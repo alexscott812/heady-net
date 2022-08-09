@@ -1,8 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const validateUUIDv4 = require('../utils/validateUUIDv4');
-const createError = require('../utils/createError');
+const validateUUIDv4 = require('../utils/validate-uuid-v4');
+const createError = require('../utils/create-error');
 
 const getUsers = async (req, res, next) => {
   const sort = req.query.sort || 'date'; // Default: 'date'

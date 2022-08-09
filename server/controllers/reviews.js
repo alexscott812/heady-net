@@ -2,8 +2,8 @@ const Review = require('../models/review');
 const Show = require('../models/show');
 const User = require('../models/user');
 const { v4: uuidv4 } = require('uuid');
-const validateUUIDv4 = require('../utils/validateUUIDv4');
-const createError = require('../utils/createError');
+const validateUUIDv4 = require('../utils/validate-uuid-v4');
+const createError = require('../utils/create-error');
 
 const getReviews = async (req, res, next) => {
   const sort = req.query.sort || 'name'; // Default: 'name'

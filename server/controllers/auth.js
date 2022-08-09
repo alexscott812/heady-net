@@ -2,13 +2,13 @@ const User = require('../models/user');
 const Token = require('../models/token');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const validateUUIDv4 = require('../utils/validateUUIDv4');
+const validateUUIDv4 = require('../utils/validate-uuid-v4');
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../utils/verifyToken');
-const getAccessToken = require('../utils/getAccessToken');
-const getRefreshToken = require('../utils/getRefreshToken');
-const getPasswordResetToken = require('../utils/getPasswordResetToken');
-const createError = require('../utils/createError');
+const verifyToken = require('../utils/verify-token');
+const generateAccessToken = require('../utils/generate-access-token');
+const generateRefreshToken = require('../utils/generate-refresh-token');
+const generatePasswordResetToken = require('../utils/generate-password-reset-token');
+const createError = require('../utils/create-error');
 
 const login = async (req, res, next) => {
   try {
@@ -31,8 +31,8 @@ const login = async (req, res, next) => {
       ...passwordlessUser
     } = user;
 
-    const accessToken = getAccessToken(passwordlessUser);
-    const refreshToken = getRefreshToken();
+    const accessToken = generateAccessToken(passwordlessUser);
+    const refreshToken = generateRefreshToken();
 
     const token = new Token({
       _id: uuidv4(),
@@ -82,8 +82,8 @@ const refreshToken = async (req, res, next) => {
       ...passwordlessUser
     } = user;
 
-    const accessToken = getAccessToken(passwordlessUser);
-    const refreshToken = getRefreshToken();
+    const accessToken = generateAccessToken(passwordlessUser);
+    const refreshToken = generateRefreshToken();
 
     await Token.findByIdAndUpdate(
       token._id,
@@ -131,7 +131,7 @@ const forgotPassword = async (req, res, next) => {
       return next(createError(400, `No user found with email ${req.body.email}`));
     }
 
-    const passwordResetToken = getPasswordResetToken();
+    const passwordResetToken = generatePasswordResetToken();
 
     user.password_reset_token = passwordResetToken;
     await user.save();

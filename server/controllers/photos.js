@@ -1,6 +1,6 @@
 const Show = require('../models/show');
 const { v4: uuidv4 } = require('uuid');
-const validateUUIDv4 = require('../utils/validateUUIDv4');
+const validateUUIDv4 = require('../utils/validate-uuid-v4');
 
 const getPhotos = async (req, res) => {
 

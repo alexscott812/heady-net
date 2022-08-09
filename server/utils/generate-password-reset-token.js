@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 
-const getRefreshToken = () => {
+const generatePasswordResetToken = () => {
   return crypto.randomBytes(64).toString('hex');
 };
 
-module.exports = getRefreshToken;
+module.exports = generatePasswordResetToken;

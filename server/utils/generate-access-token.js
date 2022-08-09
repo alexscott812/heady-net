@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const getAccessToken = (user) => {
+const generateAccessToken = (user) => {
   return jwt.sign({
       user: user
     }, 
@@ -11,4 +11,4 @@ const getAccessToken = (user) => {
   );
 };
 
-module.exports = getAccessToken;
+module.exports = generateAccessToken;

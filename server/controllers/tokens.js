@@ -2,11 +2,11 @@ const User = require('../models/user');
 const Token = require('../models/token');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const validateUUIDv4 = require('../utils/validateUUIDv4');
+const validateUUIDv4 = require('../utils/validate-uuid-v4');
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../utils/verifyToken');
-const getAccessToken = require('../utils/getAccessToken');
-const getRefreshToken = require('../utils/getRefreshToken');
+const verifyToken = require('../utils/verify-token');
+const generateAccessToken = require('../utils/generate-access-token');
+const generateRefreshToken = require('../utils/generate-refresh-token');
 
 const addToken = async (req, res) => {
   try {
