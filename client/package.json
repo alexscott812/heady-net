@@ -1,5 +1,5 @@
 {
-  "name": "dead-data-app",
+  "name": "heady-net-client",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
@@ -20,7 +20,7 @@
     "react-icons": "^4.3.1",
     "react-query": "^3.25.1",
     "react-router-dom": "^6.2.2",
-    "react-scripts": "3.4.3"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,11 +33,11 @@
     "extends": "react-app",
     "rules": {
       "semi": [
-        "error",
+        "warn",
         "always"
       ],
       "quotes": [
-        "error",
+        "warn",
         "double"
       ]
     }

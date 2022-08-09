@@ -2,7 +2,6 @@ const Show = require('../models/show');
 const { v4: uuidv4 } = require('uuid');
 const validateUUIDv4 = require('../utils/validateUUIDv4');
 const createError = require('../utils/createError');
-const redisClient = require('../utils/redis');
 
 // const getShows = async (req, res, next) => {
 //   const sort = req.query.sort || 'date'; // Default: 'date'
@@ -208,7 +207,6 @@ const getShows = async (req, res, next) => {
       }
     ]);
 
-    redisClient.set(req.originalUrl, JSON.stringify(shows[0]));
     res.status(200).json(shows[0]);
   } catch (err) {
     return next(createError(500, err.message));

@@ -6,7 +6,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const db = require('./utils/db');
-const redisClient = require('./utils/redis');
 const errorLogger = require('./middleware/errorLogger');
 const errorHandler = require('./middleware/errorHandler');
 // const logger = require('./middleware/logger');

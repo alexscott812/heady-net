@@ -28,6 +28,6 @@ const SearchBar = ({
       )}
     </InputGroup>
   );
-}
+};
 
 export default SearchBar;
