@@ -22,16 +22,17 @@ const login = async (req, res, next) => {
       return next(createError(400, 'Invalid Credentials'));
     }
 
-    const {
-      password,
-      password_reset_token,
-      created_at,
-      updated_at,
-      __v,
-      ...passwordlessUser
-    } = user;
+    // const {
+    //   password,
+    //   password_reset_token,
+    //   created_at,
+    //   updated_at,
+    //   __v,
+    //   ...passwordlessUser
+    // } = user;
+    const { _id } = user;
 
-    const accessToken = generateAccessToken(passwordlessUser);
+    const accessToken = generateAccessToken({ _id });
     const refreshToken = generateRefreshToken();
 
     const token = new Token({
@@ -73,16 +74,18 @@ const refreshToken = async (req, res, next) => {
       return next(createError(400, `No user associated with token ${tokenCookie}`));
     }
 
-    const {
-      password,
-      password_reset_token,
-      created_at,
-      updated_at,
-      __v,
-      ...passwordlessUser
-    } = user;
+    // const {
+    //   password,
+    //   password_reset_token,
+    //   created_at,
+    //   updated_at,
+    //   __v,
+    //   ...passwordlessUser
+    // } = user;
+    const { _id } = user;
 
-    const accessToken = generateAccessToken(passwordlessUser);
+
+    const accessToken = generateAccessToken({ _id });
     const refreshToken = generateRefreshToken();
 
     await Token.findByIdAndUpdate(
