@@ -160,11 +160,15 @@ const updateReviewById = async (req, res, next) => {
     if (!validateUUIDv4(req.params.id)) {
       return next(createError(404, 'Invalid review ID'));
     }
-    const review = await Review.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const review = await Review.findById(req.params.id);
     if (!review) {
       return next(createError(404, `No review found with ID of ${req.params.id}`));
     }
-    res.status(200).json(review);
+    if (review.user_id !== req.user._id) {
+      return next(createError(403, `Not allowed to update review with ID of ${req.params.id}`));
+    }
+    const updatedReview = await Review.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(updatedReview);
   } catch (err) {
     return next(createError(500, err.message));
   }
@@ -184,10 +188,14 @@ const deleteReviewById =  async (req, res, next) => {
     if (!validateUUIDv4(req.params.id)) {
       return next(createError(404, 'Invalid review ID'));
     }
-    const review = await Review.findOneAndDelete({ _id: req.params.id, user_id: req.user._id });
+    const review = await Review.findById(req.params.id);
     if (!review) {
       return next(createError(404, `No review found with ID of ${req.params.id}`));
     }
+    if (review.user_id !== req.user._id) {
+      return next(createError(403, `Not allowed to delete review with ID of ${req.params.id}`));
+    }
+    await Review.findByIdAndDelete(req.params.id);
     res.status(200).json({ msg: `Deleted review with ID of ${req.params.id}` });
   } catch (err) {
     return next(createError(500, err.message));
