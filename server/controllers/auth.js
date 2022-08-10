@@ -22,25 +22,15 @@ const login = async (req, res, next) => {
       return next(createError(400, 'Invalid Credentials'));
     }
 
-    // const {
-    //   password,
-    //   password_reset_token,
-    //   created_at,
-    //   updated_at,
-    //   __v,
-    //   ...passwordlessUser
-    // } = user;
-    const { _id } = user;
-
-    const accessToken = generateAccessToken({ _id });
+    const { _id, role } = user;
+    const accessToken = generateAccessToken({ _id, role });
     const refreshToken = generateRefreshToken();
 
     const token = new Token({
       _id: uuidv4(),
-      user_id: passwordlessUser._id,
+      user_id: _id,
       token: refreshToken
     });
-
     await token.save();
 
     res
@@ -74,20 +64,9 @@ const refreshToken = async (req, res, next) => {
       return next(createError(400, `No user associated with token ${tokenCookie}`));
     }
 
-    // const {
-    //   password,
-    //   password_reset_token,
-    //   created_at,
-    //   updated_at,
-    //   __v,
-    //   ...passwordlessUser
-    // } = user;
-    const { _id } = user;
-
-
-    const accessToken = generateAccessToken({ _id });
+    const { _id, role } = user;
+    const accessToken = generateAccessToken({ _id, role });
     const refreshToken = generateRefreshToken();
-
     await Token.findByIdAndUpdate(
       token._id,
       { token: refreshToken },
@@ -135,7 +114,6 @@ const forgotPassword = async (req, res, next) => {
     }
 
     const passwordResetToken = generatePasswordResetToken();
-
     user.password_reset_token = passwordResetToken;
     await user.save();
 
@@ -170,7 +148,7 @@ const resetPassword = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(req.body.new_password, saltRounds);
 
     user.password = hashedPassword;
-    user.password_reset_token = '';
+    user.password_reset_token = null;
     await user.save();
 
     res.status(200).json({ msg: 'Password has been reset' });
@@ -199,7 +177,6 @@ const changePassword = async (req, res, next) => {
 
     const saltRounds = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.new_password, saltRounds);
-
     user.password = hashedPassword;
     await user.save();
 
