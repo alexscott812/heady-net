@@ -1,112 +1,11 @@
 const mongoose = require('mongoose');
-
-const songSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  }
-});
-
-const songInstanceSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  song: {
-    type: songSchema,
-    required: true
-  },
-  position: {
-    type: Number,
-    required: true
-  },
-  segued: {
-    type: Boolean,
-    required: true
-  }
-});
-
-const setSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  position: {
-    type: Number,
-    required: true
-  },
-  song_instances: [{
-    type: songInstanceSchema,
-    required: true
-  }]
-});
-
-const imageSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  url: {
-    type: String,
-    required: true
-  },
-  thumbnail_sm_url: {
-    type: String,
-    required: true
-  },
-  thumbnail_md_url: {
-    type: String,
-    required: true
-  }
-});
-
-const citySchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  }
-});
-
-const stateSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  }
-});
-
-const countrySchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  }
-});
-
-const venueSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  }
-});
+const songSchema = require('./song').schema;
+const venueSchema = require('./venue').schema;
+const setSchema = require('./set').schema;
+const imageSchema = require('./image').schema;
+const citySchema = require('./city').schema;
+const stateSchema = require('./state').schema;
+const countrySchema = require('./country').schema;
 
 const showSchema = new mongoose.Schema({
   _id: {
