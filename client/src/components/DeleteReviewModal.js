@@ -15,20 +15,26 @@ import { useAuth } from '../lib/auth';
 import useDeleteReview from '../hooks/mutations/useDeleteReview.js';
 
 const DeleteReviewModal = ({
-  reviewToBeDeleted = null,
-  setReviewToBeDeleted = null,
+  review = null,
   isOpen = false,
   onClose = null,
-  // mutation = null
 }) => {
   const { isAuthenticated, getToken } = useAuth();
   const deleteReview = useDeleteReview();
   const cancelRef = useRef();
 
+  const handleClose = () => {
+    deleteReview.reset();
+    onClose();
+  };
+
   const handleDeleteReview = () => {
     deleteReview.mutate({
-      reviewId: reviewToBeDeleted._id,
+      reviewId: review._id,
+      showId: review.show._id,
       tokenFn: getToken
+    }, {
+      onSuccess: () => handleClose()
     });
   };
 

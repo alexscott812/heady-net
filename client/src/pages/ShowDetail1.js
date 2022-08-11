@@ -40,6 +40,8 @@ const ShowDetail = () => {
   const [reviewToBeEdited, setReviewToBeEdited] = useState(null);
   const [reviewToBeDeleted, setReviewToBeDeleted] = useState(null);
 
+  console.log(`reviewToBeDeleted: `, reviewToBeDeleted);
+
   const {
     isOpen: isShareModalOpen,
     onOpen: onShareModalOpen,

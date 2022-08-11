@@ -7,10 +7,10 @@ const useDeleteReview = (opts = {}) => {
   const createToast = useToast();
 
   return useMutation(deleteReview, {
-    onSuccess: (data) => {
-      queryClient.refetchQueries(['shows', data.show_id]);
+    onSuccess: (_, variables) => {
+      queryClient.refetchQueries(['shows', variables.showId]);
       queryClient.refetchQueries(['reviews', {
-        show_id: data.show_id, sort: '-created_at'
+        show_id: variables.showId, sort: '-created_at'
       }]);
       createToast({
         id: 'delete-show-review-success',
