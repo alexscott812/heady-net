@@ -41,6 +41,7 @@ const ShowDetail = () => {
   const [reviewToBeDeleted, setReviewToBeDeleted] = useState(null);
 
   console.log(`reviewToBeDeleted: `, reviewToBeDeleted);
+  console.log(`reviewToBeEdited: `, reviewToBeEdited);
 
   const {
     isOpen: isShareModalOpen,
@@ -214,12 +215,9 @@ const ShowDetail = () => {
         </Grid>
       </PageContainer>
       <WriteReviewModal
-        // reviewToBeCreated={reviewToBeCreated}
-        // setReviewToBeCreated={setReviewToBeCreated}
         isOpen={isWriteReviewModalOpen}
         showId={showData?._id}
         onClose={onWriteReviewModalClose}
-        // mutation={createReview}
       />
       <ShareModal
         isOpen={isShareModalOpen}
@@ -241,12 +239,11 @@ const ShowDetail = () => {
       />
       <EditReviewModal
         isOpen={isEditReviewModalOpen}
-        reviewToBeEdited={reviewToBeEdited}
+        review={reviewToBeEdited}
         onClose={() => { 
           onEditReviewModalClose();
           setReviewToBeEdited(null);
         }}
-        // mutation={editReview}
       />
       <DeleteReviewModal
         isOpen={isDeleteReviewModalOpen}
@@ -255,7 +252,6 @@ const ShowDetail = () => {
           onDeleteReviewModalClose();
           setReviewToBeDeleted(null);
         }}
-        // mutation={deleteReview}
       />
     </>
   );

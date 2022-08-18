@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Alert,
   AlertIcon,
@@ -19,13 +19,16 @@ import { useAuth } from '../lib/auth';
 import useSaveReview from '../hooks/mutations/useSaveReview.js';
 
 const EditReviewModal = ({
-  reviewToBeEdited = null,
-  setReviewToBeEdited = null,
+  review = null,
+  //setReviewToBeEdited = null,
   isOpen = false,
   onClose = null,
 }) => {
   const { user, isAuthenticated, getToken } = useAuth();
+  const [reviewToBeEdited, setReviewToBeEdited] = useState(review);
   const saveReview = useSaveReview();
+
+  useEffect(() => setReviewToBeEdited(review), [review]);
 
   const handleClose = () => {
     setReviewToBeEdited(null);
