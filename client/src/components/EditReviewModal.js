@@ -32,8 +32,6 @@ const EditReviewModal = ({
   const [reviewToBeEdited, setReviewToBeEdited] = useState(review);
   const saveReview = useSaveReview();
 
-  useEffect(() => setReviewToBeEdited(review), [review]);
-
   const handleClose = () => {
     setReviewToBeEdited(null);
     saveReview.reset();
@@ -46,22 +44,30 @@ const EditReviewModal = ({
   };
 
   const handleInputChange = (e) => {
-    e.preventDefault();
+    const { name, value } = e.target;
     setReviewToBeEdited({
       ...reviewToBeEdited,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
   const handleSaveReview = () => {
+    const reviewToEdit = {
+      _id: reviewToBeEdited?._id,
+      show_id: reviewToBeEdited?.show._id,
+      rating: reviewToBeEdited?.rating,
+      text: reviewToBeEdited?.text
+    };
     saveReview.mutate({
-      reviewToBeEdited,
+      review: reviewToEdit,
       tokenFn: getToken
+    }, {
+      onSuccess: () => handleClose()
     });
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
+    <Modal isOpen={isOpen} onClose={handleClose} key={review?._id}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit Review</ModalHeader>

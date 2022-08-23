@@ -238,6 +238,7 @@ const ShowDetail = () => {
         onClose={onImageModalClose}
       />
       <EditReviewModal
+        key={reviewToBeEdited?._id}
         isOpen={isEditReviewModalOpen}
         review={reviewToBeEdited}
         onClose={() => { 
