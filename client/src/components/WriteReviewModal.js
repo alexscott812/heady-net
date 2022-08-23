@@ -12,8 +12,12 @@ import {
   ModalBody,
   ModalFooter,
   Text,
-  Textarea
+  Textarea,
+  Flex,
+  Avatar,
+  VStack
 } from '@chakra-ui/react';
+import Card from './Card.js';
 import StarRating from './StarRating.js'
 import { useAuth } from '../lib/auth';
 import useCreateReview from '../hooks/mutations/useCreateReview.js';
@@ -74,7 +78,33 @@ const WriteReviewModal = ({
         <ModalBody>
           {isAuthenticated
             ? <>
-                <Text fontWeight="medium" mb={1}>{`${user.first_name} ${user.last_name}`}</Text>
+                <Flex alignItems="flex-start">
+                  <Avatar
+                    size="sm"
+                    name={`${user.first_name} ${user.last_name}`}
+                    mr={2}
+                  />
+                  <Card variant="inner" py={2} pl={3} pr={2}>
+                    <VStack align="start" spacing={1} flex={1}>
+                      <Text fontWeight="medium">{`${user.first_name} ${user.last_name}`}</Text>
+                      <Box mb={3}>
+                        <StarRating
+                          editable
+                          rating={reviewToBeCreated?.rating || 0}
+                          numberOfStars={5}
+                          onRatingChange={handleInputChange}
+                        />
+                      </Box>
+                      <Textarea
+                        name="text"
+                        value={reviewToBeCreated?.text || ''}
+                        onChange={handleInputChange}
+                        placeholder="Write a review..."
+                      />
+                    </VStack>
+                  </Card>
+                </Flex>
+                {/* <Text fontWeight="medium" mb={1}>{`${user.first_name} ${user.last_name}`}</Text>
                 <Box mb={3}>
                   <StarRating
                     editable
@@ -88,7 +118,7 @@ const WriteReviewModal = ({
                   value={reviewToBeCreated?.text || ''}
                   onChange={handleInputChange}
                   placeholder="Write a review..."
-                />
+                /> */}
               </>
             : <Alert status="error" mb={3}>
                 <AlertIcon />
