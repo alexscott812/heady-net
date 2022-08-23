@@ -16,7 +16,11 @@ const UserHeader = ({
   const { user: currentUser, logout } = useAuth();
 
   const handleLogout = async () => {
-    await logout({ returnTo: '/' });
+    logout.mutate({
+      opts: {
+        returnTo: '/'
+      }
+    });
   };
 
   return (

@@ -133,7 +133,7 @@ const Navigation = () => {
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: "smooth"
     })
   };
 
@@ -221,7 +221,7 @@ const Navigation = () => {
                       <MenuDivider />
                       <MenuItem
                         icon={<FaSignOutAlt />}
-                        onClick={logout}
+                        onClick={logout.mutate}
                       >
                         Log Out
                       </MenuItem>
@@ -288,7 +288,7 @@ const Navigation = () => {
                   </MenuItem>
                   <MenuDivider />
                   {isAuthenticated
-                    ? <MenuItem icon={<FaSignOutAlt />} onClick={logout}>
+                    ? <MenuItem icon={<FaSignOutAlt />} onClick={logout.mutate}>
                         Log Out
                       </MenuItem>
                     : <>

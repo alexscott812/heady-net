@@ -30,10 +30,9 @@ const AuthProvider = ({ client, children }) => {
   const [isInitializing, setIsInitializing] = useState(true);
   const [token, setToken] = useStateWithLocalStorage(client.tokenLocalStorageKey, '');
   const [userId, setUserId] = useState(() => getUserIdFromToken(token));
+  
   console.log(userId);
-  useEffect(() => {
-    setUserId(getUserIdFromToken(token));
-  }, [token]);
+  useEffect(() => setUserId(getUserIdFromToken(token)), [token]);
 
   const {
     data: user,
@@ -94,7 +93,6 @@ const AuthProvider = ({ client, children }) => {
   //   return;
   // }, [setToken, navigate]);
 
-
   const loginMutation = useMutation(
     addToken, {
       onSuccess: (data, variables) => {
@@ -108,14 +106,26 @@ const AuthProvider = ({ client, children }) => {
   /**
    * Delete refresh token from server and clear token and user state.
    */
-  const logout = useCallback(async (opts) => {
-    await deleteToken();
-    setToken('');
-    if (opts?.returnTo) {
-      navigate(opts?.returnTo);
+  // const logout = useCallback(async (opts) => {
+  //   await deleteToken();
+  //   setToken('');
+  //   if (opts?.returnTo) {
+  //     navigate(opts?.returnTo);
+  //   }
+  //   return;
+  // }, [setToken, navigate]);
+
+  const logoutMutation = useMutation(
+    deleteToken, {
+      onSuccess: (_, variables) => {
+        setToken('');
+        console.log(variables);
+        if (variables?.opts?.returnTo) {
+          navigate(variables?.opts?.returnTo);
+        }
+      }
     }
-    return;
-  }, [setToken, navigate]);
+  );
 
   /**
    * Add user.
@@ -176,7 +186,7 @@ const AuthProvider = ({ client, children }) => {
               isAuthenticated: !!user,
               getToken,
               login: loginMutation,
-              logout,
+              logout: logoutMutation,
               register,
               updateAccount,
               deleteAccount,
