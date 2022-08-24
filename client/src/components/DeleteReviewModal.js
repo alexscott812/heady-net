@@ -16,6 +16,7 @@ import useDeleteReview from '../hooks/mutations/useDeleteReview.js';
 
 const DeleteReviewModal = ({
   review = null,
+  setReview= null,
   isOpen = false,
   onClose = null,
 }) => {
@@ -24,6 +25,7 @@ const DeleteReviewModal = ({
   const cancelRef = useRef();
 
   const handleClose = () => {
+    setReview(null);
     deleteReview.reset();
     onClose();
   };
@@ -34,7 +36,7 @@ const DeleteReviewModal = ({
       showId: review.show._id,
       tokenFn: getToken
     }, {
-      onSuccess: () => handleClose()
+      onSuccess: handleClose
     });
   };
 
@@ -42,7 +44,7 @@ const DeleteReviewModal = ({
     <AlertDialog
       isOpen={isOpen}
       leastDestructiveRef={cancelRef}
-      onClose={onClose}
+      onClose={handleClose}
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
@@ -57,7 +59,7 @@ const DeleteReviewModal = ({
             }
           </AlertDialogBody>
           <AlertDialogFooter>
-            <Button colorScheme="gray" mr={2} onClick={onClose} ref={cancelRef}>
+            <Button colorScheme="gray" mr={2} onClick={handleClose} ref={cancelRef}>
               Cancel
             </Button>
             <Button

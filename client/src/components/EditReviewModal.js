@@ -24,50 +24,50 @@ import useSaveReview from '../hooks/mutations/useSaveReview.js';
 
 const EditReviewModal = ({
   review = null,
-  //setReviewToBeEdited = null,
+  setReview = null,
   isOpen = false,
   onClose = null,
 }) => {
   const { user, isAuthenticated, getToken } = useAuth();
-  const [reviewToBeEdited, setReviewToBeEdited] = useState(review);
+  // const [reviewToBeEdited, setReviewToBeEdited] = useState(review);
   const saveReview = useSaveReview();
 
   const handleClose = () => {
-    setReviewToBeEdited(null);
+    setReview(null);
     saveReview.reset();
     onClose();
   };
 
   const validate = () => {
-    return reviewToBeEdited?.text?.length > 0
-      && reviewToBeEdited.rating !== 0;
+    return review?.text?.length > 0
+      && review.rating !== 0;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setReviewToBeEdited({
-      ...reviewToBeEdited,
+    setReview({
+      ...review,
       [name]: value
     });
   };
 
   const handleSaveReview = () => {
     const reviewToEdit = {
-      _id: reviewToBeEdited?._id,
-      show_id: reviewToBeEdited?.show._id,
-      rating: reviewToBeEdited?.rating,
-      text: reviewToBeEdited?.text
+      _id: review?._id,
+      show_id: review?.show._id,
+      rating: review?.rating,
+      text: review?.text
     };
     saveReview.mutate({
       review: reviewToEdit,
       tokenFn: getToken
     }, {
-      onSuccess: () => handleClose()
+      onSuccess: handleClose
     });
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} key={review?._id}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit Review</ModalHeader>
@@ -87,14 +87,14 @@ const EditReviewModal = ({
                       <Box mb={3}>
                         <StarRating
                           editable
-                          rating={reviewToBeEdited?.rating || 0}
+                          rating={review?.rating || 0}
                           numberOfStars={5}
                           onRatingChange={handleInputChange}
                         />
                       </Box>
                       <Textarea
                         name="text"
-                        value={reviewToBeEdited?.text || ''}
+                        value={review?.text || ''}
                         onChange={handleInputChange}
                         placeholder="Edit review..."
                       />

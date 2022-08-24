@@ -238,21 +238,26 @@ const ShowDetail = () => {
         onClose={onImageModalClose}
       />
       <EditReviewModal
-        key={reviewToBeEdited?._id}
+        // key={reviewToBeEdited?._id}
         isOpen={isEditReviewModalOpen}
         review={reviewToBeEdited}
-        onClose={() => { 
-          onEditReviewModalClose();
-          setReviewToBeEdited(null);
-        }}
+        setReview={setReviewToBeEdited}
+        onClose={onEditReviewModalClose}
+        // onClose={() => { 
+        //   onEditReviewModalClose();
+        //   setReviewToBeEdited(null);
+        // }}
       />
       <DeleteReviewModal
+        // key={reviewToBeDeleted?._id}
         isOpen={isDeleteReviewModalOpen}
         review={reviewToBeDeleted}
-        onClose={() => {
-          onDeleteReviewModalClose();
-          setReviewToBeDeleted(null);
-        }}
+        setReview={setReviewToBeDeleted}
+        onClose={onDeleteReviewModalClose}
+        // onClose={() => {
+        //   onDeleteReviewModalClose();
+        //   setReviewToBeDeleted(null);
+        // }}
       />
     </>
   );

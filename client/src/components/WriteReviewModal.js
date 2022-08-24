@@ -22,7 +22,7 @@ import StarRating from './StarRating.js'
 import { useAuth } from '../lib/auth';
 import useCreateReview from '../hooks/mutations/useCreateReview.js';
 
-const initialReviewToBeCreatedState = {
+const initialReviewState = {
   rating: 0,
   text: ''
 };
@@ -33,24 +33,24 @@ const WriteReviewModal = ({
   showId = null
 }) => {
   const { user, isAuthenticated, getToken } = useAuth();
-  const [reviewToBeCreated, setReviewToBeCreated] = useState(initialReviewToBeCreatedState);
+  const [review, setReview] = useState(initialReviewState);
   const createReview = useCreateReview();
 
   const handleClose = () => {
-    setReviewToBeCreated(initialReviewToBeCreatedState);
+    setReview(initialReviewState);
     createReview.reset();
     onClose();
   };
 
   const validate = () => {
-    return reviewToBeCreated?.text?.length > 0
-      && reviewToBeCreated?.rating > 0;
+    return review?.text?.length > 0
+      && review?.rating > 0;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setReviewToBeCreated({
-      ...reviewToBeCreated,
+    setReview({
+      ...review,
       [name]: value
     });
   };
@@ -58,14 +58,14 @@ const WriteReviewModal = ({
   const handleCreateReview = () => {
     const reviewToCreate = {
       show_id: showId,
-      rating: reviewToBeCreated?.rating,
-      text: reviewToBeCreated?.text
+      rating: review?.rating,
+      text: review?.text
     };
     createReview.mutate({
       review: reviewToCreate,
       tokenFn: getToken
     }, {
-      onSuccess: () => handleClose()
+      onSuccess: handleClose
     });
   };
 
@@ -90,14 +90,14 @@ const WriteReviewModal = ({
                       <Box mb={3}>
                         <StarRating
                           editable
-                          rating={reviewToBeCreated?.rating || 0}
+                          rating={review?.rating || 0}
                           numberOfStars={5}
                           onRatingChange={handleInputChange}
                         />
                       </Box>
                       <Textarea
                         name="text"
-                        value={reviewToBeCreated?.text || ''}
+                        value={review?.text || ''}
                         onChange={handleInputChange}
                         placeholder="Write a review..."
                       />
