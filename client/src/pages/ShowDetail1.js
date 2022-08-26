@@ -130,26 +130,20 @@ const ShowDetail = () => {
                 <ImageGalleryCard
                   mb={4}
                   images={showData.images}
-                  onImageClick={(newImageModalIndex) => {
-                    setImageModalIndex(newImageModalIndex);
-                    onImageModalOpen();
-                  }}
+                  onShowImageModal={onImageModalOpen}
+                  setImageModalIndex={setImageModalIndex}
                 />
                 {reviewsIsLoading && <ReviewsCardSkeleton mb={4} />}
                 {reviewsData &&
                   <ReviewsCard
                     reviews={reviewsData}
-                    // handleShowWriteReviewModal={onWriteReviewModalOpen}
-                    handleShowEditReviewModal={(review) => {
-                      setReviewToBeEdited(review);
-                      onEditReviewModalOpen();
-                    }}
-                    handleShowDeleteReviewModal={(review) => {
-                      setReviewToBeDeleted(review);
-                      onDeleteReviewModalOpen();
-                    }}
-                    fetchMore={loadMoreReviews}
+                    onShowWriteReviewModal={onWriteReviewModalOpen}
+                    onShowEditReviewModal={onEditReviewModalOpen}
+                    onShowDeleteReviewModal={onDeleteReviewModalOpen}
+                    setReviewToBeEdited={setReviewToBeEdited}
+                    setReviewToBeDeleted={setReviewToBeDeleted}
                     hasMore={hasMoreReviews}
+                    fetchMore={loadMoreReviews}
                     isFetchingMore={isLoadingMoreReviews}
                   />
                 }
@@ -197,14 +191,14 @@ const ShowDetail = () => {
       />
       <EditReviewModal
         isOpen={isEditReviewModalOpen}
-        review={reviewToBeEdited}
-        setReview={setReviewToBeEdited}
+        reviewToBeEdited={reviewToBeEdited}
+        setReviewToBeEdited={setReviewToBeEdited}
         onClose={onEditReviewModalClose}
       />
       <DeleteReviewModal
         isOpen={isDeleteReviewModalOpen}
-        review={reviewToBeDeleted}
-        setReview={setReviewToBeDeleted}
+        reviewToBeDeleted={reviewToBeDeleted}
+        setReviewToBeDeleted={setReviewToBeDeleted}
         onClose={onDeleteReviewModalClose}
       />
     </>

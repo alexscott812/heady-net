@@ -18,7 +18,7 @@ import {
   VStack
 } from '@chakra-ui/react';
 import AvatarButton from './AvatarButton.js';
-import { FaPen, FaTrashAlt } from 'react-icons/fa';
+import { FaPen, FaTrashAlt, FaEllipsisH } from 'react-icons/fa';
 import StarRating from './StarRating.js'
 import { useAuth } from '../lib/auth';
 import getRelativeTime from '../utils/get-relative-time.js'
@@ -28,10 +28,11 @@ const ReviewsCard = ({
   hasMore = false,
   isFetchingMore = false,
   fetchMore = null,
-  handleShowWriteReviewModal = null,
-  handleShowEditReviewModal = null,
-  handleShowDeleteReviewModal = null,
-  onWriteReviewClick = null,
+  onShowWriteReviewModal = null,
+  onShowEditReviewModal = null,
+  onShowDeleteReviewModal = null,
+  setReviewToBeEdited,
+  setReviewToBeDeleted,
   ...restProps
 }) => {
   const { user, isAuthenticated } = useAuth();
@@ -79,19 +80,24 @@ const ReviewsCard = ({
                               variant="ghost"
                               colorScheme="gray"
                               aria-label="Options"
-                              //icon={<FontAwesomeIcon icon={faEllipsisH} />}
                               icon={<Text fontWeight="bold">···</Text>}
                             />
                             <MenuList>
                               <MenuItem
                                 icon={<FaPen />}
-                                onClick={() => handleShowEditReviewModal(review)}
+                                onClick={() => {
+                                  setReviewToBeEdited(review);
+                                  onShowEditReviewModal(review);
+                                }}
                               >
                                 Edit
                               </MenuItem>
                               <MenuItem
                                 icon={<FaTrashAlt />}
-                                onClick={() => handleShowDeleteReviewModal(review)}
+                                onClick={() => {
+                                  setReviewToBeDeleted(review);
+                                  onShowDeleteReviewModal();
+                                }}
                               >
                                 Delete
                               </MenuItem>
@@ -122,7 +128,7 @@ const ReviewsCard = ({
           : <Text>
               There are no reviews.&nbsp;
               {isAuthenticated
-                ? <Link onClick={handleShowWriteReviewModal}>
+                ? <Link onClick={onShowWriteReviewModal}>
                     Be the first to write one.
                   </Link>
                 : <Link

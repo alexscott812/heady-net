@@ -7,12 +7,14 @@ import { Text, Image, SimpleGrid, Skeleton } from '@chakra-ui/react';
 
 const ImageGalleryCard = ({
   images = [],
-  onImageClick = null,
+  onShowImageModal = null,
+  setImageModalIndex = null,
   ...restProps
 }) => {
   const handleImageClick = (e) => {
     const newIndex = images.findIndex(image => image.thumbnail_md_url === e.target.src);
-    onImageClick(newIndex);
+    setImageModalIndex(newIndex);
+    onShowImageModal();
   };
 
   return (

@@ -23,40 +23,39 @@ import { useAuth } from '../lib/auth';
 import useSaveReview from '../hooks/mutations/useSaveReview.js';
 
 const EditReviewModal = ({
-  review = null,
-  setReview = null,
+  reviewToBeEdited = null,
+  setReviewToBeEdited = null,
   isOpen = false,
   onClose = null,
 }) => {
   const { user, isAuthenticated, getToken } = useAuth();
-  // const [reviewToBeEdited, setReviewToBeEdited] = useState(review);
   const saveReview = useSaveReview();
 
   const handleClose = () => {
-    setReview(null);
+    setReviewToBeEdited(null);
     saveReview.reset();
     onClose();
   };
 
   const validate = () => {
-    return review?.text?.length > 0
-      && review.rating !== 0;
+    return reviewToBeEdited?.text?.length > 0
+      && reviewToBeEdited.rating !== 0;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setReview({
-      ...review,
+    setReviewToBeEdited({
+      ...reviewToBeEdited,
       [name]: value
     });
   };
 
   const handleSaveReview = () => {
     const reviewToEdit = {
-      _id: review?._id,
-      show_id: review?.show._id,
-      rating: review?.rating,
-      text: review?.text
+      _id: reviewToBeEdited?._id,
+      show_id: reviewToBeEdited?.show._id,
+      rating: reviewToBeEdited?.rating,
+      text: reviewToBeEdited?.text
     };
     saveReview.mutate({
       review: reviewToEdit,
@@ -87,14 +86,14 @@ const EditReviewModal = ({
                       <Box mb={3}>
                         <StarRating
                           editable
-                          rating={review?.rating || 0}
+                          rating={reviewToBeEdited?.rating || 0}
                           numberOfStars={5}
                           onRatingChange={handleInputChange}
                         />
                       </Box>
                       <Textarea
                         name="text"
-                        value={review?.text || ''}
+                        value={reviewToBeEdited?.text || ''}
                         onChange={handleInputChange}
                         placeholder="Edit review..."
                       />
