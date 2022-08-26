@@ -40,9 +40,6 @@ const ShowDetail = () => {
   const [reviewToBeEdited, setReviewToBeEdited] = useState(null);
   const [reviewToBeDeleted, setReviewToBeDeleted] = useState(null);
 
-  console.log(`reviewToBeDeleted: `, reviewToBeDeleted);
-  console.log(`reviewToBeEdited: `, reviewToBeEdited);
-
   const {
     isOpen: isShareModalOpen,
     onOpen: onShareModalOpen,
@@ -92,45 +89,6 @@ const ShowDetail = () => {
   const getDateString = ( m = 1, d = 1, y = 1965 ) => {
     return `${pad(y, 2)}-${pad(m, 2)}-${pad(d, 2)}`;
   };
-
-  // const handleShowWriteReviewModal = () => {
-  //   setShowWriteReviewModal(true);
-  // };
-
-  // const handleCloseWriteReviewModal = () => {
-  //   setShowWriteReviewModal(false);
-  //   setReviewToBeCreated(null);
-  // };
-  //
-  // const handleShowImageModal = ( newImageModalIndex ) => {
-  //   setImageModalIndex(newImageModalIndex);
-  //   setShowImageModal(true);
-  // };
-
-  // const handleCloseImageModal = () => {
-  //   setShowImageModal(false);
-  //   //setImageModalIndex(0);
-  // };
-
-  // const handleShowEditReviewModal = ( review ) => {
-  //   setReviewToBeEdited(review);
-  //   setShowEditReviewModal(true);
-  // };
-
-  // const handleCloseEditReviewModal = () => {
-  //   setReviewToBeEdited(null);
-  //   setShowEditReviewModal(false);
-  // };
-  //
-  // const handleShowDeleteReviewModal = ( review ) => {
-  //   setReviewToBeDeleted(review);
-  //   setShowDeleteReviewModal(true);
-  // };
-  //
-  // const handleCloseDeleteReviewModal = () => {
-  //   setReviewToBeDeleted(null);
-  //   setShowDeleteReviewModal(false);
-  // };
 
   const handleCopyLink = () => {
     onCopy();
@@ -238,26 +196,16 @@ const ShowDetail = () => {
         onClose={onImageModalClose}
       />
       <EditReviewModal
-        // key={reviewToBeEdited?._id}
         isOpen={isEditReviewModalOpen}
         review={reviewToBeEdited}
         setReview={setReviewToBeEdited}
         onClose={onEditReviewModalClose}
-        // onClose={() => { 
-        //   onEditReviewModalClose();
-        //   setReviewToBeEdited(null);
-        // }}
       />
       <DeleteReviewModal
-        // key={reviewToBeDeleted?._id}
         isOpen={isDeleteReviewModalOpen}
         review={reviewToBeDeleted}
         setReview={setReviewToBeDeleted}
         onClose={onDeleteReviewModalClose}
-        // onClose={() => {
-        //   onDeleteReviewModalClose();
-        //   setReviewToBeDeleted(null);
-        // }}
       />
     </>
   );
