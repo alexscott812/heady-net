@@ -8,7 +8,7 @@ import PageContainer from '../components/PageContainer.js';
 import PageHead from '../components/PageHead.js';
 import SortSelect from '../components/SortSelect.js';
 import ResultsCount from '../components/ResultsCount.js';
-import sortOptions from '../sortOptions/songs.js';
+import sortOptions from '../sortOptions/venues.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useQueryParams from '../hooks/useQueryParams.js';
 import useVenues from '../hooks/queries/useVenues.js';
