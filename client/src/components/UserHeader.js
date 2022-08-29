@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { Button, Text, Stack, Avatar, VStack } from '@chakra-ui/react';
 import Card from './Card.js';
 import CardBody from './CardBody.js';
 import CardTitle from './CardTitle.js';
-import { FaPen, FaKey, FaSignOutAlt, FaTrashAlt } from 'react-icons/fa';
+import { FaPen, FaKey, FaSignOutAlt, FaTrashAlt, FaCog } from 'react-icons/fa';
 import { useAuth } from '../lib/auth';
 import getRelativeTime from '../utils/get-relative-time.js'
 
@@ -50,40 +51,50 @@ const UserHeader = ({
           </Stack>
         </Stack> */}
         {(user._id === currentUser?._id) && (
-          <Stack direction="column" mt={3}>
-            <Button
-              variant="solid"
-              colorScheme="gray"
-              onClick={onShowEditUserButtonClick}
-              leftIcon={<FaPen />}
-            >
-              Edit Info
-            </Button>
-            <Button
-              variant="solid"
-              colorScheme="gray"
-              onClick={onShowChangePasswordButtonClick}
-              leftIcon={<FaKey />}
-            >
-              Change Password
-            </Button>
-            <Button
-              variant="solid"
-              colorScheme="gray"
-              onClick={handleLogout}
-              leftIcon={<FaSignOutAlt />}
-            >
-              Log Out
-            </Button>
-            <Button
-              variant="solid"
-              colorScheme="red"
-              onClick={onShowDeleteUserButtonClick}
-              leftIcon={<FaTrashAlt />}
-            >
-              Delete Account
-            </Button>
-          </Stack>
+          <Button
+            as={RouterLink}
+            to="/settings"
+            colorScheme="gray"
+            isFullWidth
+            leftIcon={<FaCog />}
+            mt={3}
+          >
+            Settings
+          </Button>
+          // <Stack direction="column" mt={3}>
+          //   <Button
+          //     variant="solid"
+          //     colorScheme="gray"
+          //     onClick={onShowEditUserButtonClick}
+          //     leftIcon={<FaPen />}
+          //   >
+          //     Edit Info
+          //   </Button>
+          //   <Button
+          //     variant="solid"
+          //     colorScheme="gray"
+          //     onClick={onShowChangePasswordButtonClick}
+          //     leftIcon={<FaKey />}
+          //   >
+          //     Change Password
+          //   </Button>
+          //   <Button
+          //     variant="solid"
+          //     colorScheme="gray"
+          //     onClick={handleLogout}
+          //     leftIcon={<FaSignOutAlt />}
+          //   >
+          //     Log Out
+          //   </Button>
+          //   <Button
+          //     variant="solid"
+          //     colorScheme="red"
+          //     onClick={onShowDeleteUserButtonClick}
+          //     leftIcon={<FaTrashAlt />}
+          //   >
+          //     Delete Account
+          //   </Button>
+          // </Stack>
         )}
       </CardBody>
     </Card>

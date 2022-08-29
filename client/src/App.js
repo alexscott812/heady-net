@@ -23,6 +23,7 @@ import ForgotPassword from './pages/ForgotPassword.js';
 import ResetPassword from './pages/ResetPassword.js';
 import UserDetail from './pages/UserDetail1.js';
 import NotFound from './pages/NotFound.js';
+import Settings from './pages/Settings.js';
 // import AuthProvider from './context/AuthProvider.js'
 import { AuthProvider, AuthClient } from './lib/auth';
 import {
@@ -64,6 +65,7 @@ const App = () => {
                 <Route exact path="/songs" element={<Songs />} />
                 <Route path="/songs/:id" element={<SongDetail />} />
                 <Route exact path="/about" element={<About />} />
+                <Route exact path="/settings" element={<Settings />} />
                 <Route path="/users/:id" element={<UserDetail />} />
                 <Route exact path="/auth/login" element={<Login />} />
                 <Route exact path="/auth/register" element={<Register />} />

@@ -14,7 +14,8 @@ import {
   FaMapMarkerAlt,
   FaMusic,
   FaInfoCircle,
-  FaUserCircle
+  FaUserCircle,
+  FaCog
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
 import { useAuth } from '../lib/auth';
@@ -88,6 +89,10 @@ const NavSidebar = ({ ...props }) => {
           <NavSidebarItem to={`/users/${user._id}`}>
             <Icon as={FaUserCircle} boxSize={5} mr={4} />
             Your Profile
+          </NavSidebarItem>
+          <NavSidebarItem to="/settings">
+            <Icon as={FaCog} boxSize={5} mr={4} />
+            Settings
           </NavSidebarItem>
         </>
       )}

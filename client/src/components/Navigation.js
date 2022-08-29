@@ -50,7 +50,8 @@ import {
   FaMapMarkerAlt,
   FaMusic,
   FaInfoCircle,
-  FaBolt
+  FaBolt,
+  FaCog
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
 
@@ -208,7 +209,7 @@ const Navigation = () => {
                       name={`${user.first_name} ${user.last_name}`}
                     />
                     <MenuList>
-                      <MenuItem
+                      {/* <MenuItem
                         as={RouterLink}
                         to={`/users/${user._id}`}
                         icon={<Avatar size="sm" name={`${user.first_name} ${user.last_name}`} />}
@@ -217,6 +218,21 @@ const Navigation = () => {
                           {`${user.first_name} ${user.last_name}`}
                         </Text>
                         <Text variant="tertiary">View your profile</Text>
+                      </MenuItem>
+                      <MenuDivider /> */}
+                      <MenuItem
+                        as={RouterLink}
+                        to={`/users/${user._id}`}
+                        icon={<FaUser />}
+                      >
+                        Your profile
+                      </MenuItem>
+                      <MenuItem
+                        as={RouterLink}
+                        to="/settings"
+                        icon={<FaCog />}
+                      >
+                        Settings
                       </MenuItem>
                       <MenuDivider />
                       <MenuItem
