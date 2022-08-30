@@ -3,6 +3,7 @@ import { Flex, HStack, Icon, useColorModeValue } from '@chakra-ui/react';
 import { FaStar, FaStarHalf } from 'react-icons/fa';
 
 const StarRating = ({
+  name = "rating",
   editable = false,
   numberOfStars = 5,
   rating = 0,
@@ -41,7 +42,7 @@ const StarRating = ({
                   id={`star-${i+1}`}
                   aria-label={`star-${i+1}`}
                   type="radio"
-                  name="rating"
+                  name={name}
                   style={{
                     position: 'absolute',
                     overflow: 'hidden',

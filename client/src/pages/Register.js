@@ -58,6 +58,7 @@ const Register = () => {
                 <Card>
                   <CardBody>
                     <CardTitle>Register</CardTitle>
+                    <Text mb={1}>First Name</Text>
                     <Input
                       mb={3}
                       type="first_name"
@@ -66,6 +67,7 @@ const Register = () => {
                       placeholder="First Name"
                       onChange={handleInputChange}
                     />
+                    <Text mb={1}>Last Name</Text>
                     <Input
                       mb={3}
                       type="last_name"
@@ -74,6 +76,7 @@ const Register = () => {
                       placeholder="Last Name"
                       onChange={handleInputChange}
                     />
+                    <Text mb={1}>Email Address</Text>
                     <Input
                       mb={3}
                       type="email"
@@ -82,6 +85,7 @@ const Register = () => {
                       placeholder="Email Address"
                       onChange={handleInputChange}
                     />
+                    <Text mb={1}>Password</Text>
                     <Input
                       mb={3}
                       type="password"
@@ -90,6 +94,7 @@ const Register = () => {
                       placeholder="Password"
                       onChange={handleInputChange}
                     />
+                    <Text mb={1}>Confirm Password</Text>
                     <Input
                       mb={3}
                       type="password"
@@ -125,6 +130,7 @@ const Register = () => {
                             ? `/auth/login?redirect=${encodeURIComponent(query.redirect)}`
                             : '/auth/login'
                           }
+                          variant="brand"
                         >
                           Log In
                         </Link>

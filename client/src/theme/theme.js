@@ -81,6 +81,13 @@ const theme = extendTheme({
         borderRadius: 'md'
       }
     },
+    Link: {
+      variants: {
+        brand: (props) => ({
+          color: mode('brand.500', 'brand.200')(props),
+        }),
+      }
+    },
     Modal: {
       baseStyle: (props) => ({
         dialog: {

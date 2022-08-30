@@ -21,12 +21,12 @@ const ForgotPassword = () => {
     return email.length > 0;
   };
 
-  const handleInputChange = ( e ) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
     setEmail(e.target.value);
   };
 
-  const handleResetPasswordSubmit = ( e ) => {
+  const handleResetPasswordSubmit = (e) => {
     e.preventDefault();
     if (!validateForm) return;
     mutation.mutate({ email });
@@ -41,7 +41,7 @@ const ForgotPassword = () => {
               <CardTitle>Forgot Password</CardTitle>
               {!mutation.isSuccess
                 ? <>
-                    <Text mb={2}>
+                    <Text mb={1}>
                       We will send you an email so you can reset your password.
                     </Text>
                     <Input

@@ -26,9 +26,12 @@ import {
 } from '@chakra-ui/react';
 import useChangePassword from '../hooks/mutations/useChangePassword.js';
 import { FaTrashAlt, FaKey, FaPen } from 'react-icons/fa';
+import useAuth from '../lib/auth/useAuth.js';
+import EmptyState from './EmptyState.js';
 
 const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
   const { toggleColorMode } = useColorMode();
+  const { isAuthenticated } = useAuth();
   const changePassword = useChangePassword();
   const [passwords, setPasswords] = useState({
     old_password: '',
@@ -73,103 +76,111 @@ const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <Box mb={0}>
-                    <CardTitle>Profile</CardTitle>
-                    <Divider mb={3} />
-                    <Text mb={1}>First name</Text>
-                    <Input
-                      type="text"
-                      name="first_name"
-                      placeholder="First name"
-                      value={passwords?.old_password}
-                      onChange={handleInputChange}
-                      mb={3}
-                    />
-                    <Text mb={1}>Last name</Text>
-                    <Input
-                      type="text"
-                      name="last_name"
-                      placeholder="Last name"
-                      value={passwords?.old_password}
-                      onChange={handleInputChange}
-                      mb={3}
-                    />
-                    <Text mb={1}>Bio</Text>
-                    <Textarea
-                      placeholder="Enter a bit about yourself"
-                      mb={3}
-                    />
-                    <Button
-                      leftIcon={<FaPen />}
-                      onClick={handleChangePassword}
-                      isLoading={changePassword.isLoading}
-                      loadingText="Changing Password..."
-                      isDisabled={changePassword.isLoading || !validate()}
-                    >
-                      Update Profile
-                    </Button>
-                  </Box>
+                  {isAuthenticated
+                    ? <>
+                        <CardTitle>Profile</CardTitle>
+                        <Divider mb={3} />
+                        <Text mb={1}>First name</Text>
+                        <Input
+                          type="text"
+                          name="first_name"
+                          placeholder="First name"
+                          value={passwords?.old_password}
+                          onChange={handleInputChange}
+                          mb={3}
+                        />
+                        <Text mb={1}>Last name</Text>
+                        <Input
+                          type="text"
+                          name="last_name"
+                          placeholder="Last name"
+                          value={passwords?.old_password}
+                          onChange={handleInputChange}
+                          mb={3}
+                        />
+                        <Text mb={1}>Bio</Text>
+                        <Textarea
+                          placeholder="Enter a bit about yourself"
+                          mb={3}
+                        />
+                        <Button
+                          leftIcon={<FaPen />}
+                          onClick={handleChangePassword}
+                          isLoading={changePassword.isLoading}
+                          loadingText="Changing Password..."
+                          isDisabled={changePassword.isLoading || !validate()}
+                        >
+                          Update Profile
+                        </Button>
+                      </>
+                    : <EmptyState />
+                  }
                 </TabPanel>
                 <TabPanel>
-                  <Box mb={10}>
-                    <CardTitle>Change Password</CardTitle>
-                    <Divider mb={3} />
-                    <Text mb={1}>Old password</Text>
-                    <Input
-                      type="password"
-                      name="old_password"
-                      placeholder="Old password"
-                      value={passwords?.old_password}
-                      onChange={handleInputChange}
-                      mb={3}
-                    />
-                    <Text mb={1}>New password</Text>
-                    <Input
-                      type="password"
-                      name="new_password"
-                      placeholder="New password"
-                      value={passwords?.new_password}
-                      onChange={handleInputChange}
-                      mb={3}
-                    />
-                    <Text mb={1}>Confirm new password</Text>
-                    <Input
-                      type="password"
-                      name="confirm_new_password"
-                      placeholder="Confirm new password"
-                      value={passwords?.confirm_new_password}
-                      onChange={handleInputChange}
-                      mb={3}
-                    />
-                    <Box mb={3}>
-                      <Link as={RouterLink} to="/auth/forgot-password">
-                        Forgot Password?
-                      </Link>
-                    </Box>
-                    <Button
-                      colorScheme="gray"
-                      leftIcon={<FaKey />}
-                      onClick={handleChangePassword}
-                      isLoading={changePassword.isLoading}
-                      loadingText="Changing Password..."
-                      isDisabled={changePassword.isLoading || !validate()}
-                    >
-                      Change Password
-                    </Button>
-                  </Box>
-                  <Box>
-                    <CardTitle>Deactivate Account</CardTitle>
-                    <Divider mb={3} />
-                    <Text mb={3}>Are you sure you want to deactivate your account?</Text>
-                    <Button
-                      variant="solid"
-                      colorScheme="red"
-                      onClick={onShowDeleteAccountModal}
-                      leftIcon={<FaTrashAlt />}
-                    >
-                      Deactivate Account
-                    </Button>
-                  </Box>
+                  {isAuthenticated
+                    ? <>
+                        <Box mb={10}>
+                          <CardTitle>Change Password</CardTitle>
+                          <Divider mb={3} />
+                          <Text mb={1}>Old password</Text>
+                          <Input
+                            type="password"
+                            name="old_password"
+                            placeholder="Old password"
+                            value={passwords?.old_password}
+                            onChange={handleInputChange}
+                            mb={3}
+                          />
+                          <Text mb={1}>New password</Text>
+                          <Input
+                            type="password"
+                            name="new_password"
+                            placeholder="New password"
+                            value={passwords?.new_password}
+                            onChange={handleInputChange}
+                            mb={3}
+                          />
+                          <Text mb={1}>Confirm new password</Text>
+                          <Input
+                            type="password"
+                            name="confirm_new_password"
+                            placeholder="Confirm new password"
+                            value={passwords?.confirm_new_password}
+                            onChange={handleInputChange}
+                            mb={3}
+                          />
+                          <Box mb={3}>
+                            <Link as={RouterLink} to="/auth/forgot-password" variant="brand">
+                              Forgot Password?
+                            </Link>
+                          </Box>
+                          <Button
+                            colorScheme="gray"
+                            leftIcon={<FaKey />}
+                            onClick={handleChangePassword}
+                            isLoading={changePassword.isLoading}
+                            loadingText="Changing Password..."
+                            isDisabled={changePassword.isLoading || !validate()}
+                          >
+                            Change Password
+                          </Button>
+                        </Box>
+                        <Box>
+                          <CardTitle>Deactivate Account</CardTitle>
+                          <Divider mb={3} />
+                          <Text mb={3}>Are you sure you want to deactivate your account?</Text>
+                          <Button
+                            variant="solid"
+                            colorScheme="red"
+                            onClick={onShowDeleteAccountModal}
+                            leftIcon={<FaTrashAlt />}
+                          >
+                            Deactivate Account
+                          </Button>
+                        </Box>
+                      </>
+                    : <EmptyState />
+                  }
                 </TabPanel>
                 <TabPanel>
                   <CardTitle>Theme</CardTitle>

@@ -11,6 +11,8 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
+  Text,
+  Textarea
 } from '@chakra-ui/react';
 import { useAuth } from '../lib/auth';
 import useSaveUser from '../hooks/mutations/useSaveUser.js';
@@ -79,28 +81,29 @@ const EditUserModal = ({
         <ModalBody>
           {isAuthenticated
             ? <>
+                <Text mb={1}>First name</Text>
                 <Input
-                  mt={2}
                   mb={3}
-                  size="lg"
-                  borderRadius="lg"
-                  variant="filled"
-                  type="first_name"
+                  type="text"
                   name="first_name"
                   value={userToBeEdited?.first_name || ''}
                   placeholder="First Name"
                   onChange={handleInputChange}
                 />
+                <Text mb={1}>Last name</Text>
                 <Input
                   mb={3}
-                  size="lg"
-                  borderRadius="lg"
-                  variant="filled"
-                  type="last_name"
+                  type="text"
                   name="last_name"
                   value={userToBeEdited?.last_name || ''}
                   placeholder="Last Name"
                   onChange={handleInputChange}
+                />
+                <Text mb={1}>Bio</Text>
+                <Textarea
+                  value={userToBeEdited?.bio || ''}
+                  placeholder="Enter a bit about yourself"
+                  mb={3}
                 />
               </>
             : <Alert status="error" mb={3}>
@@ -117,10 +120,10 @@ const EditUserModal = ({
             colorScheme="brand"
             onClick={handleSaveUser}
             isLoading={saveUser.isLoading}
-            loadingText="Saving Info..."
+            loadingText="Updating Profile..."
             isDisabled={saveUser.isLoading || !validate()}
           >
-            Save Info
+            Update Profile
           </Button>
         </ModalFooter>
       </ModalContent>

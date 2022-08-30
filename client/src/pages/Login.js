@@ -58,6 +58,7 @@ const Login = () => {
                 <Card>
                   <CardBody>
                     <CardTitle>Log In</CardTitle>
+                    <Text mb={1}>Email Address</Text>
                     <Input
                       mb={3}
                       type="email"
@@ -66,8 +67,9 @@ const Login = () => {
                       placeholder="Email Address"
                       onChange={handleInputChange}
                     />
+                    <Text mb={1}>Password</Text>
                     <Input
-                      mb={2}
+                      mb={3}
                       type="password"
                       name="password"
                       value={credentials.password}
@@ -75,7 +77,7 @@ const Login = () => {
                       onChange={handleInputChange}
                     />
                     <Box mb={2}>
-                      <Link as={RouterLink} to="/auth/forgot-password">
+                      <Link as={RouterLink} to="/auth/forgot-password" variant="brand">
                         Forgot Password?
                       </Link>
                     </Box>
@@ -106,6 +108,7 @@ const Login = () => {
                             ? `/auth/register?redirect=${encodeURIComponent(query.redirect)}`
                             : '/auth/register'
                           }
+                          variant="brand"
                         >
                           Sign Up
                         </Link>

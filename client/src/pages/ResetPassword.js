@@ -57,24 +57,18 @@ const ResetPassword = () => {
                     <CardTitle>Reset Password</CardTitle>
                     {!mutation.isSuccess
                       ? <>
-                          <Text>We will send you an email to so you can reset your password.</Text>
+                          <Text mb={1}>New Password</Text>
                           <Input
-                            mt={2}
                             mb={3}
-                            size="lg"
-                            borderRadius="lg"
-                            variant="filled"
                             type="password"
                             name="new_password"
                             value={passwords.new_password}
                             placeholder="New Password"
                             onChange={handleInputChange}
                           />
+                          <Text mb={1}>Confirm New Password</Text>
                           <Input
                             mb={3}
-                            size="lg"
-                            borderRadius="lg"
-                            variant="filled"
                             type="password"
                             name="confirm_new_password"
                             value={passwords.confirm_new_password}
