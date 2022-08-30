@@ -39,16 +39,6 @@ const Login = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (!validateForm) return;
-    postLoginCredentials();
-  };
-
-  const postLoginCredentials = async () => {
-    // login.mutate({
-    //   credentials,
-    //   opts: {
-    //     redirectTo: query.redirect || '/'
-    //   }
-    // });
     login.mutate({
       email: credentials.email,
       password: credentials.password,

@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   useDocumentTitle('Forgot Password | HeadyNet');
 
   const [email, setEmail] = useState('');
-  const { isAuthenticated, forgotPassword } = useAuth();
+  const { forgotPassword } = useAuth();
   const mutation = useMutation(( data ) => forgotPassword(data));
 
   const validateForm = () => {
@@ -29,69 +29,60 @@ const ForgotPassword = () => {
   const handleResetPasswordSubmit = ( e ) => {
     e.preventDefault();
     if (!validateForm) return;
-    postResetPasswordRequest();
-  };
-
-  const postResetPasswordRequest = async () => {
     mutation.mutate({ email });
   };
 
   return (
-    <>
-      {isAuthenticated
-        ? <Navigate to="/" />
-        : <PageContainer>
-            <Grid>
-              <GridItem colStart={[1,1,4,5]} colSpan={[12,12,6,4]}>
-                <Card>
-                  <CardBody>
-                    <CardTitle>Forgot Password</CardTitle>
-                    {!mutation.isSuccess
-                      ? <>
-                          <Text mb={2}>
-                            We will send you an email so you can reset your password.
-                          </Text>
-                          <Input
-                            mb={3}
-                            type="email"
-                            name="email"
-                            value={email}
-                            placeholder="Email Address"
-                            onChange={handleInputChange}
-                          />
-                          {mutation.isError && (
-                            <Alert status="error" mb={3}>
-                              <AlertIcon />
-                              {mutation.error}
-                            </Alert>
-                          )}
-                          <Button
-                            variant="solid"
-                            colorScheme="brand"
-                            isLoading={mutation.isLoading}
-                            loadingText="Sending Email..."
-                            isDisabled={!validateForm() || mutation.isLoading}
-                            isFullWidth
-                            onClick={handleResetPasswordSubmit}
-                          >
-                            Send Email
-                          </Button>
-                        </>
-                      : <>
-                          <Alert status="success" mb={3}>
-                            <AlertIcon />
-                            Email Sent!
-                          </Alert>
-                          <Text>Please check your email for a link to reset your password.</Text>
-                        </>
-                    }
-                  </CardBody>
-                </Card>
-              </GridItem>
-            </Grid>
-          </PageContainer>
-      }
-    </>
+    <PageContainer>
+      <Grid>
+        <GridItem colStart={[1,1,4,5]} colSpan={[12,12,6,4]}>
+          <Card>
+            <CardBody>
+              <CardTitle>Forgot Password</CardTitle>
+              {!mutation.isSuccess
+                ? <>
+                    <Text mb={2}>
+                      We will send you an email so you can reset your password.
+                    </Text>
+                    <Input
+                      mb={3}
+                      type="email"
+                      name="email"
+                      value={email}
+                      placeholder="Email Address"
+                      onChange={handleInputChange}
+                    />
+                    {mutation.isError && (
+                      <Alert status="error" mb={3}>
+                        <AlertIcon />
+                        {mutation.error}
+                      </Alert>
+                    )}
+                    <Button
+                      variant="solid"
+                      colorScheme="brand"
+                      isLoading={mutation.isLoading}
+                      loadingText="Sending Email..."
+                      isDisabled={!validateForm() || mutation.isLoading}
+                      isFullWidth
+                      onClick={handleResetPasswordSubmit}
+                    >
+                      Send Email
+                    </Button>
+                  </>
+                : <>
+                    <Alert status="success" mb={3}>
+                      <AlertIcon />
+                      Email Sent!
+                    </Alert>
+                    <Text>Please check your email for a link to reset your password.</Text>
+                  </>
+              }
+            </CardBody>
+          </Card>
+        </GridItem>
+      </Grid>
+    </PageContainer>
   );
 };
 

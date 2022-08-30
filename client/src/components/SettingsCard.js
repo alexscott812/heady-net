@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link as RouterLink } from "react-router-dom";
 import Card from "./Card.js";
 import CardBody from "./CardBody.js";
 import CardTitle from "./CardTitle.js";
@@ -20,7 +21,8 @@ import {
   Textarea,
   useColorMode,
   useColorModeValue,
-  Box
+  Box,
+  Link
 } from '@chakra-ui/react';
 import useChangePassword from '../hooks/mutations/useChangePassword.js';
 import { FaTrashAlt, FaKey, FaPen } from 'react-icons/fa';
@@ -63,7 +65,7 @@ const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
 
           </GridItem> */}
           <GridItem colSpan={[12,12,8,9]}>
-            <Tabs orientation="vertical">
+            <Tabs colorScheme="brand">
               <TabList mb={3}>
                 <Tab>Profile</Tab>
                 <Tab>Account</Tab>
@@ -71,7 +73,7 @@ const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
               </TabList>
               <TabPanels>
                 <TabPanel>
-                  <Box mb={10}>
+                  <Box mb={0}>
                     <CardTitle>Profile</CardTitle>
                     <Divider mb={3} />
                     <Text mb={1}>First name</Text>
@@ -98,7 +100,6 @@ const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
                       mb={3}
                     />
                     <Button
-                      variant="solid"
                       leftIcon={<FaPen />}
                       onClick={handleChangePassword}
                       isLoading={changePassword.isLoading}
@@ -140,10 +141,13 @@ const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
                       onChange={handleInputChange}
                       mb={3}
                     />
+                    <Box mb={3}>
+                      <Link as={RouterLink} to="/auth/forgot-password">
+                        Forgot Password?
+                      </Link>
+                    </Box>
                     <Button
-                      variant="solid"
                       colorScheme="gray"
-                      //onClick={onShowChangePasswordButtonClick}
                       leftIcon={<FaKey />}
                       onClick={handleChangePassword}
                       isLoading={changePassword.isLoading}
@@ -153,7 +157,7 @@ const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
                       Change Password
                     </Button>
                   </Box>
-                  <Box mb={10}>
+                  <Box>
                     <CardTitle>Deactivate Account</CardTitle>
                     <Divider mb={3} />
                     <Text mb={3}>Are you sure you want to deactivate your account?</Text>

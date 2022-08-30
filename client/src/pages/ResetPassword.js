@@ -29,7 +29,7 @@ const ResetPassword = () => {
       passwords.confirm_new_password.length > 0;
   };
 
-  const handleInputChange = ( e ) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
     setPasswords({
       ...passwords,
@@ -37,18 +37,13 @@ const ResetPassword = () => {
     });
   };
 
-  const handleResetPasswordSubmit = ( e ) => {
+  const handleResetPasswordSubmit = (e) => {
     e.preventDefault();
     if (!validateForm) return;
-    postResetPasswordRequest();
-  };
-
-  const postResetPasswordRequest = async () => {
     mutation.mutate({
       passwords,
       token: query.token
-    });
-  };
+    });  };
 
   return (
     <>

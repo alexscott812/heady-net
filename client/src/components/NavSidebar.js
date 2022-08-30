@@ -84,7 +84,7 @@ const NavSidebar = ({ ...props }) => {
         ))}
       </VStack>
       {isAuthenticated && (
-        <>
+        <VStack as="nav" spacing={1}>
           <Divider my={3} />
           <NavSidebarItem to={`/users/${user._id}`}>
             <Icon as={FaUserCircle} boxSize={5} mr={4} />
@@ -94,7 +94,7 @@ const NavSidebar = ({ ...props }) => {
             <Icon as={FaCog} boxSize={5} mr={4} />
             Settings
           </NavSidebarItem>
-        </>
+        </VStack>
       )}
     </Box>
   );

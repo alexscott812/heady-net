@@ -34,7 +34,7 @@ const Register = () => {
       userInfo.confirm_password.length > 0;
   };
 
-  const handleInputChange = ( e ) => {
+  const handleInputChange = (e) => {
     e.preventDefault();
     setUserInfo({
       ...userInfo,
@@ -42,13 +42,9 @@ const Register = () => {
     });
   };
 
-  const handleRegisterSubmit = ( e ) => {
+  const handleRegisterSubmit = (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    postRegisterInfo();
-  };
-
-  const postRegisterInfo = async () => {
     mutation.mutate({ userInfo });
   };
 
