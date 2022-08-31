@@ -78,7 +78,7 @@ const deleteUser = async ({ userId, tokenFn }) => {
 
 const forgotPassword = async (email) => {
   try {
-    const { data } = await  axiosInstance.post('auth/forgot-password', email);
+    const { data } = await axiosInstance.post('auth/forgot-password', email);
     return data;
   } catch (err) {
     throw handleError(err)
@@ -100,7 +100,7 @@ const resetPassword = async ({ passwords, token }) => {
 const changePassword = async ({ passwords, tokenFn }) => {
   try {
     const token = await tokenFn();
-    const data = await axiosInstance.post('auth/change-password',
+    const { data } = await axiosInstance.post('auth/change-password',
       passwords, {
         headers: {
           Authorization: `Bearer ${token}`

@@ -24,15 +24,16 @@ import {
   Box,
   Link
 } from '@chakra-ui/react';
-import useChangePassword from '../hooks/mutations/useChangePassword.js';
+import useToast from '../hooks/useToast.js';
 import { FaTrashAlt, FaKey, FaPen } from 'react-icons/fa';
 import useAuth from '../lib/auth/useAuth.js';
 import EmptyState from './EmptyState.js';
 
 const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
   const { toggleColorMode } = useColorMode();
-  const { isAuthenticated } = useAuth();
-  const changePassword = useChangePassword();
+  const createToast = useToast();
+  const { isAuthenticated, getToken, changePassword } = useAuth();
+  // const changePassword = useChangePassword();
   const [passwords, setPasswords] = useState({
     old_password: '',
     new_password: '',
@@ -56,7 +57,21 @@ const SettingsCard = ({ onShowDeleteAccountModal, ...restProps }) => {
   const handleChangePassword = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    changePassword.mutate({ passwords });
+    changePassword.mutate({
+      passwords, 
+      tokenFn: getToken
+    }, {
+      onSuccess: () => createToast({
+        id: 'change-password-success',
+        status: 'success',
+        message: 'Password changed!'
+    }),
+      onError: (data) => createToast({
+        id: 'change-password-error',
+        status: 'error',
+        message: data
+      })
+    });
   };
 
   return (

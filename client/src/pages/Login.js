@@ -76,7 +76,7 @@ const Login = () => {
                       placeholder="Password"
                       onChange={handleInputChange}
                     />
-                    <Box mb={2}>
+                    <Box mb={3}>
                       <Link as={RouterLink} to="/auth/forgot-password" variant="brand">
                         Forgot Password?
                       </Link>

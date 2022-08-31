@@ -50,8 +50,8 @@ const App = () => {
 
   return (
     <Router>
-      <QueryClientProvider client={queryClient}>
-        <ChakraProvider theme={theme}>
+      <ChakraProvider theme={theme}>
+        <QueryClientProvider client={queryClient}>
           <AuthProvider client={authClient}>
             <Navigation />
             <Main>
@@ -76,9 +76,9 @@ const App = () => {
             </Main>
             <Footer />
           </AuthProvider>
-        </ChakraProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </ChakraProvider>
     </Router>
   );
 }

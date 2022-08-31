@@ -20,18 +20,18 @@ import {
 import isTokenValid from '../../utils/is-token-valid.js';
 import getUserIdFromToken from '../../utils/get-user-id-from-token.js';
 import AuthContext from './AuthContext.js';
+import useToast from '../../hooks/useToast.js';
 
 const AuthProvider = ({ client, children }) => {
   if (!client) {
     throw Error('AuthProvider must be used with an AuthClient.');
   }
-  console.log(client);
+  const createToast = useToast();
   const navigate = useNavigate();
   const [isInitializing, setIsInitializing] = useState(true);
   const [token, setToken] = useStateWithLocalStorage(client.tokenLocalStorageKey, '');
   const [userId, setUserId] = useState(() => getUserIdFromToken(token));
   
-  console.log(userId);
   useEffect(() => setUserId(getUserIdFromToken(token)), [token]);
 
   const {
@@ -147,9 +147,11 @@ const AuthProvider = ({ client, children }) => {
   /**
    * Change password.
    */
-  const changePassword = useCallback(async ({ passwords }) => {
-    await changeUserPassword({ passwords, getToken });
-  }, [getToken]);
+  // const changePassword = useCallback(async ({ passwords }) => {
+  //   await changeUserPassword({ passwords, getToken });
+  // }, [getToken]);
+
+  const changePasswordMutation = useMutation(changeUserPassword);
 
   /**
    * Reset password.
@@ -190,7 +192,7 @@ const AuthProvider = ({ client, children }) => {
               register,
               updateAccount,
               deleteAccount,
-              changePassword,
+              changePassword: changePasswordMutation,
               forgotPassword,
               resetPassword
             }}

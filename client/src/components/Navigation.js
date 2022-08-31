@@ -40,6 +40,7 @@ import AvatarButton from './AvatarButton.js';
 import {
   FaBars,
   FaUser,
+  FaUserCircle,
   FaSignOutAlt,
   FaSignInAlt,
   FaSun,
@@ -88,6 +89,24 @@ const Navigation = () => {
   const { pathname, search } = useLocation();
   const { user, isAuthenticated, logout } = useAuth();
 
+  const authNavLinks = [
+    {
+      name: 'Your Profile',
+      route: `/users/${user?._id}`,
+      exact: true,
+      icon: FaUserCircle,
+      hasSubNav: false,
+      isMainNavItem: false
+    },
+    {
+      name: 'Settings',
+      route: '/settings',
+      exact: true,
+      icon: FaCog,
+      hasSubNav: false,
+      isMainNavItem: false
+    }
+  ];
   const navLinks = [
     {
       name: 'Home',
@@ -270,20 +289,34 @@ const Navigation = () => {
             <HStack spacing={1} justifyContent="flex-end" d={{ md: 'none' }}>  
               <Menu placement="bottom-end">
                 <Tooltip label="User">
-                  <MenuButton
-                    as={IconButton}
-                    isRound
-                    variant="solid"
-                    cursor="pointer"
-                    colorScheme="gray"
-                    icon={<FaUser />}
-                    aria-label="User"
-                  />
+                  {isAuthenticated 
+                    ? <MenuButton 
+                        as={AvatarButton}
+                        size="sm"
+                        name={`${user.first_name} ${user.last_name}`}
+                      />
+                    : <MenuButton
+                        as={IconButton}
+                        isRound
+                        variant="solid"
+                        cursor="pointer"
+                        colorScheme="gray"
+                        icon={<FaUser />}
+                        aria-label="User"
+                      />
+                  }
                 </Tooltip>
                 <MenuList>
                   {isAuthenticated && (
                     <>
                       <MenuItem
+                        as={RouterLink}
+                        to={`/users/${user._id}`}
+                        icon={<FaUser />}
+                      >
+                        Your profile
+                      </MenuItem>
+                      {/* <MenuItem
                         as={RouterLink}
                         to={`/users/${user._id}`}
                         icon={<Avatar size="sm" name={`${user.first_name} ${user.last_name}`} />}
@@ -293,15 +326,18 @@ const Navigation = () => {
                         </Text>
                         <Text variant="tertiary">View your profile</Text>
                       </MenuItem>
-                      <MenuDivider />
+                      <MenuDivider /> */}
                     </>
                   )}
-                  <MenuItem
+                  <MenuItem as={RouterLink} to="/settings" icon={<FaCog />}>
+                    Settings
+                  </MenuItem>
+                  {/* <MenuItem
                     icon={useColorModeValue(<FaMoon />, <FaSun />)}
                     onClick={toggleColorMode}
                   >
                     {`${useColorModeValue('Dark', 'Light')} Mode`}
-                  </MenuItem>
+                  </MenuItem> */}
                   <MenuDivider />
                   {isAuthenticated
                     ? <MenuItem icon={<FaSignOutAlt />} onClick={logout.mutate}>
@@ -351,14 +387,6 @@ const Navigation = () => {
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth={1}>
-            {/* <Heading
-              color={useColorModeValue('brand.500', 'brand.200')}
-              as="h5"
-              size="md"
-              fontWeight="extrabold"
-            >
-              HeadyNet
-            </Heading> */}
             <Heading
               color={useColorModeValue('brand.500', 'brand.200')}
               as={NavLink}
@@ -392,16 +420,31 @@ const Navigation = () => {
             </Stack>
             <Divider my={3} />
             {isAuthenticated
-              ? <Button
-                  isFullWidth
-                  colorScheme="gray"
-                  as={RouterLink}
-                  to={`/users/${user._id}`}
-                  onClick={onDrawerClose}
-                  leftIcon={<Avatar size="xs" name={`${user.first_name} ${user.last_name}`} />}
-                >
-                  View Profile
-                </Button>
+              ? <>
+                  <Stack spacing={1}>
+                    {authNavLinks.map(link => (
+                      <NavItem
+                        key={link.name}
+                        to={link.route}
+                        isActive={isRouteMatch(pathname, link.route, link.exact)}
+                        onClick={onDrawerClose}
+                      >
+                        <Icon as={link.icon} boxSize={5} mr={4} />
+                        {link.name}
+                      </NavItem>
+                    ))}
+                  </Stack>
+                  {/* <Button
+                    isFullWidth
+                    colorScheme="gray"
+                    as={RouterLink}
+                    to={`/users/${user._id}`}
+                    onClick={onDrawerClose}
+                    leftIcon={<Avatar size="xs" name={`${user.first_name} ${user.last_name}`} />}
+                  >
+                    View Profile
+                  </Button> */}
+                </>
               : <>
                   <Button
                     isFullWidth
