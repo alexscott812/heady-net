@@ -225,7 +225,7 @@ const Navigation = () => {
                     <MenuButton 
                       as={AvatarButton}
                       size="sm"
-                      name={`${user.first_name} ${user.last_name}`}
+                      name={`${user.first_name}`}
                     />
                     <MenuList>
                       {/* <MenuItem
@@ -293,7 +293,7 @@ const Navigation = () => {
                     ? <MenuButton 
                         as={AvatarButton}
                         size="sm"
-                        name={`${user.first_name} ${user.last_name}`}
+                        name={`${user.first_name}`}
                       />
                     : <MenuButton
                         as={IconButton}

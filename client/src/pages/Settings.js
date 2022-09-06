@@ -1,10 +1,16 @@
 import React from 'react';
 import PageContainer from '../components/PageContainer.js';
-import SettingsCard from '../components/SettingsCard.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useAuth from '../lib/auth/useAuth.js';
 import DeleteUserModal from '../components/DeleteUserModal.js'
 import { useDisclosure } from '@chakra-ui/react';
+import { Outlet } from "react-router-dom";
+import Card from "../components/Card.js";
+import CardBody from "../components/CardBody.js";
+import CardTitle from "../components/CardTitle.js";
+import Grid from "../components/Grid.js";
+import GridItem from "../components/GridItem.js";
+import SettingsNavSidebar from '../components/SettingsNavSidebar.js';
 
 const Settings = () => {
   const { user } = useAuth();
@@ -19,7 +25,19 @@ const Settings = () => {
   return (
     <>
       <PageContainer>
-        <SettingsCard onShowDeleteAccountModal={onDeleteUserModalOpen}/>
+        <Card>
+          <CardBody>
+            <CardTitle>Settings</CardTitle>
+            <Grid>
+              <GridItem colSpan={[12,12,4,3]}>
+                <SettingsNavSidebar />
+              </GridItem>
+              <GridItem colSpan={[12,12,8,9]}>
+                <Outlet />
+              </GridItem>
+            </Grid>
+          </CardBody>
+        </Card>
       </PageContainer>
       <DeleteUserModal
         isOpen={isDeleteUserModalOpen}

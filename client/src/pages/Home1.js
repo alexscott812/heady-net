@@ -53,13 +53,14 @@ const Home = () => {
           colSpan={[12,12,4,3]}
           d={isAuthenticated ? ['none', 'none', 'block', 'block'] : 'block'}
         >
-          {!isAuthenticated && <HeroCard3 mb={[0,0,4,4]} />}
+          {/* {!isAuthenticated && <HeroCard3 mb={[0,0,4,4]} />} */}
           <NavSidebar d={['none', 'none', 'block', 'block']} />
         </GridItem>
         <GridItem colSpan={[12,12,8,9]}>
           <Grid>
             <GridItem order={[1,1,1,0]} colSpan={[12,12,12,8]}>
-              <Text variant="subtle-bold" mb={3}>Recent Activity</Text>
+              {/* <Text variant="subtle-bold" mb={3}>Recent Activity</Text> */}
+              {!isAuthenticated && <HeroCard3 mb={[0,0,4,4]} />}
               <Spinner isShowing={recentActivityIsRefetching} />
               {recentActivityIsLoading && <RecentActivitySkeleton />}
               {recentActivityData && (

@@ -31,6 +31,9 @@ import {
   refreshToken,
   deleteToken
 } from './services/auth-service.js';
+import ProfileSettings from './components/ProfileSettings.js';
+import AccountSettings from './components/AccountSettings.js';
+import AppearanceSettings from './components/AppearanceSettings.js';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -65,7 +68,12 @@ const App = () => {
                 <Route exact path="/songs" element={<Songs />} />
                 <Route path="/songs/:id" element={<SongDetail />} />
                 <Route exact path="/about" element={<About />} />
-                <Route exact path="/settings" element={<Settings />} />
+                <Route path="/settings" element={<Settings />}>
+                  <Route index element={<ProfileSettings />} />
+                  <Route path="profile" element={<ProfileSettings />} />
+                  <Route path="account" element={<AccountSettings />} />
+                  <Route path="appearance" element={<AppearanceSettings />} />
+                </Route>
                 <Route path="/users/:id" element={<UserDetail />} />
                 <Route exact path="/auth/login" element={<Login />} />
                 <Route exact path="/auth/register" element={<Register />} />

@@ -37,7 +37,7 @@ const RecentActivity = ({ recentActivity = [] }) => {
               <AvatarButton 
                 as={RouterLink}
                 to={`/users/${review.user._id}`}
-                name={`${review.user.first_name} ${review.user.last_name}`}
+                name={`${review.user.first_name}`}
                 mr={2}
               />
               <VStack align="start" spacing={-1}>

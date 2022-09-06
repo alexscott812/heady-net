@@ -20,7 +20,7 @@ const UserHeader = ({
     <Card>
       <CardBody>
         <VStack align="start" spacing={0}>
-          <Avatar size="lg" name={`${user.first_name} ${user.last_name}`} mb={3} />
+          <Avatar size="lg" name={`${user.first_name}`} mb={3} />
           <CardTitle mb={0}>
             {(user._id === currentUser?._id)
               ? `${user.first_name} ${user.last_name} (you)`

@@ -50,7 +50,7 @@ const ReviewsCard = ({
                     <AvatarButton 
                       as={RouterLink}
                       to={`/users/${review.user._id}`}
-                      name={`${review.user.first_name} ${review.user.last_name}`}
+                      name={`${review.user.first_name}`}
                       mr={2}
                     />
                     <Card variant="inner" py={2} pl={3} pr={2}>
@@ -128,12 +128,13 @@ const ReviewsCard = ({
           : <Text>
               There are no reviews.&nbsp;
               {isAuthenticated
-                ? <Link onClick={onShowWriteReviewModal}>
+                ? <Link onClick={onShowWriteReviewModal} variant="brand">
                     Be the first to write one.
                   </Link>
                 : <Link
                     as={RouterLink}
                     to={`/auth/login?redirect=${encodeURIComponent(pathname + search)}`}
+                    variant="brand"
                   >
                     Be the first to write one.
                   </Link>
