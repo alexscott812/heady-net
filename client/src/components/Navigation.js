@@ -45,6 +45,7 @@ import {
   FaSignInAlt,
   FaSun,
   FaMoon,
+  FaEllipsisV,
   FaUserPlus,
   FaHome,
   FaTicketAlt,
@@ -161,13 +162,13 @@ const Navigation = () => {
     <>
       <Box
         __css={useStyleConfig('Navigation')}
-        boxShadow={
-          navLinks
-            .filter(link => link.hasSubNav)
-            .some(link => link.route === pathname)
-              ? 'none'
-              : 'base'
-        }
+        // boxShadow={
+        //   navLinks
+        //     .filter(link => link.hasSubNav)
+        //     .some(link => link.route === pathname)
+        //       ? 'none'
+        //       : 'base'
+        // }
       >
         <Container>
           <Flex h={14} align="center" justifyContent="space-between">
@@ -209,7 +210,7 @@ const Navigation = () => {
               </HStack>
             </Flex>
             <HStack spacing={2} justifyContent="flex-end" d={{ base: 'none', md: 'flex' }}>
-              <Tooltip label={`${useColorModeValue('Dark', 'Light')} Mode`}>
+              {/* <Tooltip label={`${useColorModeValue('Dark', 'Light')} Mode`}>
                 <IconButton
                   variant="ghost"
                   color={useColorModeValue('gray.500', 'whiteAlpha.600')}
@@ -219,7 +220,7 @@ const Navigation = () => {
                   icon={useColorModeValue(<FaMoon />, <FaSun />)}
                   onClick={toggleColorMode}
                 />
-              </Tooltip>
+              </Tooltip> */}
               {isAuthenticated
                 ? <Menu placement="bottom-end">
                     <MenuButton 
@@ -282,6 +283,34 @@ const Navigation = () => {
                     >
                       Sign Up
                     </Button>
+                    <Menu placement="bottom-end">
+                      <MenuButton
+                        as={IconButton}
+                        isRound
+                        variant="ghost"
+                        cursor="pointer"
+                        colorScheme="gray"
+                        icon={<Text fontSize="lg" fontWeight="bold" transform="rotate(90deg)">···</Text>}
+                        aria-label="Options"
+                      />
+                      <MenuList>
+                        <MenuItem as={RouterLink} to="/settings" icon={<FaCog />}>
+                          Settings
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                    {/* <Tooltip label="Settings">
+                      <IconButton
+                        isRound
+                        variant="ghost"
+                        colorScheme="gray"
+                        aria-label="Color Mode"
+                        // icon={<FaEllipsisV />}
+                        icon={<Text fontSize="lg" fontWeight="bold" transform="rotate(90deg)">···</Text>}
+                        as={RouterLink}
+                        to="/settings"
+                      />
+                    </Tooltip> */}
                   </>
               }
             </HStack>

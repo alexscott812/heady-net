@@ -66,7 +66,7 @@ const EditReviewModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
+    <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit Review</ModalHeader>

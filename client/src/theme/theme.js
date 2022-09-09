@@ -28,8 +28,11 @@ const theme = extendTheme({
       }
     },
     Button: {
+      baseStyle: {
+        borderRadius: 'full'
+      },
       defaultProps: {
-        colorScheme: 'brand'
+        colorScheme: 'brand',
       }
     },
     Card: {
@@ -42,8 +45,10 @@ const theme = extendTheme({
       }),
       variants: {
         outer: {
-          boxShadow: 'base',
+          // boxShadow: 'base',
+          borderWidth: 1,
           borderRadius: ['none', 'xl', 'xl', 'xl'],
+          // borderRadius: ['none', 'md', 'md', 'md'],
           mx: [-4,0,0,0]
         },
         inner: {
@@ -120,7 +125,8 @@ const theme = extendTheme({
         w: '100%',
         h: baseTheme.space[14],
         bg: mode('white', 'gray.800')(props),
-        boxShadow: 'base'
+        //boxShadow: 'base'
+        borderBottomWidth: '1px'
       })
     },
     PageHead: {
@@ -129,8 +135,9 @@ const theme = extendTheme({
         zIndex: 'docked',
         w: '100%',
         bg: mode('white', 'gray.800')(props),
-        boxShadow: 'base',
-        borderTopWidth: '1px'
+        //boxShadow: 'base',
+        // borderTopWidth: '1px',
+        borderBottomWidth: '1px'
       })
     },
     Popover: {

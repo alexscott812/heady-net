@@ -64,7 +64,7 @@ const FilterModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} scrollBehavior="inside">
+    <Modal isOpen={isOpen} onClose={handleClose} scrollBehavior="inside" size="xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Filters</ModalHeader>

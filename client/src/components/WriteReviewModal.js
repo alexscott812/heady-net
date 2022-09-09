@@ -70,7 +70,7 @@ const WriteReviewModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
+    <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Write a Review</ModalHeader>
