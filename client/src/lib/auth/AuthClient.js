@@ -4,8 +4,10 @@ class AuthClient {
       throw Error('AuthClient needs to be provided a config object.');
     }
     this.tokenLocalStorageKey = config.tokenLocalStorageKey || 'token'
-    this.userQueryKey = config.userQueryKey || 'users'
     this.loginFn = config.loginFn
+    this.refreshTokenFn = config.refreshTokenFn
+    this.logoutFn = config.logoutFn
+    this.navigateFn = config.navigateFn
   }
 }
 

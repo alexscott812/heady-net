@@ -48,7 +48,9 @@ const App = () => {
 
   const authClient = new AuthClient({
     tokenLocalStorageKey: 'token',
-    loginFn: addToken
+    loginFn: addToken,
+    refreshTokenFn: refreshToken,
+    logoutFn: deleteToken
   });
 
   return (
