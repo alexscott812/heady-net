@@ -15,6 +15,7 @@ import useLogin from '../hooks/mutations/useLogin.js';
 const Login = () => {
   useDocumentTitle('Login | HeadyNet');
   const { isAuthenticated, login } = useAuth();
+
   const [query] = useQueryParams(['redirect']);
   const [credentials, setCredentials] = useState({
     email: '',
@@ -36,8 +37,8 @@ const Login = () => {
     });
   };
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = () => {
+    //e.preventDefault();
     if (!validateForm) return;
     login.mutate({
       email: credentials.email,

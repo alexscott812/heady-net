@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -71,7 +71,8 @@ const App = () => {
                 <Route path="/songs/:id" element={<SongDetail />} />
                 <Route exact path="/about" element={<About />} />
                 <Route path="/settings" element={<Settings />}>
-                  <Route index element={<ProfileSettings />} />
+                {/* <Route index element={<ProfileSettings />} /> */}
+                  <Route index element={<Navigate to="profile" replace />} />
                   <Route path="profile" element={<ProfileSettings />} />
                   <Route path="account" element={<AccountSettings />} />
                   <Route path="appearance" element={<AppearanceSettings />} />
