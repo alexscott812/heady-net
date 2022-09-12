@@ -46,6 +46,6 @@ const ListenModal = ({
       </ModalContent>
     </Modal>
   );
-}
+};
 
 export default ListenModal;

@@ -17,7 +17,7 @@ const reducer = (state, action) => {
         isLoading: true,
         isError: false,
         error: null
-      }
+      };
     }
     case ACTIONS.MUTATE_SUCCESS: {
       return {
@@ -27,7 +27,7 @@ const reducer = (state, action) => {
         isError: false,
         error: null,
         isSuccess: true
-      }
+      };
     }
     case ACTIONS.MUTATE_ERROR: {
       return {
@@ -37,7 +37,7 @@ const reducer = (state, action) => {
         isError: true,
         error: action.payload.error,
         isSuccess: false
-      }
+      };
     }
     case ACTIONS.RESET_MUTATION: {
       return {
@@ -46,12 +46,12 @@ const reducer = (state, action) => {
         isError: false,
         error: null,
         isSuccess: false
-      }
+      };
     }
     default: {
       return {
         state
-      }
+      };
     }
   }
 };

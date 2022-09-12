@@ -10,7 +10,7 @@ const ACTIONS = {
 const fetchShowsInit = () => {
   return {
     type: ACTIONS.FETCH_SHOWS_INIT
-  }
+  };
 };
 
 const fetchShowsSuccess = ( shows, totalResults, hasMore ) => {
@@ -21,7 +21,7 @@ const fetchShowsSuccess = ( shows, totalResults, hasMore ) => {
       totalResults,
       hasMore
     }
-  }
+  };
 };
 
 const fetchShowsError = ( error ) => {
@@ -30,25 +30,25 @@ const fetchShowsError = ( error ) => {
     payload: {
       error
     }
-  }
+  };
 };
 
 const resetShows = () => {
   return {
     type: ACTIONS.RESET_SHOWS
-  }
+  };
 };
 
 const incrementPage = () => {
   return {
     type: ACTIONS.INCREMENT_PAGE
-  }
+  };
 };
 
 const retryFetch = () => {
   return {
     type: ACTIONS.RETRY_FETCH
-  }
+  };
 };
 
 

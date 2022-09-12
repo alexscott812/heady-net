@@ -38,6 +38,6 @@ const TodaysShowsCard = ({ month, day, showCount, ...restProps }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default TodaysShowsCard;

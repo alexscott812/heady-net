@@ -21,10 +21,10 @@ const deleteToken = (token) => {
       token: token
     }
   });
-}
+};
 
 export {
   addTokenViaCredentials,
   addTokenViaRefreshToken,
   deleteToken
-}
+};

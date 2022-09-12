@@ -17,7 +17,7 @@ const reducer = (state, action) => {
         isLoading: true,
         isError: false,
         error: null
-      }
+      };
     }
     case ACTIONS.FETCH_SUCCESS: {
       return {
@@ -26,7 +26,7 @@ const reducer = (state, action) => {
         isLoading: false,
         isError: false,
         error: null
-      }
+      };
     }
     case ACTIONS.FETCH_ERROR: {
       return {
@@ -35,18 +35,18 @@ const reducer = (state, action) => {
         isLoading: false,
         isError: true,
         error: action.payload.error
-      }
+      };
     }
     case ACTIONS.RETRY_FETCH: {
       return {
         ...state,
         retryCount: state.retryCount + 1
-      }
+      };
     }
     default: {
       return {
         state
-      }
+      };
     }
   }
 };

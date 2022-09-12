@@ -65,6 +65,6 @@ const ShowCard = ({
       </CardFooter>
     </LinkBox>
   );
-}
+};
 
 export default ShowCard;

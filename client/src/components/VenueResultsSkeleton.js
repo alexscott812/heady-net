@@ -10,6 +10,6 @@ const VenueResultsSkeleton = ({ ...props }) => {
       ))}
     </ListCard>
   );
-}
+};
 
 export default VenueResultsSkeleton;

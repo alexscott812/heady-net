@@ -26,6 +26,6 @@ const ReviewsCardSkeleton = ({ ...props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default ReviewsCardSkeleton;

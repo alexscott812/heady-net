@@ -10,7 +10,7 @@ const useCustomBodyStyles = ( bodyStyles, initalBodyStyles ) => {
       Object.keys(initalBodyStyles).forEach(key => {
         document.body.style[key] = initalBodyStyles[key];
       });
-    }
+    };
     
   }, [bodyStyles, initalBodyStyles]);
 };

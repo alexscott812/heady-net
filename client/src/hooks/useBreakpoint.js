@@ -33,7 +33,7 @@ const useBreakpoint = () => {
 
   const isWindowClient = typeof window === 'object';
   const [breakpoint, setBreakpoint] = useState(() => {
-    return getBreakpoint(isWindowClient ? window.innerWidth : undefined)
+    return getBreakpoint(isWindowClient ? window.innerWidth : undefined);
   });
 
   useEffect(() => {
@@ -59,6 +59,6 @@ const useBreakpoint = () => {
     };
   }, [breakpoint]);
 
-}
+};
 
 export default useBreakpoint;

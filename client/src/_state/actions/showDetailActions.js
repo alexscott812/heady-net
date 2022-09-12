@@ -8,7 +8,7 @@ const ACTIONS = {
 const fetchShowInit = () => {
   return {
     type: ACTIONS.FETCH_SHOW_INIT
-  }
+  };
 };
 
 const fetchShowSuccess = ( show ) => {
@@ -17,7 +17,7 @@ const fetchShowSuccess = ( show ) => {
     payload: {
       show
     }
-  }
+  };
 };
 
 const fetchShowError = ( error ) => {
@@ -26,7 +26,7 @@ const fetchShowError = ( error ) => {
     payload: {
       error
     }
-  }
+  };
 };
 
 export { ACTIONS, fetchShowInit, fetchShowSuccess, fetchShowError };

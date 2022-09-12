@@ -10,6 +10,6 @@ const SongResultsSkeleton = ({ ...props }) => {
       ))}
     </ListCard>
   );
-}
+};
 
 export default SongResultsSkeleton;

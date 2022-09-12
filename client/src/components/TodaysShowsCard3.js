@@ -7,8 +7,8 @@ import qs from 'query-string';
 import { Link } from 'react-router-dom';
 import pluralize from '../utils/pluralize.js';
 import { FaRegCalendar } from 'react-icons/fa';
-import getMonthName from '../utils/get-month-name.js'
-import getDateOrdinal from '../utils/get-date-ordinal.js'
+import getMonthName from '../utils/get-month-name.js';
+import getDateOrdinal from '../utils/get-date-ordinal.js';
 
 const TodaysShowsCard3 = ({ month, day, showCount, ...restProps }) => {
   return (
@@ -53,7 +53,7 @@ const TodaysShowsCard3 = ({ month, day, showCount, ...restProps }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default TodaysShowsCard3;
 

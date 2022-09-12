@@ -37,6 +37,6 @@ const RelatedShowsCard = ({
       </CardBody>
     </Card>
   );
-}
+};
 
 export default RelatedShowsCard;

@@ -33,6 +33,6 @@ const VenueDetailCard = ({ venue, ...restProps }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default VenueDetailCard;

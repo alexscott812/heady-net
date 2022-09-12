@@ -7,13 +7,13 @@ const ACTIONS = {
 const submitInit = () => {
   return {
     type: ACTIONS.SUBMIT_INIT
-  }
+  };
 };
 
 const submitSuccess = () => {
   return {
     type: ACTIONS.SUBMIT_SUCCESS
-  }
+  };
 };
 
 const submitError = ( error ) => {
@@ -22,7 +22,7 @@ const submitError = ( error ) => {
     payload: {
       error
     }
-  }
+  };
 };
 
 export { ACTIONS, submitInit, submitSuccess, submitError };

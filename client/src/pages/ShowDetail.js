@@ -396,6 +396,6 @@ const ShowDetail = () => {
       />
     </>
   );
-}
+};
 
 export default ShowDetail;

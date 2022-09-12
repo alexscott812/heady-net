@@ -7,7 +7,7 @@ import {
   MenuOptionGroup,
   MenuItemOption
 } from "@chakra-ui/react";
-import { FaChevronDown } from 'react-icons/fa'
+import { FaChevronDown } from 'react-icons/fa';
 
 const SortSelect = ({
   value = '',
@@ -39,6 +39,6 @@ const SortSelect = ({
       </MenuList>
     </Menu>
   );
-}
+};
 
 export default SortSelect;

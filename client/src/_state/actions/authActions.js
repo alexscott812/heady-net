@@ -10,7 +10,7 @@ const initUser = ( user ) => {
     payload: {
       user
     }
-  }
+  };
 };
 
 const updateUser = ( user ) => {
@@ -19,13 +19,13 @@ const updateUser = ( user ) => {
     payload: {
       user
     }
-  }
+  };
 };
 
 const removeUser = () => {
   return {
     type: ACTIONS.REMOVE_USER
-  }
+  };
 };
 
 export {

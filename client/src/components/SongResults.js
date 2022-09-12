@@ -18,6 +18,6 @@ const SongResults = ({ songs = [], ...restProps }) => {
       )}
     </>
   );
-}
+};
 
 export default SongResults;

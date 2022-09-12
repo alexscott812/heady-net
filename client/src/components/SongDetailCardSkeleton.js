@@ -11,6 +11,6 @@ const SongDetailCardSkeleton = ({ ...props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default SongDetailCardSkeleton;

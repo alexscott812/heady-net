@@ -12,7 +12,7 @@ const ACTIONS = {
 const fetchUserInit = () => {
   return {
     type: ACTIONS.FETCH_USER_INIT
-  }
+  };
 };
 
 const fetchUserSuccess = ( user ) => {
@@ -21,7 +21,7 @@ const fetchUserSuccess = ( user ) => {
     payload: {
       user
     }
-  }
+  };
 };
 
 const fetchUserError = ( error ) => {
@@ -30,13 +30,13 @@ const fetchUserError = ( error ) => {
     payload: {
       error
     }
-  }
+  };
 };
 
 const fetchRecentActivityInit = () => {
   return {
     type: ACTIONS.FETCH_RECENT_ACTIVITY_INIT
-  }
+  };
 };
 
 const fetchRecentActivitySuccess = ( recentActivity, recentActivityHasMore ) => {
@@ -46,7 +46,7 @@ const fetchRecentActivitySuccess = ( recentActivity, recentActivityHasMore ) => 
       recentActivity,
       recentActivityHasMore
     }
-  }
+  };
 };
 
 const fetchRecentActivityError = ( recentActivityError ) => {
@@ -55,19 +55,19 @@ const fetchRecentActivityError = ( recentActivityError ) => {
     payload: {
       recentActivityError
     }
-  }
+  };
 };
 
 const incrementRecentActivityPage = ( todaysShowsError ) => {
   return {
     type: ACTIONS.INCREMENT_RECENT_ACTIVITY_PAGE
-  }
+  };
 };
 
 const resetRecentActivity = () => {
   return {
     type: ACTIONS.RESET_RECENT_ACTIVITY
-  }
+  };
 };
 
 export {

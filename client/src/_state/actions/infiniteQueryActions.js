@@ -9,7 +9,7 @@ const ACTIONS = {
 const fetchInit = () => {
   return {
     type: ACTIONS.FETCH_INIT
-  }
+  };
 };
 
 const fetchSuccess = ( data, hasMore ) => {
@@ -19,7 +19,7 @@ const fetchSuccess = ( data, hasMore ) => {
       data,
       hasMore
     }
-  }
+  };
 };
 
 const fetchError = ( error ) => {
@@ -28,19 +28,19 @@ const fetchError = ( error ) => {
     payload: {
       error
     }
-  }
+  };
 };
 
 const retryFetch = () => {
   return {
     type: ACTIONS.RETRY_FETCH
-  }
+  };
 };
 
 const incrementPage = () => {
   return {
     type: ACTIONS.INCREMENT_PAGE
-  }
+  };
 };
 
 export { ACTIONS, fetchInit, fetchSuccess, fetchError, retryFetch, incrementPage };

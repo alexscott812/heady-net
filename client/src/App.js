@@ -92,6 +92,6 @@ const App = () => {
       </ChakraProvider>
     </Router>
   );
-}
+};
 
 export default App;

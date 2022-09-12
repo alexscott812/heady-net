@@ -18,6 +18,6 @@ const VenueResults = ({ venues = [], ...restProps }) => {
       )}
     </>
   );
-}
+};
 
 export default VenueResults;

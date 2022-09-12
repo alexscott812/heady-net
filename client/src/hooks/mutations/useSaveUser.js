@@ -20,6 +20,6 @@ const useSaveUser = () => {
       }
     }
   );
-}
+};
 
 export default useSaveUser;

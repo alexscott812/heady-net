@@ -17,6 +17,6 @@ const useShow = (id, opts = {}) => {
       ...opts
     }
   );
-}
+};
 
 export default useShow;

@@ -7,6 +7,6 @@ const Main = ({ children }) => {
       {children}
     </Box>
   );
-}
+};
 
 export default Main;

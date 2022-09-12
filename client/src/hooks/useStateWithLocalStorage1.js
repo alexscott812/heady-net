@@ -76,7 +76,7 @@ const useStateWithLocalStorage = ( key, initialValue ) => {
 
     return () => {
       window.removeEventListener('storage', onLocalStorageChange);
-    }
+    };
   }, [key]);
 
   const setPersistedValue = useCallback((newState) => {

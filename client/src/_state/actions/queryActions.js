@@ -8,7 +8,7 @@ const ACTIONS = {
 const fetchInit = () => {
   return {
     type: ACTIONS.FETCH_INIT
-  }
+  };
 };
 
 const fetchSuccess = ( data ) => {
@@ -17,7 +17,7 @@ const fetchSuccess = ( data ) => {
     payload: {
       data
     }
-  }
+  };
 };
 
 const fetchError = ( error ) => {
@@ -26,13 +26,13 @@ const fetchError = ( error ) => {
     payload: {
       error
     }
-  }
+  };
 };
 
 const retryFetch = () => {
   return {
     type: ACTIONS.RETRY_FETCH
-  }
+  };
 };
 
 export { ACTIONS, fetchInit, fetchSuccess, fetchError, retryFetch };

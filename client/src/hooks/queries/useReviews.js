@@ -52,7 +52,7 @@ const useReviews = (query, opts = {}) => {
     isLoadingMore: isFetchingNextPage,
     isRefetching: isRefetching && !isFetchingNextPage,
     hasNoData: (!dataReduced && !isLoading) || metaReduced?.total_results === 0
-  }
-}
+  };
+};
 
 export default useReviews;

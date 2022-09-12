@@ -24,4 +24,4 @@ const getShowById = async (showId) => {
 export {
   getShows,
   getShowById
-}
+};

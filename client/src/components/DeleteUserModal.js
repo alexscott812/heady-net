@@ -82,6 +82,6 @@ const DeleteUserModal = ({
       </AlertDialogOverlay>
     </AlertDialog>
   );
-}
+};
 
 export default DeleteUserModal;

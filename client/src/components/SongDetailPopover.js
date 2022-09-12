@@ -7,7 +7,6 @@ import {
   HStack,
   VStack,
   Skeleton,
-  SkeletonCircle,
   Link,
   Text
 } from '@chakra-ui/react';

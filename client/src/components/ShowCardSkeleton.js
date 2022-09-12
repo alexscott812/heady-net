@@ -20,6 +20,6 @@ const ShowCardSkeleton = () => {
       </CardFooter>
     </Card>
   );
-}
+};
 
 export default ShowCardSkeleton;

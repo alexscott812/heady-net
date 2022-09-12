@@ -4,7 +4,7 @@ import CardBody from './CardBody.js';
 import CardTitle from './CardTitle.js';
 import { Button, Icon, Text, Box, Stack, useColorModeValue } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { FaRegCompass } from 'react-icons/fa'
+import { FaRegCompass } from 'react-icons/fa';
 
 const DiscoverCard = ({ props }) => {
   return (
@@ -52,7 +52,7 @@ const DiscoverCard = ({ props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default DiscoverCard;
 

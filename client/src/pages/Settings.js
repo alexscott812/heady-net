@@ -2,7 +2,7 @@ import React from 'react';
 import PageContainer from '../components/PageContainer.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useAuth from '../lib/auth/useAuth.js';
-import DeleteUserModal from '../components/DeleteUserModal.js'
+import DeleteUserModal from '../components/DeleteUserModal.js';
 import { useDisclosure } from '@chakra-ui/react';
 import { Outlet } from "react-router-dom";
 import Card from "../components/Card.js";
@@ -46,6 +46,6 @@ const Settings = () => {
       />
     </>
   );
-}
+};
 
 export default Settings;

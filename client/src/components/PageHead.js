@@ -7,6 +7,6 @@ const PageHead = ({ children }) => {
       <Container>{children}</Container>
     </Box>
   );
-}
+};
 
 export default PageHead;

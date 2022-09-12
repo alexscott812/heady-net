@@ -102,6 +102,6 @@ const Venues = () => {
       </PageContainer>
     </>
   );
-}
+};
 
 export default Venues;

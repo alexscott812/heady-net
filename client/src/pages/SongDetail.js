@@ -39,6 +39,6 @@ const SongDetail = () => {
       </Grid>
     </PageContainer>
   );
-}
+};
 
 export default SongDetail;

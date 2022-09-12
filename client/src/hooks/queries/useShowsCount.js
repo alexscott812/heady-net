@@ -32,6 +32,6 @@ const useShowsCount = (query, opts = {}) => {
     isError,
     error
   };
-}
+};
 
 export default useShowsCount;

@@ -14,6 +14,6 @@ const useDeleteUser = () => {
       // onError: onError
     }
   );
-}
+};
 
 export default useDeleteUser;

@@ -92,7 +92,7 @@ const Home = () => {
                       borderRadius="xl"
                     >
                       <AlertIcon boxSize={10} mr={0} />
-                      <AlertTitle mt={4} mb={1} fontSize='lg'>
+                      <AlertTitle mt={4} mb={1} fontSize="lg">
                         That's all there is to see here!
                       </AlertTitle>
                     </Alert>

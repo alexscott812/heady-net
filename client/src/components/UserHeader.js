@@ -6,7 +6,7 @@ import CardBody from './CardBody.js';
 import CardTitle from './CardTitle.js';
 import { FaPen, FaCog } from 'react-icons/fa';
 import { useAuth } from '../lib/auth';
-import getRelativeTime from '../utils/get-relative-time.js'
+import getRelativeTime from '../utils/get-relative-time.js';
 
 const UserHeader = ({
   user = null,
@@ -54,6 +54,6 @@ const UserHeader = ({
       </CardBody>
     </Card>
   );
-}
+};
 
 export default UserHeader;

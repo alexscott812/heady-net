@@ -14,26 +14,26 @@ const reducer = (state, action) => {
         user: action.payload.user,
         isAuthenticated: !!action.payload.user,
         isLoading: false
-      }
+      };
     }
     case ACTIONS.UPDATE_USER: {
       return {
         ...state,
         user: action.payload.user,
         isAuthenticated: !!action.payload.user
-      }
+      };
     }
     case ACTIONS.REMOVE_USER: {
       return {
         ...state,
         user: null,
         isAuthenticated: false
-      }
+      };
     }
     default: {
       return {
         state
-      }
+      };
     }
   }
 };

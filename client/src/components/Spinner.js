@@ -9,6 +9,6 @@ const Spinner = ({ isShowing = false }) => {
       </Center>
     </Collapse>
   );
-}
+};
 
 export default Spinner;

@@ -11,6 +11,6 @@ const VenueDetailCardSkeleton = ({ ...props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default VenueDetailCardSkeleton;

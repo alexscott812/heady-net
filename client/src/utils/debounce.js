@@ -6,6 +6,6 @@ const debounce = (callback, timeout = 100) => {
       callback.apply(this, args);
     }, timeout);
   };
-}
+};
 
 export default debounce;

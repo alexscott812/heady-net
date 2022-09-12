@@ -8,7 +8,7 @@ const ACTIONS = {
 const mutateInit = () => {
   return {
     type: ACTIONS.MUTATE_INIT
-  }
+  };
 };
 
 const mutateSuccess = ( data ) => {
@@ -17,7 +17,7 @@ const mutateSuccess = ( data ) => {
     payload: {
       data
     }
-  }
+  };
 };
 
 const mutateError = ( error ) => {
@@ -26,13 +26,13 @@ const mutateError = ( error ) => {
     payload: {
       error
     }
-  }
+  };
 };
 
 const resetMutation = () => {
   return {
     type: ACTIONS.RESET_MUTATION
-  }
+  };
 };
 
 export { ACTIONS, mutateInit, mutateSuccess, mutateError, resetMutation };

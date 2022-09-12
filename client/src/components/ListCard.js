@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, List, VStack } from '@chakra-ui/react';
-import Card from './Card.js'
-import CardBody from './CardBody.js'
+import Card from './Card.js';
+import CardBody from './CardBody.js';
 
 const ListCard = ({ children, ...restProps }) => {
   return (

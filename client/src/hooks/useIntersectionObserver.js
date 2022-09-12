@@ -74,6 +74,6 @@ const useIntersectionObserver = ({
   }, [target.current, enabled]);
 
   return target;
-}
+};
 
 export default useIntersectionObserver;

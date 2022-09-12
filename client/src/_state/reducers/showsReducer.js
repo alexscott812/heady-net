@@ -18,7 +18,7 @@ const reducer = (state, action) => {
         hasMore: false,
         isLoading: true,
         error: null
-      }
+      };
     }
     case ACTIONS.FETCH_SHOWS_SUCCESS: {
       return {
@@ -28,14 +28,14 @@ const reducer = (state, action) => {
         hasMore: action.payload.hasMore,
         isLoading: false,
         error: null
-      }
+      };
     }
     case ACTIONS.FETCH_SHOWS_ERROR: {
       return {
         ...state,
         isLoading: false,
         error: action.payload.error
-      }
+      };
     }
     case ACTIONS.RESET_SHOWS: {
       return {
@@ -44,24 +44,24 @@ const reducer = (state, action) => {
         totalResults: 0,
         hasMore: false,
         page: 1
-      }
+      };
     }
     case ACTIONS.INCREMENT_PAGE: {
       return {
         ...state,
         page: state.page + 1
-      }
+      };
     }
     case ACTIONS.RETRY_FETCH: {
       return {
         ...state,
         retryCount: state.retryCount + 1
-      }
+      };
     }
     default: {
       return {
         state
-      }
+      };
     }
   }
 };

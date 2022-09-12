@@ -29,6 +29,6 @@ const WelcomeCard = ({ ...props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default WelcomeCard;

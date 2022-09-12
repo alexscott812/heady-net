@@ -27,6 +27,6 @@ const FilterSelect = ({
       </Select>
     </FormControl>
   );
-}
+};
 
 export default FilterSelect;

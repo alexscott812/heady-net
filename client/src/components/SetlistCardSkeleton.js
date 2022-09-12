@@ -18,6 +18,6 @@ const SetlistCardSkeleton = ({ ...props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default SetlistCardSkeleton;

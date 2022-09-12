@@ -11,7 +11,7 @@ const ACTIONS = {
 const fetchTodaysShowsInit = () => {
   return {
     type: ACTIONS.FETCH_TODAYS_SHOWS_INIT
-  }
+  };
 };
 
 const fetchTodaysShowsSuccess = ( todaysShowsCount ) => {
@@ -20,7 +20,7 @@ const fetchTodaysShowsSuccess = ( todaysShowsCount ) => {
     payload: {
       todaysShowsCount
     }
-  }
+  };
 };
 
 const fetchTodaysShowsError = ( todaysShowsError ) => {
@@ -29,13 +29,13 @@ const fetchTodaysShowsError = ( todaysShowsError ) => {
     payload: {
       todaysShowsError
     }
-  }
+  };
 };
 
 const fetchRecentActivityInit = () => {
   return {
     type: ACTIONS.FETCH_RECENT_ACTIVITY_INIT
-  }
+  };
 };
 
 const fetchRecentActivitySuccess = ( recentActivity, recentActivityHasMore ) => {
@@ -45,7 +45,7 @@ const fetchRecentActivitySuccess = ( recentActivity, recentActivityHasMore ) => 
       recentActivity,
       recentActivityHasMore
     }
-  }
+  };
 };
 
 const fetchRecentActivityError = ( recentActivityError ) => {
@@ -54,13 +54,13 @@ const fetchRecentActivityError = ( recentActivityError ) => {
     payload: {
       recentActivityError
     }
-  }
+  };
 };
 
 const incrementRecentActivityPage = ( todaysShowsError ) => {
   return {
     type: ACTIONS.INCREMENT_RECENT_ACTIVITY_PAGE
-  }
+  };
 };
 
 export {

@@ -7,6 +7,6 @@ const PageContainer = ({ children, ...restProps }) => {
       {children}
     </Container>
   );
-}
+};
 
 export default PageContainer;

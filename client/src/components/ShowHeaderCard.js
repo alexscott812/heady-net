@@ -5,7 +5,7 @@ import CardBody from './CardBody.js';
 // import EmptyImage from './EmptyImage.js';
 import { Button, Box, Flex, Heading, Text, Link, Stack } from '@chakra-ui/react';
 import { Link as RouterLink } from "react-router-dom";
-import { FaVolumeUp, FaStar, FaShare } from 'react-icons/fa'
+import { FaVolumeUp, FaStar, FaShare } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 // import useAuth from '../hooks/useAuth.js';
 import { useAuth } from '../lib/auth';

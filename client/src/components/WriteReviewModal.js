@@ -18,7 +18,7 @@ import {
   VStack
 } from '@chakra-ui/react';
 import Card from './Card.js';
-import StarRating from './StarRating.js'
+import StarRating from './StarRating.js';
 import { useAuth } from '../lib/auth';
 import useCreateReview from '../hooks/mutations/useCreateReview.js';
 
@@ -143,6 +143,6 @@ const WriteReviewModal = ({
       </ModalContent>
     </Modal>
   );
-}
+};
 
 export default WriteReviewModal;

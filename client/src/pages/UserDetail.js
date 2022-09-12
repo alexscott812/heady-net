@@ -3,13 +3,13 @@ import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
 import Alert from '../components/Alert.js';
 import Toast from '../components/Toast.js';
 import { useParams } from 'react-router-dom';
-import RecentActivity from '../components/RecentActivity.js'
-import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js'
-import UserHeader from '../components/UserHeader.js'
-import UserHeaderSkeleton from '../components/UserHeaderSkeleton.js'
-import EditUserModal from '../components/EditUserModal.js'
-import ChangePasswordModal from '../components/ChangePasswordModal.js'
-import DeleteUserModal from '../components/DeleteUserModal.js'
+import RecentActivity from '../components/RecentActivity.js';
+import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js';
+import UserHeader from '../components/UserHeader.js';
+import UserHeaderSkeleton from '../components/UserHeaderSkeleton.js';
+import EditUserModal from '../components/EditUserModal.js';
+import ChangePasswordModal from '../components/ChangePasswordModal.js';
+import DeleteUserModal from '../components/DeleteUserModal.js';
 import useAuth from '../hooks/useAuth.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import { useQuery, useInfiniteQuery } from 'react-query';
@@ -311,6 +311,6 @@ const UserDetail = () => {
       />
     </>
   );
-}
+};
 
 export default UserDetail;

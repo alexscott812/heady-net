@@ -10,6 +10,6 @@ const ShowResultsSkeleton = () => {
       ))}
     </SimpleGrid>
   );
-}
+};
 
 export default ShowResultsSkeleton;

@@ -75,4 +75,4 @@ export {
   addVenue,
   updateVenue,
   deleteVenue
-}
+};

@@ -75,4 +75,4 @@ export {
   addReview,
   updateReview,
   deleteReview
-}
+};

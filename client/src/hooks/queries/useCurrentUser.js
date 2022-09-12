@@ -18,7 +18,7 @@ const useCurrentUser = (token, opts) => {
     isLoading,
     isError,
     error
-  }
-}
+  };
+};
 
 export default useCurrentUser;

@@ -65,6 +65,6 @@ const SongDetailCard = ({ song, ...restProps }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default SongDetailCard;

@@ -18,10 +18,10 @@ import {
   VStack
 } from '@chakra-ui/react';
 import AvatarButton from './AvatarButton.js';
-import { FaPen, FaTrashAlt, FaEllipsisH } from 'react-icons/fa';
-import StarRating from './StarRating.js'
+import { FaPen, FaTrashAlt } from 'react-icons/fa';
+import StarRating from './StarRating.js';
 import { useAuth } from '../lib/auth';
-import getRelativeTime from '../utils/get-relative-time.js'
+import getRelativeTime from '../utils/get-relative-time.js';
 
 const ReviewsCard = ({
   reviews = [],
@@ -144,6 +144,6 @@ const ReviewsCard = ({
       </CardBody>
     </Card>
   );
-}
+};
 
 export default ReviewsCard;

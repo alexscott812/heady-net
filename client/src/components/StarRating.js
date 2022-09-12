@@ -86,7 +86,7 @@ const StarRating = ({
       }
     </HStack>
   );
-}
+};
 
 export default StarRating;
 

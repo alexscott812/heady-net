@@ -40,6 +40,6 @@ const VenueDetail = () => {
       </Grid>
     </PageContainer>
   );
-}
+};
 
 export default VenueDetail;

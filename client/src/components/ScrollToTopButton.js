@@ -12,7 +12,7 @@ const ScrollToTopButton = () => {
 
     window.addEventListener('scroll', scrollHandler);
     return () => {
-      window.removeEventListener('scroll', scrollHandler)
+      window.removeEventListener('scroll', scrollHandler);
     };
   }, []);
 
@@ -45,6 +45,6 @@ const ScrollToTopButton = () => {
       
     // </Fade>
   );
-}
+};
 
 export default ScrollToTopButton;

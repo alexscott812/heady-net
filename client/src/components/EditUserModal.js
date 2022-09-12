@@ -129,6 +129,6 @@ const EditUserModal = ({
       </ModalContent>
     </Modal>
   );
-}
+};
 
 export default EditUserModal;

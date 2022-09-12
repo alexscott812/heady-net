@@ -27,6 +27,6 @@ const ShowResults = ({ shows = [] }) => {
       )}
     </>
   );
-}
+};
 
 export default ShowResults;

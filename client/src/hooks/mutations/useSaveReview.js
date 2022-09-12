@@ -25,6 +25,6 @@ const useSaveReview = (opts = {}) => {
     }),
     ...opts
   });
-}
+};
 
 export default useSaveReview;

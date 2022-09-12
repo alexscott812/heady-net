@@ -44,4 +44,4 @@ export {
   addToken,
   refreshToken,
   deleteToken
-}
+};

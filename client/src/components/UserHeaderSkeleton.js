@@ -16,6 +16,6 @@ const UserHeaderSkeleton = () => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default UserHeaderSkeleton;

@@ -17,8 +17,8 @@ import {
   Avatar,
   VStack
 } from '@chakra-ui/react';
-import Card from './Card.js'
-import StarRating from './StarRating.js'
+import Card from './Card.js';
+import StarRating from './StarRating.js';
 import { useAuth } from '../lib/auth';
 import useSaveReview from '../hooks/mutations/useSaveReview.js';
 
@@ -139,6 +139,6 @@ const EditReviewModal = ({
       </ModalContent>
     </Modal>
   );
-}
+};
 
 export default EditReviewModal;

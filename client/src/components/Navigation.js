@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import {
-  Avatar,
   Box,
   Button,
   Container,
@@ -32,7 +31,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  useColorMode,
   useColorModeValue,
   useStyleConfig
 } from '@chakra-ui/react';
@@ -43,9 +41,6 @@ import {
   FaUserCircle,
   FaSignOutAlt,
   FaSignInAlt,
-  FaSun,
-  FaMoon,
-  FaEllipsisV,
   FaUserPlus,
   FaHome,
   FaTicketAlt,
@@ -86,7 +81,6 @@ const Navigation = () => {
     onOpen: onDrawerOpen, 
     onClose: onDrawerClose
   } = useDisclosure();
-  const { toggleColorMode } = useColorMode();
   const { pathname, search } = useLocation();
   const { user, isAuthenticated, logout } = useAuth();
 
@@ -155,7 +149,7 @@ const Navigation = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth"
-    })
+    });
   };
 
   return (

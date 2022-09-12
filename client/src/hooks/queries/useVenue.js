@@ -17,6 +17,6 @@ const useVenue = (id, opts = {}) => {
       ...opts
     }
   );
-}
+};
 
 export default useVenue;

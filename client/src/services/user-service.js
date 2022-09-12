@@ -39,7 +39,7 @@ const addUser = async (user) => {
     const { data } = await axiosInstance.post('/users', user);
     return data;
   } catch (err) {
-    throw handleError(err)
+    throw handleError(err);
   }
 };
 
@@ -55,7 +55,7 @@ const updateUser = async ({ user, token }) => {
     );
     return data;
   } catch (err) {
-    throw handleError(err)
+    throw handleError(err);
   }
 };
 
@@ -71,7 +71,7 @@ const deleteUser = async ({ userId, tokenFn }) => {
     );
     return data;
   } catch (err) {
-    throw handleError(err)
+    throw handleError(err);
   }
 };
 
@@ -81,7 +81,7 @@ const forgotPassword = async (email) => {
     const { data } = await axiosInstance.post('auth/forgot-password', email);
     return data;
   } catch (err) {
-    throw handleError(err)
+    throw handleError(err);
   }
 };
 
@@ -93,7 +93,7 @@ const resetPassword = async ({ passwords, token }) => {
     });
     return data;
   } catch (err) {
-    throw handleError(err)
+    throw handleError(err);
   }
 };
 
@@ -109,7 +109,7 @@ const changePassword = async ({ passwords, tokenFn }) => {
     );
     return data;
   } catch (err) {
-    throw handleError(err)
+    throw handleError(err);
   }
 };
 
@@ -123,4 +123,4 @@ export {
   forgotPassword,
   resetPassword,
   changePassword
-}
+};

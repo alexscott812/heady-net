@@ -17,6 +17,6 @@ const useSong = (id, opts = {}) => {
       ...opts
     }
   );
-}
+};
 
 export default useSong;

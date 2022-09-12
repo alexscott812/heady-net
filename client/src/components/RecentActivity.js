@@ -16,7 +16,7 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import StarRating from './StarRating.js';
 import { useAuth } from '../lib/auth';
-import getRelativeTime from '../utils/get-relative-time.js'
+import getRelativeTime from '../utils/get-relative-time.js';
 import EmptyImage from './EmptyImage.js';
 import AvatarButton from './AvatarButton.js';
 
@@ -103,6 +103,6 @@ const RecentActivity = ({ recentActivity = [] }) => {
       ))}
     </>
   );
-}
+};
 
 export default RecentActivity;

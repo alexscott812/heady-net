@@ -16,14 +16,14 @@ const reducer = (state, action) => {
         error: null,
         isError: false,
         isSuccess: false
-      }
+      };
     }
     case ACTIONS.SUBMIT_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         isSuccess: true
-      }
+      };
     }
     case ACTIONS.SUBMIT_ERROR: {
       return {
@@ -31,12 +31,12 @@ const reducer = (state, action) => {
         isLoading: false,
         error: action.payload.error,
         isError: true
-      }
+      };
     }
     default: {
       return {
         state
-      }
+      };
     }
   }
 };

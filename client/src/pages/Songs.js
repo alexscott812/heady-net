@@ -102,6 +102,6 @@ const Songs = () => {
       </PageContainer>
     </>
   );
-}
+};
 
 export default Songs;

@@ -5,14 +5,14 @@ import GridItem from '../components/GridItem.js';
 import { useParams } from 'react-router-dom';
 import EmptyState from '../components/EmptyState.js';
 import PageContainer from '../components/PageContainer.js';
-import RecentActivity from '../components/RecentActivity.js'
-import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js'
+import RecentActivity from '../components/RecentActivity.js';
+import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js';
 import Spinner from '../components/Spinner.js';
-import UserHeader from '../components/UserHeader.js'
-import UserHeaderSkeleton from '../components/UserHeaderSkeleton.js'
-import EditUserModal from '../components/EditUserModal.js'
-import ChangePasswordModal from '../components/ChangePasswordModal.js'
-import DeleteUserModal from '../components/DeleteUserModal.js'
+import UserHeader from '../components/UserHeader.js';
+import UserHeaderSkeleton from '../components/UserHeaderSkeleton.js';
+import EditUserModal from '../components/EditUserModal.js';
+import ChangePasswordModal from '../components/ChangePasswordModal.js';
+import DeleteUserModal from '../components/DeleteUserModal.js';
 import { useAuth } from '../lib/auth';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useReviews from '../hooks/queries/useReviews.js';
@@ -152,6 +152,6 @@ const UserDetail = () => {
       />
     </>
   );
-}
+};
 
 export default UserDetail;

@@ -17,6 +17,6 @@ const useUser = (id, opts = {}) => {
       ...opts
     }
   );
-}
+};
 
 export default useUser;

@@ -17,6 +17,6 @@ const ShowHeaderCardSkeleton = ({ ...props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default ShowHeaderCardSkeleton;

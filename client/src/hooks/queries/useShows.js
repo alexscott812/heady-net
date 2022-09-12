@@ -50,7 +50,7 @@ const useShows = (query, opts = {}) => {
     loadMore: fetchNextPage,
     isLoadingMore: isFetchingNextPage,
     hasNoData: (!dataReduced && !isLoading) || metaReduced?.total_results === 0
-  }
-}
+  };
+};
 
 export default useShows;

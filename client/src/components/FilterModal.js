@@ -19,7 +19,7 @@ import {
   AccordionPanel,
   Box
 } from '@chakra-ui/react';
-import FilterSelect from './FilterSelect.js'
+import FilterSelect from './FilterSelect.js';
 import monthOptions from '../selectOptions/months.js';
 import dayOptions from '../selectOptions/days.js';
 import yearOptions from '../selectOptions/years.js';

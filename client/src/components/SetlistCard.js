@@ -34,6 +34,6 @@ const SetlistCard = ({ sets = [], ...restProps }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default SetlistCard;

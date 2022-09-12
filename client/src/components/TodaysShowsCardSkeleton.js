@@ -38,6 +38,6 @@ const TodaysShowsCardSkeleton = ({ ...props }) => {
       </CardBody>
     </Card>
   );
-}
+};
 
 export default TodaysShowsCardSkeleton;
