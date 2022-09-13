@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CardTitle from "../components/CardTitle.js";
 import EmptyState from "../components/EmptyState.js";
+import DeleteUserModal from "../components/DeleteUserModal.js";
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Text,
@@ -8,20 +9,26 @@ import {
   Input,
   Box,
   Button,
-  Link
+  Link,
+  useDisclosure
 } from '@chakra-ui/react';
 import { useAuth } from "../lib/auth";
-import useToast from "../hooks/useToast";
+import useChangePassword from "../hooks/mutations/useChangePassword.js";
 import { FaKey, FaTrashAlt } from "react-icons/fa";
 
-const AccountSettings = ({ onShowDeleteAccountModal = null }) => {
-  const createToast = useToast();
-  const { isAuthenticated, getToken, changePassword } = useAuth();
+const AccountSettings = () => {
+  const { isAuthenticated, user, getToken } = useAuth();
+  const changePassword = useChangePassword();
   const [passwords, setPasswords] = useState({
     old_password: '',
     new_password: '',
     confirm_new_password: ''
   });
+  const {
+    isOpen: isDeleteUserModalOpen,
+    onOpen: onDeleteUserModalOpen,
+    onClose: onDeleteUserModalClose
+  } = useDisclosure();
 
   const validate = () => {
     return passwords?.old_password.length > 0 &&
@@ -43,17 +50,6 @@ const AccountSettings = ({ onShowDeleteAccountModal = null }) => {
     changePassword.mutate({
       passwords, 
       tokenFn: getToken
-    }, {
-      onSuccess: () => createToast({
-        id: 'change-password-success',
-        status: 'success',
-        message: 'Password changed!'
-      }),
-      onError: (data) => createToast({
-        id: 'change-password-error',
-        status: 'error',
-        message: data
-      })
     });
   };
 
@@ -114,7 +110,7 @@ const AccountSettings = ({ onShowDeleteAccountModal = null }) => {
               <Button
                 variant="solid"
                 colorScheme="red"
-                onClick={onShowDeleteAccountModal}
+                onClick={onDeleteUserModalOpen}
                 leftIcon={<FaTrashAlt />}
               >
                 Deactivate Account
@@ -123,6 +119,11 @@ const AccountSettings = ({ onShowDeleteAccountModal = null }) => {
           </>
         : <EmptyState />
       }
+      <DeleteUserModal
+        isOpen={isDeleteUserModalOpen}
+        user={user}
+        onClose={onDeleteUserModalClose}
+      />
     </>
   );
 };

@@ -1,9 +1,6 @@
 import React from 'react';
 import PageContainer from '../components/PageContainer.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import useAuth from '../lib/auth/useAuth.js';
-import DeleteUserModal from '../components/DeleteUserModal.js';
-import { useDisclosure } from '@chakra-ui/react';
 import { Outlet } from "react-router-dom";
 import Card from "../components/Card.js";
 import CardBody from "../components/CardBody.js";
@@ -13,13 +10,6 @@ import GridItem from "../components/GridItem.js";
 import SettingsNavSidebar from '../components/SettingsNavSidebar.js';
 
 const Settings = () => {
-  const { user } = useAuth();
-  const {
-    isOpen: isDeleteUserModalOpen,
-    onOpen: onDeleteUserModalOpen,
-    onClose: onDeleteUserModalClose
-  } = useDisclosure();
-
   useDocumentTitle('Settings | HeadyNet');
 
   return (
@@ -39,11 +29,6 @@ const Settings = () => {
           </CardBody>
         </Card>
       </PageContainer>
-      <DeleteUserModal
-        isOpen={isDeleteUserModalOpen}
-        user={user}
-        onClose={onDeleteUserModalClose}
-      />
     </>
   );
 };
