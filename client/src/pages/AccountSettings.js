@@ -48,7 +48,7 @@ const AccountSettings = ({ onShowDeleteAccountModal = null }) => {
         id: 'change-password-success',
         status: 'success',
         message: 'Password changed!'
-    }),
+      }),
       onError: (data) => createToast({
         id: 'change-password-error',
         status: 'error',

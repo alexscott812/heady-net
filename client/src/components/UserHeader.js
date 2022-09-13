@@ -10,9 +10,7 @@ import getRelativeTime from '../utils/get-relative-time.js';
 
 const UserHeader = ({
   user = null,
-  onShowEditUserButtonClick = null,
-  onShowChangePasswordButtonClick = null,
-  onShowDeleteUserButtonClick = null
+  onShowEditUserButtonClick = null
 }) => {
   const { user: currentUser } = useAuth();
 
