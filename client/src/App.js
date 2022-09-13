@@ -31,9 +31,9 @@ import {
   refreshToken,
   deleteToken
 } from './services/auth-service.js';
-import ProfileSettings from './components/ProfileSettings.js';
-import AccountSettings from './components/AccountSettings.js';
-import AppearanceSettings from './components/AppearanceSettings.js';
+import ProfileSettings from './pages/ProfileSettings.js';
+import AccountSettings from './pages/AccountSettings.js';
+import AppearanceSettings from './pages/AppearanceSettings.js';
 
 const App = () => {
   const queryClient = new QueryClient({
@@ -71,7 +71,6 @@ const App = () => {
                 <Route path="/songs/:id" element={<SongDetail />} />
                 <Route exact path="/about" element={<About />} />
                 <Route path="/settings" element={<Settings />}>
-                {/* <Route index element={<ProfileSettings />} /> */}
                   <Route index element={<Navigate to="profile" replace />} />
                   <Route path="profile" element={<ProfileSettings />} />
                   <Route path="account" element={<AccountSettings />} />

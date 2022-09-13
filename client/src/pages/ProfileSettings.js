@@ -1,5 +1,5 @@
 import React from "react";
-import CardTitle from './CardTitle';
+import CardTitle from '../components/CardTitle';
 import {
   Text,
   Divider,
@@ -7,7 +7,7 @@ import {
   Textarea,
   Button
 } from '@chakra-ui/react';
-import EmptyState from './EmptyState.js';
+import EmptyState from '../components/EmptyState.js';
 import { useAuth } from "../lib/auth";
 import { FaPen } from "react-icons/fa";
 

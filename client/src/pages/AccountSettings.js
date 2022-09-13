@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import CardTitle from "./CardTitle.js";
-import EmptyState from "./EmptyState.js";
+import CardTitle from "../components/CardTitle.js";
+import EmptyState from "../components/EmptyState.js";
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Text,

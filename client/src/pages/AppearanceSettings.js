@@ -1,6 +1,6 @@
 import React from "react";
 import { useColorMode, useColorModeValue } from '@chakra-ui/react';
-import CardTitle from "./CardTitle.js";
+import CardTitle from "../components/CardTitle.js";
 import {
   Divider,
   Switch,
