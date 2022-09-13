@@ -1,316 +1,145 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Button, Spinner } from 'react-bootstrap';
-import Alert from '../components/Alert.js';
-import Toast from '../components/Toast.js';
+import React, { useState, useEffect } from 'react';
+import { Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import Grid from '../components/Grid.js';
+import GridItem from '../components/GridItem.js';
 import { useParams } from 'react-router-dom';
-import RecentActivity from '../components/RecentActivity.js';
-import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js';
-import UserHeader from '../components/UserHeader.js';
-import UserHeaderSkeleton from '../components/UserHeaderSkeleton.js';
-import EditUserModal from '../components/EditUserModal.js';
-import ChangePasswordModal from '../components/ChangePasswordModal.js';
-import DeleteUserModal from '../components/DeleteUserModal.js';
-import useAuth from '../hooks/useAuth.js';
+import EmptyState from '../components/EmptyState.js';
+import PageContainer from '../components/PageContainer.js';
+import RecentActivity from '../components/RecentActivity.js'
+import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js'
+import Spinner from '../components/Spinner.js';
+import UserHeader from '../components/UserHeader.js'
+import UserHeaderSkeleton from '../components/UserHeaderSkeleton.js'
+import EditUserModal from '../components/EditUserModal.js'
+import ChangePasswordModal from '../components/ChangePasswordModal.js'
+import DeleteUserModal from '../components/DeleteUserModal.js'
+import { useAuth } from '../lib/auth';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import { useQuery, useInfiniteQuery } from 'react-query';
-import { getUserById } from '../services/userService.js';
-import { getReviews } from '../services/reviewService.js';
-// import { initialState, reducer } from '../state/reducers/userDetailReducer.js';
-// import {
-//   fetchUserInit,
-//   fetchUserSuccess,
-//   fetchUserError,
-//   fetchRecentActivityInit,
-//   fetchRecentActivitySuccess,
-//   fetchRecentActivityError,
-//   incrementRecentActivityPage,
-//   resetRecentActivity
-// } from '../state/actions/userDetailActions.js';
+import useReviews from '../hooks/queries/useReviews.js';
+import useUser from '../hooks/queries/useUser.js';
 
 const UserDetail = () => {
-
   const { id } = useParams();
   const { user } = useAuth();
 
-  // const [{
-  //   user,
-  //   isUserLoading,
-  //   userError,
-  //   recentActivity,
-  //   recentActivityPage,
-  //   recentActivityHasMore,
-  //   isRecentActivityLoading,
-  //   recentActivityError
-  // }, dispatch] = useReducer(reducer, initialState);
-
-  //const [recentActivityPage, setRecentActivityPage] = useState(1);
-  //const [recentActivityHasMore, setRecentActivityHasMore] = useState(false);
-
-  const [showRecentActivityErrorToast, setShowRecentActivityErrorToast] = useState(false);
-  const [showEditUserModal, setShowEditUserModal] = useState(false);
-  const [showDeleteUserModal, setShowDeleteUserModal] = useState(false);
-  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const {
+    isOpen: isEditUserModalOpen,
+    onOpen: onEditUserModalOpen,
+    onClose: onEditUserModalClose
+  } = useDisclosure();
+  const {
+    isOpen: isDeleteUserModalOpen,
+    onOpen: onDeleteUserModalOpen,
+    onClose: onDeleteUserModalClose
+  } = useDisclosure();
+  const {
+    isOpen: isChangePasswordModalOpen,
+    onOpen: onChangePasswordModalOpen,
+    onClose: onChangePasswordModalClose
+  } = useDisclosure();
 
   const {
     data: userData,
-    isLoading: userIsLoading,
-    isError: userIsError,
-    error: userError
-  } = useQuery(['users', id], () => getUserById(id));
+    isLoading: userIsLoading
+  } = useUser(id);
 
   const {
     data: recentActivityData,
     isLoading: recentActivityIsLoading,
     isRefetching: recentActivityIsRefetching,
-    isError: recentActivityIsError,
-    error: recentActivityError,
-    hasNextPage: hasNextRecentActivityPage,
-    fetchNextPage: fetchNextRecentActivityPage,
-    isFetchingNextPage: isFetchingNextRecentActivityPage
-  } = useInfiniteQuery(
-    ['reviews', { user_id: id, sort: '-created_at' }],
-    ({ pageParam = 1 }) => getReviews({
-      user_id: id,
-      page: pageParam,
-      sort: '-created_at'
-    }), {
-      getNextPageParam: (lastPage, pages) => {
-        return (lastPage.meta.current_page < lastPage.meta.total_pages)
-          ? lastPage.meta.current_page + 1
-          : false;
-      },
-      onError: () => {
-        setShowRecentActivityErrorToast(true);
-      }
-    }
-  );
+    hasMore: hasMoreRecentActivity,
+    loadMore: loadMoreRecentActivity,
+    isLoadingMore: isLoadingMoreRecentActivity
+  } = useReviews({ user_id: id, sort: '-created_at' });
 
-  useDocumentTitle(
-    userData
-      ? (userData._id === user?._id)
-        ? `${userData.first_name} ${userData.last_name} (you) | HeadyNet`
-        : `${userData.first_name} ${userData.last_name.charAt(0)}. | HeadyNet`
-      : 'User Detail | HeadyNet'
-  );
+  const [userToBeEdited, setUserToBeEdited] = useState(userData);
+  useEffect(() => {
+    setUserToBeEdited(userData);
+  }, [userData]);
 
-  // useEffect(() => {
-  //   dispatch(resetRecentActivity());
-  // }, [id]);
+  useDocumentTitle(`${userData 
+    ? (userData._id === user?._id)
+      ? `${userData.first_name} ${userData.last_name}`
+      : `${userData.first_name} ${userData.last_name.charAt(0)}.`
+    : 'User Detail'} | HeadyNet`);
 
-  // useEffect(() => {
-  //   let isSubscribed = true;
-  //   const fetchUser = async () => {
-  //     dispatch(fetchUserInit());
-  //     try {
-  //       const res = await getUserById(id);
-  //       const user = await res.data;
-  //       if (!isSubscribed) return;
-  //       dispatch(fetchUserSuccess(user));
-  //     } catch (err) {
-  //       if (!isSubscribed) return;
-  //       dispatch(fetchUserError(handleError(err)));
-  //     }
-  //   };
-  //   fetchUser();
-  //
-  //   return () => isSubscribed = false;
-  //
-  // }, [id]);
-
-  // useEffect(() => {
-  //   let isSubscribed = true;
-  //   const fetchRecentActivity = async () => {
-  //     dispatch(fetchRecentActivityInit());
-  //     try {
-  //       const res = await getReviews({
-  //         user_id: id,
-  //         page: recentActivityPage,
-  //         sort: '-created_at'
-  //       });
-  //       const { data, meta } = await res.data;
-  //       if (isSubscribed) {
-  //         dispatch(fetchRecentActivitySuccess(data, meta.current_page < meta.total_pages));
-  //       }
-  //     } catch (err) {
-  //       if (isSubscribed) {
-  //         dispatch(fetchRecentActivityError(handleError(err)));
-  //       }
-  //     }
-  //   };
-  //   fetchRecentActivity();
-  //
-  //   return () => isSubscribed = false;
-  //
-  // }, [id, recentActivityPage]);
-
-  // const handleLoadMoreRecentActivity = () => {
-  //   //dispatch(incrementRecentActivityPage());
-  //   // setRecentActivityPage(recentActivityPage => recentActivityPage + 1);
-  //   //setRecentActivityPage(recentActivityPage + 1);
-  //   //incrementRecentActivityPage();
-  //   fetchNextRecentActivityPage();
-  // };
-
-  // const handleShowEditUserModal = () => {
-  //   setShowEditUserModal(true);
-  // };
-  //
-  // const handleCloseEditUserModal = () => {
-  //   setShowEditUserModal(false);
-  // };
-
-  const handleToggleEditUserModal = () => {
-    setShowEditUserModal(!showEditUserModal);
-  };
-
-  // const handleShowChangePasswordModal = () => {
-  //   setShowChangePasswordModal(true);
-  // };
-  //
-  // const handleCloseChangePasswordModal = () => {
-  //   setShowChangePasswordModal(false);
-  // };
-
-  const handleToggleChangePasswordModal = () => {
-    setShowChangePasswordModal(!showChangePasswordModal);
-  };
-
-  // const handleShowDeleteUserModal = () => {
-  //   setShowDeleteUserModal(true);
-  // };
-  //
-  // const handleCloseDeleteUserModal = () => {
-  //   setShowDeleteUserModal(false);
-  // };
-
-  const handleToggleDeleteUserModal = () => {
-    setShowDeleteUserModal(!showDeleteUserModal);
-  };
-
-  const handleCloseRecentActivityErrorToast = () => {
-    setShowRecentActivityErrorToast(false);
-  };
+  const editUser = { isLoading: false };
+  const deleteUser = { isLoading: false };
+  const changePassword = { isLoading: false };
 
   return (
     <>
-      <Container className='py-3'>
-        {
-          userIsLoading &&
-            <Row>
-              <Col lg={4}>
+      <PageContainer>
+        <Grid>
+          {userIsLoading && (
+            <>
+              <GridItem colSpan={[12,12,4,3]}>
                 <UserHeaderSkeleton />
-              </Col>
-              <Col lg={8}>
-                <div className="mb-3 d-flex align-items-center">
-                  <div>
-                    <h6 className='m-0 text-muted fw-bold'>{ 'RECENT ACTIVITY' }</h6>
-                  </div>
-                  <div className="ps-2 flex-grow-1"><hr className='m-0'/></div>
-                </div>
-                {/*<h6 className='mb-3 text-muted fw-bold'>{ 'RECENT ACTIVITY' }</h6>*/}
+              </GridItem>
+              <GridItem colSpan={[12,12,8,6]}>
+                {/* <Flex>
+                  <Box mb={3}>
+                    <Text variant="subtle-bold">Recent Activity</Text>
+                  </Box>
+                </Flex> */}
                 <RecentActivitySkeleton />
-              </Col>
-            </Row>
-        }
-        {/*
-          userIsError &&
-            <Alert variant='danger'>
-              { userError }
-            </Alert>
-        */}
-        {
-          userData &&
-            <Row>
-              <Col lg={4}>
+              </GridItem>
+            </>
+          )}
+          {userData && (
+            <>
+              <GridItem colSpan={[12,12,4,3]}>
                 <UserHeader
-                  user={ userData }
-                  handleShowEditUserModal={ handleToggleEditUserModal }
-                  handleShowChangePasswordModal={ handleToggleChangePasswordModal }
-                  handleShowDeleteUserModal={ handleToggleDeleteUserModal }
+                  user={userData}
+                  onShowEditUserButtonClick={onEditUserModalOpen}
+                  onShowChangePasswordButtonClick={onChangePasswordModalOpen}
+                  onShowDeleteUserButtonClick={onDeleteUserModalOpen}
                 />
-              </Col>
-              <Col lg={8}>
-                <div className="mb-3 d-flex align-items-center">
-                  <div>
-                    <h6 className='m-0 text-muted fw-bold'>{ 'RECENT ACTIVITY' }</h6>
-                  </div>
-                  <div className="ps-2 flex-grow-1"><hr className='m-0'/></div>
-                </div>
-                {/*<h6 className='mb-3 text-muted fw-bold'>{ 'RECENT ACTIVITY' }</h6>*/}
-                {
-                  recentActivityIsRefetching &&
-                    <div className='d-flex justify-content-center mb-4'>
-                      <Spinner animation="border" />
-                    </div>
-                }
-                {
-                  recentActivityData &&
-                    <>
-                      <RecentActivity
-                        recentActivity={
-                          recentActivityData.pages.reduce((allData, data) => {
-                            return [...allData, ...data.data];
-                          }, [])
-                        }
-                      />
-                      {
-                        hasNextRecentActivityPage &&
-                          <div className='d-grid mb-4'>
-                            <Button
-                              disabled={ isFetchingNextRecentActivityPage }
-                              onClick={
-                                !isFetchingNextRecentActivityPage
-                                  ? fetchNextRecentActivityPage
-                                  : null
-                              }
-                            >
-                              {
-                                !isFetchingNextRecentActivityPage
-                                  ? 'Load More'
-                                  : 'Loading More...'
-                              }
-                            </Button>
-                          </div>
-                      }
-                    </>
-                }
-                {
-                  recentActivityIsLoading &&
-                    <RecentActivitySkeleton />
-                }
-                {/*
-                  recentActivityIsError &&
-                    <Alert variant='danger'>
-                      { recentActivityError }
-                    </Alert>
-                */}
-              </Col>
-            </Row>
-        }
-      </Container>
-      <Toast
-        show={ showRecentActivityErrorToast }
-        onClose={ handleCloseRecentActivityErrorToast }
-      >
-        { recentActivityError }
-      </Toast>
+              </GridItem>
+              <GridItem colSpan={[12,12,8,6]}>
+                <Text variant="subtle-bold" mb={3}>Recent Activity</Text>
+                <Spinner isShowing={recentActivityIsRefetching} />
+                {recentActivityIsLoading && <RecentActivitySkeleton />}
+                {recentActivityData && (
+                  <>
+                    <RecentActivity recentActivity={recentActivityData} />
+                    {hasMoreRecentActivity && (
+                      <Flex justify="center">
+                        <Button
+                          colorScheme="brand"
+                          isLoading={isLoadingMoreRecentActivity}
+                          loadingText="Loading More..."
+                          isDisabled={isLoadingMoreRecentActivity}
+                          onClick={loadMoreRecentActivity}
+                        >
+                          Load More
+                        </Button>
+                      </Flex>
+                    )}
+                  </>
+                )}
+              </GridItem>
+            </>
+          )}
+          {(!userData && !userIsLoading) && (
+            <GridItem>
+              <EmptyState />
+            </GridItem>
+          )}
+        </Grid>
+      </PageContainer>
       <EditUserModal
-        show={ showEditUserModal }
-        user={ userData }
-        onHide={ handleToggleEditUserModal }
-      />
-      <ChangePasswordModal
-        show={ showChangePasswordModal }
-        user={ userData }
-        onHide={ handleToggleChangePasswordModal }
-      />
-      <DeleteUserModal
-        show={ showDeleteUserModal }
-        user={ userData }
-        onHide={ handleToggleDeleteUserModal }
+        isOpen={isEditUserModalOpen}
+        userToBeEdited={userToBeEdited}
+        setUserToBeEdited={setUserToBeEdited}
+        onClose={() => {
+          onEditUserModalClose();
+          setUserToBeEdited(userData);
+        }}
+        mutation={editUser}
       />
     </>
   );
-};
+}
 
 export default UserDetail;
