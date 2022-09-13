@@ -191,7 +191,6 @@ const getShows = async (req, res, next) => {
       {
         $project: {
           data: '$data',
-          // meta1: { $arrayElemAt: [ '$meta', 0 ] },
           meta: {
             $ifNull: [
               { $arrayElemAt: ['$meta', 0] },
