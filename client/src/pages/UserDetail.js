@@ -61,11 +61,11 @@ const UserDetail = () => {
                 <UserHeaderSkeleton />
               </GridItem>
               <GridItem colSpan={[12,12,8,6]}>
-                <Flex>
+                {/* <Flex>
                   <Box mb={3}>
                     <Text variant="subtle-bold">Recent Activity</Text>
                   </Box>
-                </Flex>
+                </Flex> */}
                 <RecentActivitySkeleton />
               </GridItem>
             </>
@@ -79,7 +79,7 @@ const UserDetail = () => {
                 />
               </GridItem>
               <GridItem colSpan={[12,12,8,6]}>
-                <Text variant="subtle-bold" mb={3}>Recent Activity</Text>
+                {/* <Text variant="subtle-bold" mb={3}>Recent Activity</Text> */}
                 <Spinner isShowing={recentActivityIsRefetching} />
                 {recentActivityIsLoading && <RecentActivitySkeleton />}
                 {recentActivityData && (

@@ -24,7 +24,6 @@ import ResetPassword from './pages/ResetPassword.js';
 import UserDetail from './pages/UserDetail.js';
 import NotFound from './pages/NotFound.js';
 import Settings from './pages/Settings.js';
-// import AuthProvider from './context/AuthProvider.js'
 import { AuthProvider, AuthClient } from './lib/auth';
 import {
   addToken,

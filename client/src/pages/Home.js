@@ -62,7 +62,7 @@ const Home = () => {
         <GridItem colSpan={[12,12,8,9]}>
           <Grid>
             <GridItem order={[1,1,1,0]} colSpan={[12,12,12,8]}>
-              <Text variant="subtle-bold" mb={3}>Recent Activity</Text>
+              {/* <Text variant="subtle-bold" mb={3}>Recent Activity</Text> */}
               <Spinner isShowing={recentActivityIsRefetching} />
               {recentActivityIsLoading && <RecentActivitySkeleton />}
               {recentActivityData && (
