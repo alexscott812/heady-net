@@ -3,6 +3,9 @@ import { mode } from '@chakra-ui/theme-tools';
 import palette from './palette.js';
 
 const theme = extendTheme({
+  config: {
+    initialColorMode: 'system'
+  },
   fonts: {
     heading: `Inter, ${baseTheme.fonts.heading}`,
     body: `Inter, ${baseTheme.fonts.body}`
