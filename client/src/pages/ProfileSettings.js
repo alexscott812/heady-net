@@ -7,7 +7,7 @@ import {
   Textarea,
   Button
 } from '@chakra-ui/react';
-import EmptyState from '../components/EmptyState.js';
+import UnauthenticatedState from '../components/UnauthenticatedState.js';
 import { useAuth } from "../lib/auth";
 import { FaPen } from "react-icons/fa";
 
@@ -53,7 +53,7 @@ const ProfileSettings = () => {
               Update Profile
             </Button>
           </>
-        : <EmptyState />
+        : <UnauthenticatedState />
       }
     </>
   );

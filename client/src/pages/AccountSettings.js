@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CardTitle from "../components/CardTitle.js";
-import EmptyState from "../components/EmptyState.js";
+import UnauthenticatedState from "../components/UnauthenticatedState.js";
 import DeleteUserModal from "../components/DeleteUserModal.js";
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -117,7 +117,7 @@ const AccountSettings = () => {
               </Button>
             </Box>
           </>
-        : <EmptyState />
+        : <UnauthenticatedState />
       }
       <DeleteUserModal
         isOpen={isDeleteUserModalOpen}

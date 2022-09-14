@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider as ThemeProvider } from '@chakra-ui/react';
 import theme from './theme/theme.js';
 import './theme/fonts.css';
 import Navigation from './components/Navigation.js';
@@ -54,7 +54,7 @@ const App = () => {
 
   return (
     <Router>
-      <ChakraProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <AuthProvider client={authClient}>
             <Navigation />
@@ -87,7 +87,7 @@ const App = () => {
           </AuthProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-      </ChakraProvider>
+      </ThemeProvider>
     </Router>
   );
 };

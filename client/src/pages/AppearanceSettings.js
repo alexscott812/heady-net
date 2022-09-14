@@ -1,31 +1,28 @@
 import React from "react";
-import { useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react';
 import CardTitle from "../components/CardTitle.js";
 import {
   Divider,
-  Switch,
-  FormControl,
-  FormLabel
+  Text,
+  RadioGroup,
+  Stack,
+  Radio
 } from '@chakra-ui/react';
 
 const AppearanceSettings = () => {
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <>
-      <CardTitle>Theme</CardTitle>
+      <CardTitle>Theme Preference</CardTitle>
       <Divider mb={3} />
-      <FormControl display="flex" alignItems="center">
-        <FormLabel htmlFor="color-mode-switch" mb="0">
-          Dark Mode
-        </FormLabel>
-        <Switch
-          id="color-mode-switch"
-          isChecked={useColorModeValue(false, true)}
-          onChange={toggleColorMode}
-          colorScheme="brand"
-        />
-      </FormControl>
+      <Text mb={3}>Choose how HeadyNet looks to you.</Text>
+      <RadioGroup onChange={toggleColorMode} value={colorMode}>
+        <Stack spacing={4} direction="row">
+          <Radio value="light" colorScheme="brand">Light mode</Radio>
+          <Radio value="dark" colorScheme="brand">Dark mode</Radio>
+        </Stack>
+      </RadioGroup>
     </>
   );
 };
