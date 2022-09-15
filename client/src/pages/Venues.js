@@ -8,7 +8,7 @@ import PageContainer from '../components/PageContainer.js';
 import PageHead from '../components/PageHead.js';
 import SortSelect from '../components/SortSelect.js';
 import ResultsCount from '../components/ResultsCount.js';
-import sortOptions from '../sortOptions/venues.js';
+import { VENUE_SORT_OPTIONS } from '../constants.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useQueryParams from '../hooks/useQueryParams.js';
 import useVenues from '../hooks/queries/useVenues.js';
@@ -74,7 +74,7 @@ const Venues = () => {
           <Box>
             <SortSelect
               value={query.sort}
-              options={sortOptions}
+              options={VENUE_SORT_OPTIONS}
               onChange={handleSortChange}
             />
           </Box>

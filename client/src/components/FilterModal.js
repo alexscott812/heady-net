@@ -20,9 +20,7 @@ import {
   Box
 } from '@chakra-ui/react';
 import FilterSelect from './FilterSelect.js';
-import monthOptions from '../selectOptions/months.js';
-import dayOptions from '../selectOptions/days.js';
-import yearOptions from '../selectOptions/years.js';
+import { MONTH_OPTIONS, DAY_OPTIONS, YEAR_OPTIONS } from '../constants.js';
 import countKeys from '../utils/count-keys.js';
 
 const FilterModal = ({
@@ -91,21 +89,21 @@ const FilterModal = ({
                     label="Month"
                     name="month"
                     value={tempFilters.month || ''}
-                    options={monthOptions}
+                    options={MONTH_OPTIONS}
                     handleChange={handleFilterChange}
                   />
                   <FilterSelect
                     label="Day"
                     name="day"
                     value={tempFilters.day || ''}
-                    options={dayOptions}
+                    options={DAY_OPTIONS}
                     handleChange={handleFilterChange}
                   />
                   <FilterSelect
                     label="Year"
                     name="year"
                     value={tempFilters.year || ''}
-                    options={yearOptions}
+                    options={YEAR_OPTIONS}
                     handleChange={handleFilterChange}
                   />
                 </HStack>
@@ -138,21 +136,21 @@ const FilterModal = ({
                     label="City"
                     name="city"
                     value={tempFilters.year || ''}
-                    options={yearOptions}
+                    options={venueOptions}
                     handleChange={handleFilterChange}
                   />
                   <FilterSelect
                     label="State"
                     name="state"
                     value={tempFilters.year || ''}
-                    options={yearOptions}
+                    options={venueOptions}
                     handleChange={handleFilterChange}
                   />
                   <FilterSelect
                     label="Country"
                     name="country"
                     value={tempFilters.year || ''}
-                    options={yearOptions}
+                    options={venueOptions}
                     handleChange={handleFilterChange}
                   />
                 </VStack>

@@ -19,7 +19,7 @@ import SortSelect from '../components/SortSelect.js';
 import ShowResultsSkeleton from '../components/ShowResultsSkeleton.js';
 import useQueryParams from '../hooks/useQueryParams.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import sortOptions from '../sortOptions/shows.js';
+import { SHOW_SORT_OPTIONS } from '../constants.js';
 import useShows from '../hooks/queries/useShows.js';
 import useSongs from '../hooks/queries/useSongs.js';
 import useVenues from '../hooks/queries/useVenues.js';
@@ -88,7 +88,7 @@ const Shows = () => {
           <Box>
             <SortSelect
               value={query.sort}
-              options={sortOptions}
+              options={SHOW_SORT_OPTIONS}
               onChange={handleSortChange}
             />
           </Box>

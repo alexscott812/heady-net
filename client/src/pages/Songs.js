@@ -8,7 +8,7 @@ import SortSelect from '../components/SortSelect.js';
 import ResultsCount from '../components/ResultsCount.js';
 import PageContainer from '../components/PageContainer.js';
 import PageHead from '../components/PageHead.js';
-import sortOptions from '../sortOptions/songs.js';
+import { SONG_SORT_OPTIONS } from '../constants.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useQueryParams from '../hooks/useQueryParams.js';
 import useSongs from '../hooks/queries/useSongs.js';
@@ -74,7 +74,7 @@ const Songs = () => {
           <Box>
             <SortSelect
               value={query.sort}
-              options={sortOptions}
+              options={SONG_SORT_OPTIONS}
               onChange={handleSortChange}
             />
           </Box>
