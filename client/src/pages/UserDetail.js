@@ -49,8 +49,6 @@ const UserDetail = () => {
       : `${userData.first_name} ${userData.last_name.charAt(0)}.`
     : 'User Detail'} | HeadyNet`);
 
-  const editUser = { isLoading: false };
-
   return (
     <>
       <PageContainer>
@@ -118,7 +116,6 @@ const UserDetail = () => {
           onEditUserModalClose();
           setUserToBeEdited(userData);
         }}
-        mutation={editUser}
       />
     </>
   );
