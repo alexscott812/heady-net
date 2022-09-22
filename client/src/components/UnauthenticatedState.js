@@ -4,8 +4,8 @@ import { Alert, AlertTitle, AlertIcon, Button } from '@chakra-ui/react';
 
 const UnauthenticatedState = ({ ...props }) => {
   const location = useLocation();
-
-	return (
+  
+  return (
     <Alert
       status="info"
       variant="subtle"
