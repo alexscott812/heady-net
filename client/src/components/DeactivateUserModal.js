@@ -12,7 +12,7 @@ import {
 import { useAuth } from '../lib/auth';
 import useDeleteUser from '../hooks/mutations/useDeleteUser.js';
 
-const DeleteUserModal = ({
+const DeactivateUserModal = ({
   userToBeDeleted = null,
   setUserToBeDeleted = null,
   isOpen = false,
@@ -72,4 +72,4 @@ const DeleteUserModal = ({
   );
 };
 
-export default DeleteUserModal;
+export default DeactivateUserModal;

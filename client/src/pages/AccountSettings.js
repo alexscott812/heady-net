@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CardTitle from "../components/CardTitle.js";
 import UnauthenticatedState from "../components/UnauthenticatedState.js";
-import DeleteUserModal from "../components/DeleteUserModal.js";
+import DeactivateUserModal from "../components/DeactivateUserModal.js";
 import { Link as RouterLink } from 'react-router-dom';
 import {
   Text,
@@ -25,15 +25,15 @@ const AccountSettings = () => {
     confirm_new_password: ''
   });
   const {
-    isOpen: isDeleteUserModalOpen,
-    onOpen: onDeleteUserModalOpen,
-    onClose: onDeleteUserModalClose
+    isOpen: isDeactivateUserModalOpen,
+    onOpen: onDeactivateUserModalOpen,
+    onClose: onDeactivateUserModalClose
   } = useDisclosure();
 
   const validate = () => {
-    return passwords?.old_password.length > 0 &&
-      passwords?.new_password.length > 0 &&
-      passwords?.confirm_new_password.length > 0;
+    return passwords?.old_password.length > 0
+      && passwords?.new_password.length > 0
+      && passwords?.confirm_new_password.length > 0;
   };
 
   const handleInputChange = (e) => {
@@ -110,7 +110,7 @@ const AccountSettings = () => {
               <Button
                 variant="solid"
                 colorScheme="red"
-                onClick={onDeleteUserModalOpen}
+                onClick={onDeactivateUserModalOpen}
                 leftIcon={<FaTrashAlt />}
               >
                 Deactivate Account
@@ -119,10 +119,10 @@ const AccountSettings = () => {
           </>
         : <UnauthenticatedState />
       }
-      <DeleteUserModal
-        isOpen={isDeleteUserModalOpen}
+      <DeactivateUserModal
+        isOpen={isDeactivateUserModalOpen}
         user={user}
-        onClose={onDeleteUserModalClose}
+        onClose={onDeactivateUserModalClose}
       />
     </>
   );
