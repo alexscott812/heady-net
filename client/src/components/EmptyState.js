@@ -19,7 +19,7 @@ const EmptyState = ({ ...props }) => {
         Nothing to see here!
       </AlertTitle>
     </Alert>
-	);
+  );
 };
 
 export default EmptyState;

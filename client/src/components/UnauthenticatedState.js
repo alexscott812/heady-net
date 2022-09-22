@@ -30,7 +30,7 @@ const UnauthenticatedState = ({ ...props }) => {
         Login
       </Button>
     </Alert>
-	);
+  );
 };
 
 export default UnauthenticatedState;
