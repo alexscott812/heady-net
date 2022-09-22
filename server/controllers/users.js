@@ -27,6 +27,8 @@ const getUsers = async (req, res, next) => {
           _id: 1,
           first_name: 1,
           last_name: 1,
+          bio: 1,
+          email: 1,
           role: 1,
           created_at: 1,
           updated_at: 1
@@ -77,6 +79,8 @@ const getUserById = async (req, res, next) => {
           _id: 1,
           first_name: 1,
           last_name: 1,
+          bio: 1,
+          email: 1,
           review_count: { $size: '$reviews' },
           role: 1,
           created_at: 1,
@@ -120,6 +124,8 @@ const getCurrentUser = async (req, res, next) => {
           _id: 1,
           first_name: 1,
           last_name: 1,
+          bio: 1,
+          email: 1,
           review_count: { $size: '$reviews' },
           role: 1,
           created_at: 1,
@@ -155,12 +161,14 @@ const addUser = async (req, res, next) => {
       _id: validateUUIDv4(req.body._id) ? req.body._id : uuidv4(),
       first_name: req.body.first_name,
       last_name: req.body.last_name,
+      bio: req.body.bio,
       email: req.body.email,
       password: hashedPassword,
       role: 'user'
     });
 
-    const newUser = await user.save();
+    await user.save();
+
     const {
       password,
       password_reset_token,
