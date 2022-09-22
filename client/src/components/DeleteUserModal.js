@@ -50,6 +50,7 @@ const DeleteUserModal = ({
           <AlertDialogHeader>Deactivate Account</AlertDialogHeader>
           <AlertDialogBody>
             <Text mb={3}>Are you sure you want to deactivate your account?</Text>
+            <Text mb={3}>{user?._id || ''}</Text>
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button colorScheme="gray" mr={2} onClick={onClose} ref={cancelRef}>
@@ -62,7 +63,7 @@ const DeleteUserModal = ({
               loadingText="Deleting Account..."
               isDisabled={deleteUser.isLoading}
             >
-              Delete Account
+              Deactivate Account
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

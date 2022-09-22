@@ -75,7 +75,7 @@ const EditUserModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Edit Info</ModalHeader>
@@ -107,7 +107,7 @@ const EditUserModal = ({
           />
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="gray" mr={2} onClick={onClose}>
+          <Button colorScheme="gray" mr={2} onClick={handleClose}>
             Cancel
           </Button>
           <Button

@@ -77,12 +77,12 @@ const WriteReviewModal = ({
           <Flex alignItems="flex-start">
             <Avatar
               size="sm"
-              name={`${user.first_name} ${user.last_name}`}
+              name={`${user?.first_name} ${user?.last_name}`}
               mr={2}
             />
             <Card variant="inner" py={2} pl={3} pr={2}>
               <VStack align="start" spacing={1} flex={1}>
-                <Text fontWeight="medium">{`${user.first_name} ${user.last_name}`}</Text>
+                <Text fontWeight="medium">{`${user?.first_name} ${user?.last_name}`}</Text>
                 <Box mb={3}>
                   <StarRating
                     editable
