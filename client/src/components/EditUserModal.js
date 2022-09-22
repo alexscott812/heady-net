@@ -101,9 +101,11 @@ const EditUserModal = ({
           />
           <Text mb={1}>Bio</Text>
           <Textarea
+            mb={3}
+            name="bio"
             value={userToBeEdited?.bio || ''}
             placeholder="Enter a bit about yourself"
-            mb={3}
+            onChange={handleInputChange}
           />
         </ModalBody>
         <ModalFooter>
