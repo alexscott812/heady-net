@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Alert,
-  AlertIcon,
   Box,
   Button,
   Modal,
@@ -32,7 +30,7 @@ const WriteReviewModal = ({
   onClose = null,
   showId = null
 }) => {
-  const { user, isAuthenticated, getToken } = useAuth();
+  const { user, getToken } = useAuth();
   const [review, setReview] = useState(initialReviewState);
   const createReview = useCreateReview();
 
@@ -76,55 +74,32 @@ const WriteReviewModal = ({
         <ModalHeader>Write a Review</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {isAuthenticated
-            ? <>
-                <Flex alignItems="flex-start">
-                  <Avatar
-                    size="sm"
-                    name={`${user.first_name} ${user.last_name}`}
-                    mr={2}
-                  />
-                  <Card variant="inner" py={2} pl={3} pr={2}>
-                    <VStack align="start" spacing={1} flex={1}>
-                      <Text fontWeight="medium">{`${user.first_name} ${user.last_name}`}</Text>
-                      <Box mb={3}>
-                        <StarRating
-                          editable
-                          rating={review?.rating || 0}
-                          numberOfStars={5}
-                          onRatingChange={handleInputChange}
-                        />
-                      </Box>
-                      <Textarea
-                        name="text"
-                        value={review?.text || ''}
-                        onChange={handleInputChange}
-                        placeholder="Write a review..."
-                      />
-                    </VStack>
-                  </Card>
-                </Flex>
-                {/* <Text fontWeight="medium" mb={1}>{`${user.first_name} ${user.last_name}`}</Text>
+          <Flex alignItems="flex-start">
+            <Avatar
+              size="sm"
+              name={`${user.first_name} ${user.last_name}`}
+              mr={2}
+            />
+            <Card variant="inner" py={2} pl={3} pr={2}>
+              <VStack align="start" spacing={1} flex={1}>
+                <Text fontWeight="medium">{`${user.first_name} ${user.last_name}`}</Text>
                 <Box mb={3}>
                   <StarRating
                     editable
-                    rating={reviewToBeCreated?.rating || 0}
+                    rating={review?.rating || 0}
                     numberOfStars={5}
                     onRatingChange={handleInputChange}
                   />
                 </Box>
                 <Textarea
                   name="text"
-                  value={reviewToBeCreated?.text || ''}
+                  value={review?.text || ''}
                   onChange={handleInputChange}
                   placeholder="Write a review..."
-                /> */}
-              </>
-            : <Alert status="error" mb={3}>
-                <AlertIcon />
-                Not authorized to write review!
-              </Alert>
-          }
+                />
+              </VStack>
+            </Card>
+          </Flex>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="gray" mr={2} onClick={handleClose}>

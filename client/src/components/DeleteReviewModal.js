@@ -1,7 +1,5 @@
 import React, { useRef } from 'react';
 import {
-  Alert,
-  AlertIcon,
   Button,
   Text,
   AlertDialog,
@@ -20,7 +18,7 @@ const DeleteReviewModal = ({
   isOpen = false,
   onClose = null,
 }) => {
-  const { isAuthenticated, getToken } = useAuth();
+  const { getToken } = useAuth();
   const deleteReview = useDeleteReview();
   const cancelRef = useRef();
 
@@ -50,13 +48,7 @@ const DeleteReviewModal = ({
         <AlertDialogContent>
           <AlertDialogHeader>Delete Review</AlertDialogHeader>
           <AlertDialogBody>
-            {isAuthenticated
-              ? <Text mb={3}>Are you sure you want to delete this review?</Text>
-              : <Alert status="error" mb={3}>
-                  <AlertIcon />
-                  Not authorized to delete review!
-                </Alert>
-            }
+            <Text mb={3}>Are you sure you want to delete this review?</Text>
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button colorScheme="gray" mr={2} onClick={handleClose} ref={cancelRef}>

@@ -1,7 +1,5 @@
 import React, { useState, useRef } from 'react';
 import {
-  Alert,
-  AlertIcon,
   Button,
   Text,
   AlertDialog,
@@ -19,7 +17,6 @@ const DeleteUserModal = ({
   setUserToBeDeleted = null,
   isOpen = false,
   onClose = null,
-  mutation = null
 }) => {
   const cancelRef = useRef();
   const { isAuthenticated } = useAuth();
@@ -39,10 +36,6 @@ const DeleteUserModal = ({
 
   const handleDeleteUser = (e) => {
     e.preventDefault();
-    removeUser();
-  };
-
-  const removeUser = async () => {
     deleteUser.mutate({ userId: user._id });
   };
 
@@ -54,15 +47,9 @@ const DeleteUserModal = ({
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
-          <AlertDialogHeader>Delete Account</AlertDialogHeader>
+          <AlertDialogHeader>Deactivate Account</AlertDialogHeader>
           <AlertDialogBody>
-            {isAuthenticated
-              ? <Text mb={3}>Are you sure you want to delete your account?</Text>
-              : <Alert status="error" mb={3}>
-                  <AlertIcon />
-                  Not authorized to delete account!
-                </Alert>
-            }
+            <Text mb={3}>Are you sure you want to deactivate your account?</Text>
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button colorScheme="gray" mr={2} onClick={onClose} ref={cancelRef}>

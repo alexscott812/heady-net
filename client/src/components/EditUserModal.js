@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Alert,
-  AlertIcon,
   Button,
   Input,
   Modal,
@@ -47,13 +45,18 @@ const EditUserModal = ({
   //   props.onHide();
   // };
 
+  const handleClose = () => {
+    setUserToBeEdited(null);
+    saveUser.reset();
+    onClose();
+  };
+
   const validate = () => {
-    return userToBeEdited?.first_name?.length > 0 &&
-      userToBeEdited?.last_name?.length > 0;
+    return userToBeEdited?.first_name?.length > 0
+      && userToBeEdited?.last_name?.length > 0;
   };
 
   const handleInputChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
     setUserToBeEdited({
       ...userToBeEdited,
@@ -62,14 +65,13 @@ const EditUserModal = ({
   };
 
   const handleSaveUser = (e) => {
-    e.preventDefault();
     console.log(userToBeEdited);
     if (!validate()) return;
-    editUser();
-  };
-
-  const editUser = () => {
-    saveUser.mutate({ user: userToBeEdited });
+    saveUser.mutate({
+      user: userToBeEdited
+    }, {
+      onSuccess: handleClose
+    });
   };
 
   return (
@@ -79,38 +81,30 @@ const EditUserModal = ({
         <ModalHeader>Edit Info</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {isAuthenticated
-            ? <>
-                <Text mb={1}>First name</Text>
-                <Input
-                  mb={3}
-                  type="text"
-                  name="first_name"
-                  value={userToBeEdited?.first_name || ''}
-                  placeholder="First Name"
-                  onChange={handleInputChange}
-                />
-                <Text mb={1}>Last name</Text>
-                <Input
-                  mb={3}
-                  type="text"
-                  name="last_name"
-                  value={userToBeEdited?.last_name || ''}
-                  placeholder="Last Name"
-                  onChange={handleInputChange}
-                />
-                <Text mb={1}>Bio</Text>
-                <Textarea
-                  value={userToBeEdited?.bio || ''}
-                  placeholder="Enter a bit about yourself"
-                  mb={3}
-                />
-              </>
-            : <Alert status="error" mb={3}>
-                <AlertIcon />
-                Not authorized to edit user info!
-              </Alert>
-          }
+          <Text mb={1}>First name</Text>
+          <Input
+            mb={3}
+            type="text"
+            name="first_name"
+            value={userToBeEdited?.first_name || ''}
+            placeholder="First Name"
+            onChange={handleInputChange}
+          />
+          <Text mb={1}>Last name</Text>
+          <Input
+            mb={3}
+            type="text"
+            name="last_name"
+            value={userToBeEdited?.last_name || ''}
+            placeholder="Last Name"
+            onChange={handleInputChange}
+          />
+          <Text mb={1}>Bio</Text>
+          <Textarea
+            value={userToBeEdited?.bio || ''}
+            placeholder="Enter a bit about yourself"
+            mb={3}
+          />
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="gray" mr={2} onClick={onClose}>
