@@ -57,6 +57,8 @@ const Shows = () => {
     setQuery(newQuery);
   };
 
+  const filterCount = countKeys(query, ['month','day','year','venue','city','state','country','song']);
+
   return (
     <>
       <PageHead>
@@ -68,10 +70,8 @@ const Shows = () => {
           <Button
             colorScheme="gray"
             onClick={onFilterModalOpen}
-            leftIcon={(countKeys(query, ['month','day','year','venue','city','state','country','song']) > 0)
-              ? <Badge variant="solid">
-                  {countKeys(query, ['month','day','year','venue','city','state','country','song'])}
-                </Badge>
+            leftIcon={(filterCount > 0)
+              ? <Badge variant="solid">{filterCount}</Badge>
               : <FaSlidersH />
             }
           >

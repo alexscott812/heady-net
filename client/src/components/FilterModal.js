@@ -61,6 +61,10 @@ const FilterModal = ({
     setTempFilters({});
   };
 
+  const dateFilterCount = countKeys(tempFilters, ['month', 'day', 'year']);
+  const locationFilterCount = countKeys(tempFilters, ['venue', 'city', 'state', 'country']);
+  const setlistFilterCount = countKeys(tempFilters, ['song']) ;
+
   return (
     <Modal isOpen={isOpen} onClose={handleClose} scrollBehavior="inside" size="xl">
       <ModalOverlay />
@@ -74,9 +78,9 @@ const FilterModal = ({
                 <Box align="left" flex={1}>
                   <Text variant="subtle-bold">
                     Date
-                    {(countKeys(tempFilters, ['month', 'day', 'year']) > 0) && (
+                    {(dateFilterCount > 0) && (
                       <Badge ml={2} variant="subtle" colorScheme="brand">
-                        {countKeys(tempFilters, ['month', 'day', 'year'])}
+                        {dateFilterCount}
                       </Badge>
                     )}
                   </Text>
@@ -114,9 +118,9 @@ const FilterModal = ({
                 <Box align="left" flex={1}>
                   <Text variant="subtle-bold">
                     Location
-                    {(countKeys(tempFilters, ['venue', 'city', 'state', 'country']) > 0) && (
+                    {(locationFilterCount > 0) && (
                       <Badge ml={2} variant="subtle" colorScheme="brand">
-                        {countKeys(tempFilters, ['venue', 'city', 'state', 'country'])}
+                        {locationFilterCount}
                       </Badge>
                     )}
                   </Text>
@@ -161,9 +165,9 @@ const FilterModal = ({
                 <Box align="left" flex={1}>
                   <Text variant="subtle-bold">
                     Setlist
-                    {(countKeys(tempFilters, ['song']) > 0) && (
+                    {(setlistFilterCount > 0) && (
                       <Badge ml={2} variant="subtle" colorScheme="brand">
-                        {countKeys(tempFilters, ['song'])}
+                        {setlistFilterCount}
                       </Badge>
                     )}
                   </Text>
