@@ -1,12 +1,9 @@
 import React from 'react';
 import { SimpleGrid } from '@chakra-ui/react';
 import ShowCard from './ShowCard.js';
+import formatShowLocation from '../utils/format-show-location.js';
 
 const ShowResults = ({ shows = [] }) => {
-  const formatShowLocation = (city, state, country) => {
-    return [city, state, country].filter(Boolean).join(', ');
-  };
-
   return (
     <>
       {shows.length > 0 && (

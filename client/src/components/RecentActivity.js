@@ -20,13 +20,10 @@ import getRelativeTime from '../utils/get-relative-time.js';
 import getDisplayName from '../utils/get-display-name.js';
 import EmptyImage from './EmptyImage.js';
 import AvatarButton from './AvatarButton.js';
+import formatShowLocation from '../utils/format-show-location.js';
 
 const RecentActivity = ({ recentActivity = [] }) => {
   const { user, isAuthenticated } = useAuth();
-
-  const formatShowLocation = (city, state, country) => {
-    return [city, state, country].filter(Boolean).join(', ');
-  };
   
   return (
     <>
