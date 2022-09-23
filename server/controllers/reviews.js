@@ -121,7 +121,7 @@ const getReviews = async (req, res, next) => {
   const sortOrder = (sort.substring(0,1) === '-') ? -1 : 1;
   const sortQuery = { [sortField]: sortOrder };
   const page = Math.max((parseInt(req.query.page) || 1), 1); // Default: 1, Min: 1
-  const limit = Math.min((parseInt(req.query.limit) || 12), 20); // Default: 12, Max: 20
+  const limit = Math.min((parseInt(req.query.limit) || 6), 20); // Default: 6, Max: 20
   const skip = (page - 1) * limit;
 
   const query = {};
