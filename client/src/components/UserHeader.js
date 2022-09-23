@@ -14,13 +14,15 @@ const UserHeader = ({
 }) => {
   const { user: currentUser } = useAuth();
 
+  const isCurrentUser = user._id === currentUser?._id;
+
   return (
     <Card>
       <CardBody>
         {/* <VStack align="start" spacing={0}> */}
-          <Avatar size="lg" name={`${user.first_name}`} mb={3} />
+          <Avatar size="lg" name={user.first_name} mb={3} />
           <CardTitle mb={2}>
-            {(user._id === currentUser?._id)
+            {isCurrentUser
               ? `${user.first_name} ${user.last_name} (you)`
               : `${user.first_name} ${user.last_name.charAt(0)}.`
             }
@@ -49,7 +51,7 @@ const UserHeader = ({
             </Text>
           } */}
         {/* </VStack> */}
-        {(user._id === currentUser?._id) && (
+        {isCurrentUser && (
           <Stack direction="column" mt={3}>
             <Button
               variant="solid"

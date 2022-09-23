@@ -22,6 +22,7 @@ import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import StarRating from './StarRating.js';
 import { useAuth } from '../lib/auth';
 import getRelativeTime from '../utils/get-relative-time.js';
+import getDisplayName from '../utils/get-display-name.js';
 
 const ReviewsCard = ({
   reviews = [],
@@ -50,7 +51,7 @@ const ReviewsCard = ({
                     <AvatarButton 
                       as={RouterLink}
                       to={`/users/${review.user._id}`}
-                      name={`${review.user.first_name}`}
+                      name={review.user.first_name}
                       mr={2}
                     />
                     <Card variant="inner" py={2} pl={3} pr={2}>
@@ -58,10 +59,12 @@ const ReviewsCard = ({
                         <VStack align="start" spacing={1}>
                           <Box>
                             <Link fontWeight="medium" as={RouterLink} to={`/users/${review.user._id}`}>
-                              {(review.user._id === user?._id)
-                                ? 'You'
-                                : `${review.user.first_name} ${review.user.last_name.charAt(0)}.`
-                              }
+                              {getDisplayName(
+                                review.user.first_name,
+                                review.user.last_name,
+                                review.user._id === user?._id,
+                                isAuthenticated
+                              )}
                             </Link>
                             <Text variant="tertiary" d="inline">
                               &nbsp;{getRelativeTime(review.created_at)}

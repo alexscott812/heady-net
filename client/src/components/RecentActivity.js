@@ -17,12 +17,12 @@ import { Link as RouterLink } from 'react-router-dom';
 import StarRating from './StarRating.js';
 import { useAuth } from '../lib/auth';
 import getRelativeTime from '../utils/get-relative-time.js';
+import getDisplayName from '../utils/get-display-name.js';
 import EmptyImage from './EmptyImage.js';
 import AvatarButton from './AvatarButton.js';
 
 const RecentActivity = ({ recentActivity = [] }) => {
-  const { user } = useAuth();
-  // const [hoverUserId, setHoverUserId] = useState(null);
+  const { user, isAuthenticated } = useAuth();
 
   const formatShowLocation = (city, state, country) => {
     return [city, state, country].filter(Boolean).join(', ');
@@ -37,16 +37,18 @@ const RecentActivity = ({ recentActivity = [] }) => {
               <AvatarButton 
                 as={RouterLink}
                 to={`/users/${review.user._id}`}
-                name={`${review.user.first_name}`}
+                name={review.user.first_name}
                 mr={2}
               />
               <VStack align="start" spacing={-1}>
                 <Box>
                   <Link fontWeight="medium" as={RouterLink} to={`/users/${review.user._id}`}>
-                    {(review.user._id === user?._id)
-                      ? 'You'
-                      : `${review.user.first_name} ${review.user.last_name.charAt(0)}.`
-                    }
+                    {getDisplayName(
+                      review.user.first_name,
+                      review.user.last_name,
+                      review.user._id === user?._id,
+                      isAuthenticated
+                    )}
                   </Link>
                   <Text d="inline">&nbsp;wrote a review.</Text>
                 </Box>
