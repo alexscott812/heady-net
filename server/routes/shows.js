@@ -5,6 +5,7 @@ const {
   getShows,
   getShowById,
   getRandomShow,
+  getPopularShows,
   addShow,
   updateShowById,
   deleteShows,
@@ -26,6 +27,13 @@ router.get('/', getShows);
  * @access  Public
  */
 router.get('/random', getRandomShow);
+
+/**
+ * @route   GET api/shows/popular
+ * @desc    Get popular shows
+ * @access  Public
+ */
+ router.get('/popular', getPopularShows);
 
 /**
  * @route   GET api/shows/:id

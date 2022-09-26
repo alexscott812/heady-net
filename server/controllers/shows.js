@@ -337,6 +337,48 @@ const getRandomShow = async (req, res, next) => {
   }
 };
 
+const getPopularShows = async (req, res, next) => {
+  const popularShows = [
+    '5/8/1977',
+    '8/27/1972',
+    '7/8/1978',
+    '9/3/1977',
+    '5/2/1970',
+    '7/7/1989'
+  ];
+
+  try {
+    const shows = await Show.aggregate([
+      {
+        $match: {
+          title: {
+            $in: popularShows
+          }
+        }
+      },
+      {
+        '$project': {
+          _id: 1,
+          city: 1,
+          country: 1,
+          day: 1,
+          date: 1,
+          month: 1,
+          state: 1,
+          title: 1,
+          venue: 1,
+          year: 1,
+          image: { $arrayElemAt: [ '$images', 0 ] },
+        }
+      }
+    ]);
+
+    res.status(200).json(shows);
+  } catch (err) {
+    next(createError(500, err.message));
+  }
+};
+
 const addShow = async (req, res, next) => {
   try {
     const show = new Show({
@@ -403,6 +445,7 @@ module.exports = {
   getShows,
   getShowById,
   getRandomShow,
+  getPopularShows,
   addShow,
   updateShowById,
   deleteShows,
