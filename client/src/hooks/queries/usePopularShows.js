@@ -5,12 +5,7 @@ import useToast from '../useToast.js';
 const usePopularShows = (opts = {}) => {
   const createToast = useToast();
 
-  const {
-    data,
-    isLoading,
-    isError,
-    error
-  } = useQuery(
+  return useQuery(
     ['popularShows'],
     () => getPopularShows(), 
     {
@@ -22,13 +17,6 @@ const usePopularShows = (opts = {}) => {
       ...opts
     }
   );
-
-  return {
-    data,
-    isLoading,
-    isError,
-    error
-  };
 };
 
 export default usePopularShows;
