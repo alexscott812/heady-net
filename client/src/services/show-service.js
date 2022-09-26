@@ -21,7 +21,17 @@ const getShowById = async (showId) => {
   }
 };
 
+const getPopularShows = async (query) => {
+  try {
+    const { data } = await axiosInstance.get('/shows/popular');
+    return data;
+  } catch (err) {
+    throw handleError(err);
+  }
+};
+
 export {
   getShows,
-  getShowById
+  getShowById,
+  getPopularShows
 };

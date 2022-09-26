@@ -7,7 +7,7 @@ import {
   AlertTitle,
   AlertIcon,
   Box,
-  Text
+  useBreakpointValue
 } from "@chakra-ui/react";
 import Grid from '../components/Grid';
 import RecentActivity from '../components/RecentActivity.js';
@@ -24,7 +24,10 @@ import useDate from '../hooks/useDate.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useReviews from '../hooks/queries/useReviews.js';
 import useShowsCount from '../hooks/queries/useShowsCount.js';
-import DiscoverCard from '../components/DiscoverCard';
+import DiscoverCard from '../components/DiscoverCard.js';
+import PopularShowsCard from '../components/PopularShowsCard.js';
+import PopularShowsCardSkeleton from '../components/PopularShowsCardSkeleton.js';
+import usePopularShows from '../hooks/queries/usePopularShows.js';
 
 const Home = () => {
   useDocumentTitle('Home | HeadyNet');
@@ -35,6 +38,13 @@ const Home = () => {
     data: todaysShowsData,
     isLoading: todaysShowsIsLoading
   } = useShowsCount({ month, day });
+
+  const {
+    data: popularShowsData,
+    isLoading: popularShowsIsLoading
+  } = usePopularShows({
+    enabled: useBreakpointValue(false, false, false, true)
+  });
 
   const {
     data: recentActivityData,
@@ -112,6 +122,13 @@ const Home = () => {
                 />
               )}
               <Box d={['none', 'none', 'none', 'block']}>
+                {popularShowsIsLoading && <PopularShowsCardSkeleton mb={[0,0,0,4]} />}
+                {popularShowsData && (
+                  <PopularShowsCard
+                    shows={popularShowsData}
+                    mb={[0,0,0,4]}
+                  />
+                )}
                 <DiscoverCard />
               </Box>
             </GridItem>
