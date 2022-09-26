@@ -6,7 +6,7 @@ import { Button, Icon, Text, Box, Stack, useColorModeValue } from '@chakra-ui/re
 import qs from 'query-string';
 import { Link } from 'react-router-dom';
 import pluralize from '../utils/pluralize.js';
-import { FaRegCalendar } from 'react-icons/fa';
+import { FaCalendarDay } from 'react-icons/fa';
 import getMonthName from '../utils/get-month-name.js';
 import getDateOrdinal from '../utils/get-date-ordinal.js';
 
@@ -25,7 +25,7 @@ const TodaysShowsCard3 = ({ month, day, showCount, ...restProps }) => {
             justifyContent="center"
           >
             <Icon
-              as={FaRegCalendar}
+              as={FaCalendarDay}
               boxSize={5}
               transform="rotate(10deg)"
               color={useColorModeValue('brand.500', 'brand.200')}
