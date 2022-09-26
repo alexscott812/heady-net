@@ -37,13 +37,14 @@ const Home = () => {
   const {
     data: todaysShowsData,
     isLoading: todaysShowsIsLoading
-  } = useShowsCount({ month, day });
+  } = useShowsCount({ month, day }, { staleTime: Infinity });
 
   const {
     data: popularShowsData,
     isLoading: popularShowsIsLoading
   } = usePopularShows({
-    enabled: useBreakpointValue(false, false, false, true)
+    staleTime: Infinity,
+    enabled: useBreakpointValue({ base: false, lg: true })
   });
 
   const {
