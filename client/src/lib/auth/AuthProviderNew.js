@@ -38,7 +38,7 @@ const AuthProvider = ({ client, children }) => {
     data: user,
     isLoading: isUserLoading
   } = useQuery(
-    [client.userQueryKey, userId],
+    ['users', userId],
     () => getUserById(userId),
     {
       enabled: !!userId && !isInitializing

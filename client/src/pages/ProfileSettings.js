@@ -10,9 +10,14 @@ import {
 import UnauthenticatedState from '../components/UnauthenticatedState.js';
 import { useAuth } from "../lib/auth";
 import { FaPen } from "react-icons/fa";
+import useUser from '../hooks/queries/useUser.js';
 
 const ProfileSettings = () => {
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const {
+    data: userData,
+    isLoading: userIsLoading
+  } = useUser(user._id);
 
   return (
     <>
@@ -25,7 +30,7 @@ const ProfileSettings = () => {
               type="text"
               name="first_name"
               placeholder="First name"
-              value={''}
+              value={user?.first_name || ''}
               //onChange={handleInputChange}
               mb={3}
             />
@@ -34,13 +39,14 @@ const ProfileSettings = () => {
               type="text"
               name="last_name"
               placeholder="Last name"
-              value={''}
+              value={user?.last_name || ''}
               //onChange={handleInputChange}
               mb={3}
             />
             <Text mb={1}>Bio</Text>
             <Textarea
               placeholder="Enter a bit about yourself"
+              value={user?.bio || ''}
               mb={3}
             />
             <Button
