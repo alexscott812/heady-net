@@ -181,7 +181,7 @@ const Navigation = () => {
                   color={useColorModeValue('brand.500', 'brand.200')}
                   mr={1}
                 />
-                HeadyNet
+                shakedown
               </Heading>
               <HStack
                 as="nav"
