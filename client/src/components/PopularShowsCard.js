@@ -6,33 +6,19 @@ import { Icon, Text, Box, Stack, LinkBox, LinkOverlay, useColorModeValue, VStack
 import { Link as RouterLink } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
 import formatShowLocation from '../utils/format-show-location.js';
+import CardIcon from './CardIcon.js';
 
 const PopularShowsCard = ({ shows, ...restProps }) => {
   return (
     <Card {...restProps}>
       <CardBody>
         <Stack direction={{ base: 'row', lg: 'column' }} spacing={4} align="flex-start">
-          <Box
-            boxSize={10}
-            borderRadius="full" 
-            p={3}
-            bg={useColorModeValue('brand.50', 'whiteAlpha.50')}
-            d="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Icon
-              as={FaFire}
-              boxSize={5}
-              transform="rotate(10deg)"
-              color={useColorModeValue('brand.500', 'brand.200')}
-            />
-          </Box>
+          <CardIcon icon={FaFire} />
           <Box flex={1}>
             <CardTitle>Popular Shows</CardTitle>
             <VStack spacing={1} align="start">
               {shows.map(show => (
-                <LinkBox key={show._id} mb={1}>
+                <LinkBox key={show._id} mb={1} w="100%">
                   <LinkOverlay
                     as={RouterLink}
                     to={`/shows/${show._id}`}

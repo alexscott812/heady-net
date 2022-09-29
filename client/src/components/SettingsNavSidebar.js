@@ -14,7 +14,7 @@ import {
 
 const NavSidebarItem = ({ to, onClick, isActive = false, children }) => {
   const color = useColorModeValue('gray.500', 'whiteAlpha.600');
-  const activeColor = useColorModeValue('brand.600', 'brand.200');
+  const activeColor = useColorModeValue('brand.500', 'brand.200');
   const activeBgColor = useColorModeValue('brand.50', 'whiteAlpha.100');
   const hoverBgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
   return (
