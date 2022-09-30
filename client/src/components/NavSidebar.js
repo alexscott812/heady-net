@@ -135,7 +135,7 @@ import {
   FaMapMarkerAlt,
   FaMusic,
   FaInfoCircle,
-  FaUserCircle,
+  FaUser,
   FaCog
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
@@ -224,7 +224,7 @@ const NavSidebar = ({ ...props }) => {
           <Divider my={3} />
           <VStack as="nav" spacing={1}>
             <NavSidebarItem to={`/users/${user._id}`}>
-              <Icon as={FaUserCircle} boxSize={5} mr={4} />
+              <Icon as={FaUser} boxSize={5} mr={4} />
               Your Profile
             </NavSidebarItem>
             <NavSidebarItem to="/settings">
