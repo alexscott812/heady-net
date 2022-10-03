@@ -14,10 +14,12 @@ import useUser from '../hooks/queries/useUser.js';
 
 const ProfileSettings = () => {
   const { user, isAuthenticated } = useAuth();
-  const {
-    data: userData,
-    isLoading: userIsLoading
-  } = useUser(user._id);
+  const { data: userData, } = useUser(
+    user?._id, 
+    {
+     enabled: isAuthenticated
+    }
+  );
 
   return (
     <>
@@ -30,7 +32,7 @@ const ProfileSettings = () => {
               type="text"
               name="first_name"
               placeholder="First name"
-              value={user?.first_name || ''}
+              value={userData?.first_name || ''}
               //onChange={handleInputChange}
               mb={3}
             />
@@ -39,14 +41,14 @@ const ProfileSettings = () => {
               type="text"
               name="last_name"
               placeholder="Last name"
-              value={user?.last_name || ''}
+              value={userData?.last_name || ''}
               //onChange={handleInputChange}
               mb={3}
             />
             <Text mb={1}>Bio</Text>
             <Textarea
               placeholder="Enter a bit about yourself"
-              value={user?.bio || ''}
+              value={userData?.bio || ''}
               mb={3}
             />
             <Button
