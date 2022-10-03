@@ -13,7 +13,7 @@ import EmptyState from '../components/EmptyState.js';
 import NavSidebar from '../components/NavSidebar.js';
 import PageContainer from '../components/PageContainer.js';
 import Spinner from '../components/Spinner.js';
-import TodaysShowsCard3 from '../components/TodaysShowsCard3.js';
+import TodaysShowsCard from '../components/TodaysShowsCard.js';
 import TodaysShowsCardSkeleton from '../components/TodaysShowsCardSkeleton.js';
 import { useAuth } from '../lib/auth';
 import useDate from '../hooks/useDate.js';
@@ -57,10 +57,7 @@ const Home = () => {
   return (
     <PageContainer>
       <Grid>
-        <GridItem
-          colSpan={[12,12,4,3]}
-          d={['none', 'none', 'block', 'block']}
-        >
+        <GridItem colSpan={[12,12,4,3]} d={{ base: 'none', md: 'block' }}>
           <NavSidebar />
         </GridItem>
         <GridItem colSpan={[12,12,8,9]}>
@@ -94,14 +91,14 @@ const Home = () => {
             <GridItem order={[0,0,0,1]} colSpan={[12,12,12,4]}>
               {todaysShowsIsLoading && <TodaysShowsCardSkeleton mb={[0,0,0,4]} />}
               {todaysShowsData !== undefined && (
-                <TodaysShowsCard3
+                <TodaysShowsCard
                   showCount={todaysShowsData}
                   month={month}
                   day={day}
                   mb={[0,0,0,4]}
                 />
               )}
-              <Box d={['none', 'none', 'none', 'block']}>
+              <Box d={{ base: 'none', lg: 'block' }}>
                 {popularShowsIsLoading && <PopularShowsCardSkeleton mb={[0,0,0,4]} />}
                 {popularShowsData && (
                   <PopularShowsCard

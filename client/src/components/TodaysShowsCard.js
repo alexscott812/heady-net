@@ -2,39 +2,40 @@ import React from 'react';
 import Card from './Card.js';
 import CardBody from './CardBody.js';
 import CardTitle from './CardTitle.js';
-import { Button, Box, Text, Flex } from '@chakra-ui/react';
-import Calendar from './_Calendar.js';
+import CardIcon from './CardIcon.js';
+import { Button, Text, Box, Stack } from '@chakra-ui/react';
 import qs from 'query-string';
 import { Link } from 'react-router-dom';
 import pluralize from '../utils/pluralize.js';
+import { FaCalendarDay } from 'react-icons/fa';
+import getMonthName from '../utils/get-month-name.js';
+import getDateOrdinal from '../utils/get-date-ordinal.js';
 
 const TodaysShowsCard = ({ month, day, showCount, ...restProps }) => {
   return (
     <Card {...restProps}>
       <CardBody>
-        <CardTitle>Today in History</CardTitle>
-        <Flex alignItems="center" justifyContent="space-between">
-          <Box mr={3} w="33%">
-            <Calendar month={month} day={day} />
-          </Box>
+        <Stack direction={{ base: 'row', lg: 'column' }} spacing={4} align="flex-start">
+          <CardIcon icon={FaCalendarDay} transform="rotate(10deg)" />
           <Box flex={1}>
+            <CardTitle>Today in History</CardTitle>
             <Text>
-              {`...the Grateful Dead performed ${showCount} ${pluralize(showCount, 'show', 'shows')}.`}
+              {`${showCount === 0 ? 'Unfortunately, the' : 'The'} Grateful Dead performed ${showCount} ${pluralize(showCount, 'show', 'shows')} on ${getMonthName(month)} ${day}${getDateOrdinal(day)}.`}
             </Text>
+            {(showCount > 0) && (
+              <Button
+                mt={2}
+                variant="solid"
+                colorScheme="brand"
+                isFullWidth
+                as={Link}
+                to={`/shows?${qs.stringify({ month, day })}`}
+              >
+                {`See ${showCount} ${pluralize(showCount, 'Show', 'Shows')}`}
+              </Button>
+            )}
           </Box>
-        </Flex>
-        {showCount > 0 && (
-          <Button
-            mt={4}
-            variant="solid"
-            colorScheme="brand"
-            isFullWidth
-            as={Link}
-            to={`/shows?${qs.stringify({ month, day })}`}
-          >
-            {`See ${showCount} ${pluralize(showCount, 'Show', 'Shows')}`}
-          </Button>
-        )}
+        </Stack>
       </CardBody>
     </Card>
   );
