@@ -3,9 +3,6 @@ import {
   Button,
   Flex,
   GridItem,
-  Alert,
-  AlertTitle,
-  AlertIcon,
   Box,
   useBreakpointValue
 } from "@chakra-ui/react";
@@ -14,7 +11,6 @@ import RecentActivity from '../components/RecentActivity.js';
 import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js';
 import EmptyState from '../components/EmptyState.js';
 import NavSidebar from '../components/NavSidebar.js';
-import HeroCard3 from '../components/HeroCard3.js';
 import PageContainer from '../components/PageContainer.js';
 import Spinner from '../components/Spinner.js';
 import TodaysShowsCard3 from '../components/TodaysShowsCard3.js';
@@ -28,6 +24,7 @@ import DiscoverCard from '../components/DiscoverCard.js';
 import PopularShowsCard from '../components/PopularShowsCard.js';
 import PopularShowsCardSkeleton from '../components/PopularShowsCardSkeleton.js';
 import usePopularShows from '../hooks/queries/usePopularShows.js';
+import FinishedState from '../components/FinishedState';
 
 const Home = () => {
   useDocumentTitle('Home | HeadyNet');
@@ -88,21 +85,7 @@ const Home = () => {
                     </Flex>
                   )}
                   {(!hasMoreRecentActivity && !hasNoRecentActivityData) && (
-                    <Alert
-                      status="info"
-                      variant="subtle"
-                      flexDirection="column"
-                      alignItems="center"
-                      justifyContent="center"
-                      textAlign="center"
-                      height="200px"
-                      borderRadius="xl"
-                    >
-                      <AlertIcon boxSize={10} mr={0} />
-                      <AlertTitle mt={4} mb={1} fontSize="lg">
-                        That's all there is to see here!
-                      </AlertTitle>
-                    </Alert>
+                    <FinishedState />
                   )}
                 </>
               )}

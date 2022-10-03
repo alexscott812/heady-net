@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, AlertTitle, AlertIcon } from '@chakra-ui/react';
 
-const EmptyState = ({ ...props }) => {
+const FinishedState = ({ ...props }) => {
   return (
     <Alert
       status="info"
@@ -16,10 +16,10 @@ const EmptyState = ({ ...props }) => {
     >
       <AlertIcon boxSize={10} mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
-        Nothing to see here!
+        That's all there is to see here!
       </AlertTitle>
     </Alert>
   );
 };
 
-export default EmptyState;
+export default FinishedState;

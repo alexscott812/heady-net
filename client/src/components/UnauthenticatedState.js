@@ -17,7 +17,7 @@ const UnauthenticatedState = ({ ...props }) => {
       borderRadius="xl"
       {...props}
     >
-      <AlertIcon boxSize='40px' mr={0} />
+      <AlertIcon boxSize={10} mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">
         Please login to make changes!
       </AlertTitle>
