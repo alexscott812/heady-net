@@ -14,7 +14,7 @@ import { useMutation } from 'react-query';
 const ResetPassword = () => {
   useDocumentTitle('Reset Password | HeadyNet');
 
-  const [query] = useQueryParams(['token']);
+  const [query] = useQueryParams();
   const [passwords, setPasswords] = useState({
     new_password: '',
     confirm_new_password: ''
@@ -25,12 +25,11 @@ const ResetPassword = () => {
   const mutation = useMutation((data) => resetPassword(data));
 
   const validateForm = () => {
-    return passwords.new_password.length > 0 &&
-      passwords.confirm_new_password.length > 0;
+    return passwords.new_password.length > 0
+      && passwords.confirm_new_password.length > 0;
   };
 
   const handleInputChange = (e) => {
-    e.preventDefault();
     setPasswords({
       ...passwords,
       [e.target.name]: e.target.value
@@ -38,7 +37,6 @@ const ResetPassword = () => {
   };
 
   const handleResetPasswordSubmit = (e) => {
-    e.preventDefault();
     if (!validateForm) return;
     mutation.mutate({
       passwords,

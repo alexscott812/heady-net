@@ -101,10 +101,7 @@ const Home = () => {
               <Box d={{ base: 'none', lg: 'block' }}>
                 {popularShowsIsLoading && <PopularShowsCardSkeleton mb={[0,0,0,4]} />}
                 {popularShowsData && (
-                  <PopularShowsCard
-                    shows={popularShowsData}
-                    mb={[0,0,0,4]}
-                  />
+                  <PopularShowsCard shows={popularShowsData} mb={[0,0,0,4]} />
                 )}
                 <DiscoverCard />
               </Box>

@@ -91,7 +91,7 @@ const ShowDetail = () => {
 
   useDocumentTitle(`${showData ? showData.title : 'Show Detail'} | HeadyNet`);
 
-  const getDateString = ( m = 1, d = 1, y = 1965 ) => {
+  const getDateString = (m = 1, d = 1, y = 1965) => {
     return `${pad(y, 2)}-${pad(m, 2)}-${pad(d, 2)}`;
   };
 
@@ -153,7 +153,7 @@ const ShowDetail = () => {
                   />
                 }
               </GridItem>
-              <GridItem d={['none', 'none', 'none', 'block']} colSpan={[0,0,0,4]}>
+              <GridItem d={{ base: 'none', lg: 'block' }} colSpan={[0,0,0,4]}>
                 <RelatedShowsCard
                   month={showData?.month}
                   day={showData?.day}

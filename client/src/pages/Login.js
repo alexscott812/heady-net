@@ -25,8 +25,8 @@ const Login = () => {
   // const login = useLogin();
 
   const validateForm = () => {
-    return credentials.email.length > 0 &&
-      credentials.password.length > 0;
+    return credentials.email.length > 0
+      && credentials.password.length > 0;
   };
 
   const handleInputChange = (e) => {

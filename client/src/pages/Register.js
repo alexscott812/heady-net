@@ -27,23 +27,22 @@ const Register = () => {
   const mutation = useMutation((data) => register(data));
 
   const validateForm = () => {
-    return userInfo.first_name.length > 0 &&
-      userInfo.last_name.length > 0 &&
-      userInfo.email.length > 0 &&
-      userInfo.password.length > 0 &&
-      userInfo.confirm_password.length > 0;
+    return userInfo.first_name.length > 0
+      && userInfo.last_name.length > 0
+      && userInfo.email.length > 0 
+      && userInfo.password.length > 0
+      && userInfo.confirm_password.length > 0;
   };
 
   const handleInputChange = (e) => {
-    e.preventDefault();
+    const { name, value } = e.target;
     setUserInfo({
       ...userInfo,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
   const handleRegisterSubmit = (e) => {
-    e.preventDefault();
     if (!validateForm()) return;
     mutation.mutate({ userInfo });
   };

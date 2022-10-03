@@ -21,12 +21,10 @@ const ForgotPassword = () => {
   };
 
   const handleInputChange = (e) => {
-    e.preventDefault();
     setEmail(e.target.value);
   };
 
   const handleResetPasswordSubmit = (e) => {
-    e.preventDefault();
     if (!validateForm) return;
     mutation.mutate({ email });
   };
