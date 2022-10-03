@@ -82,7 +82,12 @@ const ShowDetail = () => {
     hasMore: hasMoreReviews,
     loadMore: loadMoreReviews,
     isLoadingMore: isLoadingMoreReviews
-  } = useReviews({ show_id: id, sort: '-created_at' });
+  } = useReviews({
+    show_id: id,
+    sort: '-created_at'
+  }, {
+    enabled: !!showData
+  });
 
   useDocumentTitle(`${showData ? showData.title : 'Show Detail'} | HeadyNet`);
 

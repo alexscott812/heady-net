@@ -38,7 +38,12 @@ const UserDetail = () => {
     hasMore: hasMoreRecentActivity,
     loadMore: loadMoreRecentActivity,
     isLoadingMore: isLoadingMoreRecentActivity
-  } = useReviews({ user_id: id, sort: '-created_at' });
+  } = useReviews({
+    user_id: id,
+    sort: '-created_at'
+  }, {
+    enabled: !!userData
+  });
 
   const [userToBeEdited, setUserToBeEdited] = useState(userData);
   useEffect(() =>  setUserToBeEdited(userData), [userData]);

@@ -63,12 +63,8 @@ const Home = () => {
         <GridItem
           colSpan={[12,12,4,3]}
           d={['none', 'none', 'block', 'block']}
-          // d={isAuthenticated ? ['none', 'none', 'block', 'block'] : 'block'}
         >
-          {/* {!isAuthenticated && <HeroCard3 mb={[0,0,4,4]} />} */}
-          <NavSidebar
-            // d={['none', 'none', 'block', 'block']}
-          />
+          <NavSidebar />
         </GridItem>
         <GridItem colSpan={[12,12,8,9]}>
           <Grid>
