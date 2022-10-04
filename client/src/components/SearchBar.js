@@ -10,14 +10,16 @@ import { FaSearch } from 'react-icons/fa';
 
 const SearchBar = ({
   search = '',
+  placeholder = "Search...",
   onChange = null,
-  onClear = null
+  onClear = null,
+  ...restProps
 }) => {
   return (
-    <InputGroup>
+    <InputGroup {...restProps}>
       <InputLeftElement pointerEvents="none" children={<FaSearch />} />
       <Input
-        placeholder="Search..."
+        placeholder={placeholder}
         onChange={onChange}
         value={search}
       />

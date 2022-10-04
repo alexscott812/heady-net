@@ -48,9 +48,11 @@ import {
   FaMusic,
   FaInfoCircle,
   FaBolt,
-  FaCog
+  FaCog,
+  FaSearch
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
+import SearchModal from './SearchModal';
 
 const NavItem = ({ to, isActive, onClick, children }) => {
   const color = useColorModeValue('gray.500', 'whiteAlpha.600');
@@ -80,6 +82,11 @@ const Navigation = () => {
     isOpen: isDrawerOpen,
     onOpen: onDrawerOpen, 
     onClose: onDrawerClose
+  } = useDisclosure();
+  const {
+    isOpen: isSearchModalOpen,
+    onOpen: onSearchModalOpen, 
+    onClose: onSearchModalClose
   } = useDisclosure();
   const { pathname, search } = useLocation();
   const { user, isAuthenticated, logout } = useAuth();
@@ -204,17 +211,14 @@ const Navigation = () => {
               </HStack>
             </Flex>
             <HStack spacing={2} justifyContent="flex-end" d={{ base: 'none', md: 'flex' }}>
-              {/* <Tooltip label={`${useColorModeValue('Dark', 'Light')} Mode`}>
-                <IconButton
-                  variant="ghost"
-                  color={useColorModeValue('gray.500', 'whiteAlpha.600')}
-                  _hover={{ bg: useColorModeValue('gray.50', 'whiteAlpha.50') }}
-                  colorScheme="gray"
-                  aria-label="Color Mode"
-                  icon={useColorModeValue(<FaMoon />, <FaSun />)}
-                  onClick={toggleColorMode}
-                />
-              </Tooltip> */}
+              <IconButton
+                isRound
+                variant="ghost"
+                colorScheme="gray"
+                icon={<FaSearch />}
+                aria-label="Search"
+                onClick={onSearchModalOpen}
+              />
               {isAuthenticated
                 ? <Menu placement="bottom-end">
                     <MenuButton 
@@ -223,17 +227,6 @@ const Navigation = () => {
                       name={`${user.first_name}`}
                     />
                     <MenuList>
-                      {/* <MenuItem
-                        as={RouterLink}
-                        to={`/users/${user._id}`}
-                        icon={<Avatar size="sm" name={`${user.first_name} ${user.last_name}`} />}
-                      >
-                        <Text fontWeight="medium">
-                          {`${user.first_name} ${user.last_name}`}
-                        </Text>
-                        <Text variant="tertiary">View your profile</Text>
-                      </MenuItem>
-                      <MenuDivider /> */}
                       <MenuItem
                         as={RouterLink}
                         to={`/users/${user._id}`}
@@ -293,18 +286,6 @@ const Navigation = () => {
                         </MenuItem>
                       </MenuList>
                     </Menu>
-                    {/* <Tooltip label="Settings">
-                      <IconButton
-                        isRound
-                        variant="ghost"
-                        colorScheme="gray"
-                        aria-label="Color Mode"
-                        // icon={<FaEllipsisV />}
-                        icon={<Text fontSize="lg" fontWeight="bold" transform="rotate(90deg)">···</Text>}
-                        as={RouterLink}
-                        to="/settings"
-                      />
-                    </Tooltip> */}
                   </>
               }
             </HStack>
@@ -391,10 +372,20 @@ const Navigation = () => {
                   }
                 </MenuList>
               </Menu>
+              <Tooltip label="Search">
+                <IconButton
+                  isRound
+                  variant="solid"
+                  colorScheme="gray"
+                  icon={<FaSearch />}
+                  aria-label="Search"
+                  onClick={onSearchModalOpen}
+                />
+              </Tooltip>
               <Tooltip label="Menu">
                 <IconButton
-                  variant="solid"
                   isRound
+                  variant="solid"
                   colorScheme="gray"
                   icon={<FaBars />}
                   aria-label="Menu"
@@ -498,6 +489,7 @@ const Navigation = () => {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
+      <SearchModal isOpen={isSearchModalOpen} onClose={onSearchModalClose} />
     </>
   );
 };
