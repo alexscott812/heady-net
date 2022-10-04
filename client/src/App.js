@@ -24,6 +24,7 @@ import ResetPassword from './pages/ResetPassword.js';
 import UserDetail from './pages/UserDetail.js';
 import NotFound from './pages/NotFound.js';
 import Settings from './pages/Settings.js';
+import Search from './pages/Search.js';
 import { AuthProvider, AuthClient } from './lib/auth';
 import {
   addToken,
@@ -69,6 +70,7 @@ const App = () => {
                 <Route exact path="/songs" element={<Songs />} />
                 <Route path="/songs/:id" element={<SongDetail />} />
                 <Route exact path="/about" element={<About />} />
+                <Route exact path="/search" element={<Search />} />
                 <Route path="/settings" element={<Settings />}>
                   <Route index element={<Navigate to="profile" replace />} />
                   <Route path="profile" element={<ProfileSettings />} />
