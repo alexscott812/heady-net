@@ -7,8 +7,13 @@ import {
   ModalCloseButton,
   ModalBody,
   Box,
-  Link,
-  Text
+  Icon,
+  Text,
+  Stack,
+  LinkBox,
+  LinkOverlay,
+  Button,
+  Badge
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import SearchBar from './SearchBar.js';
@@ -16,6 +21,22 @@ import useDebounce from '../hooks/useDebounce.js';
 import useVenues from '../hooks/queries/useVenues.js';
 import useSongs from '../hooks/queries/useSongs.js';
 import EmptyState from './EmptyState.js';
+import { FaMusic } from 'react-icons/fa';
+
+const SearchResult = ({ text, to, onClick, ...restProps }) => {
+  return (
+    <LinkBox w="100%" bg="gray.100" px={3} py={2} borderRadius="md" {...restProps}>
+      <LinkOverlay
+        as={RouterLink}
+        to={to}
+        onClick={onClick}
+        _hover={{ textDecoration: 'underline' }}
+      >
+        <Text d="inline">{text}</Text>
+      </LinkOverlay>
+    </LinkBox>
+  );
+};
 
 const SearchModal = ({
   isOpen = false,
@@ -30,9 +51,11 @@ const SearchModal = ({
     meta: venuesMeta,
     isLoading: venuesIsLoading,
     hasMore: hasMoreVenues,
+    loadMore: loadMoreVenues,
+    isLoadingMore: isLoadingMoreVenues,
     hasNoData: hasNoVenuesData
   } = useVenues({
-    search: debouncedSearch,
+    q: debouncedSearch,
     limit: searchLimit
   }, {
     enabled: !!debouncedSearch
@@ -43,9 +66,11 @@ const SearchModal = ({
     meta: songsMeta,
     isLoading: songsIsLoading,
     hasMore: hasMoreSongs,
+    loadMore: loadMoreSongs,
+    isLoadingMore: isLoadingMoreSongs,
     hasNoData: hasNoSongsData
   } = useSongs({
-    search: debouncedSearch,
+    q: debouncedSearch,
     limit: searchLimit
   }, {
     enabled: !!debouncedSearch
@@ -69,64 +94,90 @@ const SearchModal = ({
     <Modal isOpen={isOpen} onClose={handleClose} scrollBehavior="inside" size="xl">
       <ModalOverlay />
       <ModalContent>
-        {/* <ModalHeader>Search</ModalHeader>
-        <ModalCloseButton /> */}
-        <ModalBody>
+        <ModalHeader>
           <SearchBar
             search={search}
             onChange={handleSearchChange}
             onClear={handleSearchClear}
             placeholder="Search... (ex. 5/8/1977, Red Rocks, Sugaree)"
             size="lg"
-            my={4}
+            // my={4}
           />
-          <Box mb={4}>
-            {(venuesData && !hasNoVenuesData) &&
-              <Box mb={4}>
-                <Text variant="subtle-bold">Venues</Text>
+        </ModalHeader>
+        <ModalBody py={0}>
+          {(venuesData && !hasNoVenuesData) &&
+            <Box mb={4}>
+              <Text variant="subtle-bold" mb={2}>
+                Venues
+                <Badge ml={1} colorScheme="brand">{venuesMeta.total_results}</Badge>
+              </Text>
+              <Stack spacing={2}>
                 {venuesData.map(venue => (
-                  <Box key={venue._id}>
-                    <Link as={RouterLink} to={`/venues/${venue._id}`} onClick={handleClose}>
-                      {venue.name}
-                    </Link>
-                  </Box>
+                  <SearchResult
+                    key={venue._id}
+                    text={venue.name}
+                    to={`/venues/${venue._id}`}
+                    onClick={handleClose}
+                  />
                 ))}
                 {hasMoreVenues && (
-                  <Link
-                    as={RouterLink}
-                    to={`/venues?search=${debouncedSearch}`}
-                    onClick={handleClose}
-                  >
-                    {`See all ${venuesMeta.total_results} venues...`}
-                  </Link>
+                  <>
+                    {/* <SearchResult
+                      text={`See all ${venuesMeta.total_results} venues...`}
+                      to={`/search?q=${debouncedSearch}`}
+                      onClick={handleClose}
+                    /> */}
+                    <Button
+                      variant="ghost"
+                      onClick={loadMoreVenues}
+                      isLoading={isLoadingMoreVenues}
+                      loadingText="Loading More..."
+                    >
+                      Load More
+                    </Button>
+                  </>
                 )}
-              </Box>
-            }
-            {(songsData && !hasNoSongsData) &&
-              <Box mb={4}>
-                <Text variant="subtle-bold">Songs</Text>
+              </Stack>
+            </Box>
+          }
+          {(songsData && !hasNoSongsData) &&
+            <Box mb={4}>
+              <Text variant="subtle-bold" mb={2}>
+                Songs
+                <Badge ml={1} colorScheme="brand">{songsMeta.total_results}</Badge>
+              </Text>
+              <Stack spacing={2}>
                 {songsData.map(song => (
-                  <Box key={song._id}>
-                    <Link as={RouterLink} to={`/songs/${song._id}`} onClick={handleClose}>
-                      {song.name}
-                    </Link>
-                  </Box>
+                  <SearchResult
+                    key={song._id}
+                    text={song.name}
+                    to={`/songs/${song._id}`}
+                    onClick={handleClose}
+                  />
                 ))}
                 {hasMoreSongs && (
-                  <Link
-                    as={RouterLink}
-                    to={`/songs?search=${debouncedSearch}`}
-                    onClick={handleClose}
-                  >
-                    {`See all ${songsMeta.total_results} songs...`}
-                  </Link>
+                  <>
+                    {/* <SearchResult
+                      text={`See all ${songsMeta.total_results} songs...`}
+                      to={`/search?q=${debouncedSearch}`}
+                      onClick={handleClose}
+                    /> */}
+                    <Button
+                      variant="ghost"
+                      onClick={loadMoreSongs}
+                      isLoading={isLoadingMoreSongs}
+                      loadingText="Loading More..."
+                    >
+                      Load More
+                    </Button>
+                  </>
                 )}
-              </Box>
-            }
-            {(!!debouncedSearch && hasNoVenuesData && hasNoSongsData) && (
-              <EmptyState />
-            )}
-          </Box>
+              </Stack>
+            </Box>
+          }
+          {(!!debouncedSearch && hasNoVenuesData && hasNoSongsData) && (
+            <EmptyState mb={4} />
+          )}
         </ModalBody>
       </ModalContent>
     </Modal>

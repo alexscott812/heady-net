@@ -17,7 +17,7 @@ import useDebounce from '../hooks/useDebounce.js';
 const Venues = () => {
   useDocumentTitle('Venues | HeadyNet');
   const [query, setQuery] = useQueryParams(['search', 'sort']);
-  const debouncedSearch = useDebounce(query.search, 300);
+  const debouncedSearch = useDebounce(query.q, 300);
 
   const {
     data: venuesData,
@@ -29,18 +29,18 @@ const Venues = () => {
     hasNoData: hasNoVenuesData
   } = useVenues({
     ...query,
-    search: debouncedSearch || undefined
+    q: debouncedSearch || undefined
   });
 
   const handleSearchChange = (e) => {
     const newSearch = e.target.value;
-    let { search, ...restQuery } = query;
-    let newQuery = { ...restQuery, ...(!!newSearch && { search: newSearch }) };
+    let { q, ...restQuery } = query;
+    let newQuery = { ...restQuery, ...(!!newSearch && { q: newSearch }) };
     setQuery(newQuery);
   };
 
   const handleSearchClear = () => {
-    let { search, ...newQuery } = query;
+    let { q, ...newQuery } = query;
     setQuery(newQuery);
   };
 
@@ -59,7 +59,7 @@ const Venues = () => {
           <Spacer />
           <Box w={['50%','50%','25%','25%']}>
             <SearchBar
-              search={query.search}
+              search={query.q}
               onChange={handleSearchChange}
               onClear={handleSearchClear}
             />

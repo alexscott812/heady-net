@@ -14,7 +14,7 @@ const getVenues = async (req, res, next) => {
   const skip = (page - 1) * limit;
 
   const query = {};
-  if (req.query.search) query.name = { $regex: req.query.search, $options: 'i' };
+  if (req.query.q) query.name = { $regex: req.query.q, $options: 'i' };
 
   try {
     const count = await Venue.countDocuments(query);

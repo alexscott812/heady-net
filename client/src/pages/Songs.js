@@ -17,7 +17,7 @@ import useDebounce from '../hooks/useDebounce.js';
 const Songs = () => {
   useDocumentTitle('Songs | HeadyNet');
   const [query, setQuery] = useQueryParams(['search', 'sort']);
-  const debouncedSearch = useDebounce(query.search, 300);
+  const debouncedSearch = useDebounce(query.q, 300);
 
   const {
     data: songsData,
@@ -29,18 +29,18 @@ const Songs = () => {
     hasNoData: hasNoSongsData
   } = useSongs({
     ...query,
-    search: debouncedSearch || undefined
+    q: debouncedSearch || undefined
   });
 
   const handleSearchChange = (e) => {
-    const { value } = e.target;
-    let { search, ...restQuery } = query;
-    let newQuery = { ...restQuery, ...(!!value && { search: value }) };
+    const newSearch = e.target.value;
+    let { q, ...restQuery } = query;
+    let newQuery = { ...restQuery, ...(!!newSearch && { q: newSearch }) };
     setQuery(newQuery);
   };
 
   const handleSearchClear = () => {
-    let { search, ...newQuery } = query;
+    let { q, ...newQuery } = query;
     setQuery(newQuery);
   };
 
@@ -58,7 +58,7 @@ const Songs = () => {
           </Box>
           <Box w={['50%','50%','25%','25%']}>
             <SearchBar
-              search={query.search}
+              search={query.q}
               onChange={handleSearchChange}
               onClear={handleSearchClear}
             />
