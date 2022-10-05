@@ -7,36 +7,59 @@ const getVenues = async (req, res, next) => {
   const sort = req.query.sort || 'name'; // Default: 'name'
   const sortField = (sort.substring(0,1) === '-') ? sort.substring(1) : sort;
   const sortOrder = (sort.substring(0,1) === '-') ? -1 : 1;
-  const sortTest = { [sortField]: sortOrder };
+  const sortQuery = { [sortField]: sortOrder };
   const page = Math.max((parseInt(req.query.page) || 1), 1); // Default: 1, Min: 1
-  // const limit = Math.min((parseInt(req.query.limit) || 12), 20); // Default: 10, Max: 20
-  const limit = Math.min((parseInt(req.query.limit) || 12), 1000); // Default: 10, Max: 1000
+  const limit = Math.min((parseInt(req.query.limit) || 12), 1000); // Default: 12, Max: 1000
   const skip = (page - 1) * limit;
 
   const query = {};
   if (req.query.q) query.name = { $regex: req.query.q, $options: 'i' };
 
   try {
-    const count = await Venue.countDocuments(query);
-    const pages = Math.ceil(count / limit);
     const venues = await Venue.aggregate([
       { $match: query },
-      { $sort: sortTest },
-      { $skip: skip },
-      { $limit: limit }
+      { $sort: sortQuery },
+      {
+        $facet: {
+          meta: [
+            { $count: 'total_results' },
+            {
+              $addFields: {
+                current_page: page,
+                results_limit: limit,
+                total_pages: {
+                  $ceil: {
+                    $divide: [ '$total_results', limit ]
+                  }
+                }
+              }
+            }
+          ],
+          data: [
+            { $skip: skip },
+            { $limit: limit },
+          ]
+        }
+      },
+      {
+        $project: {
+          data: '$data',
+          meta: {
+            $ifNull: [
+              { $arrayElemAt: ['$meta', 0] },
+              {
+                total_results: 0,
+                current_page: page,
+                results_limit: limit,
+                total_pages: 0
+              }
+            ]
+          }
+        }
+      }
     ]);
 
-    let results = {
-      meta: {
-        total_results: count,
-        results_limit: limit,
-        current_page: page,
-        total_pages: pages
-      },
-      data: venues
-    };
-
-    res.status(200).json(results);
+    res.status(200).json(venues[0]);
   } catch (err) {
     return next(createError(500, err.message));
   }

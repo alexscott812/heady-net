@@ -3,13 +3,51 @@ const { v4: uuidv4 } = require('uuid');
 const validateUUIDv4 = require('../utils/validate-uuid-v4');
 const createError = require('../utils/create-error');
 
+// const getSongs = async (req, res, next) => {
+//   const sort = req.query.sort || 'name'; // Default: 'name'
+//   const sortField = (sort.substring(0,1) === '-') ? sort.substring(1) : sort;
+//   const sortOrder = (sort.substring(0,1) === '-') ? -1 : 1;
+//   const sortTest = { [sortField]: sortOrder };
+//   const page = Math.max((parseInt(req.query.page) || 1), 1); // Default: 1, Min: 1
+//   //const limit = Math.min((parseInt(req.query.limit) || 12), 20); // Default: 12, Max: 20
+//   const limit = Math.min((parseInt(req.query.limit) || 12), 1000); // Default: 12, Max: 1000
+//   const skip = (page - 1) * limit;
+
+//   const query = {};
+//   if (req.query.q) query.name = { $regex: req.query.q, $options: 'i' };
+
+//   try {
+//     const count = await Song.countDocuments(query);
+//     const pages = Math.ceil(count / limit);
+//     const songs = await Song.aggregate([
+//       { $match: query },
+//       { $sort: sortTest },
+//       { $skip: skip },
+//       { $limit: limit }
+//     ]);
+
+//     let results = {
+//       meta: {
+//         total_results: count,
+//         results_limit: limit,
+//         current_page: page,
+//         total_pages: pages
+//       },
+//       data: songs
+//     };
+
+//     res.status(200).json(results);
+//   } catch (err) {
+//     return next(createError(500, err.message));
+//   }
+// };
+
 const getSongs = async (req, res, next) => {
   const sort = req.query.sort || 'name'; // Default: 'name'
   const sortField = (sort.substring(0,1) === '-') ? sort.substring(1) : sort;
   const sortOrder = (sort.substring(0,1) === '-') ? -1 : 1;
-  const sortTest = { [sortField]: sortOrder };
+  const sortQuery = { [sortField]: sortOrder };
   const page = Math.max((parseInt(req.query.page) || 1), 1); // Default: 1, Min: 1
-  //const limit = Math.min((parseInt(req.query.limit) || 12), 20); // Default: 12, Max: 20
   const limit = Math.min((parseInt(req.query.limit) || 12), 1000); // Default: 12, Max: 1000
   const skip = (page - 1) * limit;
 
@@ -17,26 +55,50 @@ const getSongs = async (req, res, next) => {
   if (req.query.q) query.name = { $regex: req.query.q, $options: 'i' };
 
   try {
-    const count = await Song.countDocuments(query);
-    const pages = Math.ceil(count / limit);
     const songs = await Song.aggregate([
       { $match: query },
-      { $sort: sortTest },
-      { $skip: skip },
-      { $limit: limit }
+      { $sort: sortQuery },
+      {
+        $facet: {
+          meta: [
+            { $count: 'total_results' },
+            {
+              $addFields: {
+                current_page: page,
+                results_limit: limit,
+                total_pages: {
+                  $ceil: {
+                    $divide: [ '$total_results', limit ]
+                  }
+                }
+              }
+            }
+          ],
+          data: [
+            { $skip: skip },
+            { $limit: limit },
+          ]
+        }
+      },
+      {
+        $project: {
+          data: '$data',
+          meta: {
+            $ifNull: [
+              { $arrayElemAt: ['$meta', 0] },
+              {
+                total_results: 0,
+                current_page: page,
+                results_limit: limit,
+                total_pages: 0
+              }
+            ]
+          }
+        }
+      }
     ]);
 
-    let results = {
-      meta: {
-        total_results: count,
-        results_limit: limit,
-        current_page: page,
-        total_pages: pages
-      },
-      data: songs
-    };
-
-    res.status(200).json(results);
+    res.status(200).json(songs[0]);
   } catch (err) {
     return next(createError(500, err.message));
   }

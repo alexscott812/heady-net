@@ -5,47 +5,72 @@ const validateUUIDv4 = require('../utils/validate-uuid-v4');
 const createError = require('../utils/create-error');
 
 const getUsers = async (req, res, next) => {
-  const sort = req.query.sort || 'date'; // Default: 'date'
+  const sort = req.query.sort || 'first_name'; // Default: 'name'
   const sortField = (sort.substring(0,1) === '-') ? sort.substring(1) : sort;
   const sortOrder = (sort.substring(0,1) === '-') ? -1 : 1;
   const sortQuery = { [sortField]: sortOrder };
   const page = Math.max((parseInt(req.query.page) || 1), 1); // Default: 1, Min: 1
-  const limit = Math.min((parseInt(req.query.limit) || 12), 20); // Default: 12, Max: 20
+  const limit = Math.min((parseInt(req.query.limit) || 12), 1000); // Default: 12, Max: 1000
   const skip = (page - 1) * limit;
 
   const query = {};
+  if (req.query.q) query.first_name = { $regex: req.query.q, $options: 'i' };
 
   try {
-    const count = await User.countDocuments(query);
-    const pages = Math.ceil(count / limit);
     const users = await User.aggregate([
+      { $match: query },
       { $sort: sortQuery },
-      { $skip: skip },
-      { $limit: limit },
+      {
+        $facet: {
+          meta: [
+            { $count: 'total_results' },
+            {
+              $addFields: {
+                current_page: page,
+                results_limit: limit,
+                total_pages: {
+                  $ceil: {
+                    $divide: [ '$total_results', limit ]
+                  }
+                }
+              }
+            }
+          ],
+          data: [
+            { $skip: skip },
+            { $limit: limit },
+            {
+              $project: {
+                '_id': 1,
+                'role': 1,
+                'first_name': 1,
+                'last_name': 1,
+                'created_at': 1,
+                'updated_at': 1
+              }
+            }
+          ]
+        }
+      },
       {
         $project: {
-          _id: 1,
-          first_name: 1,
-          last_name: 1,
-          bio: 1,
-          email: 1,
-          role: 1,
-          created_at: 1,
-          updated_at: 1
+          data: '$data',
+          meta: {
+            $ifNull: [
+              { $arrayElemAt: ['$meta', 0] },
+              {
+                total_results: 0,
+                current_page: page,
+                results_limit: limit,
+                total_pages: 0
+              }
+            ]
+          }
         }
       }
     ]);
-    let results = {
-      meta: {
-        total_results: count,
-        results_limit: limit,
-        current_page: page,
-        total_pages: pages
-      },
-      data: users
-    };
 
-    res.status(200).json(results);
+    res.status(200).json(users[0]);
   } catch (err) {
     return next(createError(500, err.message));
   }
