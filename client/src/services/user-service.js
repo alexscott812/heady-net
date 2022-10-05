@@ -3,7 +3,7 @@ import handleError from '../utils/handle-error.js';
 
 const getUsers = async (query) => {
   try {
-    const { data } = axiosInstance.get('/users', {
+    const { data } = await axiosInstance.get('/users', {
       params: query
     });
     return data;

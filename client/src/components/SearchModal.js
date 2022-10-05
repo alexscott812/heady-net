@@ -20,6 +20,7 @@ import SearchBar from './SearchBar.js';
 import useDebounce from '../hooks/useDebounce.js';
 import useVenues from '../hooks/queries/useVenues.js';
 import useSongs from '../hooks/queries/useSongs.js';
+import useUsers from '../hooks/queries/useUsers.js';
 import EmptyState from './EmptyState.js';
 import { FaMusic } from 'react-icons/fa';
 
@@ -76,6 +77,21 @@ const SearchModal = ({
     enabled: !!debouncedSearch
   });
 
+  const {
+    data: usersData,
+    meta: usersMeta,
+    isLoading: usersIsLoading,
+    hasMore: hasMoreUsers,
+    loadMore: loadMoreUsers,
+    isLoadingMore: isLoadingMoreUsers,
+    hasNoData: hasNoUsersData
+  } = useUsers({
+    q: debouncedSearch,
+    limit: searchLimit
+  }, {
+    enabled: !!debouncedSearch
+  });
+
   const handleSearchChange = (e) => {
     const newSearch = e.target.value;
     setSearch(newSearch);
@@ -121,21 +137,14 @@ const SearchModal = ({
                   />
                 ))}
                 {hasMoreVenues && (
-                  <>
-                    {/* <SearchResult
-                      text={`See all ${venuesMeta.total_results} venues...`}
-                      to={`/search?q=${debouncedSearch}`}
-                      onClick={handleClose}
-                    /> */}
-                    <Button
-                      variant="ghost"
-                      onClick={loadMoreVenues}
-                      isLoading={isLoadingMoreVenues}
-                      loadingText="Loading More..."
-                    >
-                      Load More
-                    </Button>
-                  </>
+                  <Button
+                    variant="ghost"
+                    onClick={loadMoreVenues}
+                    isLoading={isLoadingMoreVenues}
+                    loadingText="Loading More..."
+                  >
+                    Load More
+                  </Button>
                 )}
               </Stack>
             </Box>
@@ -156,21 +165,42 @@ const SearchModal = ({
                   />
                 ))}
                 {hasMoreSongs && (
-                  <>
-                    {/* <SearchResult
-                      text={`See all ${songsMeta.total_results} songs...`}
-                      to={`/search?q=${debouncedSearch}`}
-                      onClick={handleClose}
-                    /> */}
-                    <Button
-                      variant="ghost"
-                      onClick={loadMoreSongs}
-                      isLoading={isLoadingMoreSongs}
-                      loadingText="Loading More..."
-                    >
-                      Load More
-                    </Button>
-                  </>
+                  <Button
+                    variant="ghost"
+                    onClick={loadMoreSongs}
+                    isLoading={isLoadingMoreSongs}
+                    loadingText="Loading More..."
+                  >
+                    Load More
+                  </Button>
+                )}
+              </Stack>
+            </Box>
+          }
+          {(usersData && !hasNoUsersData) &&
+            <Box mb={4}>
+              <Text variant="subtle-bold" mb={2}>
+                Users
+                <Badge ml={1} colorScheme="brand">{usersMeta.total_results}</Badge>
+              </Text>
+              <Stack spacing={2}>
+                {usersData.map(user => (
+                  <SearchResult
+                    key={user._id}
+                    text={`${user.first_name} ${user.last_name}`}
+                    to={`/users/${user._id}`}
+                    onClick={handleClose}
+                  />
+                ))}
+                {hasMoreUsers && (
+                  <Button
+                    variant="ghost"
+                    onClick={loadMoreUsers}
+                    isLoading={isLoadingMoreUsers}
+                    loadingText="Loading More..."
+                  >
+                    Load More
+                  </Button>
                 )}
               </Stack>
             </Box>
