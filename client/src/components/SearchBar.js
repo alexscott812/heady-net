@@ -4,7 +4,9 @@ import {
   InputLeftElement,
   InputRightElement,
   Input,
-  CloseButton
+  CloseButton,
+  Icon,
+  useColorModeValue
 } from '@chakra-ui/react';
 import { FaSearch } from 'react-icons/fa';
 
@@ -17,7 +19,10 @@ const SearchBar = ({
 }) => {
   return (
     <InputGroup {...restProps}>
-      <InputLeftElement pointerEvents="none" children={<FaSearch />} />
+      <InputLeftElement
+        pointerEvents="none"
+        children={<Icon as={FaSearch} color={useColorModeValue('gray.400','whiteAlpha.400')} />}
+      />
       <Input
         placeholder={placeholder}
         onChange={onChange}
@@ -25,7 +30,7 @@ const SearchBar = ({
       />
       {search && (
         <InputRightElement>
-          <CloseButton size="sm" borderRadius="full" onClick={onClear} />
+          <CloseButton size="sm" onClick={onClear} />
         </InputRightElement>
       )}
     </InputGroup>

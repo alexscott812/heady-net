@@ -13,11 +13,13 @@ import {
   LinkBox,
   LinkOverlay,
   Button,
-  Badge
+  Badge,
+  useColorModeValue
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import SearchBar from './SearchBar.js';
 import useDebounce from '../hooks/useDebounce.js';
+import useShows from '../hooks/queries/useShows.js';
 import useVenues from '../hooks/queries/useVenues.js';
 import useSongs from '../hooks/queries/useSongs.js';
 import useUsers from '../hooks/queries/useUsers.js';
@@ -26,7 +28,14 @@ import { FaMusic } from 'react-icons/fa';
 
 const SearchResult = ({ text, to, onClick, ...restProps }) => {
   return (
-    <LinkBox w="100%" bg="gray.100" px={3} py={2} borderRadius="md" {...restProps}>
+    <LinkBox
+      w="100%"
+      bg={useColorModeValue('gray.100', 'whiteAlpha.50')}
+      px={3}
+      py={2}
+      borderRadius="md"
+      {...restProps}
+    >
       <LinkOverlay
         as={RouterLink}
         to={to}
@@ -46,6 +55,21 @@ const SearchModal = ({
   const searchLimit = 3;
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 300);
+
+  const {
+    data: showsData,
+    meta: showsMeta,
+    isLoading: showsIsLoading,
+    hasMore: hasMoreShows,
+    loadMore: loadMoreShows,
+    isLoadingMore: isLoadingMoreShows,
+    hasNoData: hasNoShowsData
+  } = useShows({
+    q: debouncedSearch,
+    limit: searchLimit
+  }, {
+    enabled: !!debouncedSearch
+  });
 
   const {
     data: venuesData,
@@ -121,6 +145,34 @@ const SearchModal = ({
           />
         </ModalHeader>
         <ModalBody py={0}>
+          {(showsData && !hasNoShowsData) &&
+            <Box mb={4}>
+              <Text variant="subtle-bold" mb={2}>
+                Shows
+                <Badge ml={1} colorScheme="brand">{showsMeta.total_results}</Badge>
+              </Text>
+              <Stack spacing={2}>
+                {showsData.map(show => (
+                  <SearchResult
+                    key={show._id}
+                    text={show.title}
+                    to={`/shows/${show._id}`}
+                    onClick={handleClose}
+                  />
+                ))}
+                {hasMoreShows && (
+                  <Button
+                    variant="ghost"
+                    onClick={loadMoreShows}
+                    isLoading={isLoadingMoreShows}
+                    loadingText="Loading More..."
+                  >
+                    Load More
+                  </Button>
+                )}
+              </Stack>
+            </Box>
+          }
           {(venuesData && !hasNoVenuesData) &&
             <Box mb={4}>
               <Text variant="subtle-bold" mb={2}>
@@ -205,7 +257,12 @@ const SearchModal = ({
               </Stack>
             </Box>
           }
-          {(!!debouncedSearch && hasNoVenuesData && hasNoSongsData) && (
+          {(!!debouncedSearch
+              && hasNoShowsData 
+              && hasNoVenuesData 
+              && hasNoSongsData
+              && hasNoUsersData
+            ) && (
             <EmptyState mb={4} />
           )}
         </ModalBody>

@@ -190,7 +190,7 @@ const Navigation = () => {
                 />
                 shakedown
               </Heading>
-              <HStack
+              {/* <HStack
                 as="nav"
                 spacing={1}
                 display={{ base: 'none', md: 'flex' }}
@@ -208,17 +208,31 @@ const Navigation = () => {
                       {link.name}
                     </NavItem>
                 ))}
-              </HStack>
+              </HStack> */}
+              <Button
+                mx={8}
+                display={{ base: 'none', md: 'flex' }}
+                colorScheme="gray"
+                leftIcon={<Icon as={FaSearch} mr={1} />}
+                borderRadius="md"
+                color={useColorModeValue('gray.400','whiteAlpha.400')}
+                fontWeight="normal"
+                justifyContent="start"
+                flex={1}
+                onClick={onSearchModalOpen}
+              >
+                Search...
+              </Button>
             </Flex>
             <HStack spacing={2} justifyContent="flex-end" d={{ base: 'none', md: 'flex' }}>
-              <IconButton
+              {/* <IconButton
                 isRound
                 variant="ghost"
                 colorScheme="gray"
                 icon={<FaSearch />}
                 aria-label="Search"
                 onClick={onSearchModalOpen}
-              />
+              /> */}
               {isAuthenticated
                 ? <Menu placement="bottom-end">
                     <MenuButton 
