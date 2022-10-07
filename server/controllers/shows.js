@@ -119,7 +119,7 @@ const getShows = async (req, res, next) => {
   const skip = (page - 1) * limit;
 
   const query = {};
-  if (req.query.search) query.title = { $regex: req.query.search, $options: 'i' };
+  if (req.query.q) query.title = { $regex: req.query.q, $options: 'i' };
   if (req.query.city) query['city._id'] = req.query.city;
   if (req.query.country) query['country._id'] = req.query.country;
   if (req.query.state) query['state._id'] = req.query.state;
