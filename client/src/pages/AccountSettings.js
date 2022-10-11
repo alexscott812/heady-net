@@ -16,14 +16,16 @@ import { useAuth } from "../lib/auth";
 import useChangePassword from "../hooks/mutations/useChangePassword.js";
 import { FaKey, FaTrashAlt } from "react-icons/fa";
 
+const initialPasswordsState = {
+  old_password: '',
+  new_password: '',
+  confirm_new_password: ''
+};
+
 const AccountSettings = () => {
   const { isAuthenticated, user, getToken } = useAuth();
   const changePassword = useChangePassword();
-  const [passwords, setPasswords] = useState({
-    old_password: '',
-    new_password: '',
-    confirm_new_password: ''
-  });
+  const [passwords, setPasswords] = useState(initialPasswordsState);
   const {
     isOpen: isDeactivateUserModalOpen,
     onOpen: onDeactivateUserModalOpen,
@@ -44,12 +46,13 @@ const AccountSettings = () => {
     });
   };
 
-  const handleChangePassword = (e) => {
-    e.preventDefault();
+  const handleChangePassword = () => {
     if (!validate()) return;
     changePassword.mutate({
       passwords, 
       tokenFn: getToken
+    }, {
+      onSuccess: () => setPasswords(initialPasswordsState)
     });
   };
 
