@@ -33,9 +33,9 @@ const FilterModal = ({
 }) => {
   const [tempFilters, setTempFilters] = useState(query);
 
-  useEffect(() => {
-    setTempFilters(query);
-  }, [query]);
+  // useEffect(() => {
+  //   setTempFilters(query);
+  // }, [query]);
 
   const handleClose = () => {
     setTempFilters(query);
