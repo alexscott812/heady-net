@@ -11,12 +11,12 @@ const CardIcon = ({ icon, ...restProps }) => {
       d="flex"
       alignItems="center"
       justifyContent="center"
+      {...restProps}
     >
       <Icon
         as={icon}
         boxSize={5}
         color={useColorModeValue('brand.600', 'brand.200')}
-        {...restProps}
       />
     </Box>
   );

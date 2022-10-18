@@ -10,6 +10,7 @@ import Main from './components/Main.js';
 import Footer from './components/Footer.js';
 import ScrollToTop from './components/ScrollToTop.js';
 import Home from './pages/Home.js';
+import Landing from './pages/Landing.js';
 import Shows from './pages/Shows.js';
 import ShowDetail from './pages/ShowDetail.js';
 import Venues from './pages/Venues.js';
@@ -63,6 +64,7 @@ const App = () => {
               <ScrollToTop />
               <Routes>
                 <Route exact path="/" element={<Home />} />
+                <Route exact path="/landing" element={<Landing />} />
                 <Route exact path="/shows" element={<Shows />} />
                 <Route path="/shows/:id" element={<ShowDetail />} />
                 <Route exact path="/venues" element={<Venues />} />
