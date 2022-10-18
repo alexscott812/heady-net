@@ -53,6 +53,7 @@ import {
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
 import SearchModal from './SearchModal';
+import NavDrawer from './NavDrawer';
 
 const NavItem = ({ to, isActive, onClick, children }) => {
   const color = useColorModeValue('gray.500', 'whiteAlpha.600');
@@ -174,6 +175,16 @@ const Navigation = () => {
         <Container>
           <Flex h={14} align="center" justifyContent="space-between">
             <Flex flex={1} align="center">
+              <IconButton
+                isRound
+                variant="ghost"
+                mr={2}
+                display={{ base: 'none', md: 'flex' }}
+                colorScheme="gray"
+                icon={<FaBars />}
+                aria-label="Menu"
+                onClick={isDrawerOpen ? onDrawerClose : onDrawerOpen}
+              />
               <Heading
                 color={useColorModeValue('brand.500', 'brand.200')}
                 as={NavLink}
@@ -190,25 +201,6 @@ const Navigation = () => {
                 />
                 shakedown
               </Heading>
-              {/* <HStack
-                as="nav"
-                spacing={1}
-                display={{ base: 'none', md: 'flex' }}
-                ml={3}
-              >
-                {navLinks
-                  .filter(link => link.isMainNavItem)
-                  .map(link => (
-                    <NavItem
-                      key={link.name}
-                      to={link.route}
-                      isActive={isRouteMatch(pathname, link.route, link.exact)}
-                      onClick={handleScrollToTop}
-                    >
-                      {link.name}
-                    </NavItem>
-                ))}
-              </HStack> */}
               <Button
                 mx={8}
                 display={{ base: 'none', md: 'flex' }}
@@ -223,16 +215,28 @@ const Navigation = () => {
               >
                 Search...
               </Button>
+              {/* <HStack
+                as="nav"
+                spacing={1}
+                display={{ base: 'none', md: 'flex' }}
+                //ml={3}
+                mr={5}
+              >
+                {navLinks
+                  .filter(link => link.isMainNavItem)
+                  .map(link => (
+                    <NavItem
+                      key={link.name}
+                      to={link.route}
+                      isActive={isRouteMatch(pathname, link.route, link.exact)}
+                      onClick={handleScrollToTop}
+                    >
+                      {link.name}
+                    </NavItem>
+                ))}
+              </HStack> */}
             </Flex>
             <HStack spacing={2} justifyContent="flex-end" d={{ base: 'none', md: 'flex' }}>
-              {/* <IconButton
-                isRound
-                variant="ghost"
-                colorScheme="gray"
-                icon={<FaSearch />}
-                aria-label="Search"
-                onClick={onSearchModalOpen}
-              /> */}
               {isAuthenticated
                 ? <Menu placement="bottom-end">
                     <MenuButton 
@@ -334,28 +338,11 @@ const Navigation = () => {
                       >
                         Your profile
                       </MenuItem>
-                      {/* <MenuItem
-                        as={RouterLink}
-                        to={`/users/${user._id}`}
-                        icon={<Avatar size="sm" name={`${user.first_name} ${user.last_name}`} />}
-                      >
-                        <Text fontWeight="medium">
-                          {`${user.first_name} ${user.last_name}`}
-                        </Text>
-                        <Text variant="tertiary">View your profile</Text>
-                      </MenuItem>
-                      <MenuDivider /> */}
                     </>
                   )}
                   <MenuItem as={RouterLink} to="/settings" icon={<FaCog />}>
                     Settings
                   </MenuItem>
-                  {/* <MenuItem
-                    icon={useColorModeValue(<FaMoon />, <FaSun />)}
-                    onClick={toggleColorMode}
-                  >
-                    {`${useColorModeValue('Dark', 'Light')} Mode`}
-                  </MenuItem> */}
                   <MenuDivider />
                   {isAuthenticated
                     ? <MenuItem icon={<FaSignOutAlt />} onClick={logout.mutate}>
@@ -410,7 +397,7 @@ const Navigation = () => {
           </Flex>
         </Container>
       </Box>
-      <Drawer isOpen={isDrawerOpen} placement="left" onClose={onDrawerClose}>
+      {/* <Drawer isOpen={isDrawerOpen} placement="left" onClose={onDrawerClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
@@ -462,16 +449,6 @@ const Navigation = () => {
                       </NavItem>
                     ))}
                   </Stack>
-                  {/* <Button
-                    isFullWidth
-                    colorScheme="gray"
-                    as={RouterLink}
-                    to={`/users/${user._id}`}
-                    onClick={onDrawerClose}
-                    leftIcon={<Avatar size="xs" name={`${user.first_name} ${user.last_name}`} />}
-                  >
-                    View Profile
-                  </Button> */}
                 </>
               : <>
                   <Button
@@ -502,7 +479,8 @@ const Navigation = () => {
             }
           </DrawerBody>
         </DrawerContent>
-      </Drawer>
+      </Drawer> */}
+      <NavDrawer isOpen={isDrawerOpen} size="sm" placement="left" onClose={onDrawerClose} />
       <SearchModal isOpen={isSearchModalOpen} onClose={onSearchModalClose} />
     </>
   );
