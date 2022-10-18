@@ -2697,7 +2697,8 @@ async function fetchData(currentData = [], page = 1) {
     const data = res.data;
     const newData = [...currentData, ...data.setlist];
     const hasMoreData = (data.itemsPerPage * data.page) < data.total;
-    if (hasMoreData) {
+    // if (hasMoreData) {
+    if (hasMoreData && page < 3) {
       await wait(2000);
       return await fetchData(newData, page + 1);
     } else {
@@ -2821,8 +2822,8 @@ function getShows(data, { cities, states, countries, venues, songs }) {
 }
 
 async function main() {
-  //const data = await fetchData();
-  const data = await fetchFakeData();
+  const data = await fetchData();
+  //const data = await fetchFakeData();
   const reformattedData = data.map(d => tranformSetlistObject(d));
   const cities = getCities(reformattedData);
   const states = getStates(reformattedData);
@@ -2830,7 +2831,7 @@ async function main() {
   const venues = getVenues(reformattedData, { cities, states, countries });
   const songs = getSongs(reformattedData);
   const shows = getShows(reformattedData, { cities, states, countries, venues, songs });
-  console.log(JSON.stringify(shows));
+  console.log(JSON.stringify(venues));
 
 }
 
