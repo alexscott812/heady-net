@@ -9,7 +9,7 @@ import Navigation from './components/Navigation.js';
 import Main from './components/Main.js';
 import Footer from './components/Footer.js';
 import ScrollToTop from './components/ScrollToTop.js';
-import Home from './pages/LandingPage.js';
+import Home from './pages/Home.js';
 import Shows from './pages/Shows.js';
 import ShowDetail from './pages/ShowDetail.js';
 import Venues from './pages/Venues.js';

@@ -140,7 +140,7 @@ const TodaysShowsSection = ({ month, day, showCount, ...restProps }) => {
             )}
           </Box>
           <Box
-            boxSize={{ base: 28, sm: 48 }}
+            boxSize={{ base: 28, sm: 60 }}
             borderRadius="full" 
             p={3}
             bg={useColorModeValue('brand.50', 'whiteAlpha.100')}
@@ -151,7 +151,7 @@ const TodaysShowsSection = ({ month, day, showCount, ...restProps }) => {
           >
             <Icon
               as={FaCalendarDay}
-              boxSize={{ base: 14, sm: 24 }}
+              boxSize={{ base: 14, sm: 36 }}
               color={useColorModeValue('brand.600', 'brand.200')}
             />
           </Box>
@@ -225,7 +225,7 @@ const LandingPage = () => {
         showCount={todaysShowsData || 0}
         mb={4}
       />
-      <PopularShowsSection shows={popularShowsData} mb={4} />
+      <PopularShowsSection shows={popularShowsData || []} mb={4} />
     </>
   );
 };
