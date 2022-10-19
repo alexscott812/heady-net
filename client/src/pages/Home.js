@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate } from "react-router-dom";
 import {
   Button,
   Flex,
@@ -53,6 +54,10 @@ const Home = () => {
     isLoadingMore: isLoadingMoreRecentActivity,
     hasNoData: hasNoRecentActivityData
   } = useReviews({ sort: '-created_at' });
+
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
   
   return (
     <PageContainer>

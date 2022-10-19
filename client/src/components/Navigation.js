@@ -188,7 +188,7 @@ const Navigation = () => {
               <Heading
                 color={useColorModeValue('brand.500', 'brand.200')}
                 as={NavLink}
-                to="/"
+                to={isAuthenticated ? '/home' : '/'}
                 size="md"
                 fontWeight="extrabold"
                 onClick={handleScrollToTop}

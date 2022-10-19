@@ -177,10 +177,13 @@ const NavDrawerItem = ({ to, onClick, isActive = false, children }) => {
 };
 
 const NavDrawer = ({ ...props }) => {
+  const { user, isAuthenticated } = useAuth();
+  const { pathname } = useLocation();
+
   const navLinks = [
     {
       name: 'Home',
-      route: '/',
+      route: isAuthenticated ? '/home' : '/',
       exact: true,
       icon: FaHome,
       hasSubNav: false,
@@ -220,9 +223,6 @@ const NavDrawer = ({ ...props }) => {
     }
   ];
 
-  const { user, isAuthenticated } = useAuth();
-  const { pathname } = useLocation();
-
   return (
     <Drawer {...props}>
       <DrawerOverlay />
@@ -232,7 +232,7 @@ const NavDrawer = ({ ...props }) => {
           <Heading
             color={useColorModeValue('brand.500', 'brand.200')}
             as={NavLink}
-            to="/"
+            to={isAuthenticated ? '/home' : '/'}
             size="md"
             fontWeight="extrabold"
             onClick={props.onClose}

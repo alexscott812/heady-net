@@ -172,9 +172,12 @@ const NavSidebarItem = ({ to, onClick, isActive = false, children }) => {
 };
 
 const NavSidebar = ({ ...props }) => {
+  const { user, isAuthenticated } = useAuth();
+  const { pathname } = useLocation();
+
   const navLinks = [{
     name: 'Home',
-    route: '/',
+    route: isAuthenticated ? '/home' : '/',
     icon: FaHome
   }, {
     name: 'Shows',
@@ -193,9 +196,6 @@ const NavSidebar = ({ ...props }) => {
     route: '/about',
     icon: FaInfoCircle
   }];
-
-  const { user, isAuthenticated } = useAuth();
-  const { pathname } = useLocation();
 
   return (
     <Card>

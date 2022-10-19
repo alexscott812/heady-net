@@ -14,10 +14,12 @@ const ShowCard = ({
   venue,
   location,
   avgRating,
-  reviewCount
+  reviewCount,
+  includeRating = true,
+  ...restProps
 }) => {
   return (
-    <LinkBox as={Card}>
+    <LinkBox as={Card} {...restProps}>
       {image
         ? <Image
             src={image}
@@ -51,18 +53,20 @@ const ShowCard = ({
           </Text>
         </Flex>*/}
       </CardBody>
-      <CardFooter>
-        <Flex>
-          <StarRating
-            rating={avgRating}
-            numberOfStars={1}
-            editable={false}
-            mr={2}
-          />
-          <Text fontWeight="semibold" mr={1}>{avgRating}</Text>
-          <Text variant="secondary">{`(${reviewCount})`}</Text>
-        </Flex>
-      </CardFooter>
+      {includeRating && (
+        <CardFooter>
+          <Flex>
+            <StarRating
+              rating={avgRating}
+              numberOfStars={1}
+              editable={false}
+              mr={2}
+            />
+            <Text fontWeight="semibold" mr={1}>{avgRating}</Text>
+            <Text variant="secondary">{`(${reviewCount})`}</Text>
+          </Flex>
+        </CardFooter>
+      )}
     </LinkBox>
   );
 };

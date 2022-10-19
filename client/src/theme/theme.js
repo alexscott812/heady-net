@@ -49,13 +49,14 @@ const theme = extendTheme({
       variants: {
         outer: {
           // boxShadow: 'base',
-          borderLeftWidth: [0,1,1,1],
-          borderRightWidth: [0,1,1,1],
+          // borderLeftWidth: [0,1,1,1],
+          // borderRightWidth: [0,1,1,1],
           borderTopWidth: 1,
           borderBottomWidth: 1,
-          borderRadius: ['none', 'xl', 'xl', 'xl'],
-          // borderRadius: ['none', 'md', 'md', 'md'],
-          mx: [-4,0,0,0]
+          // borderRadius: ['none', 'xl', 'xl', 'xl'],
+          // mx: [-4,0,0,0],
+          borderRadius: 'xl',
+          borderWidth: 1
         },
         inner: {
           boxShadow: 'none',
