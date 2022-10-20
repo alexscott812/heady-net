@@ -339,11 +339,12 @@ const getRandomShow = async (req, res, next) => {
 
 const getPopularShows = async (req, res, next) => {
   const popularShows = [
-    '5/8/1977',
+    // '5/2/1970',
+    '4/8/1972',
     '8/27/1972',
-    '7/8/1978',
+    '5/8/1977',
     '9/3/1977',
-    '5/2/1970',
+    '7/8/1978',
     '7/7/1989'
   ];
 
