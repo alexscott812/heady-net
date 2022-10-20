@@ -133,9 +133,10 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  Heading
+  Heading,
+  Button
 } from '@chakra-ui/react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link as RouterLink, NavLink, useLocation } from 'react-router-dom';
 import {
   FaBolt,
   FaHome,
@@ -178,7 +179,7 @@ const NavDrawerItem = ({ to, onClick, isActive = false, children }) => {
 
 const NavDrawer = ({ ...props }) => {
   const { user, isAuthenticated } = useAuth();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
   const navLinks = [
     {
@@ -261,21 +262,49 @@ const NavDrawer = ({ ...props }) => {
                 </NavDrawerItem>
               ))}
             </VStack>
-            {isAuthenticated && (
-              <>
-                <Divider my={3} />
-                <VStack as="nav" spacing={1}>
-                  <NavDrawerItem to={`/users/${user._id}`} onClick={props.onClose}>
-                    <Icon as={FaUser} boxSize={5} mr={4} />
-                    Your Profile
-                  </NavDrawerItem>
-                  <NavDrawerItem to="/settings" onClick={props.onClose}>
-                    <Icon as={FaCog} boxSize={5} mr={4} />
-                    Settings
-                  </NavDrawerItem>
-                </VStack>
-              </>
-            )}
+            <Divider my={3} />
+            {isAuthenticated
+              ?
+                <>
+                  <VStack as="nav" spacing={1}>
+                    <NavDrawerItem to={`/users/${user._id}`} onClick={props.onClose}>
+                      <Icon as={FaUser} boxSize={5} mr={4} />
+                      Your Profile
+                    </NavDrawerItem>
+                    <NavDrawerItem to="/settings" onClick={props.onClose}>
+                      <Icon as={FaCog} boxSize={5} mr={4} />
+                      Settings
+                    </NavDrawerItem>
+                  </VStack>
+                </>
+              : <>
+                  <VStack spacing={2}>
+                    <Button
+                      isFullWidth
+                      as={RouterLink}
+                      to={['/auth/login', '/auth/register'].includes(pathname)
+                        ? '/auth/register'
+                        : `/auth/register?redirect=${encodeURIComponent(pathname + search)}`
+                      }
+                      onClick={props.onClose}
+                    >
+                      Sign Up
+                    </Button>
+                    <Button
+                      isFullWidth
+                      as={RouterLink}
+                      colorScheme="gray"
+                      to={['/auth/login', '/auth/register'].includes(pathname)
+                        ? '/auth/login'
+                        : `/auth/login?redirect=${encodeURIComponent(pathname + search)}`
+                      }
+                      onClick={props.onClose}
+                    >
+                      Log In
+                    </Button>
+                  </VStack>
+                </>
+            }
           </Box>
         </DrawerBody>
       </DrawerContent>
