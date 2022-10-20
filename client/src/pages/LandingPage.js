@@ -134,7 +134,7 @@ const TodaysShowsSection = ({ month, day, showCount, ...restProps }) => {
               {`${showCount === 0 ? 'Unfortunately, the' : 'The'} Grateful Dead performed ${showCount} ${pluralize(showCount, 'show', 'shows')} on ${getMonthName(month)} ${day}${getDateOrdinal(day)}.`}
             </Text>
             {(showCount > 0) && (
-              <Button as={Link} to={`/shows?${qs.stringify({ month, day })}`}>
+              <Button size="lg" as={Link} to={`/shows?${qs.stringify({ month, day })}`}>
                 {`See ${showCount} ${pluralize(showCount, 'Show', 'Shows')}`}
               </Button>
             )}
