@@ -167,7 +167,7 @@ const PopularShowsSection = ({ shows = [], ...restProps}) => {
       <Container p={4}>
         <Heading mb={5}>Popular Shows</Heading>
         <Text mb={5}>Check out some famous Grateful Dead shows.</Text>
-        <SimpleGrid columns={[1,1,3,4]} spacing={4} mb={4}>
+        <SimpleGrid columns={[1,1,4,4]} spacing={4} mb={4}>
           {shows.map(show => (
             <ShowCard
               key={show._id}
