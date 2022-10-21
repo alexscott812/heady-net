@@ -55,6 +55,7 @@ const SearchModal = ({
   const searchLimit = 3;
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 300);
+  const shouldSearch = !!debouncedSearch && debouncedSearch.length > 2;
 
   const {
     data: showsData,
@@ -68,7 +69,7 @@ const SearchModal = ({
     q: debouncedSearch,
     limit: searchLimit
   }, {
-    enabled: !!debouncedSearch
+    enabled: shouldSearch
   });
 
   const {
@@ -83,7 +84,7 @@ const SearchModal = ({
     q: debouncedSearch,
     limit: searchLimit
   }, {
-    enabled: !!debouncedSearch
+    enabled: shouldSearch
   });
 
   const {
@@ -98,7 +99,7 @@ const SearchModal = ({
     q: debouncedSearch,
     limit: searchLimit
   }, {
-    enabled: !!debouncedSearch
+    enabled: shouldSearch
   });
 
   const {
@@ -113,7 +114,7 @@ const SearchModal = ({
     q: debouncedSearch,
     limit: searchLimit
   }, {
-    enabled: !!debouncedSearch
+    enabled: shouldSearch
   });
 
   const handleSearchChange = (e) => {
@@ -257,7 +258,7 @@ const SearchModal = ({
               </Stack>
             </Box>
           }
-          {(!!debouncedSearch
+          {(shouldSearch
               && hasNoShowsData 
               && hasNoVenuesData 
               && hasNoSongsData
