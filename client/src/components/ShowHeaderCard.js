@@ -2,8 +2,8 @@ import React from 'react';
 import StarRating from './StarRating.js';
 import Card from './Card.js';
 import CardBody from './CardBody.js';
-// import EmptyImage from './EmptyImage.js';
-import { Button, Box, Flex, Heading, Text, Link, Stack } from '@chakra-ui/react';
+import EmptyImage from './EmptyImage.js';
+import { Button, Box, Flex, Heading, Text, Link, Stack, Image, Skeleton } from '@chakra-ui/react';
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { FaVolumeUp, FaStar, FaShare } from 'react-icons/fa';
 // import useAuth from '../hooks/useAuth.js';
@@ -22,7 +22,7 @@ const ShowHeaderCard = ({
 
   return (
     <Card {...restProps}>
-      {/* {show.images.length > 0
+      {show.images.length > 0
         ? <Image
             src={show.images[0].url}
             objectFit="cover"
@@ -31,7 +31,7 @@ const ShowHeaderCard = ({
             fallback={<Skeleton height="150px" />}
           />
         : <EmptyImage h='150px' w='100%' />
-      } */}
+      }
       <CardBody>
         <Heading as="h1" size="2xl" fontWeight="semibold" mb={1}>{show.title}</Heading>
         <Box mb={1}>

@@ -107,11 +107,12 @@ const ShowDetail = () => {
 
   return (
     <>
-      {showIsLoading && <ShowImageHeaderSkeleton h={48} />}
+      {/* {showIsLoading && <ShowImageHeaderSkeleton h={48} />}
       {showData?.images.length > 0 && (
         <ShowImageHeader imageUrl={showData.images[0].url} h={48} />
       )}
-      <PageContainer pt={(showIsLoading || showData?.images.length > 0) && 36}>
+      <PageContainer pt={(showIsLoading || showData?.images.length > 0) && 36}> */}
+      <PageContainer>
         <Grid>
           {showIsLoading && (
             <GridItem colSpan={[12,12,12,8]}>
