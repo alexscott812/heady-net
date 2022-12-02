@@ -35,14 +35,6 @@ app.use('/api/venues', require('./routes/venues'));
 app.use(errorLogger);
 app.use(errorHandler);
 
-// STATIC ASSETS
-if (process.env.NODE_ENV !== 'DEV') {
-  app.use(express.static(path.join(__dirname, '/client/build')));
-  app.get('*', (_, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-  });
-}
-
 // START LISTENING
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`);
