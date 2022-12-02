@@ -79,7 +79,8 @@ const refreshToken = async (req, res, next) => {
       .cookie('refresh_token', refreshToken, {
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
         httpOnly: true,
-        secure: !process.env.NODE_ENV === 'DEV'
+        secure: !process.env.NODE_ENV === 'development',
+        sameSite: 'none'
       })
       .json({
         token_type: 'bearer',

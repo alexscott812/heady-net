@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cookieParser());
 // app.use(cors({ origin: 'http://192.168.1.42:3000', credentials: true }));
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://shakedown-api.onrender.com'],
+  origin: ['http://localhost:3000', 'https://shakedown.onrender.com'],
   credentials: true
 }));
 app.use(logger(':method :url :status - :response-time ms'));
