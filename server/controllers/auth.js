@@ -38,8 +38,8 @@ const login = async (req, res, next) => {
       .cookie('refresh_token', refreshToken, {
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
         httpOnly: true,
-        secure: !process.env.NODE_ENV === 'development',
-        sameSite: 'none'
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : undefined
       })
       .json({
         token_type: 'bearer',
@@ -79,8 +79,8 @@ const refreshToken = async (req, res, next) => {
       .cookie('refresh_token', refreshToken, {
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
         httpOnly: true,
-        secure: !process.env.NODE_ENV === 'development',
-        sameSite: 'none'
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : undefined
       })
       .json({
         token_type: 'bearer',
