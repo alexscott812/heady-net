@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import Grid from '../components/Grid.js';
 import GridItem from '../components/GridItem.js';
 import EmptyState from '../components/EmptyState.js';
-import ShowImageHeader from '../components/ShowImageHeader.js';
+// import ShowImageHeader from '../components/ShowImageHeader.js';
 import ShowHeaderCard from '../components/ShowHeaderCard.js';
 import ShowHeaderCardSkeleton from '../components/ShowHeaderCardSkeleton.js';
 import ImageGalleryCard from '../components/ImageGalleryCard.js';
@@ -28,7 +28,7 @@ import { useAuth } from '../lib/auth';
 import useShow from '../hooks/queries/useShow.js';
 import useReviews from '../hooks/queries/useReviews.js';
 import pad from '../utils/pad.js';
-import ShowImageHeaderSkeleton from '../components/ShowImageHeaderSkeleton.js';
+// import ShowImageHeaderSkeleton from '../components/ShowImageHeaderSkeleton.js';
 
 const ShowDetail = () => {
   const { id } = useParams();

@@ -16,7 +16,7 @@ const SongDetail = () => {
     isLoading: songIsLoading,
   } = useSong(id);
 
-  useDocumentTitle(`${songData ? songData.name : 'Song Detail'} | HeadyNet`);
+  useDocumentTitle(`${songData ? songData.name : 'Song Detail'} | shakedown`);
 
   return (
     <PageContainer>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import Grid from '../components/Grid.js';
 import GridItem from '../components/GridItem.js';
 import { useParams } from 'react-router-dom';

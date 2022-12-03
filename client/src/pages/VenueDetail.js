@@ -17,7 +17,7 @@ const VenueDetail = () => {
     isLoading: venueIsLoading
   } = useVenue(id);
 
-  useDocumentTitle(`${venueData ? venueData.name : 'Venue Detail'} | HeadyNet`);
+  useDocumentTitle(`${venueData ? venueData.name : 'Venue Detail'} | shakedown`);
 
   return (
     <PageContainer>

@@ -13,7 +13,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useLogin from '../hooks/mutations/useLogin.js';
 
 const Login = () => {
-  useDocumentTitle('Login | HeadyNet');
+  useDocumentTitle('Login | shakedown');
   const { isAuthenticated, login } = useAuth();
 
   const [query] = useQueryParams(['redirect']);

@@ -4,10 +4,8 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   Box,
-  Icon,
   Text,
   Stack,
   LinkBox,
@@ -24,7 +22,6 @@ import useVenues from '../hooks/queries/useVenues.js';
 import useSongs from '../hooks/queries/useSongs.js';
 import useUsers from '../hooks/queries/useUsers.js';
 import EmptyState from './EmptyState.js';
-import { FaMusic } from 'react-icons/fa';
 
 const SearchResult = ({ text, to, onClick, ...restProps }) => {
   return (
@@ -60,7 +57,7 @@ const SearchModal = ({
   const {
     data: showsData,
     meta: showsMeta,
-    isLoading: showsIsLoading,
+    // isLoading: showsIsLoading,
     hasMore: hasMoreShows,
     loadMore: loadMoreShows,
     isLoadingMore: isLoadingMoreShows,
@@ -75,7 +72,7 @@ const SearchModal = ({
   const {
     data: venuesData,
     meta: venuesMeta,
-    isLoading: venuesIsLoading,
+    // isLoading: venuesIsLoading,
     hasMore: hasMoreVenues,
     loadMore: loadMoreVenues,
     isLoadingMore: isLoadingMoreVenues,
@@ -90,7 +87,7 @@ const SearchModal = ({
   const {
     data: songsData,
     meta: songsMeta,
-    isLoading: songsIsLoading,
+    // isLoading: songsIsLoading,
     hasMore: hasMoreSongs,
     loadMore: loadMoreSongs,
     isLoadingMore: isLoadingMoreSongs,
@@ -105,7 +102,7 @@ const SearchModal = ({
   const {
     data: usersData,
     meta: usersMeta,
-    isLoading: usersIsLoading,
+    // isLoading: usersIsLoading,
     hasMore: hasMoreUsers,
     loadMore: loadMoreUsers,
     isLoadingMore: isLoadingMoreUsers,

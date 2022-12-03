@@ -1,5 +1,5 @@
 {
-  "name": "heady-net-client",
+  "name": "shakedown-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

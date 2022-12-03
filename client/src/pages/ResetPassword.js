@@ -12,7 +12,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import { useMutation } from 'react-query';
 
 const ResetPassword = () => {
-  useDocumentTitle('Reset Password | HeadyNet');
+  useDocumentTitle('Reset Password | shakedown');
 
   const [query] = useQueryParams();
   const [passwords, setPasswords] = useState({

@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card.js';
 import CardBody from './CardBody.js';
 import CardTitle from './CardTitle.js';
-import { Icon, Text, Box, Stack, LinkBox, LinkOverlay, useColorModeValue, VStack } from '@chakra-ui/react';
+import { Text, Box, Stack, LinkBox, LinkOverlay, VStack } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { FaFire } from 'react-icons/fa';
 import formatShowLocation from '../utils/format-show-location.js';

@@ -187,7 +187,7 @@ const PopularShowsSection = ({ shows = [], ...restProps}) => {
 }
 
 const LandingPage = () => {
-  useDocumentTitle('HeadyNet');
+  useDocumentTitle('shakedown');
   const { month, day } = useDate();
   const { isAuthenticated } = useAuth();
 

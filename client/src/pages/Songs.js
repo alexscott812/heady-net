@@ -15,7 +15,7 @@ import useSongs from '../hooks/queries/useSongs.js';
 import useDebounce from '../hooks/useDebounce.js';
 
 const Songs = () => {
-  useDocumentTitle('Songs | HeadyNet');
+  useDocumentTitle('Songs | shakedown');
   const [query, setQuery] = useQueryParams(['search', 'sort']);
   const debouncedSearch = useDebounce(query.q, 300);
 

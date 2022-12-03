@@ -8,7 +8,7 @@ import Card from '../components/Card.js';
 import CardBody from '../components/CardBody.js';
 
 const NotFound = () => {
-  useDocumentTitle('Page Not Found | HeadyNet');
+  useDocumentTitle('Page Not Found | shakedown');
 
   return (
     <PageContainer>

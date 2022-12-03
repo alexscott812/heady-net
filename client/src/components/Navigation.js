@@ -12,8 +12,6 @@ import {
   Flex,
   HStack,
   Heading,
-  Stack,
-  Link,
   Icon,
   IconButton,
   Menu,
@@ -23,13 +21,6 @@ import {
   MenuDivider,
   Text,
   Tooltip,
-  Divider,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   useColorModeValue,
   useStyleConfig
@@ -38,45 +29,39 @@ import AvatarButton from './AvatarButton.js';
 import {
   FaBars,
   FaUser,
-  FaUserCircle,
   FaSignOutAlt,
   FaSignInAlt,
   FaUserPlus,
-  FaHome,
-  FaTicketAlt,
-  FaMapMarkerAlt,
-  FaMusic,
-  FaInfoCircle,
   FaBolt,
   FaCog,
   FaSearch
 } from 'react-icons/fa';
-import isRouteMatch from '../utils/is-route-match.js';
+// import isRouteMatch from '../utils/is-route-match.js';
 import SearchModal from './SearchModal';
 import NavDrawer from './NavDrawer';
 
-const NavItem = ({ to, isActive, onClick, children }) => {
-  const color = useColorModeValue('gray.500', 'whiteAlpha.600');
-  const activeColor = useColorModeValue('gray.800', 'whiteAlpha.900');
-  const hoverBgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
-  return (
-    <Link
-      as={NavLink}
-      py={2}
-      px={3}
-      rounded="md"
-      to={to}
-      onClick={onClick}
-      d="flex"
-      alignItems="center"
-      fontWeight="semibold"
-      color={isActive ? activeColor : color}
-      _hover={{ bg: hoverBgColor }}
-    >
-      {children}
-    </Link>
-  );
-};
+// const NavItem = ({ to, isActive, onClick, children }) => {
+//   const color = useColorModeValue('gray.500', 'whiteAlpha.600');
+//   const activeColor = useColorModeValue('gray.800', 'whiteAlpha.900');
+//   const hoverBgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
+//   return (
+//     <Link
+//       as={NavLink}
+//       py={2}
+//       px={3}
+//       rounded="md"
+//       to={to}
+//       onClick={onClick}
+//       d="flex"
+//       alignItems="center"
+//       fontWeight="semibold"
+//       color={isActive ? activeColor : color}
+//       _hover={{ bg: hoverBgColor }}
+//     >
+//       {children}
+//     </Link>
+//   );
+// };
 
 const Navigation = () => {
   const {
@@ -92,66 +77,66 @@ const Navigation = () => {
   const { pathname, search } = useLocation();
   const { user, isAuthenticated, logout } = useAuth();
 
-  const authNavLinks = [
-    {
-      name: 'Your Profile',
-      route: `/users/${user?._id}`,
-      exact: true,
-      icon: FaUserCircle,
-      hasSubNav: false,
-      isMainNavItem: false
-    },
-    {
-      name: 'Settings',
-      route: '/settings',
-      exact: true,
-      icon: FaCog,
-      hasSubNav: false,
-      isMainNavItem: false
-    }
-  ];
-  const navLinks = [
-    {
-      name: 'Home',
-      route: '/',
-      exact: true,
-      icon: FaHome,
-      hasSubNav: false,
-      isMainNavItem: false
-    },
-    {
-      name: 'Shows',
-      route: '/shows',
-      exact: false,
-      icon: FaTicketAlt,
-      hasSubNav: true,
-      isMainNavItem: true
-    },
-    {
-      name: 'Venues',
-      route: '/venues',
-      exact: false,
-      icon: FaMapMarkerAlt,
-      hasSubNav: true,
-      isMainNavItem: true
-    },
-    {
-      name: 'Songs',
-      route: '/songs',
-      exact: false,
-      icon: FaMusic,
-      hasSubNav: true,
-      isMainNavItem: true
-    },
-    {
-      name: 'About',
-      route: '/about',
-      exact: false,
-      icon: FaInfoCircle,
-      hasSubNav: false,
-      isMainNavItem: false
-    }
-  ];
+  // const authNavLinks = [
+  //   {
+  //     name: 'Your Profile',
+  //     route: `/users/${user?._id}`,
+  //     exact: true,
+  //     icon: FaUserCircle,
+  //     hasSubNav: false,
+  //     isMainNavItem: false
+  //   },
+  //   {
+  //     name: 'Settings',
+  //     route: '/settings',
+  //     exact: true,
+  //     icon: FaCog,
+  //     hasSubNav: false,
+  //     isMainNavItem: false
+  //   }
+  // ];
+  // const navLinks = [
+  //   {
+  //     name: 'Home',
+  //     route: '/',
+  //     exact: true,
+  //     icon: FaHome,
+  //     hasSubNav: false,
+  //     isMainNavItem: false
+  //   },
+  //   {
+  //     name: 'Shows',
+  //     route: '/shows',
+  //     exact: false,
+  //     icon: FaTicketAlt,
+  //     hasSubNav: true,
+  //     isMainNavItem: true
+  //   },
+  //   {
+  //     name: 'Venues',
+  //     route: '/venues',
+  //     exact: false,
+  //     icon: FaMapMarkerAlt,
+  //     hasSubNav: true,
+  //     isMainNavItem: true
+  //   },
+  //   {
+  //     name: 'Songs',
+  //     route: '/songs',
+  //     exact: false,
+  //     icon: FaMusic,
+  //     hasSubNav: true,
+  //     isMainNavItem: true
+  //   },
+  //   {
+  //     name: 'About',
+  //     route: '/about',
+  //     exact: false,
+  //     icon: FaInfoCircle,
+  //     hasSubNav: false,
+  //     isMainNavItem: false
+  //   }
+  // ];
 
   const handleScrollToTop = () => {
     window.scrollTo({

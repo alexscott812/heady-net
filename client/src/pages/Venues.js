@@ -15,7 +15,7 @@ import useVenues from '../hooks/queries/useVenues.js';
 import useDebounce from '../hooks/useDebounce.js';
 
 const Venues = () => {
-  useDocumentTitle('Venues | HeadyNet');
+  useDocumentTitle('Venues | shakedown');
   const [query, setQuery] = useQueryParams(['search', 'sort']);
   const debouncedSearch = useDebounce(query.q, 300);
 

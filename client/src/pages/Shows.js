@@ -26,7 +26,7 @@ import useVenues from '../hooks/queries/useVenues.js';
 import countKeys from '../utils/count-keys.js';
 
 const Shows = () => {
-  useDocumentTitle('Shows | HeadyNet');
+  useDocumentTitle('Shows | shakedown');
   const [query, setQuery] = useQueryParams();
 
   const {

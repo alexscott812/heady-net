@@ -10,7 +10,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import { useMutation } from 'react-query';
 
 const ForgotPassword = () => {
-  useDocumentTitle('Forgot Password | HeadyNet');
+  useDocumentTitle('Forgot Password | shakedown');
 
   const [email, setEmail] = useState('');
   const { forgotPassword } = useAuth();

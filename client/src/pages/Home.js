@@ -28,7 +28,7 @@ import usePopularShows from '../hooks/queries/usePopularShows.js';
 import FinishedState from '../components/FinishedState';
 
 const Home = () => {
-  useDocumentTitle('Home | HeadyNet');
+  useDocumentTitle('Home | shakedown');
   const { month, day } = useDate();
   const { isAuthenticated } = useAuth();
 

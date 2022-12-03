@@ -16,7 +16,7 @@ const AppearanceSettings = () => {
     <>
       <CardTitle>Theme Preference</CardTitle>
       <Divider mb={3} />
-      <Text mb={3}>Choose how HeadyNet looks to you.</Text>
+      <Text mb={3}>Choose how shakedown looks to you.</Text>
       <RadioGroup onChange={toggleColorMode} value={colorMode}>
         <Stack spacing={4} direction="row">
           <Radio value="light" colorScheme="brand">Light mode</Radio>

@@ -12,7 +12,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import { useMutation } from 'react-query';
 
 const Register = () => {
-  useDocumentTitle('Register | HeadyNet');
+  useDocumentTitle('Register | shakedown');
 
   const { register, isAuthenticated } = useAuth();
   const [query] = useQueryParams(['redirect']);

@@ -10,7 +10,7 @@ import GridItem from "../components/GridItem.js";
 import SettingsNavSidebar from '../components/SettingsNavSidebar.js';
 
 const Settings = () => {
-  useDocumentTitle('Settings | HeadyNet');
+  useDocumentTitle('Settings | shakedown');
 
   return (
     <>

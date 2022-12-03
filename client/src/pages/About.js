@@ -8,7 +8,7 @@ import CardTitle from '../components/CardTitle.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 
 const About = () => {
-  useDocumentTitle('About | HeadyNet');
+  useDocumentTitle('About | shakedown');
 
   return (
     <PageContainer>
