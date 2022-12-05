@@ -6,7 +6,7 @@ import CardBody from './CardBody.js';
 const ShowHeaderCardSkeleton = ({ ...props }) => {
   return (
     <Card {...props}>
-      {/* <Skeleton height="150px" borderRadius='none' /> */}
+      <Skeleton height="150px" borderRadius='none' />
       <CardBody>
         <Stack>
           <Skeleton h={12} w="50%" />
