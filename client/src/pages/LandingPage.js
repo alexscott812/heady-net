@@ -7,16 +7,14 @@ import {
   LinkBox,
   LinkOverlay,
   Box,
-  useBreakpointValue,
   useColorModeValue,
   Text,
   chakra,
-  HStack,
-  Divider,
   SimpleGrid,
   Container,
   Stack,
-  Icon
+  Icon,
+  Skeleton
 } from "@chakra-ui/react";
 import {
   FaTicketAlt,
@@ -27,7 +25,6 @@ import {
 import { useAuth } from '../lib/auth';
 import useDate from '../hooks/useDate.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
-import useReviews from '../hooks/queries/useReviews.js';
 import useShowsCount from '../hooks/queries/useShowsCount.js';
 import usePopularShows from '../hooks/queries/usePopularShows.js';
 import Card from '../components/Card';
@@ -35,6 +32,7 @@ import CardBody from '../components/CardBody';
 import CardTitle from '../components/CardTitle';
 import CardIcon from '../components/CardIcon';
 import ShowCard from '../components/ShowCard';
+import ShowCardSkeleton from '../components/ShowCardSkeleton';
 import pluralize from '../utils/pluralize.js';
 import getMonthName from '../utils/get-month-name.js';
 import getDateOrdinal from '../utils/get-date-ordinal.js';
@@ -69,7 +67,7 @@ const HeroSection = (props) => {
       </Container>
     </Box>
   );
-}
+};
 
 const ExploreSection = (props) => {
   return (
@@ -123,21 +121,40 @@ const ExploreSection = (props) => {
   );
 };
 
-const TodaysShowsSection = ({ month, day, showCount, ...restProps }) => {
+const TodaysShowsSection = ({
+    isError,
+    isLoading,
+    month,
+    day,
+    showCount,
+    ...restProps
+  }) => {
   return (
     <Box bg={useColorModeValue('white','gray.800')} py={[12,12,28,28]} {...restProps}> 
       <Container p={4} maxWidth="2xl">
         <Stack direction={{ base: 'row', lg: 'row' }} spacing={6} align="flex-start">
           <Box flex={1}>
             <Heading mb={5}>Today in History</Heading>
-            <Text mb={5}>
-              {`${showCount === 0 ? 'Unfortunately, the' : 'The'} Grateful Dead performed ${showCount} ${pluralize(showCount, 'show', 'shows')} on ${getMonthName(month)} ${day}${getDateOrdinal(day)}.`}
-            </Text>
-            {(showCount > 0) && (
-              <Button size="lg" as={Link} to={`/shows?${qs.stringify({ month, day })}`}>
-                {`See ${showCount} ${pluralize(showCount, 'Show', 'Shows')}`}
-              </Button>
+            {isLoading && (
+              <Stack>
+                <Skeleton h={5} w="100%" />
+                <Skeleton h={5} w="100%" />
+                <Skeleton h={5} w="60%" />
+              </Stack>
             )}
+            {showCount !== undefined && (
+              <>
+                <Text mb={5}>
+                  {`${showCount === 0 ? 'Unfortunately, the' : 'The'} Grateful Dead performed ${showCount} ${pluralize(showCount, 'show', 'shows')} on ${getMonthName(month)} ${day}${getDateOrdinal(day)}.`}
+                </Text>
+                {showCount > 0 && (
+                  <Button size="lg" as={Link} to={`/shows?${qs.stringify({ month, day })}`}>
+                    {`See ${showCount} ${pluralize(showCount, 'Show', 'Shows')}`}
+                  </Button>
+                )}
+              </>
+            )}
+            {isError && <Text>Couldn't find today's shows.</Text>}
           </Box>
           <Box
             boxSize={{ base: 28, sm: 60 }}
@@ -161,30 +178,49 @@ const TodaysShowsSection = ({ month, day, showCount, ...restProps }) => {
   );
 };
 
-const PopularShowsSection = ({ shows = [], ...restProps}) => {
+const PopularShowsSection = ({
+  isError,
+  isLoading,
+  shows,
+  ...restProps
+}) => {
   return (
     <Box textAlign="center" py={[12,12,28,28]} {...restProps}>
       <Container p={4}>
         <Heading mb={5}>Popular Shows</Heading>
         <Text mb={5}>Check out some famous Grateful Dead shows.</Text>
-        <SimpleGrid columns={[1,1,4,4]} spacing={4} mb={4}>
-          {shows.map(show => (
-            <ShowCard
-              key={show._id}
-              id={show._id}
-              image={show.image?.thumbnail_md_url}
-              title={show.title}
-              venue={show.venue.name}
-              location={formatShowLocation(show.city.name, show.state?.name || '', show.country.name)}
-              includeRating={false}
-              textAlign="start"
-            />
-          ))}
-        </SimpleGrid>
+        {isLoading && (
+          <SimpleGrid columns={[1,1,4,4]} spacing={4} mb={4}>
+            {[...Array(6)].map((_, i) => (
+              <ShowCardSkeleton
+                key={i}
+                includeRating={false}
+                textAlign="start"
+              />
+            ))}
+          </SimpleGrid>
+        )}
+        {shows && (
+          <SimpleGrid columns={[1,1,4,4]} spacing={4} mb={4}>
+            {shows.map(show => (
+              <ShowCard
+                key={show._id}
+                id={show._id}
+                image={show.image?.thumbnail_md_url}
+                title={show.title}
+                venue={show.venue.name}
+                location={formatShowLocation(show.city.name, show.state?.name || '', show.country.name)}
+                includeRating={false}
+                textAlign="start"
+              />
+            ))}
+          </SimpleGrid>
+        )}
+        {isError && <Text>Couldn't find popular shows.</Text>}
       </Container>
     </Box>
   );
-}
+};
 
 const LandingPage = () => {
   useDocumentTitle('shakedown');
@@ -193,12 +229,14 @@ const LandingPage = () => {
 
   const {
     data: todaysShowsData,
-    isLoading: todaysShowsIsLoading
+    isLoading: todaysShowsIsLoading,
+    isError: todaysShowsIsError
   } = useShowsCount({ month, day }, { staleTime: Infinity });
 
   const {
     data: popularShowsData,
-    isLoading: popularShowsIsLoading
+    isLoading: popularShowsIsLoading,
+    isError: popularShowsIsIsError
   } = usePopularShows({ staleTime: Infinity });
 
   // const {
@@ -220,12 +258,19 @@ const LandingPage = () => {
       <HeroSection mb={4} />
       <ExploreSection mb={4} />
       <TodaysShowsSection
+        isLoading={todaysShowsIsLoading}
+        isError={todaysShowsIsError}
         month={month}
         day={day}
-        showCount={todaysShowsData || 0}
+        showCount={todaysShowsData}
         mb={4}
       />
-      <PopularShowsSection shows={popularShowsData || []} mb={4} />
+      <PopularShowsSection
+        isLoading={popularShowsIsLoading}
+        isError={popularShowsIsIsError}
+        shows={popularShowsData}
+        mb={4} 
+      />
     </>
   );
 };

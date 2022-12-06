@@ -4,7 +4,7 @@ import CardBody from './CardBody.js';
 import CardFooter from './CardFooter.js';
 import { Skeleton, Stack } from '@chakra-ui/react';
 
-const ShowCardSkeleton = () => {
+const ShowCardSkeleton = ({ includeRating }) => {
   return (
     <Card>
       <Skeleton height="150px" borderRadius="none" />
@@ -15,9 +15,11 @@ const ShowCardSkeleton = () => {
           <Skeleton h={5} w="60%" />
         </Stack>
       </CardBody>
-      <CardFooter>
-        <Skeleton h={5} w="40%" />
-      </CardFooter>
+      {includeRating && (
+        <CardFooter>
+          <Skeleton h={5} w="40%" />
+        </CardFooter>
+      )}
     </Card>
   );
 };
