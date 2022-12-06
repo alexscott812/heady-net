@@ -3,7 +3,7 @@ import Card from './Card.js';
 import CardBody from './CardBody.js';
 import CardTitle from './CardTitle.js';
 import CardIcon from './CardIcon.js';
-import { Button, Icon, Text, Box, Stack, useColorModeValue } from '@chakra-ui/react';
+import { Button, Text, Box, Stack } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { FaRegCompass } from 'react-icons/fa';
 

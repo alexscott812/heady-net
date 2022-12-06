@@ -154,7 +154,7 @@ const TodaysShowsSection = ({
                 )}
               </>
             )}
-            {isError && <Text>Couldn't find today's shows.</Text>}
+            {isError && <Text>Couldn't retrieve today's shows.</Text>}
           </Box>
           <Box
             boxSize={{ base: 28, sm: 60 }}
@@ -216,7 +216,7 @@ const PopularShowsSection = ({
             ))}
           </SimpleGrid>
         )}
-        {isError && <Text>Couldn't find popular shows.</Text>}
+        {isError && <Text>Couldn't retrieve popular shows.</Text>}
       </Container>
     </Box>
   );
