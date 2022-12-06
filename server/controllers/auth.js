@@ -36,7 +36,7 @@ const login = async (req, res, next) => {
     res
       .status(201)
       .cookie('refresh_token', refreshToken, {
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : undefined
@@ -77,7 +77,7 @@ const refreshToken = async (req, res, next) => {
     res
       .status(200)
       .cookie('refresh_token', refreshToken, {
-        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : undefined
