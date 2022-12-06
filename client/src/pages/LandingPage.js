@@ -126,8 +126,8 @@ const ExploreSection = (props) => {
 const TodaysShowsSection = ({ month, day, showCount, ...restProps }) => {
   return (
     <Box bg={useColorModeValue('white','gray.800')} py={[12,12,28,28]} {...restProps}> 
-      <Container p={4}>
-        <Stack direction={{ base: 'row', lg: 'row' }} spacing={4} align="flex-start">
+      <Container p={4} maxWidth="2xl">
+        <Stack direction={{ base: 'row', lg: 'row' }} spacing={6} align="flex-start">
           <Box flex={1}>
             <Heading mb={5}>Today in History</Heading>
             <Text mb={5}>
