@@ -1,14 +1,13 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { useAuth } from '../../lib/auth';
+import { updateUser } from '../../services/user-service.js';
 import useToast from '../useToast.js';
 
 const useSaveUser = (opts = {}) => {
-  const { updateAccount } = useAuth();
   const queryClient = useQueryClient();
   const createToast = useToast();
 
   return useMutation(
-    (data) => updateAccount(data), {
+    (data) => updateUser(data), {
       onSuccess: (data) => {
         queryClient.refetchQueries(['users', data._id]);
         queryClient.refetchQueries(['reviews', {

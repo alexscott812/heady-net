@@ -14,7 +14,7 @@ import useLogin from '../hooks/mutations/useLogin.js';
 
 const Login = () => {
   useDocumentTitle('Login | shakedown');
-  const { isAuthenticated, login } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   const [query] = useQueryParams(['redirect']);
   const [credentials, setCredentials] = useState({
@@ -22,7 +22,7 @@ const Login = () => {
     password: ''
   });
 
-  // const login = useLogin();
+  const login = useLogin();
 
   const validateForm = () => {
     return credentials.email.length > 0
@@ -37,12 +37,11 @@ const Login = () => {
     });
   };
 
-  const handleLoginSubmit = () => {
+  const handleLoginSubmit = async () => {
     //e.preventDefault();
     if (!validateForm) return;
     login.mutate({
-      email: credentials.email,
-      password: credentials.password,
+      credentials,
       opts: {
         redirectTo: query.redirect || '/'
       }

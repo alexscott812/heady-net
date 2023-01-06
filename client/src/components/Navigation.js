@@ -39,6 +39,7 @@ import {
 // import isRouteMatch from '../utils/is-route-match.js';
 import SearchModal from './SearchModal';
 import NavDrawer from './NavDrawer';
+import useLogout from '../hooks/mutations/useLogout';
 
 // const NavItem = ({ to, isActive, onClick, children }) => {
 //   const color = useColorModeValue('gray.500', 'whiteAlpha.600');
@@ -75,7 +76,8 @@ const Navigation = () => {
     onClose: onSearchModalClose
   } = useDisclosure();
   const { pathname, search } = useLocation();
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated } = useAuth();
+  const logout = useLogout();
 
   // const authNavLinks = [
   //   {

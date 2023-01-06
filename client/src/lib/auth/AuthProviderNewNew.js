@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import useStateWithLocalStorage from '../../hooks/useStateWithLocalStorage.js';
 import isTokenValid from '../../utils/is-token-valid.js';
 import getUserFromToken from '../../utils/get-user-from-token.js';
+import { initialState, reducer } from './state/authReducer.js';
+
+import { initUser, updateUser, removeUser } from './state/authActions.js';
 import AuthContext from './AuthContext.js';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,12 +21,12 @@ const AuthProvider = ({ client, children }) => {
   } = client;
 
   const navigate = useNavigate();
-  const [{
-    user,
-    isInitializing,
-    isAuthenticated
-  }, dispatch] = useReducer(reducer, initialState);
-  // const [isInitializing, setIsInitializing] = useState(true);
+  // const [{
+  //   // user,
+  //   isInitializing,
+  //   isAuthenticated
+  // }, dispatch] = useReducer(reducer, initialState);
+  const [isInitializing, setIsInitializing] = useState(true);
   const [token, setToken] = useStateWithLocalStorage(tokenLocalStorageKey, '');
   // const [user, setUser] = useState(() => getUserFromToken(token));
 
@@ -34,6 +37,7 @@ const AuthProvider = ({ client, children }) => {
       } catch(err) {
         console.error(err);
       }
+      //dispatch(initUser(getUserFromToken(token)));
       setIsInitializing(false);
       return;
     };
@@ -50,7 +54,7 @@ const AuthProvider = ({ client, children }) => {
    */
   const getToken = async () => {
     if (!token) {
-      return null;
+      throw Error('No token!');
     }
     if (isTokenValid(token)) {
       return token;
@@ -71,7 +75,9 @@ const AuthProvider = ({ client, children }) => {
   const login = async ({ credentials, opts }) => {
     const { access_token } = await loginFn(credentials);
     setToken(access_token);
-    navigate(opts?.redirectTo || '/');
+    if (opts?.redirectTo) {
+      navigate(opts?.redirectTo);
+    }
     return;
   };
 
@@ -137,6 +143,9 @@ const AuthProvider = ({ client, children }) => {
   //     navigate.push(opts?.returnTo);
   //   }
   // }, [user, getToken, navigate]);
+
+  const user = getUserFromToken(token);
+  const isAuthenticated = !!user;
 
   return (
     <>
