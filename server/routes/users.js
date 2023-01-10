@@ -44,22 +44,22 @@ router.post('/', addUser);
 /**
  * @route   PUT api/users/:id
  * @desc    Update user by ID
- * @access  Public
+ * @access  authenticate
  */
-router.put('/:id', updateUserById);
+router.put('/:id', authenticate, updateUserById);
 
 /**
  * @route   DELETE api/users
  * @desc    Delete all users
- * @access  Public
+ * @access  Private
  */
 router.delete('/', authenticate, authorize(['admin']), deleteUsers);
 
 /**
  * @route   DELETE api/users/:id
  * @desc    Delete user by ID
- * @access  Public
+ * @access  Private
  */
-router.delete('/:id', deleteUserById);
+router.delete('/:id', authenticate, deleteUserById);
 
 module.exports = router;

@@ -197,8 +197,6 @@ const addUser = async (req, res, next) => {
     const {
       password,
       password_reset_token,
-      created_at,
-      updated_at,
       __v,
       ...passwordlessNewUser
     } = user;
@@ -222,8 +220,6 @@ const updateUserById = async (req, res, next) => {
     const {
       password,
       password_reset_token,
-      created_at,
-      updated_at,
       __v,
       ...passwordlessUser
     } = user;
@@ -251,6 +247,9 @@ const deleteUserById =  async (req, res, next) => {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
       return next(createError(404, `No user found with ID of ${req.params.id}`));
+    }
+    if (user._id !== req.user._id) {
+      return next(createError(403, `Not allowed to update user with ID of ${req.params.id}`));
     }
     res.status(200).json({ msg: `Deleted user with ID of ${req.params.id}` });
   } catch (err) {
