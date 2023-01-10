@@ -8,14 +8,12 @@ const cookieParser = require('cookie-parser');
 const db = require('./utils/db');
 const errorLogger = require('./middleware/errorLogger');
 const errorHandler = require('./middleware/errorHandler');
-// const logger = require('./middleware/logger');
 const logger = require('morgan');
 
 const PORT = process.env.PORT || 5000;
 
 // OPTIONS & MIDDLEWARE
 app.use(cookieParser());
-// app.use(cors({ origin: 'http://192.168.1.42:3000', credentials: true }));
 app.use(cors({
   origin: ['http://localhost:3000', 'https://shakedown.onrender.com'],
   credentials: true
@@ -41,5 +39,3 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`);
 });
-
-//app.use(express.static('public'));
