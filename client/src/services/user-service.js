@@ -43,9 +43,9 @@ const addUser = async (user) => {
   }
 };
 
-const updateUser = async ({ user, token }) => {
+const updateUser = async ({ user, tokenFn }) => {
   try {
-    // const token = await tokenFn();
+    const token = await tokenFn();
     const { data } = await axiosInstance.put(`/users/${user._id}`,
       user, {
         headers: {

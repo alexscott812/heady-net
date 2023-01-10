@@ -22,7 +22,7 @@ const EditUserModal = ({
   onClose = null,
   mutation = null
 }) => {
-  const { isAuthenticated } = useAuth();
+  const { getToken } = useAuth();
   const saveUser = useSaveUser();
 
   // const [user, setUser] = useState({
@@ -68,7 +68,8 @@ const EditUserModal = ({
     console.log(userToBeEdited);
     if (!validate()) return;
     saveUser.mutate({
-      user: userToBeEdited
+      user: userToBeEdited,
+      tokenFn: getToken
     }, {
       onSuccess: handleClose
     });
