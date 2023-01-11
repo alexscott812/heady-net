@@ -56,13 +56,13 @@ const Songs = () => {
           <Box>
             <Heading as="h4" fontWeight="semibold" size="md">Songs</Heading>
           </Box>
-          {/* <Box w={['50%','50%','25%','25%']}>
+          <Box w={['50%','50%','25%','25%']}>
             <SearchBar
               search={query.q}
               onChange={handleSearchChange}
               onClear={handleSearchClear}
             />
-          </Box> */}
+          </Box>
         </Flex>
       </PageHead>
       <PageContainer pt={18}>

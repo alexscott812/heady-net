@@ -193,6 +193,7 @@ const Navigation = () => {
                 display={{ base: 'none', md: 'flex' }}
                 colorScheme="gray"
                 leftIcon={<Icon as={FaSearch} mr={1} />}
+                maxWidth="sm"
                 borderRadius="md"
                 color={useColorModeValue('gray.400','whiteAlpha.400')}
                 fontWeight="normal"
