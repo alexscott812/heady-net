@@ -75,7 +75,7 @@ const theme = extendTheme({
     },
     Container: {
       baseStyle: {
-        maxW: 'container.xl'
+        maxW: 'container.lg'
       }
     },
     Drawer: {
