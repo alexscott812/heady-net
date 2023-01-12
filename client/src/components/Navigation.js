@@ -162,16 +162,18 @@ const Navigation = () => {
         <Container>
           <Flex h={14} align="center" justifyContent="space-between">
             <Flex flex={1} align="center">
-              <IconButton
-                isRound
-                variant="ghost"
-                mr={2}
-                display={{ base: 'none', md: 'flex' }}
-                colorScheme="gray"
-                icon={<FaBars />}
-                aria-label="Menu"
-                onClick={isDrawerOpen ? onDrawerClose : onDrawerOpen}
-              />
+              <Tooltip label="Menu">
+                <IconButton
+                  isRound
+                  variant="ghost"
+                  mr={2}
+                  //display={{ base: 'none', md: 'flex' }}
+                  colorScheme="gray"
+                  icon={<FaBars />}
+                  aria-label="Menu"
+                  onClick={isDrawerOpen ? onDrawerClose : onDrawerOpen}
+                />
+              </Tooltip>
               <Heading
                 color={useColorModeValue('brand.500', 'brand.200')}
                 as={NavLink}
@@ -296,7 +298,17 @@ const Navigation = () => {
               }
             </HStack>
             {/* MOBILE */}
-            <HStack spacing={1} justifyContent="flex-end" d={{ md: 'none' }}>  
+            <HStack spacing={1} justifyContent="flex-end" d={{ md: 'none' }}> 
+              <Tooltip label="Search">
+                <IconButton
+                  isRound
+                  variant="ghost"
+                  colorScheme="gray"
+                  icon={<FaSearch />}
+                  aria-label="Search"
+                  onClick={onSearchModalOpen}
+                />
+              </Tooltip> 
               <Menu placement="bottom-end">
                 <Tooltip label="User">
                   {isAuthenticated 
@@ -308,7 +320,7 @@ const Navigation = () => {
                     : <MenuButton
                         as={IconButton}
                         isRound
-                        variant="solid"
+                        variant="ghost"
                         cursor="pointer"
                         colorScheme="gray"
                         icon={<FaUser />}
@@ -361,26 +373,16 @@ const Navigation = () => {
                   }
                 </MenuList>
               </Menu>
-              <Tooltip label="Search">
+              {/* <Tooltip label="Menu">
                 <IconButton
                   isRound
-                  variant="solid"
-                  colorScheme="gray"
-                  icon={<FaSearch />}
-                  aria-label="Search"
-                  onClick={onSearchModalOpen}
-                />
-              </Tooltip>
-              <Tooltip label="Menu">
-                <IconButton
-                  isRound
-                  variant="solid"
+                  variant="ghost"
                   colorScheme="gray"
                   icon={<FaBars />}
                   aria-label="Menu"
                   onClick={isDrawerOpen ? onDrawerClose : onDrawerOpen}
                 />
-              </Tooltip>
+              </Tooltip> */}
             </HStack>
           </Flex>
         </Container>
