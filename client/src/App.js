@@ -17,6 +17,7 @@ import VenueDetail from './pages/VenueDetail.js';
 import Songs from './pages/Songs.js';
 import SongDetail from './pages/SongDetail.js';
 import About from './pages/About.js';
+import Contact from './pages/Contact.js';
 import Login from './pages/Login.js';
 import Register from './pages/Register.js';
 import ForgotPassword from './pages/ForgotPassword.js';
@@ -72,6 +73,7 @@ const App = () => {
                 <Route exact path="/songs" element={<Songs />} />
                 <Route path="/songs/:id" element={<SongDetail />} />
                 <Route exact path="/about" element={<About />} />
+                <Route exact path="/contact" element={<Contact />} />
                 <Route exact path="/search" element={<Search />} />
                 <Route path="/settings" element={<Settings />}>
                   <Route index element={<Navigate to="profile" replace />} />

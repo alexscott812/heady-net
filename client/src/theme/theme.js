@@ -19,8 +19,11 @@ const theme = extendTheme({
   },
   styles: {
     global: (props) => ({
+      html: {
+        h: '100%'
+      },
       body: {
-        bg: mode('gray.50', 'gray.900')(props)
+        bg: mode('gray.50', 'gray.900')(props),
       }
     }),
   },
@@ -88,6 +91,13 @@ const theme = extendTheme({
         }
       })
     },
+    Footer: {
+      baseStyle: (props) => ({
+        w: '100%',
+        bg: mode('white', 'gray.800')(props),
+        borderTopWidth: '1px'
+      })
+    },
     Image: {
       baseStyle: {
         borderRadius: 'md'
@@ -122,7 +132,8 @@ const theme = extendTheme({
     },
     Main: {
       baseStyle: {
-        pt: baseTheme.space[14]
+        pt: baseTheme.space[14],
+        minH: 'calc(100vh - var(--chakra-sizes-28))'
       }
     },
     Navigation: {
