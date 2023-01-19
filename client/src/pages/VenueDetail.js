@@ -23,12 +23,12 @@ const VenueDetail = () => {
     <PageContainer>
       <Grid>
         {venueIsLoading && (
-          <GridItem>
+          <GridItem colSpan={[12,12,12,8]}>
             <VenueDetailCardSkeleton />
           </GridItem>
         )}
         {venueData && (
-          <GridItem>
+          <GridItem colSpan={[12,12,12,8]}>
             <VenueDetailCard venue={venueData} />
           </GridItem>
         )}

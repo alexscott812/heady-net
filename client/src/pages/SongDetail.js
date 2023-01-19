@@ -22,12 +22,12 @@ const SongDetail = () => {
     <PageContainer>
       <Grid>
         {songIsLoading && (
-          <GridItem>
+          <GridItem colSpan={[12,12,12,8]}>
             <SongDetailCardSkeleton />
           </GridItem>
         )}
         {songData && (
-          <GridItem>
+          <GridItem colSpan={[12,12,12,8]}>
             <SongDetailCard song={songData} />
           </GridItem>
         )}
