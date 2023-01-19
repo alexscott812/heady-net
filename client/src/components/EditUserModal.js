@@ -22,7 +22,7 @@ const EditUserModal = ({
   onClose = null,
   mutation = null
 }) => {
-  const { getToken } = useAuth();
+  const { isAuthenticated, getToken } = useAuth();
   const saveUser = useSaveUser();
 
   // const [user, setUser] = useState({
@@ -74,7 +74,7 @@ const EditUserModal = ({
       onSuccess: handleClose
     });
   };
-
+  
   return (
     <Modal isOpen={isOpen} onClose={handleClose} size="xl">
       <ModalOverlay />

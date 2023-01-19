@@ -28,11 +28,11 @@ const DeactivateUserModal = ({
   //   setUser(props.user);
   // }, [props.user]);
 
-  // const handleClose = () => {
-  //   setUser(null);
-  //   deleteUser.reset();
-  //   onClose();
-  // };
+  const handleClose = () => {
+    //setUser(null);
+    deleteUser.reset();
+    onClose();
+  };
 
   const handleDeleteUser = (e) => {
     e.preventDefault();

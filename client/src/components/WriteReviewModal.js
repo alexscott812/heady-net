@@ -30,7 +30,7 @@ const WriteReviewModal = ({
   onClose = null,
   showId = null
 }) => {
-  const { user, getToken } = useAuth();
+  const { isAuthenticated, user, getToken } = useAuth();
   const [review, setReview] = useState(initialReviewState);
   const createReview = useCreateReview();
 

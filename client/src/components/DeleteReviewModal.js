@@ -18,7 +18,7 @@ const DeleteReviewModal = ({
   isOpen = false,
   onClose = null,
 }) => {
-  const { getToken } = useAuth();
+  const { isAuthenticated, getToken } = useAuth();
   const deleteReview = useDeleteReview();
   const cancelRef = useRef();
 

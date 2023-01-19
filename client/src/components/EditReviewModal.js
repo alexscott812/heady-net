@@ -26,7 +26,7 @@ const EditReviewModal = ({
   isOpen = false,
   onClose = null,
 }) => {
-  const { user, getToken } = useAuth();
+  const { isAuthenticated, user, getToken } = useAuth();
   const saveReview = useSaveReview();
 
   const handleClose = () => {

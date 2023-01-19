@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton, Fade } from '@chakra-ui/react';
+import { IconButton } from '@chakra-ui/react';
 import { FaChevronUp } from 'react-icons/fa';
 
 const ScrollToTopButton = () => {

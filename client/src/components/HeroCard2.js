@@ -2,16 +2,14 @@ import React from 'react';
 import Card from './Card.js';
 import CardBody from './CardBody.js';
 import CardTitle from './CardTitle.js';
-import { Button, Text, Icon, chakra, useColorModeValue } from '@chakra-ui/react';
+import { Button, Text, chakra, useColorModeValue } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { FaBolt } from 'react-icons/fa';
 
 const HeroCard2 = ({ ...props }) => {
   return (
     <Card {...props}>
       <CardBody>
         <CardTitle>
-          {/* <Icon as={FaBolt} mr={2} /> */}
           Welcome!
         </CardTitle>
         <Text>
