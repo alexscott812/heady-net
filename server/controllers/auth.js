@@ -43,7 +43,8 @@ const login = async (req, res, next) => {
       })
       .json({
         token_type: 'bearer',
-        access_token: accessToken
+        access_token: accessToken,
+        refresh_token: refreshToken
       });
   } catch (err) {
     return next(createError(500, err.message));
@@ -84,7 +85,8 @@ const refreshToken = async (req, res, next) => {
       })
       .json({
         token_type: 'bearer',
-        access_token: accessToken
+        access_token: accessToken,
+        refresh_token: refreshToken
       });
   } catch (err) {
     return next(createError(500, err.message));
