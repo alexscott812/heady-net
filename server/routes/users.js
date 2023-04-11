@@ -2,13 +2,13 @@ const express = require('express');
 const authenticate = require('../middleware/authenticate');
 const authorize = require('../middleware/authorize');
 const {
-  getUsers,
-  getUserById,
-  getCurrentUser,
-  addUser,
-  updateUserById,
-  deleteUsers,
-  deleteUserById
+	getUsers,
+	getUserById,
+	getCurrentUser,
+	addUser,
+	updateUserById,
+	deleteUsers,
+	deleteUserById
 } = require('../controllers/users');
 
 const router = express.Router();
@@ -25,7 +25,7 @@ router.get('/', getUsers);
  * @desc    Get current user
  * @access  Private
  */
- router.get('/me', authenticate, getCurrentUser);
+router.get('/me', authenticate, getCurrentUser);
 
 /**
  * @route   GET api/users/:id

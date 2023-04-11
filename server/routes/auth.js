@@ -1,12 +1,12 @@
 const express = require('express');
 const authenticate = require('../middleware/authenticate');
 const {
-  login,
-  refreshToken,
-  logout,
-  forgotPassword,
-  resetPassword,
-  changePassword
+	login,
+	refreshToken,
+	logout,
+	forgotPassword,
+	resetPassword,
+	changePassword
 } = require('../controllers/auth');
 
 const router = express.Router();

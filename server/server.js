@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -14,10 +14,12 @@ const PORT = process.env.PORT || 5000;
 
 // OPTIONS & MIDDLEWARE
 app.use(cookieParser());
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://shakedown.onrender.com'],
-  credentials: true
-}));
+app.use(
+	cors({
+		origin: ['http://localhost:3000', 'https://shakedown.onrender.com'],
+		credentials: true
+	})
+);
 app.use(logger(':method :url :status - :response-time ms'));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -37,5 +39,7 @@ app.use(errorHandler);
 
 // START LISTENING
 app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`);
+	console.log(
+		`Server running in ${process.env.NODE_ENV} mode on port ${PORT}...`
+	);
 });

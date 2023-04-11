@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useClipboard, useDisclosure } from "@chakra-ui/react";
+import { useClipboard, useDisclosure } from '@chakra-ui/react';
 import useToast from '../hooks/useToast.js';
 import { useParams } from 'react-router-dom';
 import Grid from '../components/Grid.js';
@@ -31,184 +31,191 @@ import pad from '../utils/pad.js';
 // import ShowImageHeaderSkeleton from '../components/ShowImageHeaderSkeleton.js';
 
 const ShowDetail = () => {
-  const { id } = useParams();
-  const { isAuthenticated } = useAuth();
-  const createToast = useToast();
-  const [url] = useState(window.location.href);
-  const { onCopy } = useClipboard(url);
-  const [imageModalIndex, setImageModalIndex] = useState(0);
-  const [reviewToBeEdited, setReviewToBeEdited] = useState(null);
-  const [reviewToBeDeleted, setReviewToBeDeleted] = useState(null);
+	const { id } = useParams();
+	const { isAuthenticated } = useAuth();
+	const createToast = useToast();
+	const [url] = useState(window.location.href);
+	const { onCopy } = useClipboard(url);
+	const [imageModalIndex, setImageModalIndex] = useState(0);
+	const [reviewToBeEdited, setReviewToBeEdited] = useState(null);
+	const [reviewToBeDeleted, setReviewToBeDeleted] = useState(null);
 
-  const {
-    isOpen: isShareModalOpen,
-    onOpen: onShareModalOpen,
-    onClose: onShareModalClose
-  } = useDisclosure();
-  const {
-    isOpen: isListenModalOpen,
-    onOpen: onListenModalOpen,
-    onClose: onListenModalClose
-  } = useDisclosure();
-  const {
-    isOpen: isImageModalOpen,
-    onOpen: onImageModalOpen,
-    onClose: onImageModalClose
-  } = useDisclosure();
-  const {
-    isOpen: isWriteReviewModalOpen,
-    onOpen: onWriteReviewModalOpen,
-    onClose: onWriteReviewModalClose
-  } = useDisclosure();
-  const {
-    isOpen: isEditReviewModalOpen,
-    onOpen: onEditReviewModalOpen,
-    onClose: onEditReviewModalClose
-  } = useDisclosure();
-  const {
-    isOpen: isDeleteReviewModalOpen,
-    onOpen: onDeleteReviewModalOpen,
-    onClose: onDeleteReviewModalClose
-  } = useDisclosure();
+	const {
+		isOpen: isShareModalOpen,
+		onOpen: onShareModalOpen,
+		onClose: onShareModalClose
+	} = useDisclosure();
+	const {
+		isOpen: isListenModalOpen,
+		onOpen: onListenModalOpen,
+		onClose: onListenModalClose
+	} = useDisclosure();
+	const {
+		isOpen: isImageModalOpen,
+		onOpen: onImageModalOpen,
+		onClose: onImageModalClose
+	} = useDisclosure();
+	const {
+		isOpen: isWriteReviewModalOpen,
+		onOpen: onWriteReviewModalOpen,
+		onClose: onWriteReviewModalClose
+	} = useDisclosure();
+	const {
+		isOpen: isEditReviewModalOpen,
+		onOpen: onEditReviewModalOpen,
+		onClose: onEditReviewModalClose
+	} = useDisclosure();
+	const {
+		isOpen: isDeleteReviewModalOpen,
+		onOpen: onDeleteReviewModalOpen,
+		onClose: onDeleteReviewModalClose
+	} = useDisclosure();
 
-  const {
-    data: showData,
-    isLoading: showIsLoading
-  } = useShow(id);
+	const { data: showData, isLoading: showIsLoading } = useShow(id);
 
-  const {
-    data: reviewsData,
-    isLoading: reviewsIsLoading,
-    hasMore: hasMoreReviews,
-    loadMore: loadMoreReviews,
-    isLoadingMore: isLoadingMoreReviews
-  } = useReviews({
-    show_id: id,
-    sort: '-created_at'
-  }, {
-    enabled: !!showData
-  });
+	const {
+		data: reviewsData,
+		isLoading: reviewsIsLoading,
+		hasMore: hasMoreReviews,
+		loadMore: loadMoreReviews,
+		isLoadingMore: isLoadingMoreReviews
+	} = useReviews(
+		{
+			show_id: id,
+			sort: '-created_at'
+		},
+		{
+			enabled: !!showData
+		}
+	);
 
-  useDocumentTitle(`${showData ? showData.title : 'Show Detail'} | HeadyNet`);
+	useDocumentTitle(`${showData ? showData.title : 'Show Detail'} | HeadyNet`);
 
-  const getDateString = (m = 1, d = 1, y = 1965) => {
-    return `${pad(y, 2)}-${pad(m, 2)}-${pad(d, 2)}`;
-  };
+	const getDateString = (m = 1, d = 1, y = 1965) => {
+		return `${pad(y, 2)}-${pad(m, 2)}-${pad(d, 2)}`;
+	};
 
-  const handleCopyLink = () => {
-    onCopy();
-    onShareModalClose();
-    createToast({
-      id: 'copy-show-link-success',
-      status: 'success',
-      message: 'Link copied!'
-    });
-  };
+	const handleCopyLink = () => {
+		onCopy();
+		onShareModalClose();
+		createToast({
+			id: 'copy-show-link-success',
+			status: 'success',
+			message: 'Link copied!'
+		});
+	};
 
-  return (
-    <>
-      {/* {showIsLoading && <ShowImageHeaderSkeleton h={48} />}
+	return (
+		<>
+			{/* {showIsLoading && <ShowImageHeaderSkeleton h={48} />}
       {showData?.images.length > 0 && (
         <ShowImageHeader imageUrl={showData.images[0].url} h={48} />
       )}
       <PageContainer pt={(showIsLoading || showData?.images.length > 0) && 36}> */}
-      <PageContainer>
-        <Grid>
-          {showIsLoading && (
-            <GridItem colSpan={[12,12,12,8]}>
-              <ShowHeaderCardSkeleton mb={4} />
-              <SetlistCardSkeleton mb={4} />
-              <ImageGalleryCardSkeleton mb={4} />
-              <ReviewsCardSkeleton />
-            </GridItem>
-          )}
-          {showData && (
-            <>
-              <GridItem colSpan={[12,12,12,8]}>
-                <ShowHeaderCard
-                  mb={4}
-                  show={showData}
-                  onWriteReviewButtonClick={onWriteReviewModalOpen}
-                  onShareButtonClick={onShareModalOpen}
-                  onListenButtonClick={onListenModalOpen}
-                />
-                <SetlistCard mb={4} sets={showData.sets} />
-                <ImageGalleryCard
-                  mb={4}
-                  images={showData.images}
-                  onShowImageModal={onImageModalOpen}
-                  setImageModalIndex={setImageModalIndex}
-                />
-                {reviewsIsLoading && <ReviewsCardSkeleton mb={4} />}
-                {reviewsData &&
-                  <ReviewsCard
-                    reviews={reviewsData}
-                    onShowWriteReviewModal={onWriteReviewModalOpen}
-                    onShowEditReviewModal={onEditReviewModalOpen}
-                    onShowDeleteReviewModal={onDeleteReviewModalOpen}
-                    setReviewToBeEdited={setReviewToBeEdited}
-                    setReviewToBeDeleted={setReviewToBeDeleted}
-                    hasMore={hasMoreReviews}
-                    fetchMore={loadMoreReviews}
-                    isFetchingMore={isLoadingMoreReviews}
-                  />
-                }
-              </GridItem>
-              <GridItem d={{ base: 'none', lg: 'block' }} colSpan={[0,0,0,4]}>
-                <RelatedShowsCard
-                  month={showData?.month}
-                  day={showData?.day}
-                  year={showData?.year}
-                  mb={4}
-                />
-                {!isAuthenticated && <SignUpCard />}
-              </GridItem>
-            </>
-          )}
-          {(!showData && !showIsLoading) && (
-            <GridItem>
-              <EmptyState />
-            </GridItem>
-          )}
-        </Grid>
-      </PageContainer>
-      <WriteReviewModal
-        isOpen={isWriteReviewModalOpen}
-        showId={showData?._id}
-        onClose={onWriteReviewModalClose}
-      />
-      <ShareModal
-        isOpen={isShareModalOpen}
-        url={url}
-        onClose={onShareModalClose}
-        onCopyLink={handleCopyLink}
-      />
-      <ListenModal
-        isOpen={isListenModalOpen}
-        dateString={getDateString(showData?.month, showData?.day, showData?.year)}
-        onClose={onListenModalClose}
-      />
-      <ImageModal
-        isOpen={isImageModalOpen}
-        images={showData?.images}
-        currentIndex={imageModalIndex}
-        setCurrentIndex={setImageModalIndex}
-        onClose={onImageModalClose}
-      />
-      <EditReviewModal
-        isOpen={isEditReviewModalOpen}
-        reviewToBeEdited={reviewToBeEdited}
-        setReviewToBeEdited={setReviewToBeEdited}
-        onClose={onEditReviewModalClose}
-      />
-      <DeleteReviewModal
-        isOpen={isDeleteReviewModalOpen}
-        reviewToBeDeleted={reviewToBeDeleted}
-        setReviewToBeDeleted={setReviewToBeDeleted}
-        onClose={onDeleteReviewModalClose}
-      />
-    </>
-  );
+			<PageContainer>
+				<Grid>
+					{showIsLoading && (
+						<GridItem colSpan={[12, 12, 12, 8]}>
+							<ShowHeaderCardSkeleton mb={4} />
+							<SetlistCardSkeleton mb={4} />
+							<ImageGalleryCardSkeleton mb={4} />
+							<ReviewsCardSkeleton />
+						</GridItem>
+					)}
+					{showData && (
+						<>
+							<GridItem colSpan={[12, 12, 12, 8]}>
+								<ShowHeaderCard
+									mb={4}
+									show={showData}
+									onWriteReviewButtonClick={onWriteReviewModalOpen}
+									onShareButtonClick={onShareModalOpen}
+									onListenButtonClick={onListenModalOpen}
+								/>
+								<SetlistCard mb={4} sets={showData.sets} />
+								<ImageGalleryCard
+									mb={4}
+									images={showData.images}
+									onShowImageModal={onImageModalOpen}
+									setImageModalIndex={setImageModalIndex}
+								/>
+								{reviewsIsLoading && <ReviewsCardSkeleton mb={4} />}
+								{reviewsData && (
+									<ReviewsCard
+										reviews={reviewsData}
+										onShowWriteReviewModal={onWriteReviewModalOpen}
+										onShowEditReviewModal={onEditReviewModalOpen}
+										onShowDeleteReviewModal={onDeleteReviewModalOpen}
+										setReviewToBeEdited={setReviewToBeEdited}
+										setReviewToBeDeleted={setReviewToBeDeleted}
+										hasMore={hasMoreReviews}
+										fetchMore={loadMoreReviews}
+										isFetchingMore={isLoadingMoreReviews}
+									/>
+								)}
+							</GridItem>
+							<GridItem
+								d={{ base: 'none', lg: 'block' }}
+								colSpan={[0, 0, 0, 4]}
+							>
+								<RelatedShowsCard
+									month={showData?.month}
+									day={showData?.day}
+									year={showData?.year}
+									mb={4}
+								/>
+								{!isAuthenticated && <SignUpCard />}
+							</GridItem>
+						</>
+					)}
+					{!showData && !showIsLoading && (
+						<GridItem>
+							<EmptyState />
+						</GridItem>
+					)}
+				</Grid>
+			</PageContainer>
+			<WriteReviewModal
+				isOpen={isWriteReviewModalOpen}
+				showId={showData?._id}
+				onClose={onWriteReviewModalClose}
+			/>
+			<ShareModal
+				isOpen={isShareModalOpen}
+				url={url}
+				onClose={onShareModalClose}
+				onCopyLink={handleCopyLink}
+			/>
+			<ListenModal
+				isOpen={isListenModalOpen}
+				dateString={getDateString(
+					showData?.month,
+					showData?.day,
+					showData?.year
+				)}
+				onClose={onListenModalClose}
+			/>
+			<ImageModal
+				isOpen={isImageModalOpen}
+				images={showData?.images}
+				currentIndex={imageModalIndex}
+				setCurrentIndex={setImageModalIndex}
+				onClose={onImageModalClose}
+			/>
+			<EditReviewModal
+				isOpen={isEditReviewModalOpen}
+				reviewToBeEdited={reviewToBeEdited}
+				setReviewToBeEdited={setReviewToBeEdited}
+				onClose={onEditReviewModalClose}
+			/>
+			<DeleteReviewModal
+				isOpen={isDeleteReviewModalOpen}
+				reviewToBeDeleted={reviewToBeDeleted}
+				setReviewToBeDeleted={setReviewToBeDeleted}
+				onClose={onDeleteReviewModalClose}
+			/>
+		</>
+	);
 };
 
 export default ShowDetail;

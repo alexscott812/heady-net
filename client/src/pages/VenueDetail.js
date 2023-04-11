@@ -10,36 +10,35 @@ import VenueDetailCard from '../components/VenueDetailCard.js';
 import VenueDetailCardSkeleton from '../components/VenueDetailCardSkeleton.js';
 
 const VenueDetail = () => {
-  const { id } = useParams();
+	const { id } = useParams();
 
-  const {
-    data: venueData,
-    isLoading: venueIsLoading
-  } = useVenue(id);
+	const { data: venueData, isLoading: venueIsLoading } = useVenue(id);
 
-  useDocumentTitle(`${venueData ? venueData.name : 'Venue Detail'} | shakedown`);
+	useDocumentTitle(
+		`${venueData ? venueData.name : 'Venue Detail'} | shakedown`
+	);
 
-  return (
-    <PageContainer>
-      <Grid>
-        {venueIsLoading && (
-          <GridItem colSpan={[12,12,12,8]}>
-            <VenueDetailCardSkeleton />
-          </GridItem>
-        )}
-        {venueData && (
-          <GridItem colSpan={[12,12,12,8]}>
-            <VenueDetailCard venue={venueData} />
-          </GridItem>
-        )}
-        {(!venueData && !venueIsLoading) && (
-          <GridItem>
-            <EmptyState />
-          </GridItem>
-        )}
-      </Grid>
-    </PageContainer>
-  );
+	return (
+		<PageContainer>
+			<Grid>
+				{venueIsLoading && (
+					<GridItem colSpan={[12, 12, 12, 8]}>
+						<VenueDetailCardSkeleton />
+					</GridItem>
+				)}
+				{venueData && (
+					<GridItem colSpan={[12, 12, 12, 8]}>
+						<VenueDetailCard venue={venueData} />
+					</GridItem>
+				)}
+				{!venueData && !venueIsLoading && (
+					<GridItem>
+						<EmptyState />
+					</GridItem>
+				)}
+			</Grid>
+		</PageContainer>
+	);
 };
 
 export default VenueDetail;

@@ -6,33 +6,32 @@ import { Button, Text, chakra, useColorModeValue } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
 const HeroCard2 = ({ ...props }) => {
-  return (
-    <Card {...props}>
-      <CardBody>
-        <CardTitle>
-          Welcome!
-        </CardTitle>
-        <Text>
-          <chakra.span
-            fontWeight="semibold"
-            color={useColorModeValue('brand.500', 'brand.200')}
-          >
-            HeadyNet
-          </chakra.span>
-          &nbsp;is a place where you can discover and review your favorite Grateful Dead shows.
-        </Text>
-        <Button
-          mt={2}
-          variant="solid"
-          isFullWidth
-          as={Link}
-          to="/auth/register?redirect=%2F"
-        >
-          Sign Up
-        </Button>
-      </CardBody>
-    </Card>
-  );
+	return (
+		<Card {...props}>
+			<CardBody>
+				<CardTitle>Welcome!</CardTitle>
+				<Text>
+					<chakra.span
+						fontWeight="semibold"
+						color={useColorModeValue('brand.500', 'brand.200')}
+					>
+						HeadyNet
+					</chakra.span>
+					&nbsp;is a place where you can discover and review your favorite
+					Grateful Dead shows.
+				</Text>
+				<Button
+					mt={2}
+					variant="solid"
+					isFullWidth
+					as={Link}
+					to="/auth/register?redirect=%2F"
+				>
+					Sign Up
+				</Button>
+			</CardBody>
+		</Card>
+	);
 };
 
 export default HeroCard2;

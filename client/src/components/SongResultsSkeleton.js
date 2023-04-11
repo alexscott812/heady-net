@@ -3,13 +3,13 @@ import ListCard from './ListCard.js';
 import ListItemSkeleton from './ListItemSkeleton.js';
 
 const SongResultsSkeleton = ({ ...props }) => {
-  return (
-    <ListCard {...props}>
-      {[...Array(12)].map((_, i) => (
-        <ListItemSkeleton key={i} />
-      ))}
-    </ListCard>
-  );
+	return (
+		<ListCard {...props}>
+			{[...Array(12)].map((_, i) => (
+				<ListItemSkeleton key={i} />
+			))}
+		</ListCard>
+	);
 };
 
 export default SongResultsSkeleton;

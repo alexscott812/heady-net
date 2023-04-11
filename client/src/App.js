@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate
+} from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider as ThemeProvider } from '@chakra-ui/react';
@@ -28,9 +33,9 @@ import Settings from './pages/Settings.js';
 import Search from './pages/Search.js';
 import { AuthProvider, AuthClient } from './lib/auth';
 import {
-  addToken,
-  refreshToken,
-  deleteToken
+	addToken,
+	refreshToken,
+	deleteToken
 } from './services/auth-service.js';
 import ProfileSettings from './pages/ProfileSettings.js';
 import AccountSettings from './pages/AccountSettings.js';
@@ -38,64 +43,72 @@ import AppearanceSettings from './pages/AppearanceSettings.js';
 import LandingPage from './pages/LandingPage.js';
 
 const App = () => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        refetchOnWindowFocus: false,
-        staleTime: 10000 // 10 sec
-      }
-    }
-  });
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				retry: false,
+				refetchOnWindowFocus: false,
+				staleTime: 10000 // 10 sec
+			}
+		}
+	});
 
-  const authClient = new AuthClient({
-    tokenLocalStorageKey: 'token',
-    loginFn: addToken,
-    refreshTokenFn: refreshToken,
-    logoutFn: deleteToken
-  });
+	const authClient = new AuthClient({
+		tokenLocalStorageKey: 'token',
+		loginFn: addToken,
+		refreshTokenFn: refreshToken,
+		logoutFn: deleteToken
+	});
 
-  return (
-    <Router>
-      <ThemeProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>
-          <AuthProvider client={authClient}>
-            <Navigation />
-            <Main>
-              <ScrollToTop />
-              <Routes>
-                <Route exact path="/" element={<LandingPage />} />
-                <Route exact path="/home" element={<Home />} />
-                <Route exact path="/shows" element={<Shows />} />
-                <Route path="/shows/:id" element={<ShowDetail />} />
-                <Route exact path="/venues" element={<Venues />} />
-                <Route path="/venues/:id" element={<VenueDetail />} />
-                <Route exact path="/songs" element={<Songs />} />
-                <Route path="/songs/:id" element={<SongDetail />} />
-                <Route exact path="/about" element={<About />} />
-                <Route exact path="/contact" element={<Contact />} />
-                <Route exact path="/search" element={<Search />} />
-                <Route path="/settings" element={<Settings />}>
-                  <Route index element={<Navigate to="profile" replace />} />
-                  <Route path="profile" element={<ProfileSettings />} />
-                  <Route path="account" element={<AccountSettings />} />
-                  <Route path="appearance" element={<AppearanceSettings />} />
-                </Route>
-                <Route path="/users/:id" element={<UserDetail />} />
-                <Route exact path="/auth/login" element={<Login />} />
-                <Route exact path="/auth/register" element={<Register />} />
-                <Route exact path="/auth/forgot-password" element={<ForgotPassword />} />
-                <Route exact path="/auth/reset-password" element={<ResetPassword />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Main>
-            <Footer />
-          </AuthProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </ThemeProvider>
-    </Router>
-  );
+	return (
+		<Router>
+			<ThemeProvider theme={theme}>
+				<QueryClientProvider client={queryClient}>
+					<AuthProvider client={authClient}>
+						<Navigation />
+						<Main>
+							<ScrollToTop />
+							<Routes>
+								<Route exact path="/" element={<LandingPage />} />
+								<Route exact path="/home" element={<Home />} />
+								<Route exact path="/shows" element={<Shows />} />
+								<Route path="/shows/:id" element={<ShowDetail />} />
+								<Route exact path="/venues" element={<Venues />} />
+								<Route path="/venues/:id" element={<VenueDetail />} />
+								<Route exact path="/songs" element={<Songs />} />
+								<Route path="/songs/:id" element={<SongDetail />} />
+								<Route exact path="/about" element={<About />} />
+								<Route exact path="/contact" element={<Contact />} />
+								<Route exact path="/search" element={<Search />} />
+								<Route path="/settings" element={<Settings />}>
+									<Route index element={<Navigate to="profile" replace />} />
+									<Route path="profile" element={<ProfileSettings />} />
+									<Route path="account" element={<AccountSettings />} />
+									<Route path="appearance" element={<AppearanceSettings />} />
+								</Route>
+								<Route path="/users/:id" element={<UserDetail />} />
+								<Route exact path="/auth/login" element={<Login />} />
+								<Route exact path="/auth/register" element={<Register />} />
+								<Route
+									exact
+									path="/auth/forgot-password"
+									element={<ForgotPassword />}
+								/>
+								<Route
+									exact
+									path="/auth/reset-password"
+									element={<ResetPassword />}
+								/>
+								<Route path="*" element={<NotFound />} />
+							</Routes>
+						</Main>
+						<Footer />
+					</AuthProvider>
+					<ReactQueryDevtools initialIsOpen={false} />
+				</QueryClientProvider>
+			</ThemeProvider>
+		</Router>
+	);
 };
 
 export default App;

@@ -2,12 +2,12 @@ const express = require('express');
 const authenticate = require('../middleware/authenticate');
 const authorize = require('../middleware/authorize');
 const {
-  getSongs,
-  getSongById,
-  addSong,
-  updateSongById,
-  deleteSongs,
-  deleteSongById
+	getSongs,
+	getSongById,
+	addSong,
+	updateSongById,
+	deleteSongs,
+	deleteSongById
 } = require('../controllers/songs');
 
 const router = express.Router();

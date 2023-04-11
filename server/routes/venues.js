@@ -2,12 +2,12 @@ const express = require('express');
 const authenticate = require('../middleware/authenticate');
 const authorize = require('../middleware/authorize');
 const {
-  getVenues,
-  getVenueById,
-  addVenue,
-  updateVenueById,
-  deleteVenues,
-  deleteVenueById
+	getVenues,
+	getVenueById,
+	addVenue,
+	updateVenueById,
+	deleteVenues,
+	deleteVenueById
 } = require('../controllers/venues');
 
 const router = express.Router();

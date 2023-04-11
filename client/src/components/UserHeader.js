@@ -8,57 +8,53 @@ import { FaPen, FaCog, FaCalendar, FaComment } from 'react-icons/fa';
 import { useAuth } from '../lib/auth';
 import getRelativeTime from '../utils/get-relative-time.js';
 
-const UserHeader = ({
-  user = null,
-  onShowEditUserButtonClick = null
-}) => {
-  const { user: currentUser } = useAuth();
+const UserHeader = ({ user = null, onShowEditUserButtonClick = null }) => {
+	const { user: currentUser } = useAuth();
 
-  const isCurrentUser = user._id === currentUser?._id;
+	const isCurrentUser = user._id === currentUser?._id;
 
-  return (
-    <Card>
-      <CardBody>
-        <Avatar size="lg" name={user.first_name} mb={3} />
-        <CardTitle mb={2}>
-          {isCurrentUser
-            ? `${user.first_name} ${user.last_name} (you)`
-            : `${user.first_name} ${user.last_name.charAt(0)}.`
-          }
-        </CardTitle>
-        {user.bio && <Text mb={2}>{user.bio}</Text>}
-        <Text variant="secondary">
-          <Icon as={FaCalendar} mr={2} />
-          {`Joined ${getRelativeTime(user.created_at)}`}
-        </Text>
-        <Text variant="secondary">
-          <Icon as={FaComment} mr={2} />
-          {`${user.review_count} show reviews`}
-        </Text>
-        {isCurrentUser && (
-          <Stack direction="column" mt={3}>
-            <Button
-              variant="solid"
-              colorScheme="gray"
-              onClick={onShowEditUserButtonClick}
-              leftIcon={<FaPen />}
-            >
-              Edit Profile
-            </Button>
-            <Button
-              as={RouterLink}
-              to="/settings"
-              colorScheme="gray"
-              leftIcon={<FaCog />}
-              mt={3}
-            >
-              Settings
-            </Button>
-          </Stack>
-        )}
-      </CardBody>
-    </Card>
-  );
+	return (
+		<Card>
+			<CardBody>
+				<Avatar size="lg" name={user.first_name} mb={3} />
+				<CardTitle mb={2}>
+					{isCurrentUser
+						? `${user.first_name} ${user.last_name} (you)`
+						: `${user.first_name} ${user.last_name.charAt(0)}.`}
+				</CardTitle>
+				{user.bio && <Text mb={2}>{user.bio}</Text>}
+				<Text variant="secondary">
+					<Icon as={FaCalendar} mr={2} />
+					{`Joined ${getRelativeTime(user.created_at)}`}
+				</Text>
+				<Text variant="secondary">
+					<Icon as={FaComment} mr={2} />
+					{`${user.review_count} show reviews`}
+				</Text>
+				{isCurrentUser && (
+					<Stack direction="column" mt={3}>
+						<Button
+							variant="solid"
+							colorScheme="gray"
+							onClick={onShowEditUserButtonClick}
+							leftIcon={<FaPen />}
+						>
+							Edit Profile
+						</Button>
+						<Button
+							as={RouterLink}
+							to="/settings"
+							colorScheme="gray"
+							leftIcon={<FaCog />}
+							mt={3}
+						>
+							Settings
+						</Button>
+					</Stack>
+				)}
+			</CardBody>
+		</Card>
+	);
 };
 
 export default UserHeader;

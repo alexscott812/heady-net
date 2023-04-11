@@ -2,14 +2,14 @@ const express = require('express');
 const authenticate = require('../middleware/authenticate');
 const authorize = require('../middleware/authorize');
 const {
-  getShows,
-  getShowById,
-  getRandomShow,
-  getPopularShows,
-  addShow,
-  updateShowById,
-  deleteShows,
-  deleteShowById
+	getShows,
+	getShowById,
+	getRandomShow,
+	getPopularShows,
+	addShow,
+	updateShowById,
+	deleteShows,
+	deleteShowById
 } = require('../controllers/shows');
 
 const router = express.Router();
@@ -33,7 +33,7 @@ router.get('/random', getRandomShow);
  * @desc    Get popular shows
  * @access  Public
  */
- router.get('/popular', getPopularShows);
+router.get('/popular', getPopularShows);
 
 /**
  * @route   GET api/shows/:id
