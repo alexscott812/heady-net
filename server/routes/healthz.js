@@ -1,5 +1,5 @@
-const express = require('express');
-const { getHealth } = require('../controllers/healthz');
+const express = require("express");
+const { getHealth } = require("../controllers/healthz");
 
 const router = express.Router();
 
@@ -8,6 +8,6 @@ const router = express.Router();
  * @desc    Get server health
  * @access  Public
  */
-router.get('/', getHealth);
+router.get("/", getHealth);
 
 module.exports = router;

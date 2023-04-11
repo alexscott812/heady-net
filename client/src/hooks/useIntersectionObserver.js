@@ -41,34 +41,34 @@
 //
 // export default useIntersectionObserver;
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 const useIntersectionObserver = ({ onIntersect, enabled = true }) => {
-	const target = useRef(null);
+  const target = useRef(null);
 
-	useEffect(() => {
-		console.log(target.current);
-		if (!enabled) return;
+  useEffect(() => {
+    console.log(target.current);
+    if (!enabled) return;
 
-		const observer = new IntersectionObserver(([newEntry]) => {
-			console.log('running!');
-			console.log(newEntry.isIntersecting);
-			if (newEntry.isIntersecting) {
-				console.log('intersecting!');
-				onIntersect();
-			}
-		});
+    const observer = new IntersectionObserver(([newEntry]) => {
+      console.log("running!");
+      console.log(newEntry.isIntersecting);
+      if (newEntry.isIntersecting) {
+        console.log("intersecting!");
+        onIntersect();
+      }
+    });
 
-		const element = target && target.current;
+    const element = target && target.current;
 
-		if (!element) return;
+    if (!element) return;
 
-		observer.observe(element);
+    observer.observe(element);
 
-		return () => observer.unobserve(element);
-	}, [target.current, enabled]);
+    return () => observer.unobserve(element);
+  }, [target.current, enabled]);
 
-	return target;
+  return target;
 };
 
 export default useIntersectionObserver;

@@ -28,15 +28,15 @@
 //   return [query, updateQuery];
 // };
 
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from "react-router-dom";
 
 const useQueryParams = (acceptedSearchParams = []) => {
-	const [search, setSearch] = useSearchParams();
-	const searchAsObject = Object.fromEntries(search);
-	// const searchAsObject = Object.fromEntries(
-	//   new URLSearchParams(search)
-	// );
-	return [searchAsObject, setSearch];
+  const [search, setSearch] = useSearchParams();
+  const searchAsObject = Object.fromEntries(search);
+  // const searchAsObject = Object.fromEntries(
+  //   new URLSearchParams(search)
+  // );
+  return [searchAsObject, setSearch];
 };
 
 export default useQueryParams;

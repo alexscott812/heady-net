@@ -1,9 +1,9 @@
-import { useMutation } from 'react-query';
-import { useAuth } from '../../lib/auth';
+import { useMutation } from "react-query";
+import { useAuth } from "../../lib/auth";
 
 const useForgotPassword = () => {
-	const { forgotPassword } = useAuth();
-	return useMutation((data) => forgotPassword(data));
+  const { forgotPassword } = useAuth();
+  return useMutation((data) => forgotPassword(data));
 };
 
 export default useForgotPassword;

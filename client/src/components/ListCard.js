@@ -1,18 +1,18 @@
-import React from 'react';
-import { Divider, List, VStack } from '@chakra-ui/react';
-import Card from './Card.js';
-import CardBody from './CardBody.js';
+import React from "react";
+import { Divider, List, VStack } from "@chakra-ui/react";
+import Card from "./Card.js";
+import CardBody from "./CardBody.js";
 
 const ListCard = ({ children, ...restProps }) => {
-	return (
-		<Card {...restProps}>
-			<CardBody py={1}>
-				<VStack as={List} align="stretch" spacing={0} divider={<Divider />}>
-					{children}
-				</VStack>
-			</CardBody>
-		</Card>
-	);
+  return (
+    <Card {...restProps}>
+      <CardBody py={1}>
+        <VStack as={List} align="stretch" spacing={0} divider={<Divider />}>
+          {children}
+        </VStack>
+      </CardBody>
+    </Card>
+  );
 };
 
 export default ListCard;
