@@ -1,11 +1,11 @@
-import React from "react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardTitle from "./CardTitle.js";
-import CardIcon from "./CardIcon.js";
-import { Button, Text, Box, Stack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import { FaRegCompass } from "react-icons/fa";
+import React from 'react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import CardTitle from './CardTitle.js';
+import CardIcon from './CardIcon.js';
+import { Button, Text, Box, Stack } from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import { FaRegCompass, FaArrowRight } from 'react-icons/fa';
 
 const DiscoverCard = ({ props }) => {
   return (
@@ -21,12 +21,14 @@ const DiscoverCard = ({ props }) => {
             </Text>
             <Button
               mt={2}
-              isFullWidth
-              variant="solid"
-              colorScheme="gray"
+              // isFullWidth
+              // variant="solid"
+              // colorScheme="gray"
+              py={1}
+              variant="link"
+              rightIcon={<FaArrowRight />}
               as={Link}
               to="/shows"
-              // leftIcon={<FaLocationArrow />}
             >
               Start Exploring
             </Button>
