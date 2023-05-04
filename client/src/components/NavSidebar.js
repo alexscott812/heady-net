@@ -119,14 +119,7 @@
 // export default NavSidebar;
 
 import React from 'react';
-import {
-  Box,
-  VStack,
-  Link,
-  useColorModeValue,
-  Icon,
-  Divider
-} from '@chakra-ui/react';
+import { Box, VStack, Link, Icon, Divider } from '@chakra-ui/react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   FaHome,

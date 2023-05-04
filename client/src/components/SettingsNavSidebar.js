@@ -1,5 +1,5 @@
 import React from 'react';
-import { VStack, Link, useColorModeValue, Icon } from '@chakra-ui/react';
+import { VStack, Link, Icon } from '@chakra-ui/react';
 import { NavLink, useMatch } from 'react-router-dom';
 import { FaPalette, FaUserCircle, FaCog } from 'react-icons/fa';
 

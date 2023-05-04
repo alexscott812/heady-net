@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
   RouterProvider,
   createBrowserRouter,
-  Outlet,
   Navigate
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -11,10 +9,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ChakraProvider as ThemeProvider } from '@chakra-ui/react';
 import theme from './theme/theme.js';
 import './theme/fonts.css';
-import Navigation from './components/Navigation.js';
-import Main from './components/Main.js';
-import Footer from './components/Footer.js';
-import ScrollToTop from './components/ScrollToTop.js';
+import Layout from './components/Layout.js';
 import Home from './pages/Home.js';
 import Shows from './pages/Shows.js';
 import ShowDetail from './pages/ShowDetail.js';
@@ -31,7 +26,6 @@ import ResetPassword from './pages/ResetPassword.js';
 import UserDetail from './pages/UserDetail.js';
 import NotFound from './pages/NotFound.js';
 import Settings from './pages/Settings.js';
-import Search from './pages/Search.js';
 import { AuthProvider, AuthClient } from './lib/auth';
 import {
   addToken,
@@ -64,16 +58,7 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: (
-        <>
-          <Navigation />
-          <Main>
-            <ScrollToTop />
-            <Outlet />
-          </Main>
-          <Footer />
-        </>
-      ),
+      element: <Layout />,
       children: [
         {
           path: '/',
