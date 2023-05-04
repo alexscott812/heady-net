@@ -1,28 +1,28 @@
-import React, { useState, useEffect, useReducer } from "react";
-import useStateWithLocalStorage from "../../hooks/useStateWithLocalStorage.js";
-import isTokenValid from "../../utils/is-token-valid.js";
-import getUserFromToken from "../../utils/get-user-from-token.js";
-import { initialState, reducer } from "./state/authReducer.js";
+import React, { useState, useEffect, useReducer } from 'react';
+import useStateWithLocalStorage from '../../hooks/useStateWithLocalStorage.js';
+import isTokenValid from '../../utils/is-token-valid.js';
+import getUserFromToken from '../../utils/get-user-from-token.js';
+import { initialState, reducer } from './state/authReducer.js';
 
-import { initUser, updateUser, removeUser } from "./state/authActions.js";
-import AuthContext from "./AuthContext.js";
-import { useNavigate } from "react-router-dom";
+import { initUser, updateUser, removeUser } from './state/authActions.js';
+import AuthContext from './AuthContext.js';
+// import { useNavigate } from "react-router-dom";
 
 const AuthProvider = ({ client, children }) => {
   if (!client) {
-    throw Error("AuthProvider must be used with an AuthClient.");
+    throw Error('AuthProvider must be used with an AuthClient.');
   }
 
   const { tokenLocalStorageKey, loginFn, refreshTokenFn, logoutFn } = client;
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const [{
   //   // user,
   //   isInitializing,
   //   isAuthenticated
   // }, dispatch] = useReducer(reducer, initialState);
   const [isInitializing, setIsInitializing] = useState(true);
-  const [token, setToken] = useStateWithLocalStorage(tokenLocalStorageKey, "");
+  const [token, setToken] = useStateWithLocalStorage(tokenLocalStorageKey, '');
   // const [user, setUser] = useState(() => getUserFromToken(token));
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const AuthProvider = ({ client, children }) => {
    */
   const getToken = async () => {
     if (!token) {
-      throw Error("No token!");
+      throw Error('No token!');
     }
     if (isTokenValid(token)) {
       return token;
@@ -59,7 +59,7 @@ const AuthProvider = ({ client, children }) => {
       setToken(access_token);
       return access_token;
     } catch (err) {
-      setToken("");
+      setToken('');
       throw Error(err);
     }
   };
@@ -70,9 +70,9 @@ const AuthProvider = ({ client, children }) => {
   const login = async ({ credentials, opts }) => {
     const { access_token } = await loginFn(credentials);
     setToken(access_token);
-    if (opts?.redirectTo) {
-      navigate(opts?.redirectTo);
-    }
+    // if (opts?.redirectTo) {
+    //   navigateFn(opts?.redirectTo);
+    // }
     return;
   };
 
@@ -81,10 +81,10 @@ const AuthProvider = ({ client, children }) => {
    */
   const logout = async (opts) => {
     await logoutFn();
-    setToken("");
-    if (opts?.returnTo) {
-      navigate(opts?.returnTo);
-    }
+    setToken('');
+    // if (opts?.returnTo) {
+    //   navigateFn(opts?.returnTo);
+    // }
     return;
   };
 
@@ -153,7 +153,7 @@ const AuthProvider = ({ client, children }) => {
             isAuthenticated,
             getToken,
             login,
-            logout,
+            logout
             // register,
             // updateAccount,
             // deleteAccount,

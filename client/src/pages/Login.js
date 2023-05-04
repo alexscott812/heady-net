@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Alert,
   AlertIcon,
@@ -8,28 +8,29 @@ import {
   Link,
   Divider,
   Text,
-  GridItem,
-} from "@chakra-ui/react";
-import Grid from "../components/Grid";
-import Card from "../components/Card.js";
-import CardTitle from "../components/CardTitle.js";
-import CardBody from "../components/CardBody.js";
-import PageContainer from "../components/PageContainer.js";
-import { Link as RouterLink, Navigate } from "react-router-dom";
-import useQueryParams from "../hooks/useQueryParams.js";
-import { useAuth } from "../lib/auth";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
+  GridItem
+} from '@chakra-ui/react';
+import Grid from '../components/Grid';
+import Card from '../components/Card.js';
+import CardTitle from '../components/CardTitle.js';
+import CardBody from '../components/CardBody.js';
+import PageContainer from '../components/PageContainer.js';
+import { Link as RouterLink, Navigate, useNavigate } from 'react-router-dom';
+import useQueryParams from '../hooks/useQueryParams.js';
+import { useAuth } from '../lib/auth';
+import useDocumentTitle from '../hooks/useDocumentTitle.js';
 // import useCustomBodyStyles from '../hooks/useCustomBodyStyles.js';
-import useLogin from "../hooks/mutations/useLogin.js";
+import useLogin from '../hooks/mutations/useLogin.js';
 
 const Login = () => {
-  useDocumentTitle("Login | shakedown");
+  useDocumentTitle('Login | shakedown');
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
-  const [query] = useQueryParams(["redirect"]);
+  const [query] = useQueryParams(['redirect']);
   const [credentials, setCredentials] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: ''
   });
 
   const login = useLogin();
@@ -42,19 +43,24 @@ const Login = () => {
     const { name, value } = e.target;
     setCredentials({
       ...credentials,
-      [name]: value,
+      [name]: value
     });
   };
 
   const handleLoginSubmit = async () => {
     //e.preventDefault();
     if (!validateForm) return;
-    login.mutate({
-      credentials,
-      opts: {
-        redirectTo: query.redirect || "/",
+    login.mutate(
+      {
+        credentials
+        // opts: {
+        //   redirectTo: query.redirect || "/",
+        // },
       },
-    });
+      {
+        onSuccess: () => navigate(query.redirect || '/')
+      }
+    );
   };
 
   return (
@@ -123,7 +129,7 @@ const Login = () => {
                             ? `/auth/register?redirect=${encodeURIComponent(
                                 query.redirect
                               )}`
-                            : "/auth/register"
+                            : '/auth/register'
                         }
                         variant="brand"
                       >
