@@ -41,6 +41,26 @@ const theme = extendTheme({
         colorScheme: 'brand'
       }
     },
+    CardIconBox: {
+      baseStyle: (props) => ({
+        boxSize: 10,
+        borderRadius: 'full',
+        p: 3,
+        bg: mode(
+          'brand.50',
+          transparentize('brand.200', 0.16)(props.theme)
+        )(props),
+        d: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      })
+    },
+    CardIcon: {
+      baseStyle: (props) => ({
+        boxSize: 5,
+        color: mode('brand.500', 'brand.100')(props)
+      })
+    },
     Card: {
       baseStyle: (props) => ({
         bg: mode('white', 'gray.800')(props),
