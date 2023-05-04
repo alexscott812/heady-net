@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   Button,
@@ -6,33 +6,33 @@ import {
   Heading,
   Flex,
   Spacer,
-  useDisclosure,
-} from "@chakra-ui/react";
-import { FaSlidersH } from "react-icons/fa";
-import EmptyState from "../components/EmptyState.js";
-import ShowResults from "../components/ShowResults.js";
-import FilterModal from "../components/FilterModal.js";
-import PageContainer from "../components/PageContainer.js";
-import PageHead from "../components/PageHead.js";
-import ResultsCount from "../components/ResultsCount.js";
-import SortSelect from "../components/SortSelect.js";
-import ShowResultsSkeleton from "../components/ShowResultsSkeleton.js";
-import useQueryParams from "../hooks/useQueryParams.js";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
-import { SHOW_SORT_OPTIONS } from "../constants.js";
-import useShows from "../hooks/queries/useShows.js";
-import useSongs from "../hooks/queries/useSongs.js";
-import useVenues from "../hooks/queries/useVenues.js";
-import countKeys from "../utils/count-keys.js";
+  useDisclosure
+} from '@chakra-ui/react';
+import { FaSlidersH } from 'react-icons/fa';
+import EmptyState from '../components/EmptyState.js';
+import ShowResults from '../components/ShowResults.js';
+import FilterModal from '../components/FilterModal.js';
+import PageContainer from '../components/PageContainer.js';
+import PageHead from '../components/PageHead.js';
+import ResultsCount from '../components/ResultsCount.js';
+import SortSelect from '../components/SortSelect.js';
+import ShowResultsSkeleton from '../components/ShowResultsSkeleton.js';
+import useQueryParams from '../hooks/useQueryParams.js';
+import useDocumentTitle from '../hooks/useDocumentTitle.js';
+import { SHOW_SORT_OPTIONS } from '../constants.js';
+import useShows from '../hooks/queries/useShows.js';
+import useSongs from '../hooks/queries/useSongs.js';
+import useVenues from '../hooks/queries/useVenues.js';
+import countKeys from '../utils/count-keys.js';
 
 const Shows = () => {
-  useDocumentTitle("Shows | shakedown");
+  useDocumentTitle('Shows | shakedown');
   const [query, setQuery] = useQueryParams();
 
   const {
     isOpen: isFilterModalOpen,
     onOpen: onFilterModalOpen,
-    onClose: onFilterModalClose,
+    onClose: onFilterModalClose
   } = useDisclosure();
 
   const {
@@ -42,7 +42,7 @@ const Shows = () => {
     hasMore: hasMoreShows,
     loadMore: loadMoreShows,
     isLoadingMore: isLoadingMoreShows,
-    hasNoData: hasNoShowsData,
+    hasNoData: hasNoShowsData
   } = useShows(query);
 
   const { data: songsData } = useSongs(
@@ -64,19 +64,19 @@ const Shows = () => {
   };
 
   const filterCount = countKeys(query, [
-    "month",
-    "day",
-    "year",
-    "venue",
-    "city",
-    "state",
-    "country",
-    "song",
+    'month',
+    'day',
+    'year',
+    'venue',
+    'city',
+    'state',
+    'country',
+    'song'
   ]);
 
   return (
     <>
-      <PageHead>
+      {/* <PageHead>
         <Flex h={14} alignItems="center" justifyContent="space-between">
           <Box>
             <Heading as="h4" fontWeight="semibold" size="md">
@@ -98,8 +98,9 @@ const Shows = () => {
             Filters
           </Button>
         </Flex>
-      </PageHead>
-      <PageContainer pt={18}>
+      </PageHead> */}
+      {/* <PageContainer pt={18}> */}
+      <PageContainer>
         <Flex alignItems="center" justifyContent="space-between" mb={4}>
           <Box>
             <ResultsCount count={showsMeta?.total_results} />

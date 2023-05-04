@@ -200,7 +200,22 @@ const theme = extendTheme({
         h: baseTheme.space[14],
         bg: mode('white', 'gray.800')(props),
         //boxShadow: 'base'
-        borderBottomWidth: '1px'
+        borderBottomWidth: '1px',
+        px: 4 // NEW!!
+      })
+    },
+    Sidebar: {
+      baseStyle: (props) => ({
+        bg: mode('white', 'gray.800')(props),
+        d: { base: 'none', md: 'flex' },
+        position: 'fixed',
+        w: 72,
+        h: '100vh',
+        mt: baseTheme.space[14],
+        p: 4,
+        overflowY: 'auto',
+        flexDirection: 'column',
+        borderRightWidth: 1
       })
     },
     PageHead: {

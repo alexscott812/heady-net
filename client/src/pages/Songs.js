@@ -1,22 +1,22 @@
-import React from "react";
-import { Box, Button, Heading, Flex, Spacer } from "@chakra-ui/react";
-import EmptyState from "../components/EmptyState.js";
-import SearchBar from "../components/SearchBar.js";
-import SongResults from "../components/SongResults.js";
-import SongResultsSkeleton from "../components/SongResultsSkeleton.js";
-import SortSelect from "../components/SortSelect.js";
-import ResultsCount from "../components/ResultsCount.js";
-import PageContainer from "../components/PageContainer.js";
-import PageHead from "../components/PageHead.js";
-import { SONG_SORT_OPTIONS } from "../constants.js";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
-import useQueryParams from "../hooks/useQueryParams.js";
-import useSongs from "../hooks/queries/useSongs.js";
-import useDebounce from "../hooks/useDebounce.js";
+import React from 'react';
+import { Box, Button, Heading, Flex, Spacer } from '@chakra-ui/react';
+import EmptyState from '../components/EmptyState.js';
+import SearchBar from '../components/SearchBar.js';
+import SongResults from '../components/SongResults.js';
+import SongResultsSkeleton from '../components/SongResultsSkeleton.js';
+import SortSelect from '../components/SortSelect.js';
+import ResultsCount from '../components/ResultsCount.js';
+import PageContainer from '../components/PageContainer.js';
+import PageHead from '../components/PageHead.js';
+import { SONG_SORT_OPTIONS } from '../constants.js';
+import useDocumentTitle from '../hooks/useDocumentTitle.js';
+import useQueryParams from '../hooks/useQueryParams.js';
+import useSongs from '../hooks/queries/useSongs.js';
+import useDebounce from '../hooks/useDebounce.js';
 
 const Songs = () => {
-  useDocumentTitle("Songs | shakedown");
-  const [query, setQuery] = useQueryParams(["search", "sort"]);
+  useDocumentTitle('Songs | shakedown');
+  const [query, setQuery] = useQueryParams(['search', 'sort']);
   const debouncedSearch = useDebounce(query.q, 300);
 
   const {
@@ -26,10 +26,10 @@ const Songs = () => {
     hasMore: hasMoreSongs,
     loadMore: loadMoreSongs,
     isLoadingMore: isLoadingMoreSongs,
-    hasNoData: hasNoSongsData,
+    hasNoData: hasNoSongsData
   } = useSongs({
     ...query,
-    q: debouncedSearch || undefined,
+    q: debouncedSearch || undefined
   });
 
   const handleSearchChange = (e) => {
@@ -51,7 +51,7 @@ const Songs = () => {
 
   return (
     <>
-      <PageHead>
+      {/* <PageHead>
         <Flex h={14} alignItems="center" justifyContent="space-between">
           <Box>
             <Heading as="h4" fontWeight="semibold" size="md">
@@ -67,7 +67,8 @@ const Songs = () => {
           </Box>
         </Flex>
       </PageHead>
-      <PageContainer pt={18}>
+      <PageContainer pt={18}> */}
+      <PageContainer>
         <Flex alignItems="center" justifyContent="space-between" mb={4}>
           <Box>
             <ResultsCount count={songsMeta?.total_results} />

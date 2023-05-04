@@ -1,34 +1,34 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import React from 'react';
+import { Navigate } from 'react-router-dom';
 import {
   Button,
   Flex,
   GridItem,
   Box,
-  useBreakpointValue,
-} from "@chakra-ui/react";
-import Grid from "../components/Grid";
-import RecentActivity from "../components/RecentActivity.js";
-import RecentActivitySkeleton from "../components/RecentActivitySkeleton.js";
-import EmptyState from "../components/EmptyState.js";
-import NavSidebar from "../components/NavSidebar.js";
-import PageContainer from "../components/PageContainer.js";
-import Spinner from "../components/Spinner.js";
-import TodaysShowsCard from "../components/TodaysShowsCard.js";
-import TodaysShowsCardSkeleton from "../components/TodaysShowsCardSkeleton.js";
-import { useAuth } from "../lib/auth";
-import useDate from "../hooks/useDate.js";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
-import useReviews from "../hooks/queries/useReviews.js";
-import useShowsCount from "../hooks/queries/useShowsCount.js";
-import DiscoverCard from "../components/DiscoverCard.js";
-import PopularShowsCard from "../components/PopularShowsCard.js";
-import PopularShowsCardSkeleton from "../components/PopularShowsCardSkeleton.js";
-import usePopularShows from "../hooks/queries/usePopularShows.js";
-import FinishedState from "../components/FinishedState";
+  useBreakpointValue
+} from '@chakra-ui/react';
+import Grid from '../components/Grid';
+import RecentActivity from '../components/RecentActivity.js';
+import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js';
+import EmptyState from '../components/EmptyState.js';
+import NavSidebar from '../components/NavSidebar.js';
+import PageContainer from '../components/PageContainer.js';
+import Spinner from '../components/Spinner.js';
+import TodaysShowsCard from '../components/TodaysShowsCard.js';
+import TodaysShowsCardSkeleton from '../components/TodaysShowsCardSkeleton.js';
+import { useAuth } from '../lib/auth';
+import useDate from '../hooks/useDate.js';
+import useDocumentTitle from '../hooks/useDocumentTitle.js';
+import useReviews from '../hooks/queries/useReviews.js';
+import useShowsCount from '../hooks/queries/useShowsCount.js';
+import DiscoverCard from '../components/DiscoverCard.js';
+import PopularShowsCard from '../components/PopularShowsCard.js';
+import PopularShowsCardSkeleton from '../components/PopularShowsCardSkeleton.js';
+import usePopularShows from '../hooks/queries/usePopularShows.js';
+import FinishedState from '../components/FinishedState';
 
 const Home = () => {
-  useDocumentTitle("Home | shakedown");
+  useDocumentTitle('Home | shakedown');
   const { month, day } = useDate();
   const { isAuthenticated } = useAuth();
 
@@ -38,7 +38,7 @@ const Home = () => {
   const { data: popularShowsData, isLoading: popularShowsIsLoading } =
     usePopularShows({
       staleTime: Infinity,
-      enabled: useBreakpointValue({ base: false, lg: true }),
+      enabled: useBreakpointValue({ base: false, lg: true })
     });
 
   const {
@@ -48,8 +48,8 @@ const Home = () => {
     hasMore: hasMoreRecentActivity,
     loadMore: loadMoreRecentActivity,
     isLoadingMore: isLoadingMoreRecentActivity,
-    hasNoData: hasNoRecentActivityData,
-  } = useReviews({ sort: "-created_at" });
+    hasNoData: hasNoRecentActivityData
+  } = useReviews({ sort: '-created_at' });
 
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
@@ -58,10 +58,11 @@ const Home = () => {
   return (
     <PageContainer>
       <Grid>
-        <GridItem colSpan={[12, 12, 4, 3]} d={{ base: "none", md: "block" }}>
+        {/* <GridItem colSpan={[12, 12, 4, 3]} d={{ base: "none", md: "block" }}>
           <NavSidebar />
-        </GridItem>
-        <GridItem colSpan={[12, 12, 8, 9]}>
+        </GridItem> */}
+        {/* <GridItem colSpan={[12, 12, 8, 9]}> */}
+        <GridItem colSpan={12}>
           <Grid>
             <GridItem order={[1, 1, 1, 0]} colSpan={[12, 12, 12, 8]}>
               {/* <Text variant="subtle-bold" mb={3}>Recent Activity</Text> */}
@@ -101,7 +102,7 @@ const Home = () => {
                   mb={[0, 0, 0, 4]}
                 />
               )}
-              <Box d={{ base: "none", lg: "block" }}>
+              <Box d={{ base: 'none', lg: 'block' }}>
                 {popularShowsIsLoading && (
                   <PopularShowsCardSkeleton mb={[0, 0, 0, 4]} />
                 )}

@@ -118,7 +118,7 @@
 
 // export default NavSidebar;
 
-import React from "react";
+import React from 'react';
 import {
   Box,
   VStack,
@@ -133,9 +133,9 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Heading,
-  Button,
-} from "@chakra-ui/react";
-import { Link as RouterLink, NavLink, useLocation } from "react-router-dom";
+  Button
+} from '@chakra-ui/react';
+import { Link as RouterLink, NavLink, useLocation } from 'react-router-dom';
 import {
   FaBolt,
   FaHome,
@@ -144,16 +144,16 @@ import {
   FaMusic,
   FaInfoCircle,
   FaUser,
-  FaCog,
-} from "react-icons/fa";
-import isRouteMatch from "../utils/is-route-match.js";
-import { useAuth } from "../lib/auth";
+  FaCog
+} from 'react-icons/fa';
+import isRouteMatch from '../utils/is-route-match.js';
+import { useAuth } from '../lib/auth';
 
 const NavDrawerItem = ({ to, onClick, isActive = false, children }) => {
-  const color = useColorModeValue("gray.500", "whiteAlpha.600");
-  const activeColor = useColorModeValue("brand.600", "brand.200");
-  const activeBgColor = useColorModeValue("brand.50", "whiteAlpha.100");
-  const hoverBgColor = useColorModeValue("gray.50", "whiteAlpha.50");
+  const color = useColorModeValue('gray.500', 'whiteAlpha.600');
+  const activeColor = useColorModeValue('brand.600', 'brand.200');
+  const activeBgColor = useColorModeValue('brand.50', 'whiteAlpha.100');
+  const hoverBgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
   return (
     <Link
       as={NavLink}
@@ -182,45 +182,45 @@ const NavDrawer = ({ ...props }) => {
 
   const navLinks = [
     {
-      name: "Home",
-      route: isAuthenticated ? "/home" : "/",
+      name: 'Home',
+      route: isAuthenticated ? '/home' : '/',
       exact: true,
       icon: FaHome,
       hasSubNav: false,
-      isMainNavItem: false,
+      isMainNavItem: false
     },
     {
-      name: "Shows",
-      route: "/shows",
+      name: 'Shows',
+      route: '/shows',
       exact: false,
       icon: FaTicketAlt,
       hasSubNav: true,
-      isMainNavItem: true,
+      isMainNavItem: true
     },
     {
-      name: "Venues",
-      route: "/venues",
+      name: 'Venues',
+      route: '/venues',
       exact: false,
       icon: FaMapMarkerAlt,
       hasSubNav: true,
-      isMainNavItem: true,
+      isMainNavItem: true
     },
     {
-      name: "Songs",
-      route: "/songs",
+      name: 'Songs',
+      route: '/songs',
       exact: false,
       icon: FaMusic,
       hasSubNav: true,
-      isMainNavItem: true,
+      isMainNavItem: true
     },
     {
-      name: "About",
-      route: "/about",
+      name: 'About',
+      route: '/about',
       exact: false,
       icon: FaInfoCircle,
       hasSubNav: false,
-      isMainNavItem: false,
-    },
+      isMainNavItem: false
+    }
   ];
 
   return (
@@ -230,9 +230,9 @@ const NavDrawer = ({ ...props }) => {
         <DrawerCloseButton />
         <DrawerHeader borderBottomWidth={1}>
           <Heading
-            color={useColorModeValue("brand.500", "brand.200")}
+            color={useColorModeValue('brand.500', 'brand.200')}
             as={NavLink}
-            to={isAuthenticated ? "/home" : "/"}
+            to={isAuthenticated ? '/home' : '/'}
             size="md"
             fontWeight="extrabold"
             onClick={props.onClose}
@@ -240,7 +240,7 @@ const NavDrawer = ({ ...props }) => {
             <Icon
               as={FaBolt}
               boxSize={4}
-              color={useColorModeValue("brand.500", "brand.200")}
+              color={useColorModeValue('brand.500', 'brand.200')}
               mr={1}
             />
             shakedown
@@ -285,8 +285,8 @@ const NavDrawer = ({ ...props }) => {
                     isFullWidth
                     as={RouterLink}
                     to={
-                      ["/auth/login", "/auth/register"].includes(pathname)
-                        ? "/auth/register"
+                      ['/auth/login', '/auth/register'].includes(pathname)
+                        ? '/auth/register'
                         : `/auth/register?redirect=${encodeURIComponent(
                             pathname + search
                           )}`
@@ -300,8 +300,8 @@ const NavDrawer = ({ ...props }) => {
                     as={RouterLink}
                     colorScheme="gray"
                     to={
-                      ["/auth/login", "/auth/register"].includes(pathname)
-                        ? "/auth/login"
+                      ['/auth/login', '/auth/register'].includes(pathname)
+                        ? '/auth/login'
                         : `/auth/login?redirect=${encodeURIComponent(
                             pathname + search
                           )}`
