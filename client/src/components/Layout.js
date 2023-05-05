@@ -13,8 +13,8 @@ const Layout = () => {
       <Main>
         <ScrollToTop />
         <Outlet />
+        <Footer />
       </Main>
-      <Footer />
     </>
   );
 };
