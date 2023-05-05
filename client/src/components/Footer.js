@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     // <Box __css={useStyleConfig("Footer")} mt={16} as="footer">
     <Container mt={16}>
-      <Flex direction="column" align="center" justify="center">
+      <Flex direction="column" align="center" justify="center" pb={10}>
         <Divider mb={10} />
         <Icon as={FaBolt} mb={4} />
         <Text fontSize="sm" mb={4}>
