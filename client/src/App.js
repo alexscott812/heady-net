@@ -155,67 +155,11 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <AuthProvider client={authClient}>
           <RouterProvider router={router} />
-          {/* <Navigation />
-          <Main>
-            <ScrollToTop />
-            <RouterProvider router={router} />
-          </Main>
-          <Footer /> */}
         </AuthProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ThemeProvider>
   );
-
-  // return (
-  //   <Router>
-  //     <ThemeProvider theme={theme}>
-  //       <QueryClientProvider client={queryClient}>
-  //         <AuthProvider client={authClient}>
-  //           <Navigation />
-  //           <Main>
-  //             <ScrollToTop />
-  //             <Routes>
-  //               <Route exact path="/" element={<LandingPage />} />
-  //               <Route exact path="/home" element={<Home />} />
-  //               <Route exact path="/shows" element={<Shows />} />
-  //               <Route path="/shows/:id" element={<ShowDetail />} />
-  //               <Route exact path="/venues" element={<Venues />} />
-  //               <Route path="/venues/:id" element={<VenueDetail />} />
-  //               <Route exact path="/songs" element={<Songs />} />
-  //               <Route path="/songs/:id" element={<SongDetail />} />
-  //               <Route exact path="/about" element={<About />} />
-  //               <Route exact path="/contact" element={<Contact />} />
-  //               <Route exact path="/search" element={<Search />} />
-  //               <Route path="/settings" element={<Settings />}>
-  //                 <Route index element={<Navigate to="profile" replace />} />
-  //                 <Route path="profile" element={<ProfileSettings />} />
-  //                 <Route path="account" element={<AccountSettings />} />
-  //                 <Route path="appearance" element={<AppearanceSettings />} />
-  //               </Route>
-  //               <Route path="/users/:id" element={<UserDetail />} />
-  //               <Route exact path="/auth/login" element={<Login />} />
-  //               <Route exact path="/auth/register" element={<Register />} />
-  //               <Route
-  //                 exact
-  //                 path="/auth/forgot-password"
-  //                 element={<ForgotPassword />}
-  //               />
-  //               <Route
-  //                 exact
-  //                 path="/auth/reset-password"
-  //                 element={<ResetPassword />}
-  //               />
-  //               <Route path="*" element={<NotFound />} />
-  //             </Routes>
-  //           </Main>
-  //           <Footer />
-  //         </AuthProvider>
-  //         <ReactQueryDevtools initialIsOpen={false} />
-  //       </QueryClientProvider>
-  //     </ThemeProvider>
-  //   </Router>
-  // );
 };
 
 export default App;

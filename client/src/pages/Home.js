@@ -5,6 +5,7 @@ import {
   Flex,
   GridItem,
   Box,
+  Text,
   useBreakpointValue
 } from '@chakra-ui/react';
 import Grid from '../components/Grid';
@@ -57,14 +58,12 @@ const Home = () => {
   return (
     <PageContainer>
       <Grid>
-        {/* <GridItem colSpan={[12, 12, 4, 3]} d={{ base: "none", md: "block" }}>
-          <NavSidebar />
-        </GridItem> */}
-        {/* <GridItem colSpan={[12, 12, 8, 9]}> */}
         <GridItem colSpan={12}>
           <Grid>
             <GridItem order={[1, 1, 1, 0]} colSpan={[12, 12, 12, 8]}>
-              {/* <Text variant="subtle-bold" mb={3}>Recent Activity</Text> */}
+              <Text variant="subtle-bold" mb={3}>
+                Recent Activity
+              </Text>
               <Spinner isShowing={recentActivityIsRefetching} />
               {recentActivityIsLoading && <RecentActivitySkeleton />}
               {recentActivityData && (
