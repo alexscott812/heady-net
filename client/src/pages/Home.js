@@ -11,7 +11,6 @@ import Grid from '../components/Grid';
 import RecentActivity from '../components/RecentActivity.js';
 import RecentActivitySkeleton from '../components/RecentActivitySkeleton.js';
 import EmptyState from '../components/EmptyState.js';
-import NavSidebar from '../components/NavSidebar.js';
 import PageContainer from '../components/PageContainer.js';
 import Spinner from '../components/Spinner.js';
 import TodaysShowsCard from '../components/TodaysShowsCard.js';
