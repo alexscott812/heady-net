@@ -148,33 +148,7 @@ import {
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
 import { useAuth } from '../lib/auth';
-
-const NavDrawerItem = ({ to, onClick, isActive = false, children }) => {
-  const color = useColorModeValue('gray.500', 'whiteAlpha.600');
-  const activeColor = useColorModeValue('brand.600', 'brand.200');
-  const activeBgColor = useColorModeValue('brand.50', 'whiteAlpha.100');
-  const hoverBgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
-  return (
-    <Link
-      as={NavLink}
-      py={2}
-      px={3}
-      w="100%"
-      rounded="md"
-      d="flex"
-      alignItems="center"
-      to={to}
-      onClick={onClick}
-      name={to}
-      fontWeight="semibold"
-      color={isActive ? activeColor : color}
-      bg={isActive ? activeBgColor : null}
-      _hover={{ bg: isActive ? null : hoverBgColor }}
-    >
-      {children}
-    </Link>
-  );
-};
+import NavSidebarItem from './NavSidebarItem';
 
 const NavDrawer = ({ ...props }) => {
   const { user, isAuthenticated } = useAuth();
@@ -223,6 +197,19 @@ const NavDrawer = ({ ...props }) => {
     }
   ];
 
+  const authNavLinks = [
+    {
+      name: 'Your Profile',
+      route: `/users/${user?._id}`,
+      icon: FaUser
+    },
+    {
+      name: 'Settings',
+      route: '/settings',
+      icon: FaCog
+    }
+  ];
+
   return (
     <Drawer {...props}>
       <DrawerOverlay />
@@ -250,7 +237,7 @@ const NavDrawer = ({ ...props }) => {
           <Box flexDirection="column">
             <VStack as="nav" spacing={1}>
               {navLinks.map((link) => (
-                <NavDrawerItem
+                <NavSidebarItem
                   key={link.name}
                   to={link.route}
                   onClick={props.onClose}
@@ -258,13 +245,13 @@ const NavDrawer = ({ ...props }) => {
                 >
                   <Icon as={link.icon} boxSize={5} mr={4} />
                   {link.name}
-                </NavDrawerItem>
+                </NavSidebarItem>
               ))}
             </VStack>
             <Divider my={3} />
             {isAuthenticated ? (
               <>
-                <VStack as="nav" spacing={1}>
+                {/* <VStack as="nav" spacing={1}>
                   <NavDrawerItem
                     to={`/users/${user._id}`}
                     onClick={props.onClose}
@@ -276,6 +263,19 @@ const NavDrawer = ({ ...props }) => {
                     <Icon as={FaCog} boxSize={5} mr={4} />
                     Settings
                   </NavDrawerItem>
+                </VStack> */}
+                <VStack as="nav" spacing={1}>
+                  {authNavLinks.map((link) => (
+                    <NavSidebarItem
+                      key={link.name}
+                      to={link.route}
+                      onClick={props.onClose}
+                      isActive={isRouteMatch(pathname, link.route, link.exact)}
+                    >
+                      <Icon as={link.icon} boxSize={5} mr={4} />
+                      {link.name}
+                    </NavSidebarItem>
+                  ))}
                 </VStack>
               </>
             ) : (

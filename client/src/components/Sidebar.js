@@ -7,7 +7,7 @@ import {
   Divider,
   useStyleConfig
 } from '@chakra-ui/react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import {
   FaHome,
   FaTicketAlt,
@@ -19,23 +19,7 @@ import {
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
 import { useAuth } from '../lib/auth';
-import Card from './Card.js';
-import CardBody from './CardBody.js';
-import CardTitle from './CardTitle.js';
-
-const NavSidebarItem = ({ to, onClick, isActive = false, children }) => {
-  return (
-    <Link
-      as={NavLink}
-      variant={isActive ? 'nav-active' : 'nav'}
-      to={to}
-      onClick={onClick}
-      name={to}
-    >
-      {children}
-    </Link>
-  );
-};
+import NavSidebarItem from './NavSidebarItem';
 
 const Sidebar = ({ ...props }) => {
   const { user, isAuthenticated } = useAuth();
