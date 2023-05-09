@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  VStack,
-  Link,
-  Icon,
-  Divider,
-  useStyleConfig
-} from '@chakra-ui/react';
+import { Box, VStack, Icon, Divider, useStyleConfig } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import {
   FaHome,

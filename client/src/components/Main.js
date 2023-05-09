@@ -3,7 +3,7 @@ import { Box, Container, useStyleConfig } from '@chakra-ui/react';
 
 const Main = ({ children }) => {
   return (
-    <Box ml={[0, 0, 72, 72]} pt={14}>
+    <Box __css={useStyleConfig('Main')}>
       <Container maxW="4xl" px={0}>
         {children}
       </Container>

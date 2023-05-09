@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, Button, Heading, Flex, Spacer } from '@chakra-ui/react';
 import EmptyState from '../components/EmptyState.js';
-import SearchBar from '../components/SearchBar.js';
+import Card from '../components/Card.js';
+import CardBody from '../components/CardBody.js';
 import SongResults from '../components/SongResults.js';
 import SongResultsSkeleton from '../components/SongResultsSkeleton.js';
 import SortSelect from '../components/SortSelect.js';
 import ResultsCount from '../components/ResultsCount.js';
 import PageContainer from '../components/PageContainer.js';
-import PageHead from '../components/PageHead.js';
+// import PageHead from '../components/PageHead.js';
 import { SONG_SORT_OPTIONS } from '../constants.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useQueryParams from '../hooks/useQueryParams.js';
@@ -32,17 +33,17 @@ const Songs = () => {
     q: debouncedSearch || undefined
   });
 
-  const handleSearchChange = (e) => {
-    const newSearch = e.target.value;
-    let { q, ...restQuery } = query;
-    let newQuery = { ...restQuery, ...(!!newSearch && { q: newSearch }) };
-    setQuery(newQuery);
-  };
+  // const handleSearchChange = (e) => {
+  //   const newSearch = e.target.value;
+  //   let { q, ...restQuery } = query;
+  //   let newQuery = { ...restQuery, ...(!!newSearch && { q: newSearch }) };
+  //   setQuery(newQuery);
+  // };
 
-  const handleSearchClear = () => {
-    let { q, ...newQuery } = query;
-    setQuery(newQuery);
-  };
+  // const handleSearchClear = () => {
+  //   let { q, ...newQuery } = query;
+  //   setQuery(newQuery);
+  // };
 
   const handleSortChange = (newSort) => {
     let newQuery = { ...query, sort: newSort };
@@ -69,6 +70,17 @@ const Songs = () => {
       </PageHead>
       <PageContainer pt={18}> */}
       <PageContainer>
+        <Card mb={4}>
+          <CardBody px={4} py={1}>
+            <Flex h={14} alignItems="center" justifyContent="space-between">
+              <Box>
+                <Heading as="h4" fontWeight="semibold" size="md">
+                  Songs
+                </Heading>
+              </Box>
+            </Flex>
+          </CardBody>
+        </Card>
         <Flex alignItems="center" justifyContent="space-between" mb={4}>
           <Box>
             <ResultsCount count={songsMeta?.total_results} />

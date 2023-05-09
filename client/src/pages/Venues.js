@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, Button, Heading, Flex, Spacer } from '@chakra-ui/react';
+import { Box, Button, Heading, Flex } from '@chakra-ui/react';
+import Card from '../components/Card.js';
+import CardBody from '../components/CardBody.js';
 import EmptyState from '../components/EmptyState.js';
-import SearchBar from '../components/SearchBar.js';
 import VenueResults from '../components/VenueResults.js';
 import VenueResultsSkeleton from '../components/VenueResultsSkeleton.js';
 import PageContainer from '../components/PageContainer.js';
-import PageHead from '../components/PageHead.js';
+// import PageHead from '../components/PageHead.js';
 import SortSelect from '../components/SortSelect.js';
 import ResultsCount from '../components/ResultsCount.js';
 import { VENUE_SORT_OPTIONS } from '../constants.js';
@@ -32,17 +33,17 @@ const Venues = () => {
     q: debouncedSearch || undefined
   });
 
-  const handleSearchChange = (e) => {
-    const newSearch = e.target.value;
-    let { q, ...restQuery } = query;
-    let newQuery = { ...restQuery, ...(!!newSearch && { q: newSearch }) };
-    setQuery(newQuery);
-  };
+  // const handleSearchChange = (e) => {
+  //   const newSearch = e.target.value;
+  //   let { q, ...restQuery } = query;
+  //   let newQuery = { ...restQuery, ...(!!newSearch && { q: newSearch }) };
+  //   setQuery(newQuery);
+  // };
 
-  const handleSearchClear = () => {
-    let { q, ...newQuery } = query;
-    setQuery(newQuery);
-  };
+  // const handleSearchClear = () => {
+  //   let { q, ...newQuery } = query;
+  //   setQuery(newQuery);
+  // };
 
   const handleSortChange = (newSort) => {
     let newQuery = { ...query, sort: newSort };
@@ -70,6 +71,17 @@ const Venues = () => {
       </PageHead>
       <PageContainer pt={18}> */}
       <PageContainer>
+        <Card mb={4}>
+          <CardBody px={4} py={1}>
+            <Flex h={14} alignItems="center" justifyContent="space-between">
+              <Box>
+                <Heading as="h4" fontWeight="semibold" size="md">
+                  Venues
+                </Heading>
+              </Box>
+            </Flex>
+          </CardBody>
+        </Card>
         <Flex alignItems="center" justifyContent="space-between" mb={4}>
           <Box>
             <ResultsCount count={venuesMeta?.total_results} />

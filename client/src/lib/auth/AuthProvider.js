@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStateWithLocalStorage from '../../hooks/useStateWithLocalStorage.js';
 import isTokenValid from '../../utils/is-token-valid.js';
 import getUserFromToken from '../../utils/get-user-from-token.js';
-import { initialState, reducer } from './state/authReducer.js';
-
-import { initUser, updateUser, removeUser } from './state/authActions.js';
+// import { initialState, reducer } from './state/authReducer.js';
+// import { initUser, updateUser, removeUser } from './state/authActions.js';
 import AuthContext from './AuthContext.js';
 // import { useNavigate } from "react-router-dom";
 

@@ -13,7 +13,7 @@ import EmptyState from '../components/EmptyState.js';
 import ShowResults from '../components/ShowResults.js';
 import FilterModal from '../components/FilterModal.js';
 import PageContainer from '../components/PageContainer.js';
-import PageHead from '../components/PageHead.js';
+// import PageHead from '../components/PageHead.js';
 import ResultsCount from '../components/ResultsCount.js';
 import SortSelect from '../components/SortSelect.js';
 import ShowResultsSkeleton from '../components/ShowResultsSkeleton.js';

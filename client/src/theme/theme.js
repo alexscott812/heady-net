@@ -188,8 +188,10 @@ const theme = extendTheme({
     },
     Main: {
       baseStyle: {
-        pt: baseTheme.space[14],
-        minH: 'calc(100vh - var(--chakra-sizes-28))'
+        // pt: baseTheme.space[14],
+        // minH: 'calc(100vh - var(--chakra-sizes-28))'
+        ml: [0, 0, 72, 72],
+        pt: 14
       }
     },
     Navigation: {
