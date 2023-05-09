@@ -62,7 +62,8 @@ const App = () => {
       children: [
         {
           path: '/',
-          element: <LandingPage />
+          // element: <LandingPage />
+          element: <Home />
         },
         {
           path: '/home',

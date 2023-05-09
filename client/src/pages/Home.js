@@ -51,9 +51,9 @@ const Home = () => {
     hasNoData: hasNoRecentActivityData
   } = useReviews({ sort: '-created_at' });
 
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/" replace />;
+  // }
 
   return (
     <PageContainer>

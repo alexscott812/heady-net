@@ -1,6 +1,14 @@
 import React from 'react';
-import { Box, VStack, Icon, Divider, useStyleConfig } from '@chakra-ui/react';
-import { useLocation } from 'react-router-dom';
+import {
+  Box,
+  VStack,
+  Icon,
+  Divider,
+  Text,
+  Button,
+  useStyleConfig
+} from '@chakra-ui/react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   FaHome,
   FaTicketAlt,
@@ -8,7 +16,8 @@ import {
   FaMusic,
   FaInfoCircle,
   FaUser,
-  FaCog
+  FaCog,
+  FaArrowRight
 } from 'react-icons/fa';
 import isRouteMatch from '../utils/is-route-match.js';
 import { useAuth } from '../lib/auth';
@@ -16,7 +25,7 @@ import NavSidebarItem from './NavSidebarItem';
 
 const NavSidebar = ({ ...props }) => {
   const { user, isAuthenticated } = useAuth();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
 
   const navLinks = [
     {
@@ -82,9 +91,9 @@ const NavSidebar = ({ ...props }) => {
             </NavSidebarItem>
           ))}
         </VStack>
-        {isAuthenticated && (
+        <Divider my={3} />
+        {isAuthenticated ? (
           <>
-            <Divider my={3} />
             <VStack as="nav" spacing={1}>
               {authNavLinks.map((link) => (
                 <NavSidebarItem
@@ -98,6 +107,26 @@ const NavSidebar = ({ ...props }) => {
               ))}
             </VStack>
           </>
+        ) : (
+          <Box pt={2} px={3}>
+            <Text fontSize="lg" fontWeight="semibold" mb={2}>
+              Welcome!
+            </Text>
+            <Text mb={2}>Create an account to join the community!</Text>
+            <Button
+              // variant="solid"
+              // isFullWidth
+              // py={1}
+              variant="link"
+              rightIcon={<FaArrowRight />}
+              as={Link}
+              to={`/auth/register?redirect=${encodeURIComponent(
+                pathname + search
+              )}`}
+            >
+              Join shakedown
+            </Button>
+          </Box>
         )}
       </Box>
     </Box>
