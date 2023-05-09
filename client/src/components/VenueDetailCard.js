@@ -1,20 +1,24 @@
-import React from "react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardTitle from "./CardTitle.js";
-import { Button, Text, Heading, SimpleGrid } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
-import pluralize from "../utils/pluralize.js";
+import React from 'react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import { Link, Text, Heading } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+// import pluralize from '../utils/pluralize.js';
 
 const VenueDetailCard = ({ venue, ...restProps }) => {
   return (
     <Card {...restProps}>
       <CardBody>
-        <Text variant="subtle-bold">Venue</Text>
         <Heading as="h1" size="lg" fontWeight="semibold" mb={2}>
           {venue.name}
         </Heading>
-        <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
+        <Text fontSize="lg" fontWeight="semibold">
+          Total Performances
+        </Text>
+        <Link as={RouterLink} to={`/shows?venue=${venue._id}`} fontSize="3xl">
+          {venue.show_count}
+        </Link>
+        {/* <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
           <Card variant="inner">
             <CardBody>
               <CardTitle>Total Performances</CardTitle>
@@ -29,13 +33,13 @@ const VenueDetailCard = ({ venue, ...restProps }) => {
               >
                 {`See ${venue.show_count} ${pluralize(
                   venue.show_count,
-                  "Show",
-                  "Shows"
+                  'Show',
+                  'Shows'
                 )}`}
               </Button>
             </CardBody>
           </Card>
-        </SimpleGrid>
+        </SimpleGrid> */}
       </CardBody>
     </Card>
   );

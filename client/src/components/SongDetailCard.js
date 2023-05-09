@@ -1,20 +1,47 @@
-import React from "react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardTitle from "./CardTitle.js";
-import { Button, Text, Heading, SimpleGrid } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
-import pluralize from "../utils/pluralize.js";
+import React from 'react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+// import CardTitle from './CardTitle.js';
+import { Link, Text, Heading, Divider } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+// import pluralize from '../utils/pluralize.js';
 
 const SongDetailCard = ({ song, ...restProps }) => {
   return (
     <Card {...restProps}>
       <CardBody>
-        <Text variant="subtle-bold">Song</Text>
-        <Heading as="h1" size="lg" fontWeight="semibold" mb={2}>
+        <Heading as="h1" size="lg" fontWeight="semibold" mb={4}>
           {song.name}
         </Heading>
-        <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
+        <Text fontSize="lg" fontWeight="semibold">
+          Total Performances
+        </Text>
+        <Link as={RouterLink} to={`/shows?song=${song._id}`} fontSize="3xl">
+          {song.show_count}
+        </Link>
+        <Divider my={4} />
+        <Text fontSize="lg" fontWeight="semibold">
+          First Performance
+        </Text>
+        <Link
+          as={RouterLink}
+          to={`/shows/${song.first_show._id}`}
+          fontSize="3xl"
+        >
+          {song.first_show.title}
+        </Link>
+        <Divider my={4} />
+        <Text fontSize="lg" fontWeight="semibold">
+          Last Performance
+        </Text>
+        <Link
+          as={RouterLink}
+          to={`/shows/${song.last_show._id}`}
+          fontSize="3xl"
+        >
+          {song.last_show.title}
+        </Link>
+        {/* <SimpleGrid columns={[1, 1, 3, 3]} spacing={4}>
           <Card variant="inner">
             <CardBody>
               <CardTitle>Total Performances</CardTitle>
@@ -29,8 +56,8 @@ const SongDetailCard = ({ song, ...restProps }) => {
               >
                 {`See ${song.show_count} ${pluralize(
                   song.show_count,
-                  "Show",
-                  "Shows"
+                  'Show',
+                  'Shows'
                 )}`}
               </Button>
             </CardBody>
@@ -67,7 +94,7 @@ const SongDetailCard = ({ song, ...restProps }) => {
               </Button>
             </CardBody>
           </Card>
-        </SimpleGrid>
+        </SimpleGrid> */}
       </CardBody>
     </Card>
   );
