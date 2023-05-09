@@ -1,8 +1,8 @@
-import React from "react";
-import StarRating from "./StarRating.js";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import EmptyImage from "./EmptyImage.js";
+import React from 'react';
+import StarRating from './StarRating.js';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import EmptyImage from './EmptyImage.js';
 import {
   Button,
   Box,
@@ -12,12 +12,12 @@ import {
   Link,
   Stack,
   Image,
-  Skeleton,
-} from "@chakra-ui/react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
-import { FaVolumeUp, FaStar, FaShare } from "react-icons/fa";
+  Skeleton
+} from '@chakra-ui/react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { FaVolumeUp, FaStar, FaShare } from 'react-icons/fa';
 // import useAuth from '../hooks/useAuth.js';
-import { useAuth } from "../lib/auth";
+import { useAuth } from '../lib/auth';
 //import { DEFAULT_THUMBNAIL_MD } from '../constants.js';
 
 const ShowHeaderCard = ({
@@ -52,17 +52,17 @@ const ShowHeaderCard = ({
             <Link as={RouterLink} to={`/venues/${show.venue._id}`}>
               {show.venue.name}
             </Link>
-            {" \u00B7 "}
+            {' \u00B7 '}
             <Link as={RouterLink} to={`/shows?city=${show.city._id}`}>
               {show.city.name}
             </Link>
-            {", "}
+            {', '}
             {show.state && (
               <>
                 <Link as={RouterLink} to={`/shows?state=${show.state._id}`}>
                   {show.state.name}
                 </Link>
-                {", "}
+                {', '}
               </>
             )}
             <Link as={RouterLink} to={`/shows?country=${show.country._id}`}>
@@ -83,12 +83,12 @@ const ShowHeaderCard = ({
             </Text>
             <Text variant="secondary">
               {`(${show.review_count} ${
-                show.review_count === 1 ? "Review" : "Reviews"
+                show.review_count === 1 ? 'Review' : 'Reviews'
               })`}
             </Text>
           </Flex>
         </Box>
-        <Stack direction={["column", "column", "row", "row"]}>
+        <Stack direction={['column', 'column', 'row', 'row']}>
           {isAuthenticated ? (
             <Button
               variant="solid"

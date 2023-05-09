@@ -1,20 +1,24 @@
-import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Button, Text, Stack, Avatar, Icon } from "@chakra-ui/react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardTitle from "./CardTitle.js";
-import { FaPen, FaCog, FaCalendar, FaComment } from "react-icons/fa";
-import { useAuth } from "../lib/auth";
-import getRelativeTime from "../utils/get-relative-time.js";
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { Button, Text, Stack, Avatar, Icon } from '@chakra-ui/react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import CardTitle from './CardTitle.js';
+import { FaPen, FaCog, FaCalendar, FaComment } from 'react-icons/fa';
+import { useAuth } from '../lib/auth';
+import getRelativeTime from '../utils/get-relative-time.js';
 
-const UserHeader = ({ user = null, onShowEditUserButtonClick = null }) => {
+const UserHeader = ({
+  user = null,
+  onShowEditUserButtonClick = null,
+  ...restProps
+}) => {
   const { user: currentUser } = useAuth();
 
   const isCurrentUser = user._id === currentUser?._id;
 
   return (
-    <Card>
+    <Card {...restProps}>
       <CardBody>
         <Avatar size="lg" name={user.first_name} mb={3} />
         <CardTitle mb={2}>
@@ -32,7 +36,7 @@ const UserHeader = ({ user = null, onShowEditUserButtonClick = null }) => {
           {`${user.review_count} show reviews`}
         </Text>
         {isCurrentUser && (
-          <Stack direction="column" mt={3}>
+          <Stack direction={['column', 'column', 'row', 'row']} mt={3}>
             <Button
               variant="solid"
               colorScheme="gray"

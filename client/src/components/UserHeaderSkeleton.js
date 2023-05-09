@@ -1,11 +1,11 @@
-import React from "react";
-import { VStack, Skeleton, SkeletonCircle } from "@chakra-ui/react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
+import React from 'react';
+import { VStack, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
 
-const UserHeaderSkeleton = () => {
+const UserHeaderSkeleton = ({ ...props }) => {
   return (
-    <Card>
+    <Card {...props}>
       <CardBody>
         <VStack align="start">
           <SkeletonCircle size={16} mb={3} />
