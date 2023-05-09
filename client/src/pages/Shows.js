@@ -24,6 +24,8 @@ import useShows from '../hooks/queries/useShows.js';
 import useSongs from '../hooks/queries/useSongs.js';
 import useVenues from '../hooks/queries/useVenues.js';
 import countKeys from '../utils/count-keys.js';
+import Card from '../components/Card.js';
+import CardBody from '../components/CardBody.js';
 
 const Shows = () => {
   useDocumentTitle('Shows | shakedown');
@@ -101,6 +103,31 @@ const Shows = () => {
       </PageHead> */}
       {/* <PageContainer pt={18}> */}
       <PageContainer>
+        <Card mb={4}>
+          <CardBody px={4} py={1}>
+            <Flex h={14} alignItems="center" justifyContent="space-between">
+              <Box>
+                <Heading as="h4" fontWeight="semibold" size="md">
+                  Shows
+                </Heading>
+              </Box>
+              <Spacer />
+              <Button
+                colorScheme="gray"
+                onClick={onFilterModalOpen}
+                leftIcon={
+                  filterCount > 0 ? (
+                    <Badge variant="solid">{filterCount}</Badge>
+                  ) : (
+                    <FaSlidersH />
+                  )
+                }
+              >
+                Filters
+              </Button>
+            </Flex>
+          </CardBody>
+        </Card>
         <Flex alignItems="center" justifyContent="space-between" mb={4}>
           <Box>
             <ResultsCount count={showsMeta?.total_results} />
