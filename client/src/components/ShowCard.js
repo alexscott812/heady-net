@@ -1,11 +1,18 @@
-import React from "react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardFooter from "./CardFooter.js";
-import { Flex, LinkBox, LinkOverlay, Text, Image } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import StarRating from "./StarRating.js";
-import EmptyImage from "./EmptyImage.js";
+import React from 'react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import CardFooter from './CardFooter.js';
+import {
+  Flex,
+  LinkBox,
+  LinkOverlay,
+  Text,
+  Image,
+  Skeleton
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
+import StarRating from './StarRating.js';
+import EmptyImage from './EmptyImage.js';
 
 const ShowCard = ({
   id,
@@ -26,8 +33,8 @@ const ShowCard = ({
           objectFit="cover"
           height="150px"
           width="100%"
-          //fallback={<Skeleton h="150px" borderRadius="none" />}
-          fallback={<EmptyImage h="150px" w="100%" />}
+          fallback={<Skeleton h="150px" borderRadius="none" />}
+          //fallback={<EmptyImage h="150px" w="100%" />}
         />
       ) : (
         <EmptyImage h="150px" w="100%" />
@@ -36,7 +43,7 @@ const ShowCard = ({
         <LinkOverlay
           as={Link}
           to={`/shows/${id}`}
-          _hover={{ textDecoration: "underline" }}
+          _hover={{ textDecoration: 'underline' }}
         >
           <Text fontWeight="semibold" fontSize="lg">
             {title}

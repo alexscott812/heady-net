@@ -38,7 +38,7 @@ const ShowHeaderCard = ({
           objectFit="cover"
           height="150px"
           width="100%"
-          fallback={<Skeleton height="150px" />}
+          fallback={<Skeleton h="150px" borderRadius="none" />}
         />
       ) : (
         <EmptyImage h="150px" w="100%" />
