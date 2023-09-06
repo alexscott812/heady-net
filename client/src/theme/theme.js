@@ -212,7 +212,7 @@ const theme = extendTheme({
         d: { base: 'none', md: 'flex' },
         position: 'fixed',
         w: 72,
-        h: '100vh',
+        h: `calc(100vh - ${baseTheme.space[14]})`,
         mt: baseTheme.space[14],
         p: 4,
         overflowY: 'auto',

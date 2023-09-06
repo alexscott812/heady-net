@@ -6,9 +6,11 @@ import {
   Divider,
   Text,
   Button,
+  HStack,
+  Link,
   useStyleConfig
 } from '@chakra-ui/react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   FaHome,
   FaTicketAlt,
@@ -119,15 +121,33 @@ const NavSidebar = ({ ...props }) => {
               // py={1}
               variant="link"
               rightIcon={<FaArrowRight />}
-              as={Link}
+              as={RouterLink}
               to={`/auth/register?redirect=${encodeURIComponent(
                 pathname + search
               )}`}
+              mb={2}
             >
               Join shakedown
             </Button>
           </Box>
         )}
+        <Divider my={3} />
+        <Box pt={2} px={3}>
+          <Text fontSize="xs" mb={4}>
+            © 2023 shakedown
+          </Text>
+          <HStack>
+            <Link as={RouterLink} to="/about" fontSize="xs">
+              About
+            </Link>
+            <Link as={RouterLink} to="/contact" fontSize="xs">
+              Contact
+            </Link>
+            <Link as={RouterLink} to="/settings" fontSize="xs">
+              Settings
+            </Link>
+          </HStack>
+        </Box>
       </Box>
     </Box>
   );
