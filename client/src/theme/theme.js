@@ -190,7 +190,7 @@ const theme = extendTheme({
       baseStyle: {
         // pt: baseTheme.space[14],
         // minH: 'calc(100vh - var(--chakra-sizes-28))'
-        ml: [0, 0, 72, 72],
+        ml: [0, 0, 0, 72],
         pt: 14
       }
     },
@@ -209,7 +209,7 @@ const theme = extendTheme({
     Sidebar: {
       baseStyle: (props) => ({
         bg: mode('white', 'gray.800')(props),
-        d: { base: 'none', md: 'flex' },
+        d: { base: 'none', lg: 'flex' },
         position: 'fixed',
         w: 72,
         h: `calc(100vh - ${baseTheme.space[14]})`,
