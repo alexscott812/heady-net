@@ -1,26 +1,26 @@
-import React from "react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardTitle from "./CardTitle.js";
+import React from 'react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import CardTitle from './CardTitle.js';
 import {
   Text,
   Box,
   Stack,
   LinkBox,
   LinkOverlay,
-  VStack,
-} from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
-import { FaFire } from "react-icons/fa";
-import formatShowLocation from "../utils/format-show-location.js";
-import CardIcon from "./CardIcon.js";
+  VStack
+} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import { FaFire } from 'react-icons/fa';
+import formatShowLocation from '../utils/format-show-location.js';
+import CardIcon from './CardIcon.js';
 
 const PopularShowsCard = ({ shows, ...restProps }) => {
   return (
     <Card {...restProps}>
       <CardBody>
         <Stack
-          direction={{ base: "row", lg: "column" }}
+          direction={{ base: 'row', md: 'column' }}
           spacing={4}
           align="flex-start"
         >
@@ -33,7 +33,7 @@ const PopularShowsCard = ({ shows, ...restProps }) => {
                   <LinkOverlay
                     as={RouterLink}
                     to={`/shows/${show._id}`}
-                    _hover={{ textDecoration: "underline" }}
+                    _hover={{ textDecoration: 'underline' }}
                   >
                     <Text noOfLines={1} fontWeight="semibold">
                       {show.title}
@@ -42,7 +42,7 @@ const PopularShowsCard = ({ shows, ...restProps }) => {
                   <Text noOfLines={1} variant="tertiary">
                     {`${show.venue.name} \u00B7 ${formatShowLocation(
                       show.city.name,
-                      show.state?.name || "",
+                      show.state?.name || '',
                       show.country.name
                     )}`}
                   </Text>

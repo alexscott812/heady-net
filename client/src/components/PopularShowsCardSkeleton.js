@@ -1,17 +1,17 @@
-import React from "react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardTitle from "./CardTitle.js";
-import CardIcon from "./CardIcon.js";
-import { Box, Stack, Skeleton, VStack } from "@chakra-ui/react";
-import { FaFire } from "react-icons/fa";
+import React from 'react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import CardTitle from './CardTitle.js';
+import CardIcon from './CardIcon.js';
+import { Box, Stack, Skeleton, VStack } from '@chakra-ui/react';
+import { FaFire } from 'react-icons/fa';
 
 const PopularShowsCardSkeleton = ({ ...props }) => {
   return (
     <Card {...props}>
       <CardBody>
         <Stack
-          direction={{ base: "row", lg: "column" }}
+          direction={{ base: 'row', md: 'column' }}
           spacing={4}
           align="flex-start"
         >

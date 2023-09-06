@@ -16,7 +16,7 @@ const TodaysShowsCard = ({ month, day, showCount, ...restProps }) => {
     <Card {...restProps}>
       <CardBody>
         <Stack
-          direction={{ base: 'row', lg: 'column' }}
+          direction={{ base: 'row', md: 'column' }}
           spacing={4}
           align="flex-start"
         >

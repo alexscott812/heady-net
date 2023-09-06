@@ -60,7 +60,7 @@ const Home = () => {
       <Grid>
         <GridItem colSpan={12}>
           <Grid>
-            <GridItem order={[1, 1, 1, 0]} colSpan={[12, 12, 12, 8]}>
+            <GridItem order={[1, 1, 0, 0]} colSpan={[12, 12, 8, 8]}>
               <Text variant="subtle-bold" mb={4}>
                 Recent Activity
               </Text>
@@ -88,26 +88,26 @@ const Home = () => {
               )}
               {hasNoRecentActivityData && <EmptyState />}
             </GridItem>
-            <GridItem order={[0, 0, 0, 1]} colSpan={[12, 12, 12, 4]}>
+            <GridItem order={[0, 0, 1, 1]} colSpan={[12, 12, 4, 4]}>
               {todaysShowsIsLoading && (
-                <TodaysShowsCardSkeleton mb={[0, 0, 0, 4]} />
+                <TodaysShowsCardSkeleton mb={[0, 0, 4, 4]} />
               )}
               {todaysShowsData !== undefined && (
                 <TodaysShowsCard
                   showCount={todaysShowsData}
                   month={month}
                   day={day}
-                  mb={[0, 0, 0, 4]}
+                  mb={[0, 0, 4, 4]}
                 />
               )}
-              <Box d={{ base: 'none', lg: 'block' }}>
+              <Box d={{ base: 'none', md: 'block' }}>
                 {popularShowsIsLoading && (
-                  <PopularShowsCardSkeleton mb={[0, 0, 0, 4]} />
+                  <PopularShowsCardSkeleton mb={[0, 0, 4, 4]} />
                 )}
                 {popularShowsData && (
                   <PopularShowsCard
                     shows={popularShowsData}
-                    mb={[0, 0, 0, 4]}
+                    mb={[0, 0, 4, 4]}
                   />
                 )}
                 <DiscoverCard />
