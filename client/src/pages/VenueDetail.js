@@ -1,13 +1,13 @@
-import React from "react";
-import Grid from "../components/Grid.js";
-import GridItem from "../components/GridItem.js";
-import PageContainer from "../components/PageContainer.js";
-import EmptyState from "../components/EmptyState.js";
-import { useParams } from "react-router-dom";
-import useDocumentTitle from "../hooks/useDocumentTitle.js";
-import useVenue from "../hooks/queries/useVenue.js";
-import VenueDetailCard from "../components/VenueDetailCard.js";
-import VenueDetailCardSkeleton from "../components/VenueDetailCardSkeleton.js";
+import React from 'react';
+import Grid from '../components/Grid.js';
+import GridItem from '../components/GridItem.js';
+import PageContainer from '../components/PageContainer.js';
+import EmptyState from '../components/EmptyState.js';
+import { useParams } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle.js';
+import useVenue from '../hooks/queries/useVenue.js';
+import VenueDetailCard from '../components/VenueDetailCard.js';
+import VenueDetailCardSkeleton from '../components/VenueDetailCardSkeleton.js';
 
 const VenueDetail = () => {
   const { id } = useParams();
@@ -15,19 +15,19 @@ const VenueDetail = () => {
   const { data: venueData, isLoading: venueIsLoading } = useVenue(id);
 
   useDocumentTitle(
-    `${venueData ? venueData.name : "Venue Detail"} | shakedown`
+    `${venueData ? venueData.name : 'Venue Detail'} | shakedown`
   );
 
   return (
     <PageContainer>
       <Grid>
         {venueIsLoading && (
-          <GridItem colSpan={[12, 12, 12, 8]}>
+          <GridItem colSpan={[12, 12, 8, 8]}>
             <VenueDetailCardSkeleton />
           </GridItem>
         )}
         {venueData && (
-          <GridItem colSpan={[12, 12, 12, 8]}>
+          <GridItem colSpan={[12, 12, 8, 8]}>
             <VenueDetailCard venue={venueData} />
           </GridItem>
         )}
