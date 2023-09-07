@@ -35,6 +35,7 @@ import {
 import SearchModal from './SearchModal';
 import NavDrawer from './NavDrawer';
 import useLogout from '../hooks/mutations/useLogout';
+import Logo from './Logo';
 
 // const NavItem = ({ to, isActive, onClick, children }) => {
 //   const color = useColorModeValue('gray.500', 'whiteAlpha.600');
@@ -169,7 +170,7 @@ const Navigation = () => {
                 onClick={isDrawerOpen ? onDrawerClose : onDrawerOpen}
               />
             </Tooltip>
-            <Heading
+            {/* <Heading
               color={useColorModeValue('brand.500', 'brand.200')}
               as={NavLink}
               to={isAuthenticated ? '/home' : '/'}
@@ -184,7 +185,12 @@ const Navigation = () => {
                 mr={1}
               />
               shakedown
-            </Heading>
+            </Heading> */}
+            <Logo
+              as={NavLink}
+              to={isAuthenticated ? '/home' : '/'}
+              onClick={handleScrollToTop}
+            />
             <Button
               mx={8}
               display={{ base: 'none', md: 'flex' }}

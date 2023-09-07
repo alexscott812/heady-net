@@ -28,6 +28,7 @@ import {
 import isRouteMatch from '../utils/is-route-match.js';
 import { useAuth } from '../lib/auth';
 import NavSidebarItem from './NavSidebarItem';
+import Logo from './Logo.js';
 
 const NavDrawer = ({ ...props }) => {
   const { user, isAuthenticated } = useAuth();
@@ -95,7 +96,7 @@ const NavDrawer = ({ ...props }) => {
       <DrawerContent>
         <DrawerCloseButton />
         <DrawerHeader borderBottomWidth={1}>
-          <Heading
+          {/* <Heading
             color={useColorModeValue('brand.500', 'brand.200')}
             as={NavLink}
             to={isAuthenticated ? '/home' : '/'}
@@ -110,7 +111,12 @@ const NavDrawer = ({ ...props }) => {
               mr={1}
             />
             shakedown
-          </Heading>
+          </Heading> */}
+          <Logo
+            as={NavLink}
+            to={isAuthenticated ? '/home' : '/'}
+            onClick={props.onClose}
+          />
         </DrawerHeader>
         <DrawerBody>
           <Box flexDirection="column">

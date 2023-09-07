@@ -8,19 +8,30 @@ import {
   Link,
   Divider,
   Text,
-  GridItem
+  GridItem,
+  Heading,
+  useColorModeValue,
+  Icon,
+  Flex
 } from '@chakra-ui/react';
 import Grid from '../components/Grid';
 import Card from '../components/Card.js';
 import CardTitle from '../components/CardTitle.js';
 import CardBody from '../components/CardBody.js';
 import PageContainer from '../components/PageContainer.js';
-import { Link as RouterLink, Navigate, useNavigate } from 'react-router-dom';
+import {
+  Link as RouterLink,
+  NavLink,
+  Navigate,
+  useNavigate
+} from 'react-router-dom';
 import useQueryParams from '../hooks/useQueryParams.js';
 import { useAuth } from '../lib/auth';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 // import useCustomBodyStyles from '../hooks/useCustomBodyStyles.js';
 import useLogin from '../hooks/mutations/useLogin.js';
+import { FaBolt } from 'react-icons/fa';
+import Logo from '../components/Logo';
 
 const Login = () => {
   useDocumentTitle('Login | shakedown');
@@ -63,87 +74,104 @@ const Login = () => {
     );
   };
 
+  // if (isAuthenticated) {
+  //   return <Navigate to="/" />;
+  // }
+
   return (
-    <>
-      {isAuthenticated ? (
-        <Navigate to="/" />
-      ) : (
-        <PageContainer>
-          <Grid>
-            <GridItem colStart={[1, 1, 4, 5]} colSpan={[12, 12, 6, 4]}>
-              <Card>
-                <CardBody>
-                  <CardTitle>Log In</CardTitle>
-                  <Text mb={1}>Email Address</Text>
-                  <Input
-                    mb={3}
-                    type="email"
-                    name="email"
-                    value={credentials.email}
-                    placeholder="Email Address"
-                    onChange={handleInputChange}
+    <PageContainer>
+      <Grid>
+        <GridItem colStart={[1, 1, 4, 5]} colSpan={[12, 12, 6, 4]}>
+          <Card>
+            <CardBody>
+              <Flex justifyContent="center" p={4}>
+                <Logo as={NavLink} to={isAuthenticated ? '/home' : '/'} />
+                {/* <Heading
+                  color={useColorModeValue('brand.500', 'brand.200')}
+                  as={NavLink}
+                  to={isAuthenticated ? '/home' : '/'}
+                  size="md"
+                  fontWeight="extrabold"
+                >
+                  <Icon
+                    as={FaBolt}
+                    boxSize={4}
+                    color={useColorModeValue('brand.500', 'brand.200')}
+                    mr={1}
                   />
-                  <Text mb={1}>Password</Text>
-                  <Input
-                    mb={3}
-                    type="password"
-                    name="password"
-                    value={credentials.password}
-                    placeholder="Password"
-                    onChange={handleInputChange}
-                  />
-                  <Box mb={3}>
-                    <Link
-                      as={RouterLink}
-                      to="/auth/forgot-password"
-                      variant="brand"
-                    >
-                      Forgot Password?
-                    </Link>
-                  </Box>
-                  {login.isError && (
-                    <Alert status="error" mb={3}>
-                      <AlertIcon />
-                      {login.error}
-                    </Alert>
-                  )}
-                  <Button
-                    variant="solid"
-                    colorScheme="brand"
-                    isLoading={login.isLoading}
-                    loadingText="Logging in..."
-                    isDisabled={!validateForm() || login.isLoading}
-                    isFullWidth
-                    onClick={handleLoginSubmit}
+                  shakedown
+                </Heading> */}
+              </Flex>
+              <Divider my={3} />
+              <CardTitle>Log In</CardTitle>
+              <Text mb={1}>Email Address</Text>
+              <Input
+                mb={3}
+                type="email"
+                name="email"
+                value={credentials.email}
+                placeholder="Email Address"
+                onChange={handleInputChange}
+              />
+              <Text mb={1}>Password</Text>
+              <Input
+                mb={3}
+                type="password"
+                name="password"
+                value={credentials.password}
+                placeholder="Password"
+                onChange={handleInputChange}
+              />
+              <Box mb={3}>
+                <Link
+                  as={RouterLink}
+                  to="/auth/forgot-password"
+                  variant="brand"
+                >
+                  Forgot Password?
+                </Link>
+              </Box>
+              {login.isError && (
+                <Alert status="error" mb={3}>
+                  <AlertIcon />
+                  {login.error}
+                </Alert>
+              )}
+              <Button
+                variant="solid"
+                colorScheme="brand"
+                isLoading={login.isLoading}
+                loadingText="Logging in..."
+                isDisabled={!validateForm() || login.isLoading}
+                isFullWidth
+                onClick={handleLoginSubmit}
+              >
+                Log In
+              </Button>
+              <Divider my={3} />
+              <Box>
+                <Text>
+                  {`Don't have an account? `}
+                  <Link
+                    as={RouterLink}
+                    to={
+                      query.redirect
+                        ? `/auth/register?redirect=${encodeURIComponent(
+                            query.redirect
+                          )}`
+                        : '/auth/register'
+                    }
+                    variant="brand"
                   >
-                    Log In
-                  </Button>
-                  <Divider my={3} />
-                  <Box>
-                    <Text>
-                      {`Don't have an account? `}
-                      <Link
-                        as={RouterLink}
-                        to={
-                          query.redirect
-                            ? `/auth/register?redirect=${encodeURIComponent(
-                                query.redirect
-                              )}`
-                            : '/auth/register'
-                        }
-                        variant="brand"
-                      >
-                        Sign Up
-                      </Link>
-                    </Text>
-                  </Box>
-                </CardBody>
-              </Card>
-            </GridItem>
-          </Grid>
-        </PageContainer>
-      )}
-    </>
+                    Sign Up
+                  </Link>
+                </Text>
+              </Box>
+            </CardBody>
+          </Card>
+        </GridItem>
+      </Grid>
+    </PageContainer>
   );
 };
 
