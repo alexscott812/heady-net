@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Box,
   VStack,
-  useColorModeValue,
   Icon,
   Divider,
   Drawer,
@@ -11,12 +10,10 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  Heading,
   Button
 } from '@chakra-ui/react';
 import { Link as RouterLink, NavLink, useLocation } from 'react-router-dom';
 import {
-  FaBolt,
   FaHome,
   FaTicketAlt,
   FaMapMarkerAlt,

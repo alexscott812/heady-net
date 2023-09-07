@@ -9,10 +9,7 @@ import {
   Divider,
   Text,
   GridItem,
-  Flex,
-  Heading,
-  Icon,
-  useColorModeValue
+  Flex
 } from '@chakra-ui/react';
 import Grid from '../components/Grid';
 import Card from '../components/Card.js';
@@ -24,7 +21,6 @@ import { useAuth } from '../lib/auth';
 import useQueryParams from '../hooks/useQueryParams.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import { useMutation } from 'react-query';
-import { FaBolt } from 'react-icons/fa';
 import Logo from '../components/Logo';
 
 const Register = () => {
@@ -65,9 +61,9 @@ const Register = () => {
     mutation.mutate({ userInfo });
   };
 
-  // if (isAuthenticated) {
-  //   return <Navigate to="/" />;
-  // }
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <PageContainer>

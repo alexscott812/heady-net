@@ -6,7 +6,6 @@ import {
   Button,
   Flex,
   HStack,
-  Heading,
   Icon,
   IconButton,
   Menu,
@@ -27,7 +26,6 @@ import {
   FaSignOutAlt,
   FaSignInAlt,
   FaUserPlus,
-  FaBolt,
   FaCog,
   FaSearch
 } from 'react-icons/fa';
@@ -36,29 +34,6 @@ import SearchModal from './SearchModal';
 import NavDrawer from './NavDrawer';
 import useLogout from '../hooks/mutations/useLogout';
 import Logo from './Logo';
-
-// const NavItem = ({ to, isActive, onClick, children }) => {
-//   const color = useColorModeValue('gray.500', 'whiteAlpha.600');
-//   const activeColor = useColorModeValue('gray.800', 'whiteAlpha.900');
-//   const hoverBgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
-//   return (
-//     <Link
-//       as={NavLink}
-//       py={2}
-//       px={3}
-//       rounded="md"
-//       to={to}
-//       onClick={onClick}
-//       d="flex"
-//       alignItems="center"
-//       fontWeight="semibold"
-//       color={isActive ? activeColor : color}
-//       _hover={{ bg: hoverBgColor }}
-//     >
-//       {children}
-//     </Link>
-//   );
-// };
 
 const Navigation = () => {
   const {

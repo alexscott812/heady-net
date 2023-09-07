@@ -9,9 +9,6 @@ import {
   Divider,
   Text,
   GridItem,
-  Heading,
-  useColorModeValue,
-  Icon,
   Flex
 } from '@chakra-ui/react';
 import Grid from '../components/Grid';
@@ -30,7 +27,6 @@ import { useAuth } from '../lib/auth';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 // import useCustomBodyStyles from '../hooks/useCustomBodyStyles.js';
 import useLogin from '../hooks/mutations/useLogin.js';
-import { FaBolt } from 'react-icons/fa';
 import Logo from '../components/Logo';
 
 const Login = () => {
@@ -74,9 +70,9 @@ const Login = () => {
     );
   };
 
-  // if (isAuthenticated) {
-  //   return <Navigate to="/" />;
-  // }
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <PageContainer>

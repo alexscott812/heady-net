@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
 import {
   Button,
   Flex,
@@ -16,7 +15,7 @@ import PageContainer from '../components/PageContainer.js';
 import Spinner from '../components/Spinner.js';
 import TodaysShowsCard from '../components/TodaysShowsCard.js';
 import TodaysShowsCardSkeleton from '../components/TodaysShowsCardSkeleton.js';
-import { useAuth } from '../lib/auth';
+// import { useAuth } from '../lib/auth';
 import useDate from '../hooks/useDate.js';
 import useDocumentTitle from '../hooks/useDocumentTitle.js';
 import useReviews from '../hooks/queries/useReviews.js';
@@ -30,7 +29,6 @@ import FinishedState from '../components/FinishedState';
 const Home = () => {
   useDocumentTitle('Home | shakedown');
   const { month, day } = useDate();
-  const { isAuthenticated } = useAuth();
 
   const { data: todaysShowsData, isLoading: todaysShowsIsLoading } =
     useShowsCount({ month, day }, { staleTime: Infinity });
