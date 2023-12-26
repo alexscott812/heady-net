@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef } from 'react';
 import {
   Button,
   Text,
@@ -7,19 +7,19 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogContent,
-  AlertDialogOverlay,
-} from "@chakra-ui/react";
-import { useAuth } from "../lib/auth";
-import useDeleteUser from "../hooks/mutations/useDeleteUser.js";
+  AlertDialogOverlay
+} from '@chakra-ui/react';
+// import { useAuth } from '../lib/auth';
+import useDeleteUser from '../hooks/mutations/useDeleteUser.js';
 
 const DeactivateUserModal = ({
   userToBeDeleted = null,
   setUserToBeDeleted = null,
   isOpen = false,
-  onClose = null,
+  onClose = null
 }) => {
   const cancelRef = useRef();
-  const { isAuthenticated } = useAuth();
+  // const { isAuthenticated } = useAuth();
   const deleteUser = useDeleteUser();
 
   const [user] = useState(null);
@@ -43,7 +43,7 @@ const DeactivateUserModal = ({
     <AlertDialog
       isOpen={isOpen}
       leastDestructiveRef={cancelRef}
-      onClose={onClose}
+      onClose={handleClose}
     >
       <AlertDialogOverlay>
         <AlertDialogContent>
@@ -52,17 +52,22 @@ const DeactivateUserModal = ({
             <Text mb={3}>
               Are you sure you want to deactivate your account?
             </Text>
-            <Text mb={3}>{user?._id || ""}</Text>
+            <Text mb={3}>{user?._id || ''}</Text>
           </AlertDialogBody>
           <AlertDialogFooter>
-            <Button colorScheme="gray" mr={2} onClick={onClose} ref={cancelRef}>
+            <Button
+              colorScheme="gray"
+              mr={2}
+              onClick={handleClose}
+              ref={cancelRef}
+            >
               Cancel
             </Button>
             <Button
               colorScheme="red"
               onClick={handleDeleteUser}
               isLoading={deleteUser.isLoading}
-              loadingText="Deleting Account..."
+              loadingText="Deactivating Account..."
               isDisabled={deleteUser.isLoading}
             >
               Deactivate Account

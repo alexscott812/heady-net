@@ -35,7 +35,7 @@ import {
 import ProfileSettings from './pages/ProfileSettings.js';
 import AccountSettings from './pages/AccountSettings.js';
 import AppearanceSettings from './pages/AppearanceSettings.js';
-import LandingPage from './pages/LandingPage.js';
+// import LandingPage from './pages/LandingPage.js';
 
 const App = () => {
   const queryClient = new QueryClient({

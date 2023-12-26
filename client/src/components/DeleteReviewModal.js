@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 import {
   Button,
   Text,
@@ -7,18 +7,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogContent,
-  AlertDialogOverlay,
-} from "@chakra-ui/react";
-import { useAuth } from "../lib/auth";
-import useDeleteReview from "../hooks/mutations/useDeleteReview.js";
+  AlertDialogOverlay
+} from '@chakra-ui/react';
+import { useAuth } from '../lib/auth';
+import useDeleteReview from '../hooks/mutations/useDeleteReview.js';
 
 const DeleteReviewModal = ({
   reviewToBeDeleted = null,
   setReviewToBeDeleted = null,
   isOpen = false,
-  onClose = null,
+  onClose = null
 }) => {
-  const { isAuthenticated, getToken } = useAuth();
+  const { getToken } = useAuth();
   const deleteReview = useDeleteReview();
   const cancelRef = useRef();
 
@@ -33,10 +33,10 @@ const DeleteReviewModal = ({
       {
         reviewId: reviewToBeDeleted._id,
         showId: reviewToBeDeleted.show._id,
-        tokenFn: getToken,
+        tokenFn: getToken
       },
       {
-        onSuccess: handleClose,
+        onSuccess: handleClose
       }
     );
   };
