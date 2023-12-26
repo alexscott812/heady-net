@@ -1,9 +1,9 @@
-const Review = require("../models/review");
-const Show = require("../models/show");
-const User = require("../models/user");
-const { v4: uuidv4 } = require("uuid");
-const validateUUIDv4 = require("../utils/validate-uuid-v4");
-const createError = require("../utils/create-error");
+const Review = require('../models/review');
+const Show = require('../models/show');
+const User = require('../models/user');
+const { v4: uuidv4 } = require('uuid');
+const validateUUIDv4 = require('../utils/validate-uuid-v4');
+const createError = require('../utils/create-error');
 
 // const getReviews = async (req, res, next) => {
 //   const sort = req.query.sort || 'name'; // Default: 'name'
@@ -116,17 +116,17 @@ const createError = require("../utils/create-error");
 // };
 
 const getReviews = async (req, res, next) => {
-  const sort = req.query.sort || "date"; // Default: 'name'
-  const sortField = sort.substring(0, 1) === "-" ? sort.substring(1) : sort;
-  const sortOrder = sort.substring(0, 1) === "-" ? -1 : 1;
+  const sort = req.query.sort || 'date'; // Default: 'name'
+  const sortField = sort.substring(0, 1) === '-' ? sort.substring(1) : sort;
+  const sortOrder = sort.substring(0, 1) === '-' ? -1 : 1;
   const sortQuery = { [sortField]: sortOrder };
   const page = Math.max(parseInt(req.query.page) || 1, 1); // Default: 1, Min: 1
   const limit = Math.min(parseInt(req.query.limit) || 6, 20); // Default: 6, Max: 20
   const skip = (page - 1) * limit;
 
   const query = {};
-  if (req.query.user_id) query["user_id"] = req.query.user_id;
-  if (req.query.show_id) query["show_id"] = req.query.show_id;
+  if (req.query.user_id) query['user_id'] = req.query.user_id;
+  if (req.query.show_id) query['show_id'] = req.query.show_id;
 
   try {
     const reviews = await Review.aggregate([
@@ -135,33 +135,33 @@ const getReviews = async (req, res, next) => {
       {
         $facet: {
           meta: [
-            { $count: "total_results" },
+            { $count: 'total_results' },
             {
               $addFields: {
                 current_page: page,
                 results_limit: limit,
                 total_pages: {
                   $ceil: {
-                    $divide: ["$total_results", limit],
-                  },
-                },
-              },
-            },
+                    $divide: ['$total_results', limit]
+                  }
+                }
+              }
+            }
           ],
           data: [
             { $skip: skip },
             { $limit: limit },
             {
               $lookup: {
-                from: "shows",
-                let: { show_id: "$show_id" },
+                from: 'shows',
+                let: { show_id: '$show_id' },
                 pipeline: [
                   {
                     $match: {
                       $expr: {
-                        $eq: ["$_id", "$$show_id"],
-                      },
-                    },
+                        $eq: ['$_id', '$$show_id']
+                      }
+                    }
                   },
                   {
                     $project: {
@@ -176,36 +176,37 @@ const getReviews = async (req, res, next) => {
                       venue: 1,
                       year: 1,
                       image: {
-                        $arrayElemAt: ["$images", 0],
-                      },
-                    },
-                  },
+                        $arrayElemAt: ['$images', 0]
+                      }
+                    }
+                  }
                 ],
-                as: "shows",
-              },
+                as: 'shows'
+              }
             },
             {
               $lookup: {
-                from: "users",
-                let: { user_id: "$user_id" },
+                from: 'users',
+                let: { user_id: '$user_id' },
                 pipeline: [
                   {
                     $match: {
                       $expr: {
-                        $eq: ["$_id", "$$user_id"],
-                      },
-                    },
+                        $eq: ['$_id', '$$user_id']
+                      }
+                    }
                   },
                   {
                     $project: {
                       _id: 1,
                       first_name: 1,
                       last_name: 1,
-                    },
-                  },
+                      username: 1
+                    }
+                  }
                 ],
-                as: "users",
-              },
+                as: 'users'
+              }
             },
             {
               $project: {
@@ -215,32 +216,32 @@ const getReviews = async (req, res, next) => {
                 created_at: 1,
                 updated_at: 1,
                 user: {
-                  $arrayElemAt: ["$users", 0],
+                  $arrayElemAt: ['$users', 0]
                 },
                 show: {
-                  $arrayElemAt: ["$shows", 0],
-                },
-              },
-            },
-          ],
-        },
+                  $arrayElemAt: ['$shows', 0]
+                }
+              }
+            }
+          ]
+        }
       },
       {
         $project: {
-          data: "$data",
+          data: '$data',
           meta: {
             $ifNull: [
-              { $arrayElemAt: ["$meta", 0] },
+              { $arrayElemAt: ['$meta', 0] },
               {
                 total_results: 0,
                 current_page: page,
                 results_limit: limit,
-                total_pages: 0,
-              },
-            ],
-          },
-        },
-      },
+                total_pages: 0
+              }
+            ]
+          }
+        }
+      }
     ]);
 
     res.status(200).json(reviews[0]);
@@ -267,21 +268,21 @@ const getReviews = async (req, res, next) => {
 const getReviewById = async (req, res, next) => {
   try {
     if (!validateUUIDv4(req.params.id)) {
-      return next(createError(404, "Invalid review ID"));
+      return next(createError(404, 'Invalid review ID'));
     }
     const review = await Review.aggregate([
       { $match: { _id: req.params.id } },
       {
         $lookup: {
-          from: "shows",
-          let: { show_id: "$show_id" },
+          from: 'shows',
+          let: { show_id: '$show_id' },
           pipeline: [
             {
               $match: {
                 $expr: {
-                  $eq: ["$_id", "$$show_id"],
-                },
-              },
+                  $eq: ['$_id', '$$show_id']
+                }
+              }
             },
             {
               $project: {
@@ -296,36 +297,37 @@ const getReviewById = async (req, res, next) => {
                 venue: 1,
                 year: 1,
                 image: {
-                  $arrayElemAt: ["$images", 0],
-                },
-              },
-            },
+                  $arrayElemAt: ['$images', 0]
+                }
+              }
+            }
           ],
-          as: "shows",
-        },
+          as: 'shows'
+        }
       },
       {
         $lookup: {
-          from: "users",
-          let: { user_id: "$user_id" },
+          from: 'users',
+          let: { user_id: '$user_id' },
           pipeline: [
             {
               $match: {
                 $expr: {
-                  $eq: ["$_id", "$$user_id"],
-                },
-              },
+                  $eq: ['$_id', '$$user_id']
+                }
+              }
             },
             {
               $project: {
                 _id: 1,
                 first_name: 1,
                 last_name: 1,
-              },
-            },
+                username: 1
+              }
+            }
           ],
-          as: "users",
-        },
+          as: 'users'
+        }
       },
       {
         $project: {
@@ -335,13 +337,13 @@ const getReviewById = async (req, res, next) => {
           created_at: 1,
           updated_at: 1,
           user: {
-            $arrayElemAt: ["$users", 0],
+            $arrayElemAt: ['$users', 0]
           },
           show: {
-            $arrayElemAt: ["$shows", 0],
-          },
-        },
-      },
+            $arrayElemAt: ['$shows', 0]
+          }
+        }
+      }
     ]);
 
     if (!review[0]) {
@@ -358,10 +360,10 @@ const getReviewById = async (req, res, next) => {
 const addReview = async (req, res, next) => {
   try {
     if (!validateUUIDv4(req.body.show_id)) {
-      return next(createError(404, "Invalid show ID"));
+      return next(createError(404, 'Invalid show ID'));
     }
     if (!validateUUIDv4(req.user._id)) {
-      return next(createError(404, "Invalid user ID"));
+      return next(createError(404, 'Invalid user ID'));
     }
     const show = await Show.findById(req.body.show_id).lean();
     if (!show) {
@@ -381,7 +383,7 @@ const addReview = async (req, res, next) => {
       text: req.body.text,
       rating: req.body.rating,
       show_id: req.body.show_id,
-      user_id: req.user._id,
+      user_id: req.user._id
     });
 
     const newReview = await review.save();
@@ -394,7 +396,7 @@ const addReview = async (req, res, next) => {
 const updateReviewById = async (req, res, next) => {
   try {
     if (!validateUUIDv4(req.params.id)) {
-      return next(createError(404, "Invalid review ID"));
+      return next(createError(404, 'Invalid review ID'));
     }
     const review = await Review.findById(req.params.id);
     if (!review) {
@@ -433,7 +435,7 @@ const deleteReviews = async (req, res, next) => {
 const deleteReviewById = async (req, res, next) => {
   try {
     if (!validateUUIDv4(req.params.id)) {
-      return next(createError(404, "Invalid review ID"));
+      return next(createError(404, 'Invalid review ID'));
     }
     const review = await Review.findById(req.params.id);
     if (!review) {
@@ -462,5 +464,5 @@ module.exports = {
   addReview,
   updateReviewById,
   deleteReviews,
-  deleteReviewById,
+  deleteReviewById
 };

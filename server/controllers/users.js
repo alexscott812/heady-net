@@ -1,20 +1,22 @@
-const User = require("../models/user");
-const bcrypt = require("bcrypt");
-const { v4: uuidv4 } = require("uuid");
-const validateUUIDv4 = require("../utils/validate-uuid-v4");
-const createError = require("../utils/create-error");
+const User = require('../models/user');
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
+const validateUUIDv4 = require('../utils/validate-uuid-v4');
+const createError = require('../utils/create-error');
 
 const getUsers = async (req, res, next) => {
-  const sort = req.query.sort || "first_name"; // Default: 'name'
-  const sortField = sort.substring(0, 1) === "-" ? sort.substring(1) : sort;
-  const sortOrder = sort.substring(0, 1) === "-" ? -1 : 1;
+  // const sort = req.query.sort || "first_name"; // Default: 'name'
+  const sort = req.query.sort || 'username'; // Default: 'username'
+  const sortField = sort.substring(0, 1) === '-' ? sort.substring(1) : sort;
+  const sortOrder = sort.substring(0, 1) === '-' ? -1 : 1;
   const sortQuery = { [sortField]: sortOrder };
   const page = Math.max(parseInt(req.query.page) || 1, 1); // Default: 1, Min: 1
   const limit = Math.min(parseInt(req.query.limit) || 12, 1000); // Default: 12, Max: 1000
   const skip = (page - 1) * limit;
 
   const query = {};
-  if (req.query.q) query.first_name = { $regex: req.query.q, $options: "i" };
+  // if (req.query.q) query.first_name = { $regex: req.query.q, $options: "i" };
+  if (req.query.q) query.username = { $regex: req.query.q, $options: 'i' };
 
   try {
     const users = await User.aggregate([
@@ -23,18 +25,18 @@ const getUsers = async (req, res, next) => {
       {
         $facet: {
           meta: [
-            { $count: "total_results" },
+            { $count: 'total_results' },
             {
               $addFields: {
                 current_page: page,
                 results_limit: limit,
                 total_pages: {
                   $ceil: {
-                    $divide: ["$total_results", limit],
-                  },
-                },
-              },
-            },
+                    $divide: ['$total_results', limit]
+                  }
+                }
+              }
+            }
           ],
           data: [
             { $skip: skip },
@@ -45,29 +47,30 @@ const getUsers = async (req, res, next) => {
                 role: 1,
                 first_name: 1,
                 last_name: 1,
+                username: 1,
                 created_at: 1,
-                updated_at: 1,
-              },
-            },
-          ],
-        },
+                updated_at: 1
+              }
+            }
+          ]
+        }
       },
       {
         $project: {
-          data: "$data",
+          data: '$data',
           meta: {
             $ifNull: [
-              { $arrayElemAt: ["$meta", 0] },
+              { $arrayElemAt: ['$meta', 0] },
               {
                 total_results: 0,
                 current_page: page,
                 results_limit: limit,
-                total_pages: 0,
-              },
-            ],
-          },
-        },
-      },
+                total_pages: 0
+              }
+            ]
+          }
+        }
+      }
     ]);
 
     res.status(200).json(users[0]);
@@ -79,39 +82,40 @@ const getUsers = async (req, res, next) => {
 const getUserById = async (req, res, next) => {
   try {
     if (!validateUUIDv4(req.params.id)) {
-      return next(createError(404, "Invalid user ID"));
+      return next(createError(404, 'Invalid user ID'));
     }
     const user = await User.aggregate([
       {
-        $match: { _id: req.params.id },
+        $match: { _id: req.params.id }
       },
       {
         $lookup: {
-          from: "reviews",
-          let: { user_id: "$_id" },
+          from: 'reviews',
+          let: { user_id: '$_id' },
           pipeline: [
             {
               $match: {
-                $expr: { $eq: ["$user_id", "$$user_id"] },
-              },
-            },
+                $expr: { $eq: ['$user_id', '$$user_id'] }
+              }
+            }
           ],
-          as: "reviews",
-        },
+          as: 'reviews'
+        }
       },
       {
         $project: {
           _id: 1,
           first_name: 1,
           last_name: 1,
+          username: 1,
           bio: 1,
           email: 1,
-          review_count: { $size: "$reviews" },
+          review_count: { $size: '$reviews' },
           role: 1,
           created_at: 1,
-          updated_at: 1,
-        },
-      },
+          updated_at: 1
+        }
+      }
     ]);
 
     if (!user[0]) {
@@ -130,35 +134,36 @@ const getCurrentUser = async (req, res, next) => {
   try {
     const user = await User.aggregate([
       {
-        $match: { _id: req.user._id },
+        $match: { _id: req.user._id }
       },
       {
         $lookup: {
-          from: "reviews",
-          let: { user_id: "$_id" },
+          from: 'reviews',
+          let: { user_id: '$_id' },
           pipeline: [
             {
               $match: {
-                $expr: { $eq: ["$user_id", "$$user_id"] },
-              },
-            },
+                $expr: { $eq: ['$user_id', '$$user_id'] }
+              }
+            }
           ],
-          as: "reviews",
-        },
+          as: 'reviews'
+        }
       },
       {
         $project: {
           _id: 1,
           first_name: 1,
           last_name: 1,
+          username: 1,
           bio: 1,
           email: 1,
-          review_count: { $size: "$reviews" },
+          review_count: { $size: '$reviews' },
           role: 1,
           created_at: 1,
-          updated_at: 1,
-        },
-      },
+          updated_at: 1
+        }
+      }
     ]);
 
     if (!user[0]) {
@@ -175,13 +180,19 @@ const getCurrentUser = async (req, res, next) => {
 
 const addUser = async (req, res, next) => {
   try {
-    const existingUser = await User.findOne({ email: req.body.email }).lean();
+    // const existingUser = await User.findOne({ email: req.body.email }).lean();
+    const existingUser = await User.findOne({
+      username: req.body.username
+    }).lean();
     if (existingUser) {
-      return next(createError(400, `Email ${req.body.email} already exists`));
+      // return next(createError(400, `Email ${req.body.email} already exists`));
+      return next(
+        createError(400, `Username ${req.body.username} already exists`)
+      );
     }
 
     if (req.body.password !== req.body.confirm_password) {
-      return next(createError(400, "Passwords do not match"));
+      return next(createError(400, 'Passwords do not match'));
     }
     const saltRounds = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
@@ -190,10 +201,11 @@ const addUser = async (req, res, next) => {
       _id: validateUUIDv4(req.body._id) ? req.body._id : uuidv4(),
       first_name: req.body.first_name,
       last_name: req.body.last_name,
+      username: req.body.username,
       bio: req.body.bio,
       email: req.body.email,
       password: hashedPassword,
-      role: "user",
+      role: 'user'
     });
 
     await user.save();
@@ -210,10 +222,10 @@ const addUser = async (req, res, next) => {
 const updateUserById = async (req, res, next) => {
   try {
     if (!validateUUIDv4(req.params.id)) {
-      return next(createError(404, "Invalid user ID"));
+      return next(createError(404, 'Invalid user ID'));
     }
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      new: true
     }).lean();
     if (!user) {
       return next(
@@ -241,7 +253,7 @@ const deleteUsers = async (req, res, next) => {
 const deleteUserById = async (req, res, next) => {
   try {
     if (!validateUUIDv4(req.params.id)) {
-      return next(createError(404, "Invalid user ID"));
+      return next(createError(404, 'Invalid user ID'));
     }
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) {
@@ -270,5 +282,5 @@ module.exports = {
   addUser,
   updateUserById,
   deleteUsers,
-  deleteUserById,
+  deleteUserById
 };

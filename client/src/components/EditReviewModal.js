@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   Button,
@@ -13,20 +13,20 @@ import {
   Textarea,
   Flex,
   Avatar,
-  VStack,
-} from "@chakra-ui/react";
-import Card from "./Card.js";
-import StarRating from "./StarRating.js";
-import { useAuth } from "../lib/auth";
-import useSaveReview from "../hooks/mutations/useSaveReview.js";
+  VStack
+} from '@chakra-ui/react';
+import Card from './Card.js';
+import StarRating from './StarRating.js';
+import { useAuth } from '../lib/auth';
+import useSaveReview from '../hooks/mutations/useSaveReview.js';
 
 const EditReviewModal = ({
   reviewToBeEdited = null,
   setReviewToBeEdited = null,
   isOpen = false,
-  onClose = null,
+  onClose = null
 }) => {
-  const { isAuthenticated, user, getToken } = useAuth();
+  const { user, getToken } = useAuth();
   const saveReview = useSaveReview();
 
   const handleClose = () => {
@@ -43,7 +43,7 @@ const EditReviewModal = ({
     const { name, value } = e.target;
     setReviewToBeEdited({
       ...reviewToBeEdited,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -52,15 +52,15 @@ const EditReviewModal = ({
       _id: reviewToBeEdited?._id,
       show_id: reviewToBeEdited?.show._id,
       rating: reviewToBeEdited?.rating,
-      text: reviewToBeEdited?.text,
+      text: reviewToBeEdited?.text
     };
     saveReview.mutate(
       {
         review: reviewToEdit,
-        tokenFn: getToken,
+        tokenFn: getToken
       },
       {
-        onSuccess: handleClose,
+        onSuccess: handleClose
       }
     );
   };
@@ -73,10 +73,10 @@ const EditReviewModal = ({
         <ModalCloseButton />
         <ModalBody>
           <Flex alignItems="flex-start">
-            <Avatar size="sm" name={user?.first_name} mr={2} />
+            <Avatar size="sm" name={user?.username} mr={2} />
             <Card variant="inner" py={2} pl={3} pr={2}>
               <VStack align="start" spacing={1} flex={1}>
-                <Text fontWeight="medium">{`${user?.first_name} ${user?.last_name}`}</Text>
+                <Text fontWeight="medium">{user?.username}</Text>
                 <Box mb={3}>
                   <StarRating
                     editable
@@ -87,7 +87,7 @@ const EditReviewModal = ({
                 </Box>
                 <Textarea
                   name="text"
-                  value={reviewToBeEdited?.text || ""}
+                  value={reviewToBeEdited?.text || ''}
                   onChange={handleInputChange}
                   placeholder="Edit review..."
                 />

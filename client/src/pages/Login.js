@@ -36,14 +36,14 @@ const Login = () => {
 
   const [query] = useQueryParams(['redirect']);
   const [credentials, setCredentials] = useState({
-    email: '',
+    username: '',
     password: ''
   });
 
   const login = useLogin();
 
   const validateForm = () => {
-    return credentials.email.length > 0 && credentials.password.length > 0;
+    return credentials.username.length > 0 && credentials.password.length > 0;
   };
 
   const handleInputChange = (e) => {
@@ -100,13 +100,22 @@ const Login = () => {
               </Flex>
               <Divider my={3} />
               <CardTitle>Log In</CardTitle>
-              <Text mb={1}>Email Address</Text>
+              {/* <Text mb={1}>Email Address</Text>
               <Input
                 mb={3}
                 type="email"
                 name="email"
                 value={credentials.email}
                 placeholder="Email Address"
+                onChange={handleInputChange}
+              /> */}
+              <Text mb={1}>Username</Text>
+              <Input
+                mb={3}
+                type="username"
+                name="username"
+                value={credentials.username}
+                placeholder="Username"
                 onChange={handleInputChange}
               />
               <Text mb={1}>Password</Text>

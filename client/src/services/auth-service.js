@@ -1,16 +1,17 @@
-import axiosInstance from "../utils/axios-instance.js";
-import handleError from "../utils/handle-error.js";
+import axiosInstance from '../utils/axios-instance.js';
+import handleError from '../utils/handle-error.js';
 
 const addToken = async (credentials) => {
   try {
     const { data } = await axiosInstance.post(
       `/auth/login`,
       {
-        email: credentials.email,
-        password: credentials.password,
+        // email: credentials.email,
+        username: credentials.username,
+        password: credentials.password
       },
       {
-        withCredentials: true,
+        withCredentials: true
       }
     );
     return data;
@@ -22,10 +23,10 @@ const addToken = async (credentials) => {
 const refreshToken = async () => {
   try {
     const { data } = await axiosInstance.post(
-      "/auth/refresh-token",
+      '/auth/refresh-token',
       {},
       {
-        withCredentials: true,
+        withCredentials: true
       }
     );
     return data;
@@ -40,7 +41,7 @@ const deleteToken = async () => {
       `/auth/logout`,
       {},
       {
-        withCredentials: true,
+        withCredentials: true
       }
     );
     return data;

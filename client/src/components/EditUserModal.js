@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   Input,
@@ -10,19 +10,19 @@ import {
   ModalBody,
   ModalFooter,
   Text,
-  Textarea,
-} from "@chakra-ui/react";
-import { useAuth } from "../lib/auth";
-import useSaveUser from "../hooks/mutations/useSaveUser.js";
+  Textarea
+} from '@chakra-ui/react';
+import { useAuth } from '../lib/auth';
+import useSaveUser from '../hooks/mutations/useSaveUser.js';
 
 const EditUserModal = ({
   userToBeEdited = null,
   setUserToBeEdited = null,
   isOpen = false,
   onClose = null,
-  mutation = null,
+  mutation = null
 }) => {
-  const { isAuthenticated, getToken } = useAuth();
+  const { getToken } = useAuth();
   const saveUser = useSaveUser();
 
   // const [user, setUser] = useState({
@@ -52,17 +52,14 @@ const EditUserModal = ({
   };
 
   const validate = () => {
-    return (
-      userToBeEdited?.first_name?.length > 0 &&
-      userToBeEdited?.last_name?.length > 0
-    );
+    return userToBeEdited?.username?.length > 0;
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserToBeEdited({
       ...userToBeEdited,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -72,10 +69,10 @@ const EditUserModal = ({
     saveUser.mutate(
       {
         user: userToBeEdited,
-        tokenFn: getToken,
+        tokenFn: getToken
       },
       {
-        onSuccess: handleClose,
+        onSuccess: handleClose
       }
     );
   };
@@ -87,12 +84,21 @@ const EditUserModal = ({
         <ModalHeader>Edit Info</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Text mb={1}>First name</Text>
+          <Text mb={1}>Username</Text>
+          <Input
+            mb={3}
+            type="text"
+            name="username"
+            value={userToBeEdited?.username || ''}
+            placeholder="Username"
+            onChange={handleInputChange}
+          />
+          {/* <Text mb={1}>First name</Text>
           <Input
             mb={3}
             type="text"
             name="first_name"
-            value={userToBeEdited?.first_name || ""}
+            value={userToBeEdited?.first_name || ''}
             placeholder="First Name"
             onChange={handleInputChange}
           />
@@ -101,15 +107,15 @@ const EditUserModal = ({
             mb={3}
             type="text"
             name="last_name"
-            value={userToBeEdited?.last_name || ""}
+            value={userToBeEdited?.last_name || ''}
             placeholder="Last Name"
             onChange={handleInputChange}
-          />
+          /> */}
           <Text mb={1}>Bio</Text>
           <Textarea
             mb={3}
             name="bio"
-            value={userToBeEdited?.bio || ""}
+            value={userToBeEdited?.bio || ''}
             placeholder="Enter a bit about yourself"
             onChange={handleInputChange}
           />

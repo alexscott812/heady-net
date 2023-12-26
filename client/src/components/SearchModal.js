@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -12,22 +12,22 @@ import {
   LinkOverlay,
   Button,
   Badge,
-  useColorModeValue,
-} from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
-import SearchBar from "./SearchBar.js";
-import useDebounce from "../hooks/useDebounce.js";
-import useShows from "../hooks/queries/useShows.js";
-import useVenues from "../hooks/queries/useVenues.js";
-import useSongs from "../hooks/queries/useSongs.js";
-import useUsers from "../hooks/queries/useUsers.js";
-import EmptyState from "./EmptyState.js";
+  useColorModeValue
+} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import SearchBar from './SearchBar.js';
+import useDebounce from '../hooks/useDebounce.js';
+import useShows from '../hooks/queries/useShows.js';
+import useVenues from '../hooks/queries/useVenues.js';
+import useSongs from '../hooks/queries/useSongs.js';
+import useUsers from '../hooks/queries/useUsers.js';
+import EmptyState from './EmptyState.js';
 
 const SearchResult = ({ text, to, onClick, ...restProps }) => {
   return (
     <LinkBox
       w="100%"
-      bg={useColorModeValue("gray.100", "whiteAlpha.50")}
+      bg={useColorModeValue('gray.100', 'whiteAlpha.50')}
       px={3}
       py={2}
       borderRadius="md"
@@ -37,7 +37,7 @@ const SearchResult = ({ text, to, onClick, ...restProps }) => {
         as={RouterLink}
         to={to}
         onClick={onClick}
-        _hover={{ textDecoration: "underline" }}
+        _hover={{ textDecoration: 'underline' }}
       >
         <Text d="inline">{text}</Text>
       </LinkOverlay>
@@ -47,7 +47,7 @@ const SearchResult = ({ text, to, onClick, ...restProps }) => {
 
 const SearchModal = ({ isOpen = false, onClose = null }) => {
   const searchLimit = 3;
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 300);
   const shouldSearch = !!debouncedSearch && debouncedSearch.length > 2;
 
@@ -58,14 +58,14 @@ const SearchModal = ({ isOpen = false, onClose = null }) => {
     hasMore: hasMoreShows,
     loadMore: loadMoreShows,
     isLoadingMore: isLoadingMoreShows,
-    hasNoData: hasNoShowsData,
+    hasNoData: hasNoShowsData
   } = useShows(
     {
       q: debouncedSearch,
-      limit: searchLimit,
+      limit: searchLimit
     },
     {
-      enabled: shouldSearch,
+      enabled: shouldSearch
     }
   );
 
@@ -76,14 +76,14 @@ const SearchModal = ({ isOpen = false, onClose = null }) => {
     hasMore: hasMoreVenues,
     loadMore: loadMoreVenues,
     isLoadingMore: isLoadingMoreVenues,
-    hasNoData: hasNoVenuesData,
+    hasNoData: hasNoVenuesData
   } = useVenues(
     {
       q: debouncedSearch,
-      limit: searchLimit,
+      limit: searchLimit
     },
     {
-      enabled: shouldSearch,
+      enabled: shouldSearch
     }
   );
 
@@ -94,14 +94,14 @@ const SearchModal = ({ isOpen = false, onClose = null }) => {
     hasMore: hasMoreSongs,
     loadMore: loadMoreSongs,
     isLoadingMore: isLoadingMoreSongs,
-    hasNoData: hasNoSongsData,
+    hasNoData: hasNoSongsData
   } = useSongs(
     {
       q: debouncedSearch,
-      limit: searchLimit,
+      limit: searchLimit
     },
     {
-      enabled: shouldSearch,
+      enabled: shouldSearch
     }
   );
 
@@ -112,14 +112,14 @@ const SearchModal = ({ isOpen = false, onClose = null }) => {
     hasMore: hasMoreUsers,
     loadMore: loadMoreUsers,
     isLoadingMore: isLoadingMoreUsers,
-    hasNoData: hasNoUsersData,
+    hasNoData: hasNoUsersData
   } = useUsers(
     {
       q: debouncedSearch,
-      limit: searchLimit,
+      limit: searchLimit
     },
     {
-      enabled: shouldSearch,
+      enabled: shouldSearch
     }
   );
 
@@ -129,11 +129,11 @@ const SearchModal = ({ isOpen = false, onClose = null }) => {
   };
 
   const handleSearchClear = () => {
-    setSearch("");
+    setSearch('');
   };
 
   const handleClose = () => {
-    setSearch("");
+    setSearch('');
     onClose();
   };
 
@@ -259,7 +259,7 @@ const SearchModal = ({ isOpen = false, onClose = null }) => {
                 {usersData.map((user) => (
                   <SearchResult
                     key={user._id}
-                    text={`${user.first_name} ${user.last_name}`}
+                    text={user.username}
                     to={`/users/${user._id}`}
                     onClick={handleClose}
                   />

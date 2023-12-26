@@ -20,11 +20,12 @@ const UserHeader = ({
   return (
     <Card {...restProps}>
       <CardBody>
-        <Avatar size="lg" name={user.first_name} mb={3} />
+        <Avatar size="lg" name={user.username} mb={3} />
         <CardTitle mb={2}>
-          {isCurrentUser
+          {/* {isCurrentUser
             ? `${user.first_name} ${user.last_name} (you)`
-            : `${user.first_name} ${user.last_name.charAt(0)}.`}
+            : `${user.first_name} ${user.last_name.charAt(0)}.`} */}
+          {`${user.username}${isCurrentUser ? ' (you)' : ''}`}
         </CardTitle>
         {user.bio && <Text mb={2}>{user.bio}</Text>}
         <Text variant="secondary">

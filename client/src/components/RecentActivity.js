@@ -1,6 +1,6 @@
-import React from "react";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
+import React from 'react';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
 import {
   Box,
   Text,
@@ -11,19 +11,19 @@ import {
   LinkOverlay,
   Image,
   VStack,
-  Skeleton,
-} from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
-import StarRating from "./StarRating.js";
-import { useAuth } from "../lib/auth";
-import getRelativeTime from "../utils/get-relative-time.js";
-import getDisplayName from "../utils/get-display-name.js";
-import EmptyImage from "./EmptyImage.js";
-import AvatarButton from "./AvatarButton.js";
-import formatShowLocation from "../utils/format-show-location.js";
+  Skeleton
+} from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import StarRating from './StarRating.js';
+import { useAuth } from '../lib/auth';
+import getRelativeTime from '../utils/get-relative-time.js';
+import getDisplayName from '../utils/get-display-name.js';
+import EmptyImage from './EmptyImage.js';
+import AvatarButton from './AvatarButton.js';
+import formatShowLocation from '../utils/format-show-location.js';
 
 const RecentActivity = ({ recentActivity = [] }) => {
-  const { user, isAuthenticated } = useAuth();
+  const { user } = useAuth();
 
   return (
     <>
@@ -34,7 +34,7 @@ const RecentActivity = ({ recentActivity = [] }) => {
               <AvatarButton
                 as={RouterLink}
                 to={`/users/${review.user._id}`}
-                name={review.user.first_name}
+                name={review.user.username}
                 mr={2}
               />
               <VStack align="start" spacing={-1}>
@@ -45,10 +45,8 @@ const RecentActivity = ({ recentActivity = [] }) => {
                     to={`/users/${review.user._id}`}
                   >
                     {getDisplayName(
-                      review.user.first_name,
-                      review.user.last_name,
-                      review.user._id === user?._id,
-                      isAuthenticated
+                      review.user.username,
+                      review.user._id === user?._id
                     )}
                   </Link>
                   <Text d="inline">&nbsp;wrote a review.</Text>
@@ -77,7 +75,7 @@ const RecentActivity = ({ recentActivity = [] }) => {
                   <LinkOverlay
                     as={RouterLink}
                     to={`/shows/${review.show._id}`}
-                    _hover={{ textDecoration: "underline" }}
+                    _hover={{ textDecoration: 'underline' }}
                   >
                     <Text noOfLines={1} fontWeight="semibold" fontSize="lg">
                       {review.show.title}
@@ -87,7 +85,7 @@ const RecentActivity = ({ recentActivity = [] }) => {
                   <Text noOfLines={1} variant="secondary">
                     {formatShowLocation(
                       review.show.city.name,
-                      review.show.state?.name || "",
+                      review.show.state?.name || '',
                       review.show.country.name
                     )}
                   </Text>

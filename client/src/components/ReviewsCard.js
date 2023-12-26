@@ -1,8 +1,8 @@
-import React from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
-import Card from "./Card.js";
-import CardBody from "./CardBody.js";
-import CardTitle from "./CardTitle.js";
+import React from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import Card from './Card.js';
+import CardBody from './CardBody.js';
+import CardTitle from './CardTitle.js';
 import {
   Button,
   Box,
@@ -15,14 +15,14 @@ import {
   MenuItem,
   IconButton,
   Spacer,
-  VStack,
-} from "@chakra-ui/react";
-import AvatarButton from "./AvatarButton.js";
-import { FaPen, FaTrashAlt } from "react-icons/fa";
-import StarRating from "./StarRating.js";
-import { useAuth } from "../lib/auth";
-import getRelativeTime from "../utils/get-relative-time.js";
-import getDisplayName from "../utils/get-display-name.js";
+  VStack
+} from '@chakra-ui/react';
+import AvatarButton from './AvatarButton.js';
+import { FaPen, FaTrashAlt } from 'react-icons/fa';
+import StarRating from './StarRating.js';
+import { useAuth } from '../lib/auth';
+import getRelativeTime from '../utils/get-relative-time.js';
+import getDisplayName from '../utils/get-display-name.js';
 
 const ReviewsCard = ({
   reviews = [],
@@ -51,7 +51,7 @@ const ReviewsCard = ({
                   <AvatarButton
                     as={RouterLink}
                     to={`/users/${review.user._id}`}
-                    name={review.user.first_name}
+                    name={review.user.username}
                     mr={2}
                   />
                   <Card variant="inner" py={2} pl={3} pr={2}>
@@ -63,11 +63,15 @@ const ReviewsCard = ({
                             as={RouterLink}
                             to={`/users/${review.user._id}`}
                           >
-                            {getDisplayName(
+                            {/* {getDisplayName(
                               review.user.first_name,
                               review.user.last_name,
                               review.user._id === user?._id,
                               isAuthenticated
+                            )} */}
+                            {getDisplayName(
+                              review.user.username,
+                              review.user._id === user?._id
                             )}
                           </Link>
                           <Text variant="tertiary" d="inline">

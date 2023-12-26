@@ -1,10 +1,10 @@
-import axiosInstance from "../utils/axios-instance.js";
-import handleError from "../utils/handle-error.js";
+import axiosInstance from '../utils/axios-instance.js';
+import handleError from '../utils/handle-error.js';
 
 const getUsers = async (query) => {
   try {
-    const { data } = await axiosInstance.get("/users", {
-      params: query,
+    const { data } = await axiosInstance.get('/users', {
+      params: query
     });
     return data;
   } catch (err) {
@@ -23,10 +23,10 @@ const getUserById = async (userId) => {
 
 const getCurrentUser = async (token) => {
   try {
-    const { data } = await axiosInstance.get("/users/me", {
+    const { data } = await axiosInstance.get('/users/me', {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     });
     return data;
   } catch (err) {
@@ -36,7 +36,7 @@ const getCurrentUser = async (token) => {
 
 const addUser = async (user) => {
   try {
-    const { data } = await axiosInstance.post("/users", user);
+    const { data } = await axiosInstance.post('/users', user);
     return data;
   } catch (err) {
     throw handleError(err);
@@ -48,8 +48,8 @@ const updateUser = async ({ user, tokenFn }) => {
     const token = await tokenFn();
     const { data } = await axiosInstance.put(`/users/${user._id}`, user, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     });
     return data;
   } catch (err) {
@@ -62,8 +62,8 @@ const deleteUser = async ({ userId, tokenFn }) => {
     const token = await tokenFn();
     const { data } = await axiosInstance.delete(`/users/${userId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        Authorization: `Bearer ${token}`
+      }
     });
     return data;
   } catch (err) {
@@ -73,7 +73,7 @@ const deleteUser = async ({ userId, tokenFn }) => {
 
 const forgotPassword = async (email) => {
   try {
-    const { data } = await axiosInstance.post("auth/forgot-password", email);
+    const { data } = await axiosInstance.post('auth/forgot-password', email);
     return data;
   } catch (err) {
     throw handleError(err);
@@ -82,9 +82,9 @@ const forgotPassword = async (email) => {
 
 const resetPassword = async ({ passwords, token }) => {
   try {
-    const { data } = await axiosInstance.post("auth/reset-password", {
+    const { data } = await axiosInstance.post('auth/reset-password', {
       ...passwords,
-      token,
+      token
     });
     return data;
   } catch (err) {
@@ -96,12 +96,12 @@ const changePassword = async ({ passwords, tokenFn }) => {
   try {
     const token = await tokenFn();
     const { data } = await axiosInstance.post(
-      "auth/change-password",
+      'auth/change-password',
       passwords,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
-        },
+          Authorization: `Bearer ${token}`
+        }
       }
     );
     return data;
@@ -119,5 +119,5 @@ export {
   deleteUser,
   forgotPassword,
   resetPassword,
-  changePassword,
+  changePassword
 };

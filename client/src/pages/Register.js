@@ -29,8 +29,7 @@ const Register = () => {
   const { register, isAuthenticated } = useAuth();
   const [query] = useQueryParams(['redirect']);
   const [userInfo, setUserInfo] = useState({
-    first_name: '',
-    last_name: '',
+    username: '',
     email: '',
     password: '',
     confirm_password: ''
@@ -40,8 +39,7 @@ const Register = () => {
 
   const validateForm = () => {
     return (
-      userInfo.first_name.length > 0 &&
-      userInfo.last_name.length > 0 &&
+      userInfo.username.length > 0 &&
       userInfo.email.length > 0 &&
       userInfo.password.length > 0 &&
       userInfo.confirm_password.length > 0
@@ -91,7 +89,7 @@ const Register = () => {
               </Flex>
               <Divider my={3} />
               <CardTitle>Register</CardTitle>
-              <Text mb={1}>First Name</Text>
+              {/* <Text mb={1}>First Name</Text>
               <Input
                 mb={3}
                 type="first_name"
@@ -107,6 +105,15 @@ const Register = () => {
                 name="last_name"
                 value={userInfo.last_name}
                 placeholder="Last Name"
+                onChange={handleInputChange}
+              /> */}
+              <Text mb={1}>Username</Text>
+              <Input
+                mb={3}
+                type="username"
+                name="username"
+                value={userInfo.username}
+                placeholder="Username"
                 onChange={handleInputChange}
               />
               <Text mb={1}>Email Address</Text>
